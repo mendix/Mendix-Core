@@ -1,0 +1,58 @@
+/* 
+ * Override default Maven skin style here.
+ */
+
+
+body {
+  background-image: url(../images/background.jpg) ;
+  width: 950px;
+  background-position: top;
+  background-color:rgb(192,182,172); 
+}
+
+#banner {
+  height: 190px;
+  background: url(../images/mod4j-people-header.jpg) no-repeat;
+  background-position: top;
+}
+
+#bannerLeft {
+  display:none; 
+}
+
+#breadcrumbs {
+  display:none; 
+  height: auto;
+  background-image: none;
+  padding: 5px 10px 14px 20px;
+}
+
+#leftColumn {
+  width: 150px;
+  float:left;
+  overflow: auto;
+  margin-left: 12px;
+  margin-right: 8px;
+}
+
+#bodyColumn {
+  margin-right: 5px;
+  margin-left: 205px;
+  padding-right: 10px;
+}
+
+table.bodyTable tr.a {
+  background-color: #eee;
+}
+
+table.bodyTable tr.b {
+  background-color: #eee;
+}
+
+a:link {
+  color:#5d2f92;
+}
+a:visited  {
+  color:#5d2f92;
+}
+

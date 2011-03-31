@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <!--
+        Please edit this file with the Eclipse XML editor, set your XML editor to a line length of 128 characters, indent-size
+        of 4 characters and not using tab-characters, and format the file (Ctrl-Shift-F) before checking in. This should
+        minimize the number of non-significant differences when comparing versions.
+    -->
+    <properties>
+        <title>Mod4j Developer Guide</title>
+    </properties>
+    <body>
+        <section name="Mod4j Professional Support">
+            <p> Mod4j is open source and therefore free to use for anyone. On the Mod4j website you
+                will find extensive documentation free of charge. </p>
+            <p> When applying Mod4j or model-driven software development in general it is often good
+                to get some experts for training and consulting. The companies below all have Mod4j
+                committers aboard and offer some form of support around Mod4j. </p>
+            <p>
+                <img src="images/j-technologies-logo.gif" alt="Ordina J-Technologies"/>
+            </p>
+            <p> Ordina is the initiator of the Mod4j project and has in-depth knowledge of Mod4j and
+                of all of the Eclipse Modeling tools that are usded in the development of the DSLs.
+                Ordina can provide you with the services described below. If you are interested in
+                professional support from Ordina please contact <a
+                    href="mailto:edwin.damen@ordina.nl">Edwin Damen</a>. </p>
+            <subsection name="Using Mod4j">
+                <p> Ordina provides professional training and consultancy to support you in
+                    kick-starting the use of Mod4j. Additionally we can deliver experienced
+                    architects and developers with Mod4j skills. They can speed up development
+                    and also act as a Mod4j mentor to the rest of the team. Having an experienced
+                    Mod4j developer is an effective way to learn Mod4j on the job. </p>
+            </subsection>
+            <subsection name="Adapting Mod4j">
+                <p> The Mod4j DSL provide a usefull starting point, but will not always be exactly
+                    what you need. The structure of Mod4j is made with flexibility in mind. It is
+                    therefore possible to change or extend the DSLs in various ways. Our
+                    experienced Mod4j development team can help you to analyse the applicability of
+                    Mod4j, find the changes you need and incorporate them into Mod4j. </p>
+            </subsection>
+            <subsection name="Developing Custom DSL">
+                <p> If you need custom DSLs for your development you will need some high level DSL
+                    development skills. With our experience of building DSLs like Mod4j we can help
+                    you setup your own DSL. If required, Ordina can also connect your own DSL to the
+                    existing Mod4j DSLs to enhance the possibilities. </p>
+            </subsection>
+        </section>
+    </body>
+</document>

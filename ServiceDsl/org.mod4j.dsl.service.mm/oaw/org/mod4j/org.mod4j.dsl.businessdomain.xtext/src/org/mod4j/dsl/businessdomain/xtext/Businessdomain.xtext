@@ -1,0 +1,141 @@
+grammar org.mod4j.dsl.businessdomain.xtext.BusinessDomain with org.eclipse.xtext.common.Terminals
+
+import "platform:/resource/org.mod4j.dsl.businessdomain.mm/model/BusinessDomainDsl.ecore"
+import "platform:/resource/org.mod4j.crossx.mm/model/crossx.ecore"
+
+/*******************************************************************************
+ * Copyright (c) 2009 Ordina and committers to Mod4j
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Ordina - initial implementation
+ *******************************************************************************/
+
+BusinessDomainModel :
+	(description=STRING )?
+	"domain" name = ID ";"
+//	(types+= BusinessClassReference)*
+	( (types        += BusinessClass) |
+	  (enumerations += Enumeration)   |
+	  (associations += Association)
+	 )*
+	;
+// COMMETNED OUT: import does not work correctly, therefore should not be possible at all.
+//BusinessClassReference:
+//    "from" referredModel=ID "import" name=ID  ";" 
+//    ;
+    
+Association:
+	(description=STRING )?
+    "association" 
+    source=[BusinessClass] sourceRoleName=ID 
+    sourceMultiplicity=Multiplicity
+    ((bidirectional?="<->") | ("->"))
+    targetMultiplicity=Multiplicity
+    target=[AbstractBusinessClass]  targetRoleName=ID 
+    (ordered?="ordered")? ";"
+    ;
+
+enum Multiplicity:
+     ZeroMany="many"  | ZeroOne="one" // | OneMany="1..*" | One="1..1"
+     ;
+ 	
+BusinessClass:
+	(description=STRING)?
+    "class" name=ID
+    ("inherits" superclass=[BusinessClass])?
+    "["
+        (properties += Property)*
+        ("rules" "[" (businessRules += AbstractBusinessRule)* "]")?
+    "]"
+     ;
+
+Enumeration:
+	(description=STRING)?
+    "enumeration" name=ID
+    "[" (enumerationLiterals += EnumerationLiteral)+ "]"
+    ;
+
+EnumerationLiteral:
+    name=ID ("=" persistedValue=INT) ";"
+    ;
+
+AbstractBusinessRule:
+	BusinessRule | UniqueRule
+	;
+	
+BusinessRule:
+    (description=STRING)?
+    name=ID ";"
+    ;
+
+UniqueRule:
+    (description=STRING)?
+	"unique" name=ID "["
+	   (properties += [Property]) 
+	   ("," properties += [Property])* 
+	"]"
+	;
+
+Property:
+    (BoolProperty | StringProperty | DateTimeProperty | IntegerProperty |
+	 DecimalProperty | EnumerationProperty) 
+	(nullable?="nullable")?
+	(derived?="derived" (writable?="writable")?)?
+//	("persistency" persistency=PersistencyMode)?
+	";"
+	;
+
+BoolProperty:
+    (description=STRING)?
+    dataType="boolean" name=ID
+    (hasDefault?="default" ((defaultValue?="true") | "false"))?
+    ;
+
+StringProperty:
+    (description=STRING)?
+    dataType="string" name=ID
+    (hasDefault?="default" defaultValue=STRING)?
+    ("minlength" minLength=INT)? ("maxlength" maxLength=INT)? 
+    ("regexp" regularExpression=STRING)?
+    ;
+
+DateTimeProperty:
+    (description=STRING)?
+    dataType="datetime"
+//    accuracy=DateTimeAccuracy
+    name=ID
+    (hasDefault?="default" defaultValue=STRING)?
+    ;
+
+enum DateTimeAccuracy:
+    Month="month" | Year="year" | Day = "day" | Hour = "hour" | Minute = "minute" |
+    Second = "second" | Millisecond = "millisecond"
+    ;
+
+IntegerProperty:
+    (description=STRING)?
+    dataType="integer" name=ID
+    (hasDefault?="default" defaultValue=INT)?
+    ("min" minValue=INT)? ("max" maxValue=INT)?  
+    ;
+
+DecimalProperty:
+    (description=STRING)?
+    dataType="decimal" name=ID
+//                 (hasDefault?="default" defaultValue=INT)?
+//               ("min" minValue=INT)? ("max" maxValue=INT)?  
+    ;
+
+EnumerationProperty:
+    (description=STRING)?
+    type=[Enumeration] name=ID
+    (hasDefault?="default" defaultValueAsString=ID)?
+    ; 
+
+enum PersistencyMode:
+    ReadWrite="ReadWrite" | Read="Read" | None= "NONE"
+    ;

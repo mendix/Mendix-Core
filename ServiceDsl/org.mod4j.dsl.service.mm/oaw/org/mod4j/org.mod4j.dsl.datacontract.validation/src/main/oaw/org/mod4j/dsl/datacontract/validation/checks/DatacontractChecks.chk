@@ -1,0 +1,10 @@
+import org::mod4j::dsl::datacontract::mm::DataContractDsl;
+
+extension org::mod4j::dslcommon::xtend::generatorutil;
+
+context DataContractDsl::Dto ERROR "The name of Dto "+ this.name + " must be unique" :
+	this.datacontractModel.dtos.forAll(e|(e != this) implies (!e.name.equalsIgnoreCase(this.name)) )
+;
+
+context DataContractDsl::ExternalReference WARNING "The keyowrd 'import' is deprecated, use 'businessclass' or 'enumeration instead" :
+    ! this.keyword.equalsIgnoreCase("import");

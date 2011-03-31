@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <!--
+        Please edit this file with the Eclipse XML editor, set your XML editor to a line length of 128 characters, indent-size
+        of 4 characters and not using tab-characters, and format the file (Ctrl-Shift-F) before checking in. This should
+        minimize the number of non-significant differences when comparing versions.
+    -->
+    <properties>
+        <title>Mod4j Developer Guide</title>
+    </properties>
+    <body>
+        <section name="Mod4j Developer Guide">
+            <p> This Developer Guide helps developers of the Mod4j project to get started with coding and modeling. If you are
+                an user of Mod4j you should follow the Getting Started from the user docs. See menu > User Docs > Getting
+                Started.</p>
+            <subsection name="Getting started">
+                <ol>
+                    <li>
+                        Make sure you've installed Java JDK version 5 or 6. You can download one from the
+                        <a href="http://java.sun.com/javase/downloads/index.jsp">Sun download site</a>
+                        .
+                        <br />
+                        <br />
+                    </li>
+                     <li>
+                        Install
+                        <b>Eclipse Helios SR2 for Java EE developers</b>
+                        . You can
+                        download one from the
+                        <a href="http://www.eclipse.org/downloads/packages/release/helios/sr2">Eclipse
+                            download site</a>
+                        . If you've already installed Eclipse, you can
+                        check if it is the right version, by checking the
+                        About box from the menu:
+                        Help -> About Eclipse. You should see "Eclipse Java EE IDE for Web Developers. Version: Helios Service Release 2."
+                        <br />
+                        <br />
+                    </li>
+                    <li>
+                        Install, using the Update Manager in Eclipse, at least the following plug-ins into Eclipse:
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Eclise plug-in</th>
+                                    <th>Features to select when installing</th>
+                                    <th>Update site</th>
+                                </tr>
+                            </thead>
+                            <tr>
+                                <td>Eclipse Xtext and Xpand plug-ins</td>
+                                <td>
+                                    <b> - TMF XTEXT SDK (Incubation) 0.7.2</b>
+                                    <br />
+                                    <b> - M2T XPAND SDK (Incubation) 0.7.2</b>
+                                    <br />
+                                    <b> - MWE SDK (Incubation) 0.7.2</b>
+                                </td>
+                                <td>
+                                    <b>
+                                        <code>http://download.eclipse.org/releases/galileo</code>
+                                    </b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Eclipse Xtext Antlr plug-ins</td>
+                                <td>
+                                    <b> - Xtext Antlr Support 0.7.2</b>
+                                </td>
+                                <td>
+                                    <b>
+                                        <code>http://download.itemis.com/updates/releases</code>
+                                    </b>
+                                </td>
+                            </tr>                            
+                            <tr>
+                                <td>Eclipse Maven plug-in: m2eclipse</td>
+                                <td>
+                                    - Maven Integration for Eclipse 0.12.1 or higher
+                                </td>
+                                <td>
+                                    <b>
+                                        <code>http://m2eclipse.sonatype.org/sites/m2e</code>
+                                    </b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ecore Tools. (For graphical modeling of our meta-models)</td>
+                                <td>
+                                    Choose
+                                    <b>Modeling</b>
+                                    and then
+                                    <b>Ecore Tools SDK</b>
+                                </td>
+                                <td>
+                                
+                                    <code>Helios - http://download.eclipse.org/releases/helios</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Subclipse, plug-in for integration with Subversion</td>
+                                <td>
+                                    Select all features
+                                </td>
+                                <td>
+                                    <b>
+                                        <code>http://subclipse.tigris.org/update_1.6.x</code>
+                                    </b>
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                    </li>
+                    <li>
+                        Make sure the text file encoding in Eclipse is set to 'UTF-8'. You can verify and set this in the field
+                        'Text file encoding' by navigating to 'Window -> Preferences... -> General -> Workspace'. For Linux
+                        users UTF-8 is usually the platform encoding, and no change will be necessary.
+                        <br />
+                        <br />
+                    </li>
+                    <li>
+                        Set XML editor preferences. Navigate to 'Window -> Preferences -> XML -> XML Files -> XML Editor' and
+                        <ul>
+                            <li>
+                                Set Line width: to
+                                <b>128</b>
+                            </li>
+                            <li>
+                                Enable Indent using spaces, with a
+                                <b>Indentation size</b>
+                                of
+                                <b>4</b>
+                                <br />
+                                <br />
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Import our Eclipse code formatter for Java. You can download and save the configuration file
+                        <code>smartjava_eclipse_formatter.xml</code>
+                        <a href="http://svn.codehaus.org/mod4j/trunk/modules/org.mod4j.buildtools/src/main/resources/"> here</a>
+                        .
+                        <br />
+                        In Eclipse navigate to Window -> Preferences -> Java -> Code Style -> Formatter and choose
+                        <b>Import</b>
+                        . Select the file
+                        <code>smartjava_eclipse_formatter.xml</code>
+                        .
+                        <br />
+                        <br />
+                    </li>
+                    <li>
+                        Install Apache Maven 2.1.0 or higher. For download and install instructions see the
+                        <a href="http://maven.apache.org">Apache Maven site</a>
+                    </li>
+                </ol>
+            </subsection>
+            <subsection name="Checking out, import into Eclipse, generating the DSL-editors">
+                <p> While the metamodel and its associated syntax is still under development, you should be prepared to
+                    generate
+                    the model editors yourself from the metamodel and the syntax definitions, before you can start modeling: </p>
+                <p>
+                    <b>Hybrids</b>
+                    <br />
+                    Important to know is, that the Mod4j modules that you are going to checkout from the repository,
+                    do have a
+                    hybrid nature. Some of the modules are Eclipse plug-ins and some are Maven modules. But the most
+                    modules are
+                    both: Eclipse plug-in and configured as a Maven module (yes, you can recognize them by the
+                    pom.xml file).
+                    <br />
+                    This last category, the hybrids, must be treated with extra care. It mainly implies that you as a developer
+                    must know that dependencies must be manually managed in two places within the module. In the manifest
+                    (Eclipse plug-in) and in the pom.xml file (Maven) of the module. Also, in an equal manner, the versions of
+                    the module must be maintained manually twice.
+                    <br />
+                    At the moment we do not have a suitable solution for automating this process, maybe in the future we will
+                    extend our mod4j-maven-plugin with this functionality or see if the maven-eclipse-plugin can help us out.
+                </p>
+                <ol>
+                    <li>
+                        Check out the source code of the
+                        <code>mod4j</code>
+                        project from the Subversion URL
+                        <code>https://svn.codehaus.org/mod4j/trunk</code>
+                        into a directory on your file system. See the link
+                        <a href="source-repository.html">Project information</a>
+                        for information on how to do this.
+                    </li>
+                    <li>
+                        Choose
+                        <b>Import</b>
+                        >
+                        <b>Existing Project into Workspace</b>
+                        and Browse to the
+                        <code>../modules/Crossx</code>
+                        folder. After choosing
+                        <b>Ok</b>
+                        and
+                        <b>Finish</b>
+                        the following modules are imported in your workspace:
+                        <br />
+                        <code>org.mod4j.crossx.mm</code>
+                        <br />
+                        <code>org.mod4j.crossx.broker</code>
+                    </li>
+                    <li>
+                        Even so do this with:
+                        <br />
+                        <code>modules/org.mod4j.common</code>
+                        and
+                        <br />
+                        <code>modules/org.mod4j.updatesite</code>
+                        and
+                        <br />
+                        <code>modules/Eclipse/org.mod4j.eclipse</code>
+                    </li>
+                    <li>
+                        Choose
+                        <b>Import</b>
+                        >
+                        <b>Existing Project into Workspace</b>
+                        and Browse to the
+                        <code>../modules/BusinessDomainDsl</code>
+                        folder. After choosing
+                        <b>Ok</b>
+                        and
+                        <b>Finish</b>
+                        the following modules are imported in your workspace:
+                        <br />
+                        <code>org.mod4j.dsl.businessdomain.generator</code>
+                        <br />
+                        <code>org.mod4j.dsl.businessdomain.mm</code>
+                        <br />
+                        <code>org.mod4j.dsl.businessdomain.validation</code>
+                        <br />
+                        <code>org.mod4j.dsl.businessdomain.xtext</code>
+                        <br />
+                        <code>org.mod4j.dsl.businessdomain.xtext.ui</code>
+                    </li>
+                    <li>
+                        If you need to (re)generate the modelcode from a meta model, for instance the BusinessDomani meta model:
+                        Open
+                        <code>org.mod4j.dsl.businessdomain.mm/model/BusinessDomainDsl.genmodel
+                        </code>
+                        in the EMF Generator editor.
+                    </li>
+                    <li>
+                        Right-click on
+                        <code>BusinessDomainDsl</code>
+                        in the editor pane, and choose
+                        <q>Generate Model Code</q>
+                        <br />
+                        Normally you wouldn't need to add generated sources to the version control system (Subverson), but due
+                        to not being able for us to perform this step outside Eclipse we've decided -for now- to add the
+                        generated code (src-gen folder) to Subversion. So the continuous integration build can build it and
+                        other
+                        modules can depend on it.
+                        <br />
+                    </li>
+                    <li>
+                        You need to generate the code for Xtext and Xtext.ui projects: Right-click the file
+                        <code>org.mod4j.dsl.businessdomain.xtext/src/org.mod4j.dsl.businessdomain.xtext/GenerateBusinessdomain.mwe,
+                        </code>
+                        and choose
+                        <br />
+                        <q>Run As -> MWE Workflow</q>
+                        from the context-menu.
+                    </li>
+                    <li>
+                        Repeat the previous steps you took for importing the BusinessDomainDsl projects for:
+                        <br />
+                        <code>../modules/DataContractDsl</code>
+                        and
+                        <br />
+                        <code>../modules/ServiceDsl</code>
+                    </li>
+                    <li>
+                        Now import as
+                        <b>Maven Project</b>
+                        :
+                        <br />
+                        Choose
+                        <b>Import</b>
+                        >
+                        <b>Maven2 Project</b>
+                        >
+                        <b>Next</b>
+                        and Browse to the
+                        <code>modules/org.mod4j.runtime.common</code>
+                        folder. Then choose
+                        <b>Ok</b>
+                        and
+                        <b>Finish</b>
+                        .
+                        <br />
+                        Do the same with:
+                        <br />
+                        <code>modules/org.mod4j.mavenplugin</code>
+                    </li>
+                </ol>
+                <p>
+                    Now you have imported and generated the necessary modules. The DSL editors are ready to use. There
+                    for you
+                    need
+                    to activate the newly created editor in a second Eclipse instance. See next section "Modeling".
+                </p>
+            </subsection>
+            <subsection name="Modeling">
+                <ol>
+
+                    <li>
+                        Be sure you start a second Eclipse instance with the right memory settings. Add the following arguments
+                        in the
+                        <b>Arguments</b>
+                        tab, see
+                        <b>Run</b>
+                        >
+                        <b>Run Configurations...</b>
+                        <br />
+                        Add to Vm arguments:
+                        <q>-Xms512m -Xmx512m -XX:PermSize=512m -XX:MaxPermSize=512m</q>
+                        <br />
+                        Add to Program Arguments:
+                        <q> -Dcom.sun.management.jmxremote </q>
+                    </li>
+                    <li>
+                        To start the second Eclipse instance: Right-click the module
+                        <code>org.mod4j.dsl.businessdomain.xtext.ui</code>
+                        and choose
+                        <q>Run As -> Eclipse Application</q>
+                        from the context menu.
+                    </li>
+                    <li>
+                        Choose
+                        <b>Import</b>
+                        >
+                        <b>Existing Project into Workspace</b>
+                        and Browse to the
+                        <code>../modules/Examples/RecordShop-ExampleProject/RecordShop-dslModels
+                        </code>
+                        folder.
+                        After choosing
+                        <b>Ok</b>
+                        and
+                        <b>
+                            Finish
+                        </b>
+                        the following modules are imported in your workspace:
+                        <br />
+                        <code>RecordShop-dslModels</code>
+                    </li>
+                    <li>
+                        Now import as
+                        <b>Maven Project</b>
+                        :
+                        <br />
+                        Choose
+                        <b>Import</b>
+                        >
+                        <b>Maven2 Project</b>
+                        >
+                        <b>Next</b>
+                        and Browse to the
+                        <code>../modules/Examples/RecordShop-ExampleProject</code>
+                        folder. Then choose
+                        <b>Ok</b>
+                        <br />
+                        Uncheck the RecordShop-dslModels module (you already imported this one in the previous step)
+                        and klick
+                        <b>Finish</b>
+                        .
+                        <br />
+                        After choosing
+                        <b>Ok</b>
+                        and
+                        <b>Finish</b>
+                        the following modules are imported in your workspace:
+                        <br />
+                        <code>RecordShop-domain</code>
+                        <br />
+                        <code>RecordShop-data</code>
+                        <br />
+                        <code>RecordShop-business</code>
+                        <br />
+                        <code>RecordShop-service</code>
+                    </li>
+                    <li>In the previous step the IAM Maven plug-in not always recognizes the source folders correctly. Adjust
+                        the source
+                        folders manually if you encounter compilation failures. Right-click on the project to adjust
+                        the "Build
+                        Path" configuration. Add src/main/java, src/test/java, src/main/resources, generated-sources
+                        and
+                        generated-resources to it.</li>
+                    <li>
+                        In the new Eclipse session you should be able to edit the .busmod, .sermod and .dtcmod model files in
+                        the
+                        <code>RecordShop-dslModels</code>
+                        project.
+                        <br />
+                        Open the file
+                        <code>RecordShop-dslModels/src/model/businessDomain/businessDomain/model.busmod
+                        </code>
+                        change this file as needed and save the file.
+                    </li>
+                    <li>
+                        The previous step generated two new modules into the RecordShop-ExampleProject folder. See:
+                        <code>../RecordShop-ExampleProject/RecordShop-domain
+                        </code>
+                        and
+                        <code>../RecordShop-ExampleProject/RecordShop-data</code>
+                        <br />
+                        The modules are generated as a mulitmodule Maven project. To test and install the maven modules:
+                        <br />
+                        Open a command console and navigate to location of the parent-POM (../RecordShop-ExampleProject/pom.xml)
+                        <br />
+                        Give the command:
+                        <code>
+                            <b>mvn clean install</b>
+                        </code>
+                    </li>
+                </ol>
+            </subsection>
+            <subsection name="First day procedure for Mod4j developers">
+                <p>As a new developer of Mod4j you will need to follow the next steps</p>
+                <ol>
+                    <li>
+                        Subscribe yourself to the
+                        <a href="http://xircles.codehaus.org/manage_email/dev@mod4j.codehaus.org">developer mailinglist</a>
+                        (dev@mod4j.codehaus.org) and post a short
+                        message to introduce your self to the other developers. So all
+                        developers know who you are and that
+                        there is a new developer active.
+                    </li>
+                    <li>Add yourself as notifier to the notifiers list of the ciManagement section in the parent-pom. So you
+                        will be
+                        notified by Continuum of build status changes.</li>
+                    <li>Make sure you're familiar with the different Maven profiles in the parent-pom. Its important to know
+                        which modules are effected when you're building with Maven.</li>
+                </ol>
+            </subsection>
+        </section>
+    </body>
+</document>

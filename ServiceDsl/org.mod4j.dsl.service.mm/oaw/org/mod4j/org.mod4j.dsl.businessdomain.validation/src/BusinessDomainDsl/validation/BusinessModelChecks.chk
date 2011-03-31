@@ -1,0 +1,137 @@
+/*******************************************************************************
+ * Copyright (c) 2009 Ordina and committers to Mod4j
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Ordina - initial implementation
+ *******************************************************************************/
+import BusinessDomainDsl;
+
+extension BusinessDomainDsl::validation::javautils;
+extension org::mod4j::dslcommon::xtend::generatorutil;
+
+/*
+ * This check file is used by the parser
+ * and by the editor. Add your constraints here!
+ */
+// identical target role names from this association's class
+context Association ERROR "Association target role ["+ this.targetRoleName + "] is not unique" :
+     this.source.associationsTo.select(e|e!= this).
+          forAll(e|e.targetRoleName != this.targetRoleName)
+;
+
+// identical and source and target role names from this association's class
+context Association ERROR "Association target role ["+ this.targetRoleName + "] conflicts with source role" :
+     this.model.associations.select(e|(e.target == this.source) && e.bidirectional ).
+          forAll(e|e.sourceRoleName != this.targetRoleName)
+;
+
+// identical and target role names from this association's class
+context Association ERROR "Association source role ["+ this.sourceRoleName + "] is not unique " : // + this.getProperty("ERROR")  :
+     this.bidirectional implies (
+     this.model.associations.select(e|(e.target == this.target) && e.bidirectional && (e!= this) ).
+          forAll(e|e.sourceRoleName != this.sourceRoleName)
+     )
+;
+
+// target role name conflicts with property name
+context Association ERROR "Association target role ["+ this.targetRoleName + 
+                          "] conflicts with property from source class [" + this.source.name + "]" :
+     this.source.properties.forAll(e|e.name != this.targetRoleName)
+;
+
+// source role name conflicts with property name
+context Association ERROR "Association source role ["+ this.sourceRoleName + 
+                          "] conflicts with property from target class [" + this.target.name + "]" :
+     this.bidirectional implies (
+         this.target.properties.forAll(e|e.name != this.sourceRoleName)
+     )
+;
+
+// ordered and bidirectional associations do not go together
+context Association ERROR "An ordered association source may not be bidirectional" :
+     this.ordered implies ( ! this.bidirectional )
+;
+
+// TODO: the test for an upper bound for the target multiplicity of "Many"
+// using string comparison is ugly. This must be improved!
+context Association ERROR "[" + this.targetRoleName + "/" + this.targetMultiplicity +
+                          "]: only associations with multiplicity MANY may be ordered" :
+    this.ordered implies (this.targetMultiplicity.toString().equalsIgnoreCase("ZeroMany")
+    || this.targetMultiplicity.toString().equalsIgnoreCase("OneMany"));
+
+context BusinessClass ERROR "Name of BusinessClass [" + this.name + "] is not unique" :
+   ((BusinessDomainDsl::BusinessDomainModel)this.eContainer).types.forAll(e|
+     e != this implies (! e.name.equalsIgnoreCase(this.name) ) ) ;
+
+context BusinessClass ERROR "Name of BusinessClass should not be empty" :
+    this.name.trim().length > 0;
+
+context BusinessClass ERROR "BusinessClass [" + this.name + "] inherits itself" :
+    ! circularInheritance(this);
+
+context Property ERROR "Name of Attribute [" + this.name + "] is not unique":
+   ((BusinessDomainDsl::BusinessClass)this.eContainer).properties.forAll(e|
+     e != this implies e.name != this.name) ;
+
+context Property ERROR "The dataType of property [" + this.name + "] is not specified.":
+    ((this.metaType.name.endsWith("EnumerationPropertyImpl"))
+//    ((this.metaType.isAssignableFrom(EnumerationProperty) )
+    ?    (true)
+    :    (dataType.length > 1));
+
+context Property ERROR "The name of Property ["+ name + "] must be more than one character long." :
+    name.length > 1;
+    
+context Property ERROR "The derived Property [" + name + "] cannot have a default value." :
+	derived implies !hasDefault;
+ 
+context IntegerProperty ERROR "The minimal value of Property ["+ name + "] must be smaller that the maximum value." :
+    minValue <= maxValue;
+
+context IntegerProperty ERROR "The default value of Property ["+ name + "] must be  greater than the minimum value." :
+    (hasDefault && (minValue != -2147483648) ) ? defaultValue >= minValue : true ;
+ 
+context IntegerProperty ERROR "The default value of Property ["+ name + "] must be less than the maximum value." :
+    (hasDefault && (maxValue != -2147483648) ) ? defaultValue <= maxValue : true ;
+ 
+context StringProperty ERROR "The lenght of the default value of Property ["+ name + "] must be greater than the minimum lenght." :
+    (hasDefault && (minLength != -1) ) ? defaultValue.length >= minLength : true ;
+ 
+context StringProperty ERROR "The lenght of the default value of Property ["+ name + "] must be less than the maximum lenght." :
+    (hasDefault && (maxLength != -1) ) ? defaultValue.length <= maxLength : true ;
+ 
+context StringProperty ERROR "The minimum lenght of Property ["+ name + "] must be less or equal to the maximum lenght." :
+    ((minLength != -1) && (maxLength != -1) ) ? minLength <= maxLength : true ;
+ 
+// context EnumerationProperty ERROR "The default value of Property ["+ name + "] must be an enumeration literal of [" + type.name + "]." :
+//    (hasDefault ? this.type.enumerationLiterals.name.contains(defaultValue) : true);
+ 
+context Enumeration ERROR "Enumeration literals must be unique" :
+      enumerationLiterals.forAll(e1 | 
+         enumerationLiterals.forAll( e2 | e1 != e2 implies e1.name != e2.name) );
+
+context Enumeration ERROR "Enumeration numeric values must be unique" :
+      enumerationLiterals.forAll(e1 | 
+         enumerationLiterals.forAll( e2 | e1 != e2 implies e1.persistedValue!= e2.persistedValue) );
+
+context EnumerationProperty ERROR "Default value [" + this.defaultValueAsString + "] is not a literal of enumeration " + type.name :
+    this.hasDefault implies this.type.enumerationLiterals.exists(lit | lit.name == this.defaultValueAsString);
+
+context BusinessRule ERROR "Name of BusinessRule [" + this.name + "] must be unique" :
+    this.businessClass.businessRules.forAll(e| e != this implies (! e.name.equalsIgnoreCase(this.name)))
+	;
+
+context UniqueRule ERROR "All properties of a unique rule must belong to the containing class" :
+    this.properties.forAll( p |  ((BusinessDomainDsl::BusinessClass)this.eContainer).properties.contains(p) );
+
+context UniqueRule ERROR "Any property can be part of just one unique rule" :
+    let constrainedProperties = this.businessClass.businessRules.typeSelect(UniqueRule).properties :
+    constrainedProperties.size == constrainedProperties.toSet().size;
+    
+
+
+ 

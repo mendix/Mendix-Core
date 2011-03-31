@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <!--
+        Please edit this file with the Eclipse XML editor, set your XML editor to a line length of 128 characters, indent-size
+        of 4 characters and not using tab-characters, and format the file (Ctrl-Shift-F) before checking in. This should
+        minimize the number of non-significant differences when comparing versions.
+    -->
+
+    <properties>
+        <title>Mod4j 1.1.0 Release Notes</title>
+    </properties>
+    <body>
+        <section name="Mod4j 1.1.0 Release Notes">
+
+            <p>
+                Dear Mod4j community,
+                <br />
+                <br />
+                The Mod4j development team is pleased to announce the release of Mod4j 1.1.0.
+                The following list highlights the
+                main issues that were involved with this release. For the complete list of solved bugs, improvements and tasks,
+                scroll down to the Release Notes List.
+            </p>
+            <ul>
+                <li>
+                    <b>Upgrade to Eclipse Galileo</b>
+                    <br />
+                    We have migrated all our sources to Eclipse Galileo. This includes the migration from OpenArchitectureWare
+                    to the new TMF XTEXT and M2T XPAND Eclipse projects.
+                </li>
+                <li>
+                <b>
+                    Enhancements for Spring and Hibernate
+                </b>
+                    <br />
+                    Several issues have been fixed. For more details scroll down to the Release Notes List.
+                </li>
+                                <li>
+                    <b>Upgrade to Apache Maven 2.1.0</b>
+                    <br />
+                    To take advantage of new Maven version, we moved on to
+                    <a href="http://maven.apache.org/release-notes-2.1.x.html">Maven 2.1.0</a>
+                    .
+                </li>
+            </ul>
+
+            <subsection name="How to upgrade">
+                <p>
+                    If you want to upgrade from the previous Mod4j release, you will need to follow the required upgrade steps
+                    as described in the
+                    <a href="upgradenotes.html">Mod4j 1.1.0 Upgrade Notes</a>
+                </p>
+            </subsection>
+            <subsection name="1.1.0 Relaese Notes List">
+                <h2> Sub-task
+            </h2>
+                <ul>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-120'>MODFORJ-120</a>
+                        ] - Document the derived property for attributes
+                    </li>
+                </ul>
+
+                <h2> Bug
+            </h2>
+                <ul>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-3'>MODFORJ-3</a>
+                        ] - Code completion for reference methods does not work
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-17'>MODFORJ-17</a>
+                        ] - Gegenereerde code (constructor bij extension point) niet overschreven na wijziging in DSL
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-18'>MODFORJ-18</a>
+                        ] - Services in the business layer are called DomainServices
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-62'>MODFORJ-62</a>
+                        ] - Constant 1 is incorrect according to DSL editors
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-75'>MODFORJ-75</a>
+                        ] - Missing translation of an association in DtoTranslator.
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-80'>MODFORJ-80</a>]
+                        - translator fromDto methode vereist een &quot;target&quot;.
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-94'>MODFORJ-94</a>
+                        ] - Empty file generated for list dto's.
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-98'>MODFORJ-98</a>
+                        ] - validate method is not called in setter of domain object.
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-99'>MODFORJ-99</a>
+                        ] - Validators are not set when a domain object is restored by hibernate
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-111'>MODFORJ-111</a>
+                        ] - The getting started section is confusing
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-112'>MODFORJ-112</a>
+                        ] - Update method in DaoImplBase classes uses the save method instead of update
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-116'>MODFORJ-116</a>
+                        ] - Spring overriding-mechanism doesn't work when overriding the tra-transactionmanager with another
+                        transactionmanager in the /service/applicationContext.xml
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-119'>MODFORJ-119</a>
+                        ] - When using derived attributes, executing the generated code results in a
+                        UnsupportedOperationException
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-123'>MODFORJ-123</a>
+                        ] - No documentation is added for special service methods e.g. find and listall.
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-124'>MODFORJ-124</a>
+                        ] - Incorrect Hibernate mapping generated when creating an association from a class to itself
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-133'>MODFORJ-133</a>
+                        ] - Configuration error in the generated hbm.xml
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-135'>MODFORJ-135</a>
+                        ] - Objects in one2one association not persited
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-141'>MODFORJ-141</a>
+                        ] - The DTOs prevent optimistic locking because they lack a version property
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-143'>MODFORJ-143</a>
+                        ] - Refactor equals() and hashCode() methods in domain objects
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-144'>MODFORJ-144</a>
+                        ] - No id set for newly added dto's (update-service method)
+                    </li>
+                </ul>
+
+                <h2> Improvement
+            </h2>
+                <ul>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-6'>MODFORJ-6</a>
+                        ] - Data Contract Dsl: cannot have a reference without attributes
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-12'>MODFORJ-12</a>
+                        ] - Errors like having multiple business classes of the same name in multiple files should be checked
+                        and an
+                        error message should be given.
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-13'>MODFORJ-13</a>
+                        ] - Generating the sample model files should be optional
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-22'>MODFORJ-22</a>
+                        ] - Add pointers in Javadoc to the mutable implementing files
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-24'>MODFORJ-24</a>
+                        ] - Unexpected create objectbehavior with nullable attributes with default values
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-26'>MODFORJ-26</a>
+                        ] - Correct javadoc for implementation classes
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-28'>MODFORJ-28</a>
+                        ] - Add enviroment aware switch for transactionManger in Spring configuration
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-30'>MODFORJ-30</a>
+                        ] - Coloring of keywords instable
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-59'>MODFORJ-59</a>
+                        ] - Find a solution for the Eclipse plug-in - Maven gap
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-73'>MODFORJ-73</a>
+                        ] - Refactor enum's for special methods into subtypes of SpecialMethod
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-79'>MODFORJ-79</a>
+                        ] - MOD4j should not define the data sources in the Spring Context Definition
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-90'>MODFORJ-90</a>
+                        ] - Add tilde to generated .crossx and mod4project.xml files
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-93'>MODFORJ-93</a>
+                        ] - Upgrade to Maven 2.1.0
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-114'>MODFORJ-114</a>
+                        ] - Persisted objects within a Hibernate session do not need to be explicitly updated
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-117'>MODFORJ-117</a>
+                        ] - Flexible ddl generation
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-121'>MODFORJ-121</a>
+                        ] - Default values for attributes on domain classes have no effect on dto's
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-131'>MODFORJ-131</a>
+                        ] - Code completion missing for default value when specifying an enum attribtute for a domain class
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-132'>MODFORJ-132</a>
+                        ] - Add a generic xpand template for generating standard file headers
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-142'>MODFORJ-142</a>
+                        ] - Make syntax consistent
+                    </li>
+                </ul>
+
+                <h2> New Feature
+            </h2>
+                <ul>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-125'>MODFORJ-125</a>
+                        ] - Add toString, equals, etc implementation to Dto'
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-126'>MODFORJ-126</a>
+                        ] - Add document to the argument and return type in the 'method' declaration
+                    </li>
+                </ul>
+
+                <h2> Task
+            </h2>
+                <ul>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-8'>MODFORJ-8</a>
+                        ] - Make a release notes page and a migration page for the project site
+                    </li>
+                </ul>
+            </subsection>
+        </section>
+    </body>
+</document>

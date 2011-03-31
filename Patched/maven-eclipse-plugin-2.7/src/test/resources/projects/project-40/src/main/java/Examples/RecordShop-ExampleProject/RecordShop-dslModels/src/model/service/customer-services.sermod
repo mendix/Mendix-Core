@@ -1,0 +1,79 @@
+"The RecordShop Customer Service Model. Contains all services needed to maintain Customers."
+service CustomerServiceModel   ;
+          
+from RecordShopDataContract import SimpleCustomerDto; 
+from RecordShopDataContract import UniqueCustomerDto; 
+from RecordShopDataContract import StringDto;
+from RecordShopDataContract import FullCustomerDto; 
+from RecordShopDataContract import OrderDto; 
+from RecordShopDataContract import OrderNumberAndDateDto;
+from RecordShopDataContract import OrderWithOrderLinesDto;  
+from RecordShopDataContract import OrderLineDto;
+from RecordShopDataContract import CustomerWithOrdersAndOrderLines;
+from RecordShopDataContract import CustomerWithAddressDto; 
+from RecordShopDataContract import ProductWithCustomersDto;
+from RecordShopDataContract import FullProductDto;
+from RecordShopDataContract import ArtistDto;
+from RecordShopDataContract import PersonDto;   
+from RecordShopDataContract import RelationDto;
+from RecordShopDataContract import AddressDto;
+
+crud RelationDto;
+crud PersonDto;
+find findPersons for PersonDto;
+
+read readOrder     for OrderDto ; 
+read readOrderLine for OrderLineDto;                
+for OrderDto reference orderLines add OrderLineDto ;
+for OrderDto reference orderLines remove OrderLineDto;
+            
+"All crud servuices needed for FullCustomer"           
+crud FullCustomerDto ;
+crud ProductWithCustomersDto;  
+crud FullProductDto;
+
+crud CustomerWithOrdersAndOrderLines;
+crud ArtistDto;           
+/*              
+ * Explicit definded crud servicemethods         
+ */         
+create createCustomer for SimpleCustomerDto ;             
+read   readCustomer for SimpleCustomerDto ;   
+update updateCustomer for SimpleCustomerDto ;         
+delete deleteCustomer for SimpleCustomerDto ;
+create createAddress for AddressDto;
+read readAddress for AddressDto;
+create createCustomerWithAddress for CustomerWithAddressDto;          
+
+listall listCustomers for SimpleCustomerDto ;
+listall listFullCustomers for FullCustomerDto;
+listall listAllArtists for ArtistDto;
+      
+find findCustomers for SimpleCustomerDto ;  
+find findCustomersFull for FullCustomerDto;
+find findCustomerWithAddress for CustomerWithAddressDto;
+
+for SimpleCustomerDto reference orders add OrderDto;
+for SimpleCustomerDto reference orders remove OrderDto;
+for SimpleCustomerDto reference orders get OrderNumberAndDateDto;
+
+for OrderDto reference customer  get  SimpleCustomerDto;
+for OrderDto reference customer add SimpleCustomerDto;
+
+"test" 
+method voidreturn in (OrderDto ord); 
+  
+"add order to customer"     
+method addToOrders in ("The order to add"
+                        OrderDto order, 
+                       "The customer to which the orders is added"
+                        SimpleCustomerDto customer) 
+                   out OrderDto; 
+
+"Find Customer by unique key attributes."
+method findCustomerByUniqueKey in (UniqueCustomerDto cust)
+                               out SimpleCustomerDto;
+
+"Find all Customers matching the given name."
+method findCustomerByName in (StringDto name) out list SimpleCustomerDto;
+method findCustomersByNames in (list StringDto names) out list SimpleCustomerDto;    

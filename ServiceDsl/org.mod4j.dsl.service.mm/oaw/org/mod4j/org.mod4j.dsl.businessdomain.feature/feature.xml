@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="mod4j.businessdomain.feature"
+      label="Mod4j BusinessDomain Feature"
+      version="1.3.0.qualifier"
+      provider-name="org.mod4j">
+
+   <description url="http://mod4j.org">
+      The Mod4j features supports modeling and code generation through
+small independent DSL&apos;s. for Java projects. This business domain
+language is one of those DSL&apos;s.
+   </description>
+
+   <copyright>
+      (c) 2008, Ordina: original contributor
+(c) 2008, Jos Warmer &amp; Anneke Kleppe: Java code generation for
+associations is based on the code generator from Octopus (http://octopus.sourceforge.net)
+   </copyright>
+
+   <license url="http://www.eclipse.org">
+      Mod4j contributors make available all content in this plug-in
+(&quot;Content&quot;). Unless otherwise indicated below, the Content is
+provided to you under the terms and conditions of the Eclipse
+Public License Version 1.0 (&quot;EPL&quot;). A copy of the EPL is available
+at http://www.eclipse.org/legal/epl-v10.html. For purposes of
+the EPL, &quot;Program&quot; will mean the Content.
+If you did not receive this Content directly from the Eclipse
+Foundation, the Content is being redistributed by another party
+(&quot;Redistributor&quot;) and different terms and conditions may apply
+to your use of any object code in the Content. Check the Redistributor’s
+license that was provided with the Content. If no such license
+exists, contact the Redistributor. Unless otherwise indicated
+below, the terms and conditions of the EPL still apply to any
+source code in the Content and such source code may be obtained
+at http://www.eclipse.org.
+   </license>
+
+   <url>
+      <update label="Mod4j update site" url="http://mod4j.org/updatesite"/>
+   </url>
+
+   <plugin
+         id="org.mod4j.crossx.mm"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.mod4j.crossx.broker"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.mod4j.eclipse"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.mod4j.dsl.businessdomain.generator"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.mod4j.dsl.businessdomain.mm"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.mod4j.dsl.businessdomain.validation"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.mod4j.dsl.businessdomain.xtext"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.mod4j.common"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.mod4j.dsl.businessdomain.xtext.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

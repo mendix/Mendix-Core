@@ -1,0 +1,42 @@
+«IMPORT DataContractDsl»
+«IMPORT org::mod4j::dslcommon::xpand::xml»
+
+«EXTENSION org::mod4j::dslcommon::xtend::ProjectProperties»
+«EXTENSION org::mod4j::common::xtend::NameMapper»
+«EXTENSION org::mod4j::dslcommon::xtend::generatorutil»
+
+«DEFINE createServiceModulePom FOR DataContractModel»
+<?xml version="1.0" encoding="«getFileEncoding()»"?>
+«EXPAND XmlComments::extensionPointHeader ("Mod4j DataContractDsl generator: ServiceModuelPom.xpt") FOR this»
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>«getRootPackage()»</groupId>
+        <artifactId>«getApplicationName()»</artifactId>
+        <version>«getApplicationVersion()»</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>«getRootPackage()»</groupId>
+    <artifactId>«getServiceModuleName()»</artifactId>
+    <name>«getServiceModuleName()»</name>
+    <version>«getApplicationVersion()»</version>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>«getRootPackage()»</groupId>
+            <artifactId>«getBusinessDomainModuleName()»</artifactId>
+            <version>«getApplicationVersion()»</version>
+        </dependency>
+    </dependencies>    
+</project>
+«ENDDEFINE»

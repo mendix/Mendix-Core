@@ -1,0 +1,124 @@
+«REM»
+ Copyright (c) 2009 Ordina and committers to Mod4j
+ All rights reserved. This program and the accompanying materials
+ are made available under the terms of the Eclipse Public License v1.0
+ which accompanies this distribution, and is available at
+ http://www.eclipse.org/legal/epl-v10.html
+  Contributors:
+     Ordina - initial implementation
+«ENDREM»
+«IMPORT BusinessDomainDsl»
+«IMPORT org::mod4j::dsl::businessdomain::generator::xpand::java»
+«IMPORT org::mod4j::dsl::businessdomain::generator::xpand::maven»
+«IMPORT org::mod4j::dsl::businessdomain::generator::xpand::spring»
+
+«EXTENSION org::mod4j::dslcommon::xtend::generatorutil»
+«EXTENSION org::mod4j::dslcommon::xtend::ProjectProperties»
+«EXTENSION org::mod4j::common::xtend::NameMapper»
+«EXTENSION org::mod4j::common::xtend::FileTracker»
+
+«DEFINE Root FOR BusinessDomainDsl::BusinessDomainModel »
+
+	«print("MOD4J INFO: Running Business Domain generator on model [" + this.name + "]")»
+		
+    «IF !fileExist(fullExtendPath(getBusinessDomainModuleName(), getBusinessdomainRootPackageAsPath() + "/beanRefContext.xml"))»
+        «FILE generateToMain(getBusinessDomainModuleName(), getBusinessdomainRootPackageAsPath() + "/beanRefContext.xml")»
+            «EXPAND BusinessdomainLayerBeanRefContext::genBeanRefContext FOR this»
+        «ENDFILE»
+    «ELSE»
+        «retain(getBusinessDomainModuleName(), getBusinessdomainRootPackageAsPath() + "/beanRefContext.xml")»
+    «ENDIF»
+		
+	«FILE generate(getBusinessDomainModuleName(), getBusinessdomainRootPackageAsPath() + "/applicationContext.xml")-»
+    	«EXPAND ApplicationContext::genApplicationContext FOR this»
+	«ENDFILE»
+	
+    «FOREACH types.typeSelect(BusinessClass) AS class»
+        «FILE generate(getBusinessDomainModuleName(), javaPathFileName(javaDomainBaseClassPath(class.name) ))»
+            «EXPAND NewJavaBean::BeanClassImplBase FOR class»
+        «ENDFILE»
+	    «FOREACH class.businessRules.typeSelect(BusinessRule) AS br»
+		    «FILE generate(getBusinessDomainModuleName(), javaPathFileName(javaBusinessRuleBaseClassPath(br.name) ))»
+		        «EXPAND NewBusinessRules::BusinessRuleImplBase (class) FOR br»
+			«ENDFILE»
+	    «ENDFOREACH»
+    «ENDFOREACH»
+    
+	«FOREACH enumerations AS enum»
+	    «FILE generate(getBusinessDomainModuleName(), javaPathFileName(javaDomainClassPath(enum.name) ))»
+			«EXPAND Enumeration::createEnum FOR enum»
+		«ENDFILE»
+	«ENDFOREACH»
+«ENDDEFINE»
+
+«REM»
+	Generation of extention Points for the implementation base classes.
+	If an extension point already exist in the source folder for manually maintained sources (scr/main)
+	these classes will not be generated again.
+«ENDREM»
+«DEFINE ExtensionPointGeneration FOR BusinessDomainDsl::BusinessDomainModel»
+
+	«print("MOD4J INFO: Running Business Domain extension point generator on model [" + this.name + "]")»
+
+    «FOREACH types.typeSelect(BusinessClass) AS class»
+
+		«REM»Extension points for business domain classes.«ENDREM»
+		«IF !fileExist(fullExtendPath(getBusinessDomainModuleName(), javaPathFileName(javaDomainClassPath(class.name) )))»
+			«FILE generate(getBusinessDomainModuleName(), javaPathFileName(javaDomainClassPath(class.name) ))»
+	            «EXPAND NewJavaBean::BeanClassExtensionPoint FOR class»
+	        «ENDFILE»
+		«ELSE»
+			«retain(getBusinessDomainModuleName(), javaPathFileName(javaDomainClassPath(class.name) ))»
+	    «ENDIF»
+
+		«REM»ExampleClasses for business domain classes to enable query bu example.«ENDREM»
+	    «FILE generate(getBusinessDomainModuleName(), javaPathFileName(javaDomainExampleClassPath(class.name) ))»
+		    «EXPAND NewJavaBean::BeanClassQueryExample FOR class»
+		«ENDFILE»
+        
+        «REM»Extension points for businessrule classes.«ENDREM»
+	    «FOREACH class.businessRules.typeSelect(BusinessRule) AS br»
+			«IF !fileExist(fullExtendPath(getBusinessDomainModuleName(), javaPathFileName(javaBusinessRuleClassPath(br.name) )))»
+				«FILE generate(getBusinessDomainModuleName(), javaPathFileName(javaBusinessRuleClassPath(br.name) ))»
+					«EXPAND NewBusinessRules::BusinessRuleExtensionPoint  FOR br»
+				«ENDFILE»
+			«ELSE»
+				«retain(getBusinessDomainModuleName(), javaPathFileName(javaBusinessRuleClassPath(br.name) ))»
+			«ENDIF»
+	    «ENDFOREACH»
+    «ENDFOREACH»
+«ENDDEFINE»
+
+«REM»
+	Generation of Maven configuration files.
+	Because these files do not directly change by any kind of model changes, they will be directly genrated
+	into the src/main folder.
+«ENDREM»
+«DEFINE CreateMavenConfiguration FOR BusinessDomainDsl::BusinessDomainModel»
+
+	«print("MOD4J INFO: Running Business Domain Maven generator on model [" + this.name + "]")»
+
+    «IF !fileExist(getDslModelsModulePath() + "/pom.xml")»
+        «FILE generateToMain( getDslModelsModuleName(), "pom.xml" )-»
+		    «EXPAND DslModelsModulePom::createDslModelsModulePom»
+		«ENDFILE»
+	«ELSE»
+		«retain(getDslModelsModuleName(), "pom.xml" )»
+	«ENDIF»
+	
+	«IF !fileExist(getApplicationPath() + "/pom.xml")»
+		«FILE generateToMain("", "pom.xml")»
+		    «EXPAND ParentPom::createParentPom»
+		«ENDFILE»
+	«ELSE»
+		«retain("", "pom.xml" )»
+	«ENDIF»
+
+    «IF !fileExist(getBusinessDomainModulePath() + "/pom.xml")»
+        «FILE generateToMain( getBusinessDomainModuleName(), "pom.xml" )-»
+			«EXPAND BusinessDomainModulePom::createBusinessDomainModulePom»
+		«ENDFILE»
+	«ELSE»
+		«retain(getBusinessDomainModuleName(), "pom.xml" )»
+	«ENDIF»
+«ENDDEFINE»

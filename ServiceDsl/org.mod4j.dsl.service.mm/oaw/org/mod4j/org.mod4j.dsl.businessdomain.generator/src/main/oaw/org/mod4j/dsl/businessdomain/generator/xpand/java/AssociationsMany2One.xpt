@@ -1,0 +1,129 @@
+«REM»
+ Copyright (c) 2009 Ordina and committers to Mod4j
+ All rights reserved. This program and the accompanying materials
+ are made available under the terms of the Eclipse Public License v1.0
+ which accompanies this distribution, and is available at
+ http://www.eclipse.org/legal/epl-v10.html
+  Contributors:
+     Ordina - initial implementation
+«ENDREM»
+«IMPORT BusinessDomainDsl»
+
+«EXTENSION Association»
+«EXTENSION org::mod4j::common::xtend::NameMapper»
+
+«REM»
+    Adds the accessor methods at the source side of a one to many association
+    If the association is bidirectional, code is generated to uodate the target side as well.
+«ENDREM»
+«DEFINE many2OneAccessorsTo FOR Association»
+    /**
+     * @return «targetRoleName» (<«target.name»>) 
+     */
+    public «javaDomainClass(target.name)» get«targetRoleName.toFirstUpper()» () {
+        return this.«targetRoleName»;
+    }
+
+    /**
+     * Implements adding single element to a collection
+     */
+    public void set«this.targetRoleName.toFirstUpper()»(«javaDomainClass(this.target.name)» element) {
+        if( this.«targetRoleName» != element ) {
+«IF this.bidirectional»
+            if ( this.«targetRoleName»  != null ) {
+                this.«targetRoleName».z_internalRemoveFrom«this.sourceRoleName.toFirstUpper()»( («javaDomainClass(source.name)») this);
+            }
+«ENDIF»
+            this.«this.targetRoleName» = element;
+«IF this.bidirectional»
+            if ( element != null ) {
+                element.z_internalAddTo«this.sourceRoleName.toFirstUpper()»( («javaDomainClass(this.source.name)»)this );
+            }
+«ENDIF»
+            validation.validate();
+        }
+    }
+
+    /**
+     * This operation should NOT be used by clients. It implements the correct addition of an element in an association.
+     * 
+     * @param element 
+     */
+    public void z_internalSet«this.targetRoleName.toFirstUpper()»(«javaDomainClass(this.target.name)» element) {
+        this.«this.targetRoleName» = element;
+    }
+    
+    /**
+     * This operation should NOT be used by clients. It implements the correct removal of an element in an association.
+     * 
+     * @param element 
+     */
+    public void z_internalRemove«this.targetRoleName.toFirstUpper()»(«javaDomainClass(this.target.name)» element) {
+        this.«this.targetRoleName» = null;
+    }
+«ENDDEFINE»
+
+«REM»
+    Adds the accessor methods at the target side of a bidirectional one to many association.
+    Code to update the o=ther side si generated as well.
+«ENDREM»
+«DEFINE many2OneAccessorsFrom FOR Association»
+    public Set<«javaDomainClass(source.name)»> get«sourceRoleName.toFirstUpper()» ( ) {
+        return this.«sourceRoleName»;
+    }
+
+    /**
+     * Implements the setter of association end 
+     * 
+     * @param element 
+     */
+    public void addTo«this.sourceRoleName.toFirstUpper()»(«javaDomainClass(this.source.name)» element) {
+        if( element == null) {
+            return;
+        }
+        if ( this.«sourceRoleName».contains(element) ) {
+            return;
+        }
+        this.«sourceRoleName».add(element);
+«IF bidirectional -»
+        if ( element.get«targetRoleName.toFirstUpper()»() != null ) {
+            element.get«targetRoleName.toFirstUpper()»().z_internalRemoveFrom«sourceRoleName.toFirstUpper()»(element);
+        }
+        element.z_internalSet«targetRoleName.toFirstUpper()»( («javaDomainClass(target.name)») this) ;
+«ENDIF»
+        validation.validate();
+    }
+    
+    public void removeFrom«sourceRoleName.toFirstUpper()» («javaDomainClass(source.name)» element) {
+        if ( element == null ) {
+            return;
+        }
+        this.«sourceRoleName».remove(element);
+«IF bidirectional -»
+        element.z_internalRemove«targetRoleName.toFirstUpper()» ( («javaDomainClass(target.name)») this) ;
+«ENDIF»
+        validation.validate();
+    }
+        
+    /**
+     * Should NOT be used by clients!
+     * Implements the correct setting of the link for + owner 
+     *                  when a single element is added to it.
+     * 
+     * @param element 
+     */
+    public void z_internalAddTo«this.sourceRoleName.toFirstUpper()»(«javaDomainClass(this.source.name)» element) {
+        this.«this.sourceRoleName».add(element);
+    }
+    
+    /**
+     * Should NOT be used by clients! Implements the correct setting of the link for + owner 
+     *                  when a single element is removed to it.
+     * 
+     * @param element 
+     */
+    public void z_internalRemoveFrom«this.sourceRoleName.toFirstUpper()» («javaDomainClass(this.source.name)» element) {
+        this.«this.sourceRoleName».remove(element);
+    }
+
+«ENDDEFINE»

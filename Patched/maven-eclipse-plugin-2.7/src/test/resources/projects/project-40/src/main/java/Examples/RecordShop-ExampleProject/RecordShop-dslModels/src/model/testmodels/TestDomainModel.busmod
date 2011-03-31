@@ -1,0 +1,83 @@
+domain TestDomainModel;
+ 
+"Test derived attributes"
+class DerivedNotYetImplemented [
+    string first derived writable;
+    boolean secondo derived writable;
+    datetime third derived writable;
+    integer fourth derived writable; 
+    decimal fifth derived writable; 
+]
+
+"Test derived attributes"
+class Derived [     
+    string first derived; 
+    boolean secondo derived writable;
+    datetime third nullable derived;
+    integer fourth nullable derived writable;
+    decimal fifth derived;
+]
+ 
+"Test derived attributes"
+class MyDerived [ 
+    string first derived; 
+    boolean secondo derived writable;
+    datetime third nullable derived;
+    integer fourth nullable derived writable;
+    decimal fifth derived;
+	Color clr derived writable;      
+]
+
+enumeration Color [ 
+    red = 0;
+    blue = 1;
+]
+"This class has no meaning in the recordshop application. Its purpose is to test
+ uni-directional many-to-many associations"
+class Many2ManyFrom [  
+    string property; 
+] 
+
+"This class has no meaning in the recordshop application. Its purpose is to test
+ uni-directional many-to-many associations" 
+class Many2ManyTo [
+    string property; 
+]
+
+"This class has no meaning in the recordshop application. Its purpose is to test
+ ordered one-to-many associations"
+class One2ManyFrom [
+    string property; 
+]
+
+"This class has no meaning in the recordshop application. Its purpose is to test
+ ordered one-to-many associations"
+class One2ManyOrderedTo [
+    string property; 
+]
+
+"This class has no meaning in the recordshop application. Its purpose is to test
+ ordered one-to-many associations"
+class Many2ManyOrderedTo [
+    string property;
+]
+
+"This Association has no meaning in the recordshop application. Its purpose is to test
+ uni-directional many-to-many associations"
+association Many2ManyFrom fromEnd  many  -> many  Many2ManyTo toEnd ;
+
+"This Association has no meaning in the recordshop application. Its purpose is to test
+ uni-directional many-to-many associations"
+association One2ManyFrom source  one  -> many  One2ManyOrderedTo  target ordered ;
+association One2ManyFrom source one  <-> many  One2ManyOrderedTo targetBiDirectional ; //ordered ;
+association Many2ManyFrom many2manySource many  -> many  Many2ManyOrderedTo target ordered ; 
+association Many2ManyFrom many2manySource many  <-> many  Many2ManyOrderedTo targetBiDirectional ; 
+
+"Verify that the name of the role of the many end of a one-to-many association may be
+ the same as the class name."
+association One2ManyFrom source one -> many One2ManyFrom one2ManyFrom;
+
+"Verify that the name of the role of the many end of a many-to-many association may be
+ the same as the class name."
+association Many2ManyFrom source one -> many Many2ManyTo many2ManyTo;
+

@@ -1,0 +1,29 @@
+«REM»
+	  Copyright (c) 2009 Ordina and committers to Mod4j
+	  All rights reserved. This program and the accompanying materials
+	  are made available under the terms of the Eclipse Public License v1.0
+	  which accompanies this distribution, and is available at
+	  http://www.eclipse.org/legal/epl-v10.html
+	 
+	  Contributors:
+	      Ordina - initial implementation
+«ENDREM»
+
+«REM»The recommended way to implement a singleton«ENDREM»
+«DEFINE makeSingleton FOR String»
+
+    // Protected constructor is sufficient to suppress unauthorized calls to the constructor
+    protected «this»() {}
+ 
+    /**
+     * SingletonHolder is loaded on the first execution of Singleton.getInstance() 
+     * or the first access to SingletonHolder.INSTANCE , not before.
+     */
+     private static class SingletonHolder { 
+         private final static «this» INSTANCE = new «this»();
+     }
+ 
+     public static «this» getInstance() {
+         return SingletonHolder.INSTANCE;
+     }
+«ENDDEFINE»

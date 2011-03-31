@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.mod4j.org/mod4j.crossx" 
+       class = "org.mod4j.crossx.mm.crossx.CrossxPackage"
+       genModel = "model/crossx.genmodel" /> 
+  </extension>
+
+</plugin>

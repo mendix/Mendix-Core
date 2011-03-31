@@ -1,0 +1,256 @@
+«REM»
+      Copyright (c) 2009 Ordina and committers to Mod4j
+      All rights reserved. This program and the accompanying materials
+      are made available under the terms of the Eclipse Public License v1.0
+      which accompanies this distribution, and is available at
+      http://www.eclipse.org/legal/epl-v10.html
+
+      Contributors:
+          Ordina - initial implementation
+«ENDREM»
+«IMPORT DataContractDsl»
+
+«EXTENSION org::mod4j::dsl::datacontract::generator::xtend::Dto»
+
+«DEFINE instanceVariable FOR DtoDataProperty»
+    «EXPAND Javadoc::addInstanceVarJavaDoc FOR this -»
+    «IF hasDefault»
+        «EXPAND instanceVariableWithDefault FOR this -»
+    «ELSE»
+        private «javaType(this)» «name»;
+    «ENDIF»
+«ENDDEFINE»
+
+«DEFINE instanceVariableWithDefault FOR DtoDataProperty»«REM»No generation«ENDREM»«ENDDEFINE»
+
+«DEFINE instanceVariableWithDefault FOR DtoStringProperty»
+    private «javaType(this)» «name» = "«defaultValue»";
+«ENDDEFINE»
+
+«DEFINE instanceVariableWithDefault FOR DtoIntegerProperty»
+     private «javaType(this)» «name» = «defaultValue»;
+«ENDDEFINE»
+
+«DEFINE instanceVariableWithDefault FOR DtoDecimalProperty»
+«REM»TODO: defaults for decmimals not supported yet.«ENDREM»
+«ENDDEFINE»
+
+«DEFINE instanceVariableWithDefault FOR DtoBooleanProperty»
+     private «javaType(this)» «name» = «defaultValue»;
+«ENDDEFINE»
+
+«DEFINE instanceVariableWithDefault FOR DtoDateTimeProperty»
+    private «javaType(this)» «name» = new «this.javaType()»("«defaultValue»");
+«ENDDEFINE»
+
+«DEFINE instanceVariableWithDefault FOR DtoEnumerationProperty»
+    private «javaType(this)» «name» = «this.javaType()».«defaultValueAsString -»;
+«ENDDEFINE»
+
+«DEFINE addGetter FOR DtoProperty»
+    /**
+    *
+    * @return «name» («javaType(this)») «description»
+    */
+    public «javaType(this)» get«name.toFirstUpper()» () {
+           return this.«name»;
+    }
+«ENDDEFINE»
+
+«DEFINE addGetter FOR DtoBooleanProperty»
+    /**
+    *
+    * @return «name» («javaType(this)») «description»
+    */
+    public «javaType(this)» is«name.toFirstUpper()» () {
+           return this.«name»;
+    }
+«ENDDEFINE»
+
+«DEFINE addSetter FOR DtoProperty»
+   «EXPAND Javadoc::addSetterJavaDoc FOR this -»
+    public void set«name.toFirstUpper()» (final «javaType(this)» «name») {
+        this.«name» = «name»;
+    }
+«ENDDEFINE»
+
+«DEFINE addAttribute FOR DtoProperty»
+    /**
+     *  Unknown Property type. It is not a subclass of Property or it is not expanded by this generator.
+     *  Name: «name»
+     *  Description: «description»
+     */
+«ENDDEFINE»
+
+«DEFINE instanceVariableNew FOR DtoAssociationRoleProperty »
+    «EXPAND Javadoc::addInstanceVarJavaDoc FOR this -»
+    «IF this.multiplicity == Multiplicity::MANY»
+        «IF this.ordered»
+            // ORDERED
+            private final List<«dtoType.name.toFirstUpper()»> «this.name» = new ArrayList<«dtoType.name.toFirstUpper()»>();
+        «ELSE »
+            private final Set<«dtoType.name.toFirstUpper()»> «this.name» = new HashSet<«dtoType.name.toFirstUpper()»>();
+        «ENDIF»
+    «ELSE»
+    private «dtoType.name.toFirstUpper()» «this.name» = null; //pppp1
+    «ENDIF»
+«ENDDEFINE»
+
+«DEFINE addAssociationRoleAccessors FOR DtoAssociationRoleProperty »
+    «IF this.multiplicity == Multiplicity::MANY»
+        «IF this.ordered»
+            «EXPAND addAssociationRoleAccessorsOrdered FOR this»
+        «ELSE»
+            «EXPAND addAssociationRoleAccessorsUnOrdered FOR this»
+        «ENDIF»
+    «ELSE»
+        «EXPAND addAssociationRoleAccessorsOne FOR this»
+    «ENDIF»
+«ENDDEFINE»
+
+«DEFINE addAssociationRoleAccessorsUnOrdered FOR DtoAssociationRoleProperty » «REM»DtoL:ist«ENDREM»
+    /**
+     * @param id
+     *        id of the collection element to return
+     *
+     * @return «dtoType.name.toFirstLower()» («dtoType.name.toFirstUpper()»)
+     *         with the given id.
+     */
+    public «dtoType.name.toFirstUpper()» getFrom«this.name.toFirstUpper()»(Long id) {
+        if (id == null) {
+            return null;
+        }
+        for («dtoType.name.toFirstUpper()» «dtoType.name.toFirstLower()» : this.«this.name») {
+            if (id.equals(«dtoType.name.toFirstLower()».getId())) {
+                return «dtoType.name.toFirstLower()»;
+            }
+        }
+        return null;
+    }
+    /**
+     * @return «this.name» (Set<«dtoType.name.toFirstUpper()»>)
+     */
+    public Set<«dtoType.name.toFirstUpper()»> get«this.name.toFirstUpper()»() {
+        return this.«this.name»;
+    }
+
+    «EXPAND addToCollection FOR this»
+    «EXPAND removeFromCollection FOR this»
+«ENDDEFINE»
+
+«DEFINE addAssociationRoleAccessorsOrdered FOR DtoAssociationRoleProperty »
+    /**
+     * @param id
+     *        id of the collection element to return
+     *
+     * @return «dtoType.name.toFirstLower()» («dtoType.name.toFirstUpper()»)
+     *         with the given id.
+     */
+    public «dtoType.name.toFirstUpper()» getFrom«this.name.toFirstUpper()» (Long id) {
+        if (id == null) {
+            return null;
+        }
+        for («dtoType.name.toFirstUpper()» «dtoType.name.toFirstLower()»: this.«this.name») {
+            if (id.equals(«dtoType.name.toFirstLower()».getId())) {
+                return «dtoType.name.toFirstLower()»;
+            }
+        }
+        return null;
+    }
+
+    /** ORDERED
+     * @return «this.name» (List<«dtoType.name.toFirstUpper()»>)
+     */
+    public List<«dtoType.name.toFirstUpper()»> get«this.name.toFirstUpper()»() {
+        return this.«this.name»;
+    }
+
+    «EXPAND addToCollection FOR this»
+    «EXPAND addToIndexCollection FOR this»
+    «EXPAND removeFromCollection FOR this»
+    «EXPAND removeFromIndexCollection FOR this»
+«ENDDEFINE»
+
+«DEFINE addAssociationRoleAccessorsOne FOR DtoAssociationRoleProperty »
+    /**
+     * @return «dtoType.name» («dtoType.name.toFirstUpper()») «dtoType.description»
+     */
+     public «dtoType.name.toFirstUpper()» get«this.name.toFirstUpper()» () {
+            return this.«this.name»;
+     }
+
+    /**
+     * @param «this.name» («dtoType.name.toFirstUpper()») «dtoType.description»
+     */
+     public void set«this.name.toFirstUpper()» (final «dtoType.name.toFirstUpper()» «this.name») {
+         this.«this.name» = «this.name»;
+     }
+«ENDDEFINE»
+
+«REM» Method to add an element to an association collection.
+      Works fro both ordered and unordered collections
+«ENDREM»
+«DEFINE addToCollection FOR DtoAssociationRoleProperty»
+    /**
+     * Adds a single element to the «this.name» collection
+     *
+     * @param element The element to add.
+     */
+    public void addTo«this.name.toFirstUpper()»(«dtoType.name.toFirstUpper()» element) {
+
+        if (element == null || this.«this.name».contains(element)) {
+            return;
+        }
+        this.«this.name».add(element);
+    }
+«ENDDEFINE»
+
+«REM» Method to add an element at specified index to an ordered association collection.
+«ENDREM»
+«DEFINE addToIndexCollection FOR DtoAssociationRoleProperty»
+    /**
+     * Adds a single element to the «this.name» collection at index
+     *
+     * @param element The element to add.
+     *        index   The index where the element will be added
+     */
+    public void addTo«this.name.toFirstUpper()»(int index, «dtoType.name.toFirstUpper()» element) {
+
+        if (element == null || this.«this.name».contains(element)) {
+            return;
+        }
+        this.«this.name».add(index, element);
+    }
+«ENDDEFINE»
+
+«REM» Method to remove an element from an association collection.
+      Works fro both ordered and unordered collections
+«ENDREM»
+«DEFINE removeFromCollection FOR DtoAssociationRoleProperty»
+    /**
+     * Removes a single element from the «this.name» collection.
+     *
+     * @param element The element to be removed.
+     */
+    public void removeFrom«this.name.toFirstUpper()»(«dtoType.name.toFirstUpper()» element) {
+
+        if (element == null) {
+            return;
+        }
+        this.«this.name».remove(element);
+    }
+«ENDDEFINE»
+
+«REM» Method to remove an element from an association collection.
+      Works fro ordered collections
+«ENDREM»
+«DEFINE removeFromIndexCollection FOR DtoAssociationRoleProperty»
+    /**
+     * Removes a single element from the «this.name» collection.
+     *
+     * @param index The index of the element to be removed.
+     */
+    public void removeFrom«this.name.toFirstUpper()»(int index) {
+        this.«this.name».remove(index);
+    }
+«ENDDEFINE»

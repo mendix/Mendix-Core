@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+            class="org.mod4j.dsl.service.xtext.ServiceExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="sermod"
+            id="org.mod4j.dsl.service.xtext.Service"
+            name="Service Editor">
+        </editor>
+    </extension>
+    <extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="org.mod4j.dsl.service.xtext.ServiceExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="org.mod4j.dsl.service.xtext.Service.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
+            class="org.mod4j.dsl.service.xtext.ServiceExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.handler.ValidateActionHandler"
+            commandId="org.mod4j.dsl.service.xtext.Service.validate">
+         <activeWhen>
+            <reference
+                    definitionId="org.mod4j.dsl.service.xtext.Service.Editor.opened">
+            </reference>
+         </activeWhen>
+      </handler>
+    </extension>
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="org.mod4j.dsl.service.xtext.Service.Editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
+                        value="org.mod4j.dsl.service.xtext.Service" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            class="org.mod4j.dsl.service.xtext.ServiceExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
+            id="org.mod4j.dsl.service.xtext.Service"
+            name="Service"
+            category="org.eclipse.xtext.languages">
+            <keywordReference id="org.mod4j.dsl.service.xtext.ui.keyword_Service"/>
+        </page>
+        <page
+            category="org.mod4j.dsl.service.xtext.Service"
+            class="org.mod4j.dsl.service.xtext.ServiceExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.mod4j.dsl.service.xtext.Service.coloring"
+            name="Syntax Coloring">
+            <keywordReference id="org.mod4j.dsl.service.xtext.ui.keyword_Service"/>
+        </page>
+        <page
+            category="org.mod4j.dsl.service.xtext.Service"
+            class="org.mod4j.dsl.service.xtext.ServiceExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+            id="org.mod4j.dsl.service.xtext.Service.templates"
+            name="Templates">
+            <keywordReference id="org.mod4j.dsl.service.xtext.ui.keyword_Service"/>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="org.mod4j.dsl.service.xtext.ui.keyword_Service"
+            label="Service"/>
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="org.mod4j.dsl.service.xtext.Service.validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.open">
+             <command
+                 commandId="org.mod4j.dsl.service.xtext.Service.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.mod4j.dsl.service.xtext.Service.Editor.opened">
+                </reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+    </extension>
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.mod4j.dsl.service.xtext.ServiceExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			type="sermod">
+		</parser>
+	</extension>
+
+
+
+
+</plugin>

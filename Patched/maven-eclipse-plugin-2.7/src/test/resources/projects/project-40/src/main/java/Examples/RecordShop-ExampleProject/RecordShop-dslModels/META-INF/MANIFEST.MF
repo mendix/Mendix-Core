@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: my.generator.project
+Bundle-SymbolicName: my.generator.project; singleton:=true
+Bundle-Version: 1.0.0
+Require-Bundle: org.mod4j.dsl.businessdomain.generator;bundle-version="1.1.0",
+ org.mod4j.dsl.businessdomain.mm;bundle-version="1.1.0",
+ org.mod4j.dsl.businessdomain.validation;bundle-version="1.1.0",
+ org.mod4j.dsl.businessdomain.xtext;bundle-version="1.1.0",
+ org.mod4j.dsl.service.generator;bundle-version="1.1.0",
+ org.mod4j.dsl.service.mm;bundle-version="1.1.0",
+ org.mod4j.dsl.service.validation;bundle-version="1.1.0",
+ org.mod4j.dsl.service.xtext;bundle-version="1.1.0",
+ org.mod4j.dsl.datacontract.generator;bundle-version="1.1.0",
+ org.mod4j.dsl.datacontract.mm;bundle-version="1.1.0",
+ org.mod4j.dsl.datacontract.validation;bundle-version="1.1.0",
+ org.mod4j.dsl.datacontract.xtext;bundle-version="1.1.0",
+ org.mod4j.dsl.presentation.generator;bundle-version="1.1.0";resolution:=optional,
+ org.mod4j.dsl.presentation.mm;bundle-version="1.1.0";resolution:=optional,
+ org.mod4j.dsl.presentation.validation;bundle-version="1.1.0";resolution:=optional,
+ org.mod4j.dsl.presentation.xtext;bundle-version="1.1.0";resolution:=optional

@@ -1,0 +1,6 @@
+import emf;
+import crossx;
+
+String getProjectName(EObject eObject):
+  JAVA org.mod4j.eclipse.util.EclipseUtil.getProjectName(org.eclipse.emf.ecore.EObject) ;
+ 

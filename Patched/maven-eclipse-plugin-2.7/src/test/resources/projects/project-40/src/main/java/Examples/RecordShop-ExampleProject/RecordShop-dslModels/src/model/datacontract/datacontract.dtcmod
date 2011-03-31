@@ -1,0 +1,192 @@
+"The RecordShop data contract."
+datacontract RecordShopDataContract  ; 
+  
+from RecordShopDomainModel import Customer;
+from RecordShopDomainModel import Person;
+from RecordShopDomainModel import Relation;
+from RecordShopDomainModel import Artist;
+from RecordShopDomainModel import Order;
+from RecordShopDomainModel import Record;
+from RecordShopDomainModel import OrderLine;
+from RecordShopDomainModel import Product;
+from RecordShopDomainModel import SexeEnum;
+from RecordShopDomainModel import RecordTypeEnum;
+from RecordShopDomainModel import Address;
+  
+    /*     
+     * Transfer objects for BusinessClasses 
+     */
+     
+	"Full Customer transfer object with all the Customer attributes (no associations)."
+	class FullCustomerDto represents Customer;
+	
+	class CustomerWithAddressDto represents Customer [
+	    firstName;
+	    lastName;
+	    birthDate;
+	    customerNr; 
+	    references [
+	        // Add inherited reference from Person 
+	        homeAddress as AddressDto;
+	    ]
+	]
+
+    class AddressDto represents Address; 
+
+    "A simple Customer transfer object with a subset of Customer attributes."
+	class SimpleCustomerDto represents Customer [  
+	     customerNr; 
+	     lastName; 
+	     firstName;
+ 	     blackListed;
+ 	     username;
+	     sexe;  
+	     birthDate; 
+	     references [  
+	         orders as OrderNumberAndDateDto;
+	         idols as ArtistDto;
+	         relatedTo as DisLikesDto;
+	     ]    
+	]  
+	
+	class DisLikesDto represents Artist [
+	    firstName;
+	    lastName;
+	]
+	
+	"Simple Order transfer object."
+	class OrderNumberAndDateDto represents Order [
+	     orderNumber;  
+	     orderDate;
+	     references [
+	         customer as SimpleCustomerDto;  
+         ]
+    ]
+
+	"Full Order transfer object, containing all the Order attributes (no associations)"
+	class OrderDto represents Order ;
+	
+	class CustomerWithOrdersAndOrderLines represents Customer [
+	    firstName;
+	    lastName;
+	    birthDate;
+	    customerNr;
+	    references [ orders as OrderWithOrderLinesDto; ]
+	]
+	
+	class OrderWithOrderLinesDto represents Order [
+		orderNumber;
+		references [
+			orderLines as OrderLineDto ;
+		]
+	] 
+	
+	"Full OrderLine transfer object, containing all the OrderLine attributes (no associations)"
+	class OrderLineDto represents OrderLine [
+	   lineNumber;  
+	   quantity;
+	   description;
+	   references [
+           product as FullProductDto;
+       ]
+	]
+	
+	"The Artist transfer object."
+	class ArtistDto represents Artist [ 
+	     firstName ;
+	     lastName ; 
+	     age;
+		 artistName ;
+	]
+	
+    class FullProductDto represents Product;
+    
+    class ProductWithCustomersDto represents Product [
+        productNumber ;
+        orderable;  
+        price;
+        references [
+            buyers as SimpleCustomerDto;
+        ]
+    ]
+    
+    class ProductWithRecordsDto represents Product [
+        productNumber ;
+        /* TODO: http://jira.codehaus.org/browse/MODFORJ-219
+        references [
+            records as FullRecordDto;
+        ]
+        */
+    ]
+    
+    class FullRecordDto represents Record;
+    
+    class SimpleRecordDto represents Record [
+        asin;
+        price; 
+        type;
+    ]
+
+	class OrderlineWithRecordRefsDto represents OrderLine [
+	    lineNumber;
+	    description;
+	    lineAmount;
+	    references [ 
+            product as FullProductDto;    	        
+	    ]
+	]
+
+	/*
+	 * Custom transfer objects
+	 */
+	"String transfer object."
+	custom StringDto [ 
+	    "A string attribute"
+	    string stringAttribute;
+	]
+	
+	"Date transfer object."
+	custom DateDto [   
+	    "date"  
+	    datetime date;
+	]
+	
+	"Customer unique key."
+	custom UniqueCustomerDto [ 
+	    "firstName"
+	    string firstName;
+	    "lastName"
+	    string lastName;
+	]
+	
+    /* 
+     * Enumeration Dto's
+     */
+	enumeration sexeEnumDto represents  SexeEnum;
+	enumeration RecordTypeEnumDto represents RecordTypeEnum;
+	enumeration lowerRecordTypeEnumDto represents RecordTypeEnum;
+	
+	class RelationDto represents Relation [
+	    name;
+	    since;
+	    references [
+	        personTo as PersonDto;
+	        personFrom as PersonDto;
+	    ]
+	]
+	
+	class PersonDto represents Person [
+	    firstName;
+	    lastName;
+	    birthDate;
+	    references [
+	       relationsFrom as RelationDto;
+	       relationsTo as RelationDto;
+	    ]
+	]
+	
+	class AgedPerson represents Person [
+	   firstName;
+	   lastName;
+	   age;
+	]

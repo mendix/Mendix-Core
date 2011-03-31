@@ -1,0 +1,71 @@
+«REM»
+ Copyright (c) 2009 Ordina and committers to Mod4j
+ All rights reserved. This program and the accompanying materials
+ are made available under the terms of the Eclipse Public License v1.0
+ which accompanies this distribution, and is available at
+ http://www.eclipse.org/legal/epl-v10.html
+  Contributors:
+     Ordina - initial implementation
+«ENDREM»
+«IMPORT BusinessDomainDsl»
+«IMPORT org::mod4j::dslcommon::xpand::xml»
+
+«EXTENSION org::mod4j::dslcommon::xtend::ProjectProperties»
+«EXTENSION org::mod4j::dslcommon::xtend::generatorutil»
+«EXTENSION org::mod4j::common::xtend::FileTracker»
+«EXTENSION org::mod4j::common::xtend::NameMapper»
+«EXTENSION org::mod4j::crossx::broker::xtend::Crossx»
+
+«DEFINE genApplicationContext FOR BusinessDomainDsl::BusinessDomainModel»
+<?xml version="1.0" encoding="UTF-8"?>
+«EXPAND XmlComments::regenerationWarningHeader ("Mod4j BusinessDomainDsl generator: ApplicationContext.xpt") FOR this»
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd"
+    xmlns:aop="http://www.springframework.org/schema/aop">
+
+    <!-- Aspects -->
+    <aop:config>
+        <aop:pointcut id="«getApplicationName().toFirstLower()»DataMethods" 
+                      expression="execution(* «getDaoImplPackage()».*DaoImpl.*(..))"/>
+        <aop:aspect ref="loggingAspect">
+            <aop:before pointcut-ref="«getApplicationName().toFirstLower()»DataMethods" method="logBefore" />
+            <aop:after pointcut-ref="«getApplicationName().toFirstLower()»DataMethods" method="logAfter" />
+        </aop:aspect>
+        <aop:aspect ref="timingAspect">
+            <aop:around pointcut-ref="«getApplicationName().toFirstLower()»DataMethods" method="time"/>
+        </aop:aspect>
+    </aop:config>
+
+    <!--  Data layer part of infrastructure -->
+«FOREACH findAllSymbols( getProject(), "BusinessClass" ).name AS clsName -»
+    <bean id="«clsName.toFirstLower()»Dao"
+        class="«getDaoImplPackage()».«clsName»DaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+«ENDFOREACH»
+
+    <!--
+        Locations of the Hibernate mapping files. To be referenced by the session factory.
+    -->
+    <bean id="mappingResources" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+«FOREACH findAllSymbols( getProject(), "BusinessClass" ).name AS clsName -»
+                <value>«getDomainRootPackageAsPath()»/«clsName».hbm.xml</value>
+«ENDFOREACH -»
+            </list>
+        </constructor-arg>
+    </bean>
+    
+    <!-- Environment properties file on the classpath -->
+    <bean
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+            <value>classpath:environment.properties</value>
+        </property>
+    </bean>
+</beans>
+«ENDDEFINE»

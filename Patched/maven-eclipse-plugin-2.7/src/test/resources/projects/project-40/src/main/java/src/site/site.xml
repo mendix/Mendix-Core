@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="mod4j project site">
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-stylus-skin</artifactId>
+        <version>1.0.1</version>
+    </skin>
+    <publishDate position="bottom" format="dd MMM yyyy - HH:mm" />
+    <body>
+        <menu name="News" inherit="bottom">
+            <item name="> Devnology session about Mod4j" href="news/news.html" />
+            <item name="> Mod4j 1.1.0 released" href="news/news.html" />
+            <item name="> Mod4j at Model Driven Experience 2009" href="news/news.html#Mod4j_at_the_Model_Driven_Experience_2009" />
+            <item name="> Mod4j at Code Generation 2009" href="news/news.html#Mod4j_at_Code_Generation_2009" />
+            <item name="> Mod4j at Ordina's 8th 'Innoveer jij mee'" href="news/news.html#Mod4j_at_Ordina's_'Innoveer_jij_mee'_session" />
+            <item name="More news ..." href="news/news.html" />
+        </menu>
+        <menu name="About Mod4j" inherit="bottom">
+            <item name="Home" href="index.html" />
+            <item name="Releases" href="releases/index.html" />
+            <item name="Downloads" href="downloads/download.html" />
+            <item name="Publications" href="downloads/publications.html" />
+            <item name="Professional Support" href="professional-support.html" />
+            <item name="Issue Tracking" href="http://jira.codehaus.org/browse/MODFORJ" />
+        </menu>
+        <menu name="User Docs" inherit="bottom">        
+            <item name="Getting Started" href="releases/${release.version.latest}/gettingstarted.html" />
+            <item name="User Guide - PDF" href="documentation/${release.version.latest}/user-guide/mod4j-user-guide.pdf" />
+            <item name="User Guide - HTML" href="documentation/${release.version.latest}/user-guide/mod4j-user-guide.html" />
+            <item name="Application Architecture - PDF" href="documentation/${release.version.latest}/application-architecture/mod4j-application-architecture.pdf" />
+            <item name="Application Architecture - HTML" href="documentation/${release.version.latest}/application-architecture/mod4j-application-architecture.html" />
+            <item name="All Documents" href="documentation.html"/>
+        </menu>
+        <menu name="Mod4j Developer Docs" inherit="bottom">
+            <item name="Developer Guide" href="developer-guides/developer-guide.html" />
+            <item name="Release Guide" href="developer-guides/release-guide.html" />
+        </menu>
+        <menu ref="parent" inherit="top" />
+        <menu ref="reports" inherit="bottom" />
+        <menu name="Supported by" inherit="bottom"/>
+    </body>
+    <poweredBy>
+        <logo name="Codehaus" href="http://xircles.codehaus.org/projects/mod4j" img="images/codehaus-logo.jpg" />
+        <logo name="Ecipse Ready" href="http://www.eclipse.org/" img="images/eclipse-ready-logo.png" />
+        <logo name="oXygen" href="http://www.oxygenxml.com/" img="images/oxygen-logo.jpg" />
+        <logo name="Maven" href="http://maven.apache.org/" img="http://maven.apache.org/images/logos/maven-feather.png" />
+    </poweredBy>
+</project>

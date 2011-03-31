@@ -1,0 +1,9 @@
+service StateChangeBusinessRule;
+
+from StateChangeBusinessRule import OrganisatieDto;
+from StateChangeBusinessRule import KaderDto;
+from StateChangeBusinessRule import CasusOverlegDto;
+
+crud OrganisatieDto;
+crud CasusOverlegDto;
+crud KaderDto;

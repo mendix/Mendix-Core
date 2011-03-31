@@ -1,0 +1,118 @@
+/*******************************************************************************
+ * Copyright (c) 2009 Ordina and committers to Mod4j
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Ordina - initial implementation
+ *******************************************************************************/
+grammar org.mod4j.dsl.datacontract.xtext.DataContract with org.eclipse.xtext.common.Terminals
+
+import "platform:/resource/org.mod4j.dsl.datacontract.mm/model/DataContractDsl.ecore"
+
+// importMetamodel "http://www.mod4j.org/datacontract" ;
+
+DataContractModel : 
+    (description=STRING)?
+    "datacontract" name=ID ";"
+    (externalReferences += ExternalReference)*
+    ( (dtos += Dto) | (enumerations += EnumerationDto) )*
+    ;
+    
+Dto : 
+   ( BusinessClassDto | CustomDto ); 
+
+ExternalReference :
+    (description=STRING)?
+    "from" modelname=ID (keyword =("import" | "businessclass" | "enumeration") ) name=ID ";";
+    
+//BusinessClassReference:
+//    (description=STRING)?
+//    "from" modelname=ID "class" name=ID;
+    
+//BusinessEnumerationReference:
+//    (description=STRING)?
+//    "from" modelname=ID "enumeration" name=ID;
+    
+BusinessClassDto :
+    (description=STRING)?
+    "class" name=ID "represents" base=[ExternalReference]
+    (
+        ( ";" )
+        |
+	    ( "[" (propertyReferences += BusinessClassPropertyReference)+  
+	      ( "references" "["
+	      		(associationReferences += BusinessClassAssociationRoleReference)+
+	        "]"
+	      )?
+	    
+	    "]")
+	)
+    ;    
+    
+EnumerationDto :
+    (description=STRING)?
+    "enumeration" name=ID "represents" base=[ExternalReference] ";"
+    ; 
+    
+BusinessClassPropertyReference :
+    name=ID ";"
+    ;
+
+BusinessClassAssociationRoleReference :
+    name=ID "as"
+    dtoType = [Dto] ";"
+    ;
+    
+CustomDto :
+    (description=STRING)?
+    "custom" name=ID "["
+    (properties += DtoProperty)+
+    "]"
+    ;    
+
+DtoProperty:
+//   (description=STRING)?
+    (DtoBooleanProperty | DtoStringProperty  | DtoDateTimeProperty | DtoIntegerProperty |DtoDecimalProperty | DtoEnumerationProperty) 
+	";"
+	;
+
+DtoBooleanProperty:
+   (description=STRING)?
+    dataType="boolean" name=ID
+    ;
+
+DtoStringProperty:
+   (description=STRING)?
+    dataType="string" name=ID
+    ;
+
+DtoDateTimeProperty:
+   (description=STRING)?
+    dataType="datetime"
+//    accuracy=DateTimeAccuracy
+    name=ID
+    ;
+
+//Enum DateTimeAccuracy:
+//    Month="month" | Year="year" | Day = "day" | Hour = "hour" | Minute = "minute" |
+//    Second = "second" | Millisecond = "millisecond"
+//    ;
+
+DtoIntegerProperty:
+   (description=STRING)?
+    dataType="integer" name=ID
+    ;
+
+DtoDecimalProperty:
+   (description=STRING)?
+    dataType="decimal" name=ID
+    ;
+
+DtoEnumerationProperty:
+   (description=STRING)?
+    type=[EnumerationDto] name=ID
+    ; 
+

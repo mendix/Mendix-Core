@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.mod4j.eclipse.dsl">
+      <dsl
+            dsl2crossxWorkflow="org/mod4j/dsl/datacontract/generator/workflow/dtcmod2crossx.oaw"
+            dslCodegenProperties="mod4j.properties"
+            dslCodegenWorkflow="org/mod4j/dsl/datacontract/generator/workflow/DataContractDsl.oaw"
+            dslFileExtension=".dtcmod"
+            dslMetamodelPackage="org.mod4j.dsl.datacontract.mm.DataContractDsl.DataContractDslPackage"
+            dslName="Data Contract DSL"
+            dslXtendModule="dtcmod2crossx">
+      </dsl>
+   </extension>
+
+</plugin>

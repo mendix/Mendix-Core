@@ -1,0 +1,88 @@
+/*******************************************************************************
+ * Copyright (c) 2009 Ordina and committers to Mod4j
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Ordina - initial implementation
+ *******************************************************************************/
+ 
+import crossx; 
+
+Symbol lookupSymbol(String model, String symbolname, String symboltype) :
+ JAVA org.mod4j.crossx.broker.CrossxBroker.lookupSymbol(java.lang.String, java.lang.String, java.lang.String);
+  
+crossx::Symbol lookupReference(crossx::ReferenceSymbolProperty ref) :
+ JAVA org.mod4j.crossx.broker.CrossxBroker.lookupReference(org.mod4j.crossx.mm.crossx.ReferenceSymbolProperty );
+  
+List[crossx::Symbol] findAllFromModel(String modelname, String elemType) :
+  JAVA org.mod4j.crossx.broker.CrossxBroker.findAllFromModel(java.lang.String, java.lang.String) ;
+
+List[crossx::Symbol] findAllFromModel(String modelname, List[String] elemTypes) :
+  JAVA org.mod4j.crossx.broker.CrossxBroker.findAllFromModel(java.lang.String, java.util.List) ;
+
+List[crossx::Symbol] findAllFromModel(String modelname, String symbolName, List[String] elemTypes) :
+  JAVA org.mod4j.crossx.broker.CrossxBroker.findAllFromModel(java.lang.String, java.lang.String, java.util.List) ;
+
+List[crossx::ModelInfo] findAllModels() :
+  JAVA org.mod4j.crossx.broker.CrossxBroker.findAllModels() ;
+
+String getPropertyValue(crossx::Symbol symbol, String propertyName) :
+  JAVA org.mod4j.crossx.broker.CrossxBroker.getPropertyValue(org.mod4j.crossx.mm.crossx.Symbol, java.lang.String) ;
+
+crossx::Symbol getSubSymbol(crossx::Symbol mainSymbol, String symbolName) :
+  JAVA org.mod4j.crossx.broker.CrossxBroker.getSubSymbol(org.mod4j.crossx.mm.crossx.Symbol, java.lang.String) ;
+
+crossx::SymbolProperty getProperty(crossx::Symbol symbol, String propertyName) :
+  JAVA org.mod4j.crossx.broker.CrossxBroker.getProperty(org.mod4j.crossx.mm.crossx.Symbol, java.lang.String) ;
+
+crossx::ReferenceSymbolProperty getReferenceProperty(crossx::Symbol symbol, String propertyName) :
+  JAVA org.mod4j.crossx.broker.CrossxBroker.getReferenceProperty(org.mod4j.crossx.mm.crossx.Symbol, java.lang.String) ;
+
+crossx::LiteralSymbolProperty getLiteralProperty(crossx::Symbol symbol, String propertyName) :
+  JAVA org.mod4j.crossx.broker.CrossxBroker.getLiteralProperty(org.mod4j.crossx.mm.crossx.Symbol, java.lang.String) ;
+
+List[crossx::ModelInfo] findAllModelsInProject(String project) :
+  JAVA org.mod4j.crossx.broker.CrossxBroker.findAllModelsInProject(java.lang.String) ;
+ 
+List[crossx::Symbol] findAllSubSymbols(crossx::Symbol symbol, String symbolType) :
+  JAVA org.mod4j.crossx.broker.CrossxBroker.findAllSubSymbols(org.mod4j.crossx.mm.crossx.Symbol, java.lang.String) ;
+
+List[crossx::Symbol] findAllSymbols(String project, String symboltype) :
+  JAVA org.mod4j.crossx.broker.CrossxBroker.findAllSymbols(java.lang.String, java.lang.String) ;
+
+crossx::Symbol lookupSymbolWithProperty(String model, String symbolname, String type, String propertyName, String propertyValue) :
+  JAVA org.mod4j.crossx.broker.CrossxBroker.lookupSymbolWithProperty(java.lang.String , java.lang.String , java.lang.String , java.lang.String , java.lang.String ) ;
+
+crossx::Symbol lookupSymbolWithSubsymbol(String model, String symbolname, String symboltype, 
+            String subsymbolType,
+            String subsymbolName) :
+  JAVA org.mod4j.crossx.broker.CrossxBroker.lookupSymbolWithSubsymbol(java.lang.String , 
+                                            java.lang.String , java.lang.String , java.lang.String , java.lang.String ) ;
+
+crossx::Symbol lookupSubSymbol(crossx::Symbol main, String subsymbolName, String symbolType) :
+    if main == null then (
+        null
+    ) else (
+        main.subSymbols.select(sub | (sub.type == symbolType) && (sub.name == subsymbolName) ).first()
+    )
+    ; 
+
+crossx::LiteralSymbolProperty newProperty(String name, String value) :
+    let result = new crossx::LiteralSymbolProperty :
+    result.setName(name)->
+    result.setValue(value)->
+    result
+    ;
+
+crossx::ReferenceSymbolProperty newRefProperty(String name, String modelname, String symbolname, String type) :
+    let result = new crossx::ReferenceSymbolProperty :
+	result.setName(name)->
+    result.setSymbolname(symbolname)->
+    result.setModelname(modelname)->
+    result.setType(type)->
+    result
+    ;
+ 

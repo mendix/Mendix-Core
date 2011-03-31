@@ -1,0 +1,5 @@
+datacontract TestDC;
+
+from TestDomainModel import Derived;
+
+class DerivedDto represents Derived; 

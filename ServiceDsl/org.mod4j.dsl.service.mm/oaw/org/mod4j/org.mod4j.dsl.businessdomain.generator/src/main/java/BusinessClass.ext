@@ -1,0 +1,48 @@
+/*******************************************************************************
+ * Copyright (c) 2009 Ordina and committers to Mod4j
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Ordina - initial implementation
+ *******************************************************************************/
+import BusinessDomainDsl;
+
+boolean isCompositePart(BusinessDomainDsl::BusinessClass cls) :
+ JAVA org.mod4j.businessdomain.generator.helpers.BusinessClassHelpers.isCompositePart(BusinessDomainDsl.BusinessClass);
+
+List[Property] getAllProperties(BusinessClass cls) :
+ JAVA org.mod4j.businessdomain.generator.helpers.BusinessClassHelpers.getAllProperties(BusinessDomainDsl.BusinessClass);
+
+List[Association] getAllAssociationsTo(BusinessClass cls) :
+ JAVA org.mod4j.businessdomain.generator.helpers.BusinessClassHelpers.getAllAssociationsTo(BusinessDomainDsl.BusinessClass);
+
+List[Association] getAllAssociationsFrom(BusinessClass cls) :
+ JAVA org.mod4j.businessdomain.generator.helpers.BusinessClassHelpers.getAllAssociationsFrom(BusinessDomainDsl.BusinessClass);
+ 
+List[Association] getToOneAssociationsFromInHierarchy(BusinessClass cls) :
+ JAVA org.mod4j.businessdomain.generator.helpers.BusinessClassHelpers.getToOneAssociationsFromInHierarchy(BusinessDomainDsl.BusinessClass);
+ 
+List[Association] getToOneAssociationsToInHierarchy(BusinessClass cls) :
+ JAVA org.mod4j.businessdomain.generator.helpers.BusinessClassHelpers.getToOneAssociationsToInHierarchy(BusinessDomainDsl.BusinessClass);
+ 
+List[Association] getAllToOneAssociationsInHierarchy(BusinessClass cls) :
+ JAVA org.mod4j.businessdomain.generator.helpers.BusinessClassHelpers.getAllToOneAssociationsInHierarchy(BusinessDomainDsl.BusinessClass);
+  
+String javaType(Property p) :
+ JAVA org.mod4j.businessdomain.generator.helpers.BusinessClassHelpers.javaType(BusinessDomainDsl.Property);
+
+String javaNullableType(Property p) :
+ JAVA org.mod4j.businessdomain.generator.helpers.BusinessClassHelpers.javaNullableType(BusinessDomainDsl.Property);
+
+String javaDefaultValue(Property p) :
+ JAVA org.mod4j.businessdomain.generator.helpers.BusinessClassHelpers.javaDefaultValue(BusinessDomainDsl.Property);
+
+boolean hasSubclasses(BusinessClass clazz) :
+ JAVA org.mod4j.businessdomain.generator.helpers.BusinessClassHelpers.hasSubclasses(BusinessDomainDsl.BusinessClass);
+
+ // Workaround for problem with optional references in xText
+ EnumerationLiteral defaultValue(EnumerationProperty this) :
+   this.type.enumerationLiterals.select(a|a.name==this.defaultValueAsString).first();

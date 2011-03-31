@@ -1,0 +1,51 @@
+com.google:collect:jar:0.8.0    -   -   -
+com.ibm:icu:jar:4.0.1
+org.antlr:runtime:jar:3.0.0     -   -   -
+org.apache.commons:cli:jar:1.0.0    -   -   -
+org.apache.commons:lang:jar:2.1.0   -   -   -
+org.apache.commons:logging:jar:1.0.4    -   -   -
+org.eclipse.compare:core:jar:3.5.0  -   -   -
+org.eclipse.core.databinding:observable:jar:1.2.0   -   -   -
+org.eclipse.core.databinding:property:jar:1.2.0     -   -   -
+org.eclipse.core:commands:jar:3.5.0     -   -   -
+org.eclipse.core:contenttype:jar:3.4.0  -   -   -
+org.eclipse.core:databinding:jar:1.2.0  -   -   -
+org.eclipse.core:expressions:jar:3.4.100    -   -   -
+org.eclipse.core:filebuffers:jar:3.5.0  -   -   -
+org.eclipse.core:filesystem:jar:1.2.0   -   -   -
+org.eclipse.core:jobs:jar:3.4.100   -   -   -
+org.eclipse.core:resources:jar:3.5.0    -   -   -
+org.eclipse.core:runtime:jar:3.5.0  -   -   -
+org.eclipse.emf.ecore:xmi:jar:2.5.0     -   -   -
+org.eclipse.emf.mwe:core:jar:0.7.1  -   -   -
+org.eclipse.emf.mwe:utils:jar:0.7.1     -   -   -
+org.eclipse.emf:common:jar:2.5.0    -   -   -
+org.eclipse.emf:ecore:jar:2.5.0     -   -   -
+org.eclipse.emf:index:jar:0.7.0     -   -   -
+org.eclipse.equinox:app:jar:1.2.0   -   -   -
+org.eclipse.equinox:common:jar:3.5.0    -   -   -
+org.eclipse.equinox:preferences:jar:3.2.300     -   -   -
+org.eclipse.equinox:registry:jar:3.4.100    -   -   -
+org.eclipse.jdt:core:3.5.0
+org.eclipse.jface:databinding:jar:1.3.0     -   -   -
+org.eclipse.jface:text:jar:3.5.0    -   -   -
+org.eclipse.ui.workbench:texteditor:jar:3.5.0   -   -   -
+org.eclipse.ui:editors:jar:3.5.0    -   -   -
+org.eclipse.ui:ide:jar:3.5.0    -   -   -
+org.eclipse.ui:workbench:jar:3.5.0  -   -   -
+org.eclipse:xpand:jar:0.7.1
+org.eclipse:xtend:jar:0.7.1
+org.eclipse.xtend.typesystem:emf:jar:0.7.1  -   -   -
+org.eclipse.xtend.util:stdlib:jar:0.7.1     -   -   -
+org.eclipse.xtext.ui:common:jar:0.7.1
+org.eclipse.xtext:log4j:jar:1.2.15  -   -   -
+org.eclipse.xtext:util:jar:0.7.1    -   -   -
+org.eclipse.xtext:xtend:jar:0.7.1   -   -   -
+org.eclipse:help:jar:3.4.0  -   -   -
+org.eclipse:jface:jar:3.5.0     -   -   -
+org.eclipse:osgi:jar:3.5.0  -   -   -
+org.eclipse:swt:jar:3.5.0   -   -   -
+org.eclipse:text:jar:3.5.0  -   -   -
+org.eclipse:ui:jar:3.5.0    -   -   -
+org.eclipse:xtext:jar:0.7.1     -   -   -
+org:junit:jar:3.8.2     -   -   -

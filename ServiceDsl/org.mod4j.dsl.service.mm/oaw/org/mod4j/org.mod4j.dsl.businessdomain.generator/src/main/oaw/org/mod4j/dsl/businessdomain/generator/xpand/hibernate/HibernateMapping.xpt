@@ -1,0 +1,272 @@
+«REM»
+ Copyright (c) 2009 Ordina and committers to Mod4j
+ All rights reserved. This program and the accompanying materials
+ are made available under the terms of the Eclipse Public License v1.0
+ which accompanies this distribution, and is available at
+ http://www.eclipse.org/legal/epl-v10.html
+  Contributors:
+     Ordina - initial implementation
+«ENDREM»
+«IMPORT BusinessDomainDsl»
+«IMPORT org::mod4j::dslcommon::xpand::xml»
+
+«EXTENSION BusinessRule»
+«EXTENSION Association»
+«EXTENSION org::mod4j::dslcommon::xtend::generatorutil»
+«EXTENSION org::mod4j::dslcommon::xtend::ProjectProperties»
+«EXTENSION org::mod4j::common::xtend::FileTracker»
+«EXTENSION org::mod4j::common::xtend::NameMapper»
+
+«DEFINE header FOR BusinessDomainDsl::BusinessClass»
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+«EXPAND XmlComments::regenerationWarningHeader ("Mod4j BusinessDomainDsl generator: HibernateMapping.xpt") FOR this»
+
+<!--     
+     Mapping for class : «this.name»
+     Description       : «this.description»
+-->
+
+«ENDDEFINE»
+
+«DEFINE mapping FOR BusinessDomainDsl::BusinessClass»
+   «EXPAND header FOR this»
+
+    <hibernate-mapping
+        default-access="field"
+        package="«getDomainRootPackage()»">
+        
+        «IF superclass == null -»
+            «EXPAND rootClassMapping FOR this -»
+        «ELSEIF getHibernate_InheritanceMappingStrategy() == "table.per.concrete.class"»
+            «EXPAND concreteClassMapping FOR this -»
+        «ELSEIF getHibernate_InheritanceMappingStrategy() == "table.per.subclass"»
+            «EXPAND subclassMapping FOR this -»    
+        «ENDIF»
+</hibernate-mapping>
+«ENDDEFINE»
+
+«DEFINE rootClassMapping FOR BusinessDomainDsl::BusinessClass -»
+    <class name="«javaDomainClass(this.name)»"
+           optimistic-lock="version">
+        <cache usage="read-write" />
+        <id name="id" type="java.lang.Long">
+            <generator class="«getHibernate_mapping_class_id_generator_class()»" />
+        </id>
+        <version name="version" unsaved-value="negative" />
+        «EXPAND featureMappings FOR this -»
+    </class>
+«ENDDEFINE»
+
+«DEFINE concreteClassMapping FOR BusinessDomainDsl::BusinessClass -»
+    <union-subclass
+        name="«javaDomainClass(this.name)»"
+        extends="«javaDomainClass(this.superclass.name)»">
+        «EXPAND featureMappings FOR this -»
+    </union-subclass>
+«ENDDEFINE»
+
+«DEFINE subclassMapping FOR BusinessDomainDsl::BusinessClass -»
+    <joined-subclass
+        name="«javaDomainClass(name)»"
+        extends="«javaDomainClass(superclass.name)»">
+        <key column="ID"/>
+        «EXPAND featureMappings FOR this -»
+    </joined-subclass>
+«ENDDEFINE»
+
+«DEFINE featureMappings FOR BusinessDomainDsl::BusinessClass»
+    «EXPAND mapping      FOREACH this.properties.reject(e|e.derived) -»
+    «EXPAND mappingsTo   FOREACH this.associationsTo -»
+    «EXPAND mappingsFrom FOREACH this.associationsFrom.select(a | a.bidirectional) -»
+«ENDDEFINE»
+
+«DEFINE mapping FOR BusinessDomainDsl::Property -»
+        <property name="«this.name»" 
+        «IF this.uniqueRule() != null -»
+            unique-key="«uniqueRule().name»"
+        «ENDIF -»
+        «IF !this.nullable»
+            not-null="true"
+        «ENDIF -»
+        />
+«ENDDEFINE»
+
+«DEFINE mapping FOR BusinessDomainDsl::StringProperty -»
+        <property name="«this.name»" «IF maxLength > -1»length="«maxLength»"«ENDIF» 
+        «IF this.uniqueRule() != null -»
+            unique-key="«uniqueRule().name»"
+        «ENDIF -»
+        «IF !this.nullable»
+            not-null="true"
+        «ENDIF -»
+        />
+«ENDDEFINE»
+
+«DEFINE mapping FOR EnumerationProperty -»
+        <property name="«this.name»"        
+        «IF this.uniqueRule() != null -»
+            unique-key="«uniqueRule().name»"
+        «ENDIF -»
+        «IF !this.nullable»
+            not-null="true"
+        «ENDIF -»>
+            <type name="«getDataRootPackage()».GenericEnumUserType">
+                <param name="enumClass">«getDomainRootPackage()».«this.type.name»</param>
+            </type>
+        </property>
+«ENDDEFINE»
+
+«DEFINE mapping FOR DateTimeProperty -»
+        <property name="«this.name»"      
+        «IF this.uniqueRule() != null -»
+            unique-key="«uniqueRule().name»"
+        «ENDIF -»
+        «IF !this.nullable»
+            not-null="true"
+        «ENDIF -»
+              type="org.joda.time.contrib.hibernate.PersistentDateTime" />
+«ENDDEFINE»
+
+«REM»mapping for outgoing associations«ENDREM»
+«DEFINE mappingsTo FOR Association -»
+    «IF isOne2Many(this)»
+        «IF ordered»
+            «EXPAND orderedOne2manyMappingTo FOR this -»
+        «ELSE»
+            «EXPAND one2manyMappingTo FOR this -»
+        «ENDIF»
+	«ELSEIF isOne2One(this)»
+		«EXPAND one2oneMappingTo FOR this -»
+	«ELSEIF isMany2One(this)»
+		«EXPAND many2oneMappingTo FOR this -»
+    «ELSEIF isMany2Many(this)»
+        «IF ordered»
+            «EXPAND orderedMany2manyMappingTo FOR this -»
+        «ELSE»
+            «EXPAND many2manyMappingTo FOR this -»
+        «ENDIF»
+    «ELSE»
+	<!-- WARNING mappingsTo(Association) no generation for : «this.name» -->
+    «ENDIF»
+«ENDDEFINE»
+
+«DEFINE mappingsFrom FOR Association -»
+	«IF this.bidirectional»
+	    «IF isOne2Many(this)»
+			«EXPAND one2manyMappingFrom FOR this -»
+		«ELSEIF isOne2One(this)»
+			«EXPAND one2oneMappingFrom FOR this -»
+		«ELSEIF isMany2One(this)»
+			«EXPAND many2oneMappingFrom FOR this -»
+		«ELSEIF isMany2Many(this)»
+			«EXPAND many2manyMappingFrom FOR this -»
+	    «ELSE»
+		<!-- WARNING mappingsFrom(Association) no generation for : «this.name» -->
+	    «ENDIF»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE one2manyMappingTo FOR Association -»
+		<!-- one2manyMappingTo«IF bidirectional», bi-directional«ENDIF» -->
+        <set name="«this.targetRoleName»"
+            cascade="save-update" «IF bidirectional»inverse="true"«ENDIF»>
+            <key column="«this.sourceRoleName»_ID"/>
+            <one-to-many
+                class="«javaDomainClass(this.target.name)»" 
+             />
+        </set>
+«ENDDEFINE»
+
+«DEFINE orderedOne2manyMappingTo FOR Association -»
+        <!-- orderedOne2manyMappingTo «IF bidirectional», bi-directional«ENDIF» -->
+        <list name="«this.targetRoleName»"
+            cascade="save-update" «IF bidirectional»inverse="true"«ENDIF»>
+            <key column="«this.sourceRoleName»_ID"/>
+            <list-index column="orderFor«sourceRoleName.toFirstUpper()»" />
+            <one-to-many
+                class="«javaDomainClass(this.target.name)»" 
+             />
+        </list>
+«ENDDEFINE»
+
+«REM»Reverse navigable association from the target.
+     This is generat3ed in the target class.
+«ENDREM»
+«DEFINE one2manyMappingFrom FOR Association -»
+		<!-- one2manyMappingFrom, bi-directional -->
+        <many-to-one name="«sourceRoleName»"
+            class="«javaDomainClass(this.source.name)»"
+            not-null="false" column="«this.sourceRoleName»_ID" />
+«ENDDEFINE»
+
+«DEFINE many2oneMappingTo FOR Association -»
+		<!-- many2oneMappingTo «IF bidirectional», bi-directional«ENDIF» -->
+        <many-to-one name="«targetRoleName»"
+            cascade="save-update"
+            class="«javaDomainClass(this.target.name)»" 
+            not-null="false" column="«this.targetRoleName»_ID"
+        />
+«ENDDEFINE»
+
+«REM»Reverse navigable association from the target.
+     This is generat3ed in the target class.
+«ENDREM»
+«DEFINE many2oneMappingFrom FOR Association -»
+        <!-- many2oneMappingFrom, bi-directional -->
+        <set name="«this.sourceRoleName»" inverse="true"
+            cascade="save-update">
+            <key column="«this.targetRoleName»_ID"/>
+            <one-to-many
+                class="«javaDomainClass(this.source.name)»" 
+             />
+        </set>
+«ENDDEFINE»
+
+«DEFINE one2oneMappingTo FOR Association -»
+		<!-- one2oneMappingTo «IF bidirectional», bi-directional«ENDIF» -->
+        <many-to-one name="«targetRoleName»" 
+                    column="«this.targetRoleName»_ID"
+                    cascade="save-update"
+                    unique="true"
+                    class="«javaDomainClass(this.target.name)»"
+         /> 
+«ENDDEFINE»
+
+«DEFINE one2oneMappingFrom FOR Association -»
+		<!-- one2oneMappingFrom, bi-directional -->
+        <one-to-one name="«sourceRoleName»" 
+                    property-ref="«targetRoleName»"
+                    class="«javaDomainClass(this.source.name)»"
+         /> 
+«ENDDEFINE»
+
+«DEFINE many2manyMappingTo FOR Association -»
+        <!-- many2manyMappingTo «IF bidirectional», bi-directional«ENDIF» -->
+        <set name="«this.targetRoleName»" table="«this.sourceRoleName»_«this.targetRoleName»">
+            <key column="«this.sourceRoleName»_ID" not-null="true" />
+            <many-to-many class="«javaDomainClass(this.target.name)»" column="«this.targetRoleName»_ID" />
+        </set>
+«ENDDEFINE»
+
+«DEFINE orderedMany2manyMappingTo FOR Association -»
+        <!-- orderedMany2manyMappingTo «IF bidirectional», bi-directional«ENDIF» -->
+        <list name="«this.targetRoleName»" table="«this.sourceRoleName»_«this.targetRoleName»">
+            <key column="«this.sourceRoleName»_ID" not-null="true" />
+            <list-index column="orderFor«sourceRoleName.toFirstUpper()»" />
+            <many-to-many class="«javaDomainClass(this.target.name)»" column="«this.targetRoleName»_ID" />
+        </list>
+«ENDDEFINE»
+
+
+«DEFINE many2manyMappingFrom FOR Association -»
+        <!-- many2manyMappingFrom, bi-directional -->
+        <set name="«this.sourceRoleName»" inverse="true" table="«this.sourceRoleName»_«this.targetRoleName»">
+            <key column="«this.targetRoleName»_ID" not-null="true" />
+            <many-to-many class="«javaDomainClass(this.source.name)»" column="«this.sourceRoleName»_ID" />
+        </set>
+«ENDDEFINE»

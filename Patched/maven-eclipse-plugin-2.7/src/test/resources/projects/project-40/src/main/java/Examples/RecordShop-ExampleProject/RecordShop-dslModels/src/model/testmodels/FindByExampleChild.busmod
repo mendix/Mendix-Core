@@ -1,0 +1,23 @@
+domain FindByExampleChild;
+
+class SuperRoot [
+	string name;
+]
+
+class Root inherits SuperRoot [
+]
+
+class Child [
+	string name;
+]
+
+class GrandChild [
+	string name;
+]
+
+association SuperRoot roots many -> one SuperRoot root;
+association SuperRoot roots many -> one Child child;
+association Child children many -> one GrandChild grandChild;
+association GrandChild grandChildren many -> one SuperRoot root;
+
+association SuperRoot parent one <-> many Child children;

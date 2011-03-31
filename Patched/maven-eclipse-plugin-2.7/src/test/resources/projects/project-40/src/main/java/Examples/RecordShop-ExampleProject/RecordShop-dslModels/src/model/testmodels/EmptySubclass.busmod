@@ -1,0 +1,50 @@
+"See http://jira.codehaus.org/browse/MODFORJ-193:
+
+I have the following in the business model:
+
+class Person {
+	string name
+	maxlength 50;
+}
+
+class Employee inherits Person {
+	boolean active default true;
+}
+This gives a compile error in EmployeeExample: 'Implicit constructor Employee() is undefined'. EmployeeExample.java contains the following generated constructor:
+
+public EmployeeExample() {
+	activateValidation(false);
+	actief = null;
+}
+There is no default constructor in Person, because Person has non-nullable fields. The problem will go away if I define an extra string property in Employee, or if I define Person.name to be nullable."
+domain EmptySubclass;
+
+class Superclass [  
+	string name   
+	maxlength 50;
+] 
+
+class Subclass inherits Superclass [
+	boolean active default true;
+]
+
+//class SubclassWithDoubleName inherits Superclass [
+//	string name default "test";
+//]
+
+class Subclass2 inherits Subclass [ ]
+class Subclass3 inherits Subclass [ string dummy; ]
+ 
+class Empty [ ]
+
+class Empty2 inherits Empty []
+
+class SubclassEmpty inherits Empty [ 
+	string age ;
+	boolean yes nullable;
+]
+
+class SubclassEmpty2 inherits Empty2 [
+	string age ;
+	boolean yes nullable;
+]

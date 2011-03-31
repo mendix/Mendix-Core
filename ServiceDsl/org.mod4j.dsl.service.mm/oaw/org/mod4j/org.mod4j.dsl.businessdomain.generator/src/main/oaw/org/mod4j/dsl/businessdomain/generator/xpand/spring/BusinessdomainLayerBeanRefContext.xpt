@@ -1,0 +1,47 @@
+«REM»
+ Copyright (c) 2009 Ordina and committers to Mod4j
+ All rights reserved. This program and the accompanying materials
+ are made available under the terms of the Eclipse Public License v1.0
+ which accompanies this distribution, and is available at
+ http://www.eclipse.org/legal/epl-v10.html
+  Contributors:
+     Ordina - initial implementation
+«ENDREM»
+«IMPORT BusinessDomainDsl»
+«IMPORT org::mod4j::dslcommon::xpand::xml»
+
+«EXTENSION org::mod4j::dslcommon::xtend::ProjectProperties»
+«EXTENSION org::mod4j::dslcommon::xtend::generatorutil»
+«EXTENSION org::mod4j::common::xtend::FileTracker»
+«EXTENSION org::mod4j::common::xtend::NameMapper»
+
+«DEFINE genBeanRefContext FOR BusinessDomainDsl::BusinessDomainModel»
+<?xml version="1.0" encoding="UTF-8"?>
+«EXPAND XmlComments::extensionPointHeader ("Mod4j BusinessDomainDsl generator: BusinessdomainLayerBeanRefContext.xpt") FOR this»
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <bean id="«getBusinessdomainRootPackage()».Context"
+        class="org.springframework.context.support.ClassPathXmlApplicationContext">
+        <constructor-arg>
+            <list>
+                <value>/«getBusinessdomainRootPackageAsPath()»/applicationContext.xml</value>
+                <value>/«getDataRootPackageAsPath()»/dataSourceContext.xml</value>
+                <value>/«getDataRootPackageAsPath()»/sessionFactoryContext.xml</value>
+            </list>
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="mod4jCommonContext"/>
+        </constructor-arg>
+    </bean>
+    
+    <bean id="mod4jCommonContext"
+        class="org.springframework.context.support.ClassPathXmlApplicationContext">
+        <constructor-arg  value="Mod4jCommonContext.xml"/>
+    </bean>
+</beans>
+«ENDDEFINE»
+

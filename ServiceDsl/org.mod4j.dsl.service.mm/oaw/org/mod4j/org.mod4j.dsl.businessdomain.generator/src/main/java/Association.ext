@@ -1,0 +1,35 @@
+/*******************************************************************************
+ * Copyright (c) 2009 Ordina and committers to Mod4j
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Ordina - initial implementation
+ *******************************************************************************/
+import BusinessDomainDsl;
+
+boolean isOne2Many(Association a) :
+ JAVA org.mod4j.businessdomain.generator.helpers.BusinessClassHelpers.isOne2Many(BusinessDomainDsl.Association);
+
+boolean isOne2One(Association a) :
+ JAVA org.mod4j.businessdomain.generator.helpers.BusinessClassHelpers.isOne2One(BusinessDomainDsl.Association);
+
+boolean isMany2One(Association a) :
+ JAVA org.mod4j.businessdomain.generator.helpers.BusinessClassHelpers.isMany2One(BusinessDomainDsl.Association);
+
+boolean isMany2Many(Association a) :
+ JAVA org.mod4j.businessdomain.generator.helpers.BusinessClassHelpers.isMany2Many(BusinessDomainDsl.Association);
+
+String getCollectionInterface(Association a) :
+    JAVA org.mod4j.businessdomain.generator.helpers.BusinessClassHelpers.getCollectionInterface(BusinessDomainDsl.Association);
+
+String getCollectionImplementation(Association a) :
+    JAVA org.mod4j.businessdomain.generator.helpers.BusinessClassHelpers.getCollectionImplementation(BusinessDomainDsl.Association);
+
+String getterTo(Association a) :
+ "get" + a.targetRoleName.toFirstUpper();
+ 
+ String getterFrom(Association a) :
+ "get" + a.sourceRoleName.toFirstUpper();

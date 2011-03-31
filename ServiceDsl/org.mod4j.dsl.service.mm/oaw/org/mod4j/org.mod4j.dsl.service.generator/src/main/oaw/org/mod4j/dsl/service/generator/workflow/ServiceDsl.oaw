@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ - Copyright (c) 2009 Ordina and committers to Mod4j
+ - All rights reserved. This program and the accompanying materials
+ - are made available under the terms of the Eclipse Public License v1.0
+ - which accompanies this distribution, and is available at
+ - http://www.eclipse.org/legal/epl-v10.html
+ -
+ - Contributors:
+ -     Ordina - initial implementation
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<workflow>
+    <!-- 
+        Initialize workflow and load properties
+    -->
+    <component class="org.eclipse.xtend.util.stdlib.ExtIssueReporter"/>
+
+    <component class="org.mod4j.dslcommon.generator.helpers.PropertiesWorkflowComponent">
+        <propertyFile value="${appPropFilePath}" />
+        <workDir value="${workDir}" />
+        <project value="${project}" />
+    </component>
+
+   <bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" >
+        <platformUri value=".."/>
+    </bean>
+    <bean class="org.mod4j.dsl.service.xtext.ServiceStandaloneSetup"/>
+    <bean id="sm" class="org.eclipse.xtend.typesystem.emf.EmfMetaModel">
+         <metaModelPackage value="org.mod4j.dsl.service.mm.ServiceDsl.ServiceDslPackage" />   
+    </bean>
+    <bean id="crossx" class="org.eclipse.xtend.typesystem.emf.EmfMetaModel">
+        <metaModelPackage value="org.mod4j.crossx.mm.crossx.CrossxPackage" />   
+    </bean>
+    <bean id="ecore" class="org.eclipse.xtend.typesystem.emf.EmfMetaModel">
+        <metaModelPackage value="org.eclipse.emf.ecore.EcorePackage" />   
+    </bean>
+    
+    <!--
+        Parse the model file and validate syntax and model constraints
+    -->
+    <component class="org.eclipse.emf.mwe.utils.Reader">
+        <uri value="${modelFile}" />
+        <modelSlot value="serviceModel" />
+    </component>
+    
+    <component id="ServiceWorkflow-ModelChecks" class="org.eclipse.xtend.check.CheckComponent">
+        <metaModel idRef="sm" />
+        <metaModel idRef="crossx" />
+        <checkFile value="org::mod4j::dsl::service::validation::checks::ServiceChecks" />
+        <emfAllChildrenSlot value="serviceModel" />
+    </component>
+    <component id="ServiceWorkflow-CrossxChecks" class="org.eclipse.xtend.check.CheckComponent">
+        <metaModel idRef="sm" />
+        <metaModel idRef="crossx" />
+        <checkFile value="org::mod4j::dsl::service::validation::checks::CrossxChecks" />
+        <emfAllChildrenSlot value="serviceModel" />
+    </component>
+
+    <!-- Call the Xtend model-to-model transformation to complete the DTO model
+         with all properties derived from the business classes.
+    -->
+    <component id="complteSvc" class="org.eclipse.xtend.XtendComponent">
+       <metaModel idRef="sm"/>
+       <metaModel idRef="crossx"/>
+       <invoke value="org::mod4j::dsl::service::generator::xtend::CompleteSvc::completeModel(serviceModel)"/>
+    </component>
+
+    <!--
+        Generation of Service sources and resources for the SERVICE layer
+    -->
+    <component id="ServiceWorkflow-Generator" class="org.eclipse.xpand2.Generator">
+        <metaModel idRef="sm" />
+        <metaModel idRef="crossx"/>
+        <metaModel idRef="ecore"/>
+        <fileEncoding value="${fileEncoding}"/>
+        <expand value="org::mod4j::dsl::service::generator::xpand::ServiceLayer::Generate FOR serviceModel" />
+        <outlet path="${applicationPath}/">
+            <postprocessor class="org.eclipse.xpand2.output.JavaBeautifier" />
+            <postprocessor class="org.eclipse.xpand2.output.XmlBeautifier" />
+        </outlet>
+    </component>
+    
+ </workflow>

@@ -1,0 +1,1721 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4/EN"
+"http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd" [
+<!ENTITY mod4j "<ulink url='http://www.mod4j.org/'>Mod4j</ulink>">
+]>
+<book lang="en">
+  <bookinfo>
+    <title>&mod4j; User Guide</title>
+    <authorgroup>
+      <author>
+        <firstname>Jos</firstname>
+        <surname>Warmer</surname>
+      </author>
+      <author>
+        <firstname>Eric Jan</firstname>
+        <surname>Malotaux</surname>
+      </author>
+      <author>
+        <firstname>Johan</firstname>
+        <surname>Vogelzang</surname>
+      </author>
+    </authorgroup>
+    <releaseinfo>&version;</releaseinfo>
+    <copyright>
+      <year>2009</year>
+      <holder>Ordina and other &mod4j; committers</holder>
+    </copyright>
+  </bookinfo>
+  <chapter id="intro">
+    <title>Introduction</title>
+    <section>
+      <title>Introduction</title>
+      <para>&mod4j; (<emphasis role="italic">Modeling for Java</emphasis>) is an open source
+        DSL-based environment for developing administrative enterprise applications. It uses a
+        collection of DSL’s to model different parts of the architecture, combined with manually
+        written code. Currently &mod4j; consists of four DSLs: the Business Domain DSL, Service
+        DSL, Data Contract DSL and Presentation DSL. The modeling environment is seamlessly
+        integrated into the Eclipse IDE which gives the developers one environment where they can
+        easily switch back- and forth between models and code. The different DSL’s used in
+        &mod4j; can be used independently, but if they are used in collaboration they will be
+        fully validated with each other. Apart from integration in the Eclipse IDE, &mod4j; also
+        supports the use of Maven. That is, using the DSL models as the source, the complete code
+        generation process can be run automatically on a build server without the need for Eclipse.
+        This is a must for professional development and fits well in current ways of working.</para>
+      <para>This document is the user guide for &mod4j;. <xref linkend="Mod4jPrinciples"/>
+        describes the guiding principles that are used within &mod4j;.</para>
+    </section>
+    <section>
+      <title>References</title>
+      <anchor id="bibliography"/>
+      <bibliography>
+        <biblioentry id="mod4j-app-arch">
+          <abbrev>mod4j-app-arch</abbrev>
+          <title>&mod4j; Application Architecture</title>
+          <author>
+            <firstname>Eric</firstname>
+            <othername>Jan</othername>
+            <surname>Malotaux</surname>
+          </author>
+          <date>2009</date>
+        </biblioentry>
+      </bibliography>
+    </section>
+  </chapter>
+  <chapter id="Mod4jPrinciples">
+    <title>&mod4j; Principles and Patterns</title>
+    <section>
+      <title>Principles</title>
+      <para>It is important to understand the principles behind the &mod4j; project. These
+        principles have guided how the DSL's are designed and how they should be used.</para>
+      <section>
+        <title>Code Generation Principles</title>
+        <para>Code generation has been around for a long time. &mod4j; takes in account many of
+          the lessons learned. The following principles are guiding the &mod4j;
+          development.</para>
+        <itemizedlist>
+          <listitem>
+            <para><keycap>Generated code must be clear and readable</keycap>. Using &mod4j;
+              should not be a lifetime commitment. Therefore the source code must be at least as
+              good as handwritten code. This allows projects to continue development with the
+              generated code instead of the DSL models. Note that this surely isn't the recommended
+              way, but we like the freedom this gives.</para>
+            <para>Another reason for generating clear and readable code is that we do not have
+              debuggers at the model level. This would be great, but the tools to develop
+              model-level debuggers are not available (yet, we hope). Therefore code needs to be
+              debugged at the source code level and having readable generated code really
+              helps.</para>
+            <para>The third reason for generating clear code is that we do not generate everything.
+              We support a mixed-mode development where developers write both models and code to
+              extend the generated code. It is easier to extend generated cod when this is
+              readable.</para>
+          </listitem>
+          <listitem>
+            <para><keycap>Generated code is strictly separated from handwritten code</keycap>, in
+              other words <emphasis>the model is always leading</emphasis> and code is always
+              regenerated from the model whenever the model changes. </para>
+            <para>To ensure that generated code never needs to be overwritten the generated code is
+              designed and generated with so-called <emphasis>extension points</emphasis>. These
+              extension points are the only places where handwritten code may be placed. In most
+              cases an extension point is in a file separate from the generated code. To help the
+              developer a first empty extension point file is usually created. Extension points are
+              regenerated as long as no handwritten code has been added. Once handwritten code has
+              been added an extension point is not regenerated anymore.</para>
+          </listitem>
+          <listitem>
+            <para><keycap>Mod4j supports incremental code generation</keycap>. Code is generated on
+              a per model file basis. Effectively whenever a model file is saved the code for this
+              model file is generated automatically in the background. There is no need for a
+              separate code generation step. This code generation step uses the standard Eclipse
+              build structure. If the option 'build automatically' is set code generation will take
+              place automatically. If a full build is requested all code will be regenerated. This
+              allows Eclipse users to work with models in the same way as with source code (i.e.
+              Java class files).</para>
+          </listitem>
+          <listitem>
+            <para><keycap>Automatic builds through Maven.</keycap> &mod4j; includes a Maven
+              plugin that support the code generation process in batch mode. This is used to run
+              automatics builds based on the models. There is no need to checkin generated source
+              code, just as there is no need to checkin compiled Java classes. </para>
+          </listitem>
+        </itemizedlist>
+      </section>
+      <section>
+        <title>Modeling Principles</title>
+        <para>Modeling in &mod4j; is guided by a set of principles:<itemizedlist>
+            <listitem>
+              <para><keycap>The goal of a model is to generate code.</keycap> Thus, everything in a
+                model is used in some way to generate code. We don't do modeling for the sake of
+                modeling.</para>
+            </listitem>
+            <listitem>
+              <para><keycap>Model and code live side by side</keycap>. That is, we do not focus on
+                100 percent code generation. Instead we focus on modeling aspects from which as much
+                code as possible can be generated. At the same time we keep using code for aspects
+                that are as much work in code as they are in a model. Given the time constraints
+                that we all have, we start with the modeling concepts that give the best ratio of
+                model-to-code.</para>
+            </listitem>
+            <listitem>
+              <para><keycap>DSL"s and DSL models are independent of each other</keycap>. They may
+                reference through soft references, but are never hard-linked to each other. This
+                allows both DSL models and DSLs to be developed separately. It also allows version
+                and multi-user management by common tools as CVS or subversion.</para>
+            </listitem>
+            <listitem>
+              <para><keycap>DSL Models are and remain small.</keycap> We do not need to handle huge
+                models because models are always divided into small, independent parts which we call
+                DSL models. The relationship between those DSL models is done by symbolic
+                integration of the models. See the section on Crossx.</para>
+            </listitem>
+          </itemizedlist></para>
+      </section>
+    </section>
+    <section>
+      <title>Code Generation Patterns</title>
+      <para>The code generated by &mod4j; is designed to be extensible by handwritten code. This
+        provides the developer with maximum flexibility. These so-called extension points are
+        designed in such a way that a developer never needs to overwrite generated code, he always
+        extends it. This ensures that code can always be regenerated keeping the model as the source
+        for development during the lifetime of an application.</para>
+      <para>This section describes code generation patterns that are used in the various code
+        generators. </para>
+      <section id="section-generation-gap-pattern">
+        <title>Generation Gap Pattern</title>
+        <para>The Generation Gap pattern is described at
+          http://www.research.ibm.com/designpatterns/pubs/gg.html by John Vlissides. The main
+          aspects of this pattern are:</para>
+        <section>
+          <title>Intent</title>
+          <para>The intent of the pattern is to be able to modify or extend generated code just once
+            no matter how many times it is regenerated. </para>
+        </section>
+        <section>
+          <title>Motivation</title>
+          <para>Having a computer generate code for you is usually preferable to writing it
+            yourself, provided the code it generates is * correct, * efficient enough, *
+            functionally complete, and * maintainable. The problem is twofold:</para>
+          <itemizedlist>
+            <listitem>
+              <para>handwritten code may get lost when re-generating code from a model</para>
+            </listitem>
+            <listitem>
+              <para>generated code may sometimes not do exactly what is needed</para>
+            </listitem>
+          </itemizedlist>
+        </section>
+        <section>
+          <title>Solution</title>
+          <para>Separate the handwritten and generated code in separate classes / files. Generate an
+            abstract base class that contains all code that is generated. Generate an empty subclass
+            in a separate file. In this way the generator may always regenerate the base class with
+            all generated code, while it will never regenerate the subclass file with handwritten
+            code.</para>
+          <para>The handwritten subclass file is used for two purposes:</para>
+          <itemizedlist>
+            <listitem>
+              <para>Extend the generated code in the base class with things that cannot be generated
+                from the model. In this case the base class usually defines something like an
+                abstract method such that this must be defined in the handwritten file</para>
+            </listitem>
+            <listitem>
+              <para>Overwrite a method in the generated base class. This allows a developer to
+                overrule the generated code. The system depends to a great extent on assumptions
+                about the generated code. Therefore the developer should be intimately aware of the
+                consequences and only use this in exceptional cases.</para>
+            </listitem>
+          </itemizedlist>
+          <para>The generation gap pattern is used at several places within &mod4j;. It is a
+            well known pattern in Java code generation and allows for a clear separation of
+            generated and handwritten code. Code generation for a Java class or java interface is
+            done in two parts. An abstract base class is generated which contains all the generated
+            code. An empty concrete subclass is generated, in which handwritten code should
+            added.</para>
+          <para>The generator will always regenerate the abstract base class. The generator will
+            only generate the empty subclass if it has not been manually changed. In this way
+            handwritten code is never overwritten by the code generator.</para>
+          <para>The solution is shown in <xref linkend="emptysubclass-pattern"/>.</para>
+          <figure id="emptysubclass-pattern">
+            <title id="titleid">Generation Gap Pattern applies to Java Classes</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="images/base-emptysubclass-pattern.jpg"/>
+              </imageobject>
+            </mediaobject>
+          </figure>
+          <para>There are a few properties of this solution that we need to be aware of:</para>
+          <orderedlist>
+            <listitem>
+              <para>The empty subclass isn't completely empty. It needs to include the public
+                constructors from the base class with a calls to super(). This means that whenever
+                the generated constructors change, the constructors in the subclass will be
+                outdated.</para>
+            </listitem>
+            <listitem>
+              <para>When the abstract base class is not generated anymore, the empty subclass will
+                become superfluous. It refers to a non-existing base class. The java compiler will
+                flag this as an error, and the developer needs to remove the subclass by
+                hand.</para>
+            </listitem>
+          </orderedlist>
+        </section>
+      </section>
+    </section>
+  </chapter>
+  <chapter id="chapter-eclipse">
+    <title>The &mod4j; Eclipse environment</title>
+    <section>
+      <title>&mod4j; Project</title>
+      <para>&mod4j; models reside within an Eclipse &mod4j; project. A &mod4j; project
+        has several characteristics. First of all, such a project has a &mod4j; nature, which
+        tells Eclipse that this project contains &mod4j; DSL models. This nature triggers the
+        Eclipse build system to run on the model units in this project. &mod4j; model files must
+        reside in a &mod4j; project </para>
+      <section>
+        <title>&mod4j; New Project Wizard</title>
+        <para>To create a &mod4j; project you can use the &mod4j; Wizard. You can find this
+          under the menu option <keycap>File ==> New ==> Project ... ==> Mod4j ==> Mod4j
+            Project</keycap>. You can then define the project name and the project location. Within
+          a &mod4j; project the folder src/model is special. All &mod4j; models must reside
+          within this folder. The default structure below this folder is to make sub folders for
+          business domain models, data contract models and service models.</para>
+      </section>
+      <section>
+        <title>&mod4j; New Model Wizard</title>
+        <para>Once e &mod4j; project has been created you can create a new &mod4j; model
+          through the menu option <keycap>New ==> Other... ==> Mod4j ==> Mod4j &lt;DSL name>
+            Model File</keycap>. Make sure you create the model files inside the src/model folder,
+          or they will be ignored.</para>
+      </section>
+      <section>
+        <title>&mod4j; Model Editors</title>
+        <para>Once a &mod4j; model is created it can be opened in the special model editor by
+          double clicking it. The model editors use syntax highlighting for keywords, where the
+          color of the keywords matches the color of the layer in the architectural overview. Each
+          editors has a different keyword color. This helps you to quickly know which type of model
+          you are editing.</para>
+        <para>The model editors also have code completion, which is of course triggered by tye
+          default Eclipse key combination <keycap>Ctrl-SPACE</keycap>. Errors in the models are
+          displayed in the Eclipse Problem View, thus working as expected in Eclipse. </para>
+      </section>
+      <section>
+        <title>&mod4j; FileTracker View</title>
+        <para>For each model unit code is generated in a number of different files that may reside
+          inside different folders in projects. It is rather cumbersome to navigate through the
+          different projects to find the files that are generated. the FileTracker view, which can
+          be shown by the menu option <keycap>Window ==> Show View ==> Other ==> Mod4j ==> Mod4j
+            FileTracker</keycap>. The FileTracker view shows a tree with all model files. Under each
+          model file the list of files generated from the specific model is shown. A generated file
+          may be shown with a small G in the right lower corner, which indicates that this is a
+          generate3d file that will always be overwritten. Files without the G are extension points
+          and may be changed by hand. As long as these files are not changed by hand they will be
+          regenerated. When such a file is changed, manually the &mod4j; builder will recognize
+          this and will not overwrite such a file.</para>
+        <para>Double clicking on the model file or on a generated will directly open the file,
+          provided that the project in which the file resides is available as an Eclipse project in
+          your workspace. For new projects you first need to import the different projects as
+          described in <xref linkend="chapter-code-generation"/>. </para>
+      </section>
+      <section>
+        <title>&mod4j; CrossX View</title>
+        <para>As described in <xref linkend="chapter-crossx"/>, the connection between the different
+          models in different files is supported by the CrossX component. To view the contents of
+          the CrossX broker you can select <keycap>Window ==> Show View ==> Other ==> Mod4j ==>
+            CrossX</keycap>. For normal usage of &mod4j;, the CrossX View is not needed. It
+          becomes useful when you are developing your own DSL and need to check whether the right
+          symbols are exported to CrossX from your DSL. </para>
+        <para>Double clicking on the model file will directly open the file, provided that the
+          project in which the file resides is available as an Eclipse project in your workspace.
+          For new projects you need to import the different projects as described in <xref
+            linkend="chapter-code-generation"/>. </para>
+      </section>
+    </section>
+  </chapter>
+  <chapter id="chapter-code-generation">
+    <title>&mod4j; Code Generation</title>
+    <section>
+      <title>Structure of Generated Code</title>
+      <para>Code generation in &mod4j; follows a well-defined structure, which is derived from
+        the layers in the application architecture.</para>
+      <para>From the various models in &mod4j; code is generated to so-called <emphasis
+          role="italic">modules</emphasis>. Each module represents a layer of the architecture. The
+        names of the modules are derived from the application name. For example, if the application
+        name is <emphasis role="italic">RecordShop</emphasis> the modules used in &mod4j; are:<itemizedlist>
+          <listitem>
+            <para><emphasis role="italic">RecordsShop-dslModels</emphasis>: this is the project that
+              contains all of the &mod4j; models., No code is generated into this
+              project.</para>
+          </listitem>
+          <listitem>
+            <para><emphasis role="italic">RecordShop-domain</emphasis>: this project contains code
+              for the domain layer of the architecture. Code is generated from the business domain
+              DSL. </para>
+          </listitem>
+          <listitem>
+            <para><emphasis role="italic">RecordShop-data</emphasis>: this project contains code for
+              the data layer of the architecture. Code is generated from the business domain
+              DSL.</para>
+          </listitem>
+          <listitem>
+            <para><emphasis role="italic">RecordShop-business</emphasis>: this project contains code
+              for the business layer of the architecture. Code is generated from the service
+              DSL.</para>
+          </listitem>
+          <listitem>
+            <para><emphasis role="italic">RecordShop-service</emphasis>: this project contains code
+              for the service layer of the architecture. Code is generated from the data contract
+              and service DSLs.</para>
+          </listitem>
+          <listitem>
+            <para><emphasis role="italic">RecordShop-presentation</emphasis>: this project contains
+              code for the presentation layer of the architecture. Code is generated from the
+              presentation DSL. Note that the presentation DSL is not part of the 1.0.0 release of
+              &mod4j;.</para>
+          </listitem>
+        </itemizedlist></para>
+      <para>Each modules is a Maven module and includes a Maven <emphasis role="italic">pom.xml
+        </emphasis>file that describes the build structure of the module. The location of the
+        modules is defined in the Mod4j.properties files which is described in <xref
+          linkend="section-mod4j-properties"/>.</para>
+      <para>The structure of the modules in the file system is important, because all of the modules
+        need to use the same parent pom.xml file. The structure is as follows:</para>
+      <programlisting>main-folder
+    pom.xml                            -- the parent pom for all modules
+    RecordShop-dslModels
+        pom.xml                        
+    RecordShop-domain
+        pom.xml
+    RecordShop-data
+        pom.xml
+    RecordShop-business
+        pom.xml
+    RecordShop-service
+        pom.xml
+    RecordShop-presentation
+        pom.xml      </programlisting>
+      <para>The project can be built by running maven (mvn clean install) in the main-folder. </para>
+      <para>To work with the generated modules in Eclipse &mod4j; uses the Eclipse plugin Q4E.
+        The q4e plugin allows an Eclipse user to import maven projects as Eclipse projects. It takes
+        care of keeping all Eclipse settings in sync with the pom.xml file. The <emphasis
+          role="italic">getting started </emphasis>guide om the &mod4j; project site describes
+        how to install q4e and how to run maven on a newly created project. </para>
+      <warning>
+        <para>Within Eclipse the default location of projects is directly in the workspace folder.
+          The consequence of this is that the parent pom for a &mod4j; project will reside in
+          the workspace fo0lder. This becomes a problem when you are working with more than one
+          &mod4j; project. The parent pom for each of the &mod4j; projects will have the
+          same location. To avoid these problems, we advise to create &mod4j; projects outside
+          the Eclipse workspace. </para>
+      </warning>
+    </section>
+    <section>
+      <title>Spring configuration</title>
+      <para>As explained in the <biblioref linkend="mod4j-app-arch"/>, each maven module
+        corresponding with an architectural layer, except the domain layer, has its own Spring
+        configuration. The contexts are created and tied together by a <ulink
+          url="http://static.springframework.org/spring/docs/2.5.x/api/org/springframework/context/access/ContextSingletonBeanFactoryLocator.html">
+          <classname>ContextSingletonBeanFactoryLocator</classname>
+        </ulink>, configured by a set of <filename>beanRefContext.xml</filename> files. The
+        configuration is separated into parts that are always generated, and parts that are
+        generated just once as a convenience for the developer, and after that never overwritten
+        because they are intended to be maintained manually. The generated parts are generated into
+        a file named <filename>applicationContext.xml</filename> in the directory corresponding to
+        the root package for each module in the source folder <filename class="directory"
+          >generated-resources</filename>. The manually maintained files are generated just once
+        into the directory corresponding to the root package for each module in the source folder
+          <filename class="directory">src/main/resources</filename>. The manually maintained
+        configuration files contain those configuration items that depend on the environment where
+        the application will be deployed and therefore cannot be known in advance. Currently there
+        are three such configuration files:<orderedlist>
+          <listitem>
+            <para><filename>dataSourceContext.xml</filename> in the data module.</para>
+          </listitem>
+          <listitem>
+            <para><filename>sessionFactoryContext.xml</filename> in the data module.</para>
+          </listitem>
+          <listitem>
+            <para><filename>transactionManagerContext.xml</filename> in the service module.</para>
+          </listitem>
+        </orderedlist>It is quite probable that in the future more specialised environment dependent
+        configuration files will be introduced, for instance for JMS queues et cetera.</para>
+      <para>This separation of Spring configuration files between modules, and between generated and
+        manual parts tries to benefit from knowledge available in the model on the one hand, and
+        flexibility needed to adapt to the environment on the other hand. The generated setup will
+        be sufficient for simple cases. When a more complicated configuration is needed, the
+        developer will have to created his own, but he can still use most of the generated parts. In
+        that case he will probably substitute his own <filename>beanRefContext.xml</filename> for
+        the generated ones and assemble the contexts there. Just one
+          <filename>beanRefContext.xml</filename> will probably be easier to maintain by hand than
+        the several generated ones.</para>
+    </section>
+    <section id="section-mod4j-properties">
+      <title>Tuning the Code Generation Properties </title>
+      <para> Inside the <emphasis role="italic">src/model </emphasis>folder of the &mod4j;
+        project a file named <emphasis role="italic">mod4j.properties </emphasis>is generated by the
+        new &mod4j; project wizard. This files contains a number of properties that can be used
+        to tune the &mod4j; code generation. This file has a number of sections which are
+        explained below. </para>
+      <bridgehead>Application properties</bridgehead>
+      <para>Default encoding for generated XML files </para>
+      <programlisting>      fileEncoding=UTF-8</programlisting>
+      <para>The name of the application </para>
+      <programlisting>      applicationName=RecordShop</programlisting>
+      <para>The version of the application, this is used by Maven </para>
+      <programlisting>      applicationVersion=1.0-SNAPSHOT</programlisting>
+      <para>The main location of the project, this has only been tested with the value "..", be
+        aware of any other value you use. </para>
+      <programlisting>      applicationPath=..</programlisting>
+      <para>The name of the root package for the generated code. </para>
+      <programlisting>      rootPackage=org.company.recordshop</programlisting>
+      <para>The folder where Java sources are (re)generated. Files generated in this folder are
+        always regenerated, thus they should never be changed by hand. Also, there is no need to
+        checkin these generated files in SVN or other version control system. The files are
+        regenerated anyway by both the Eclipse and the Maven builder. </para>
+      <programlisting>      srcGenPath=generated-sources</programlisting>
+      <para> The folder where resources are (re)generated. This has the same function as the
+          <emphasis role="italic">srcGenPath</emphasis>, but for non Java files. </para>
+      <programlisting>     resourceGenPath=generated-resources</programlisting>
+      <para>The folder where Java extension points are generated. These are the Java files where
+        code may be added by hand. Any file changed after generation will not be regenerated. From
+        this folder all manually changed files need to checked in, unchanged files should not be
+        checked in. </para>
+      <programlisting>      srcManPath=src/main/java</programlisting>
+      <para>The folder where non-Java extension points are generated. Works identically to <emphasis
+          role="italic">srcManPath</emphasis> .</para>
+      <programlisting>      resourceManPath=src/main/resources</programlisting>
+      <bridgehead>Dsl Models properties</bridgehead>
+      <para>The name of the module that contains the &mod4j; models. </para>
+      <programlisting>      dslModelsModuleName=RecordShop-dslModels</programlisting>
+      <bridgehead>Domain module properties</bridgehead>
+      <para>The name of the module that contains the code for the domain layer. </para>
+      <programlisting>      domainModuleName=RecordShop-domain</programlisting>
+      <para>The name of the root package for this module </para>
+      <programlisting>      domainRootPackage=org.company.recordshop.domain</programlisting>
+      <bridgehead>Data module properties</bridgehead>
+      <para>The name of the module that contains the code for the data layer.</para>
+      <programlisting>      dataModuleName=RecordShop-data</programlisting>
+      <para>The name of the root package for this module</para>
+      <programlisting>      dataRootPackage=org.company.recordshop.data</programlisting>
+      <para>Indicated whether a new database schema should be created. The value create that a new
+        database schema is always created. The value update means that only changes in the database
+        schema are generated.</para>
+      <programlisting>      hibernate.hbm2ddl.auto=update</programlisting>
+      <para>The Hibernate mapping strategy for inheritance. There are two possible values.</para>
+      <programlisting>      #hibernate-mapping.inheritance.strategy=[table.per.concrete.class|table.per.subclass]
+      hibernate-mapping.inheritance.strategy=table.per.concrete.class</programlisting>
+      <para>The name of the class that generates the id for objects. Value <emphasis role="italic"
+          >native</emphasis> indicated that the id generator of the underlying database is
+        used.</para>
+      <programlisting>      hibernate-mapping.class.id.generator.class=native</programlisting>
+      <bridgehead>Business module properties</bridgehead>
+      <para>The name of the module that contains the code for the business layer. </para>
+      <programlisting>      businessModuleName=RecordShop-business</programlisting>
+      <para>The name of the root package for this module. </para>
+      <programlisting>      businessRootPackage=org.company.recordshop.business</programlisting>
+      <bridgehead>Service module properties</bridgehead>
+      <para>The name of the module that contains the code for the service layer.</para>
+      <programlisting>      serviceModuleName=RecordShop-service</programlisting>
+      <para>The name of the root package for this module.</para>
+      <programlisting>      serviceRootPackage=org.company.recordshop.service</programlisting>
+      <bridgehead>Presentation module properties</bridgehead>
+      <para>The name of the module that contains the code for the presentation layer</para>
+      <programlisting>      presentationModuleName=RecordShop-presentation</programlisting>
+      <para>The name of the root package for this module.</para>
+      <programlisting>      presentationRootPackage=org.company.recordshop.presentation</programlisting>
+    </section>
+  </chapter>
+  <chapter id="chapter-crossx">
+    <title>CrossX</title>
+    <para>Each model file is edited and processed separately. However information from one model
+      file is often needed in another model file. To support the inter model referencing and
+      validation we developed a specific component called CrossX. CrossX acts as a symbol table for
+      model information. Each model exports symbolic information about a subset of its model
+      elements to CrossX. Whenever a reference to a model element in another model is needed this is
+      looked up in CrossX.</para>
+    <para>CrossX is integrated into the &mod4j; Eclipse builder. When the CrossX builder is
+      called on a model file it will extract the CrossX information from the model file. This
+      information is stored in memory in the CrossX broker. It keeps track of which resource
+      information has come from. If a model file changes, the information from that model files is
+      replaced by the newly exported information. </para>
+    <para>The CrossX information is also stored in a .crossx file. These files are used to
+      initialize the CrossX broker at Eclipse startup, to ensure that not all models need to be
+      processed again. </para>
+    <para>The CrossX View can be used to examine the contents of the CrossX broker inside Eclipse.
+      If it shows empty you need to rebuild your project (see issues below) CrossX will only process
+      projects that have a &mod4j; nature. </para>
+    <para>Users of &mod4j; will usually not need to do anything with CrossX, it quietly does its
+      work in the background. For developers of CrossX it is important to understand the inner
+      working, which will be described in the developer guide.</para>
+  </chapter>
+  <chapter>
+    <title>Business Domain DSL Reference</title>
+    <para>This chapter provides a description of all the concepts in the Business Domain DSL. Each
+      concept is described by a definition which explains the business meaning of the concept, and a
+      description of the code generated for the concept.</para>
+    <para>The Business Domain DSL is intended to be used for modeling the domain model of an
+      application. De Business Domain model consists of all domain classes, as understood by the
+      business expert. Technical aspects do not belong in Business Domain models.</para>
+    <figure>
+      <title>Business Domain DSL generation for each Domain Class</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/BusinessDomainClass-generated.jpg"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+    <para>As you can see in the figure, eight files are generated for each domain class. At the
+      domain level the generation gap pattern is used to generate two files. At the data layer a DAO
+      class always has a separate interface. To allow manual additions, a double generation gap
+      pattern is used where both the interface and the class can be extended. Next to the Java files
+      a Hibernate mapping file is generated containing the mapping for the specified class.</para>
+    <para>To support the Hibernate query by example functionality the PersonExample class is
+      generated. The Person.java class has its validation turned on, even when the constructor is
+      called. This supports the rule in the application architecture that an object must always be
+      valid. For the query by example functionality the example object does not need to be a valid
+      domain object. The purpose of the PersonExmple.java class is to turn off the validation in the
+      constructor,. This example class is only to be used for the query by example functionality. </para>
+    <para>For a business rule two files, fo0llowing the generation gap pattern are generated. This
+      is shown in figure <xref linkend="fig-rule-generation"/>.</para>
+    <figure id="fig-rule-generation">
+      <title>Business Domain DSL generation for a Business Domain model.</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/BusinessRule-generated.jpg"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+    <para>For the model as a whole, several files are generated as well, independent of the number
+      of business classes in the model. This is shown in the following figure. </para>
+    <figure>
+      <title>Business Domain DSL generation for a Business Domain model.</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/BusinessDomainModel-generated.jpg"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+    <para>The remainder of this chapter describes the concepts as they are defined in the language
+      and how they can be used to specify a business domain model.</para>
+    <section>
+      <title>Domain Class</title>
+      <section>
+        <title>Definition</title>
+        <programlisting continuation="continues" format="linespecific" linenumbering="numbered" xml:space="preserve"><keycap>class</keycap> Person [
+    // properties go here ...
+    // rules go here ...
+]
+</programlisting>
+        <para>A Domain Class describes something that has a specific meaning in the business domain
+          being modeled. In the system being modeled instances of domain classes will be
+          created.</para>
+        <para>A domain class has properties (also called attributes in e.g. UML) of different
+          types.</para>
+        <para>A domain class also contains business rules, that specify the conditions that an
+          instance of the class needs to conform to.</para>
+      </section>
+      <section>
+        <title>Generated code</title>
+        <para>For a domain class code is generated for both the domain and the data layer of the
+          architecture.</para>
+        <section>
+          <title>Domain Layer</title>
+          <para>In the domain layer code is generated according to the <emphasis>generation gap
+              pattern </emphasis>(<xref linkend="section-generation-gap-pattern"/>). For each domain
+            class two Java classes are generated. The first Java class is an abstract base class
+            containing all generated code for the domain class. All code generated for properties,
+            associations and validation of attribute constraints and business rules is placed inside
+            this class.</para>
+          <para>The second class generated is an empty (except for constructors calling
+              <code>super()</code>) class which subclasses the first class. This empty class is what
+            we call an <emphasis>extension point </emphasis>file, where manual code may be added.
+            This extension class is generated once and not overwritten, which ensures that all
+            handwritten code is maintained at all times.</para>
+          <figure id="figure-emptysubclass-domain">
+            <title>Generation Gap pattern applied to the Domain Layer</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="images/base-emptysubclass-domain.jpg"/>
+              </imageobject>
+            </mediaobject>
+          </figure>
+        </section>
+        <section>
+          <title>Data Layer</title>
+          <para>In the data layer a number of files is generated.</para>
+          <para>
+            <itemizedlist>
+              <listitem>
+                <para>A hibernate mapping file is generated for each domain class.</para>
+              </listitem>
+              <listitem>
+                <para>A DAO (Data Access Object) is generated. The DAO normally consists of one
+                  interface and an implementing class. To get a clean separation of generated and
+                  handwritten code both of these use the generation gap pattern. The result for a
+                  class called Person is shown in figure <xref linkend="figure-emptysubclass-data"
+                  />. Note that this is another instance of the generation gap pattern as described
+                  in <xref linkend="section-generation-gap-pattern"/>.</para>
+              </listitem>
+              <listitem>
+                <para>Spring configuration files are generated (beanRefContext.xml and
+                  applicationContext.xml) for the DAOs mentioned in the previous bullet. These files
+                  are generated in the <filename class="directory">generated-resources</filename>
+                  directory. Two other Spring configuration files are generated just once in
+                    <filename class="directory">src/main/resource</filename> and never overwritten:
+                    <filename>dataSourceContext.xml</filename>, containing a JNDI data source
+                  definition suitable for deployment in an application server, and
+                    <filename>sessionFactoryContext.xml</filename>, containing a definition of a
+                  Hibernate session factory bean. These files are generated just once to help
+                  developers get up and running quickly. They will never be overwritten, and are
+                  intended to be maintained manually by the developer. The reason for this is that
+                  data sources and session factories are generally dependent on the environment
+                  where the application will be deployed, and so cannot be known beforehand. The
+                  generated <filename>beanRefContext.xml</filename> contains references to these
+                  files.</para>
+              </listitem>
+            </itemizedlist>
+          </para>
+          <figure id="figure-emptysubclass-data">
+            <title>Generation Gap pattern applied to the Data Layer</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="images/base-emptysubclass-data.jpg"/>
+              </imageobject>
+            </mediaobject>
+          </figure>
+        </section>
+      </section>
+    </section>
+    <section>
+      <title>Inheritance</title>
+      <programlisting continuation="continues" format="linespecific" linenumbering="numbered" xml:space="preserve"><emphasis role="bold">class</emphasis> Customer <emphasis role="bold">inherits</emphasis> Person [
+        // additional attributes go here ...
+        // additional rules go here ...
+]
+      </programlisting>
+      <para>A domain Class may inherit from another domain class. All attributes, associations and
+        rules defined for the class from which it inherits are applicable to the subclass as well. </para>
+      <para>A domain class may inherit from one class at most, multiple inheritance is not
+        supported.</para>
+      <section>
+        <title>Generated code</title>
+        <para>For inheritance domain class code is generated for both the domain and the data layer
+          of the architecture.</para>
+        <section>
+          <title>Domain Layer</title>
+          <para>In the domain code is generated to ensure that inheritance is part of the Java class
+            structure as well. That is, inheritance is mapped onto the Java <emphasis role="italic"
+              >extends </emphasis>.</para>
+        </section>
+        <section>
+          <title>Data Layer</title>
+          <para>In the data layer code is generated in the hibernate mapping files using the
+            hibernate support for inheritance.</para>
+          <para>In the DAO package, a regular DAO Java file is generated. There is no inheritance
+            relationship between the class and its superclass in the DAO code. The DAO files
+            contains methods for accessing the database as shown below.</para>
+          <para><programlisting><emphasis role="bold">public </emphasis><emphasis role="bold">interface </emphasis>CustomerDaoBase {
+    	Customer retrieve(Long id);
+    	Customer add(Customer object);
+    	Customer update(Customer object);
+    	<emphasis role="bold">void</emphasis> delete(Customer object);
+    	List&lt;Customer> listAll();
+    List&lt;Customer> listPage(final int firstResult, final int maxResults);
+    long count();
+    	List&lt;Customer> findByExample(CustomerExample example);
+}</programlisting>The
+            generated code includes full Javadoc, which has been left out in the above example to
+            save space. </para>
+        </section>
+      </section>
+    </section>
+    <section>
+      <title>Attributes</title>
+      <section>
+        <title>Definition</title>
+        <para>Attributes are part of a domain class and defined within the scope of their class. The
+          example class person looks as follows.</para>
+        <programlisting continuation="continues" linenumbering="numbered" xml:space="preserve"><keycap>class</keycap> Person [
+    <keycap>string</keycap>   name
+                  <keycap>derived</keycap> [ <keycap>writable</keycap> ]
+                  <keycap>default</keycap> "the default name"
+                  <keycap>minlength</keycap> 3  <keycap>maxlength</keycap> 10 
+                  <keycap>regexp</keycap> "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$"
+                  <keycap>nullable</keycap> ;
+    <keycap>integer</keycap>  numberOfEars;    // optional constraints
+    <keycap>datetime</keycap> birthdate;       // optional constraints
+    <keycap>decimal</keycap>  length;          // optional constraints
+    "Description of the isMale attribute"
+    <keycap>boolean</keycap>  isMale;          // optional constraints
+    // rules go here ...
+]
+</programlisting>
+        <para>An attribute describes a characteristic of a domain class. Attributes always has a
+          defined type, which can be <emphasis>integer</emphasis>, <emphasis>string</emphasis>,
+            <emphasis>decimal</emphasis>, <emphasis>boolean</emphasis>,
+            <emphasis>datetime</emphasis> or an enumeration defined in the domain model.</para>
+        <para>Each attribute can have a description, which is placed directly before the attribute
+          definition within double quotes. In the example only <emphasis>isMale</emphasis> has a
+          description.</para>
+        <para>For each attribute additional constraints can be specified. In th above example
+            <emphasis role="italic">minlength</emphasis>, <emphasis role="italic"
+            >maxlength</emphasis> and <emphasis role="italic">regexp</emphasis> are such
+          constraints. For each attribute type the possible constraints are defined in the following
+          sections.</para>
+        <para>Each instance of a domain class has its own values for each attribute. These values
+          always need to conform to all the rules specified for the domain class.</para>
+        <para>An attribute can be defined as <emphasis>derived</emphasis>, which means that its
+          value is not set directly, but derived from the values of other attributes. The derivation
+          algorithm must be provided by manually implementing the corresponding
+            <emphasis>getter</emphasis> method in the extension point Java class. Normally the
+          derivation algorithm only works one way, so that the derived property is read-only, which
+          means that there is no setter for it. A subset of all possible derivation algorithms work
+          both ways, so that the values of the attributes can be derived from the value of the
+          derived attribute. This can be specified by adding the keyword
+            <emphasis>writable</emphasis>. For derived attributes, the reverse derivation algorithm
+          must be provided by manually implementing the corresponding <emphasis>setter</emphasis>
+          method in the extension point for the enclosing class.</para>
+      </section>
+      <section>
+        <title>Generated code</title>
+        <para>For an attribute code is generated for both the domain and the data layer of the
+          architecture.</para>
+        <para>As described before code is generated in the domain layer according to the generation
+          gap pattern. For each domain class an abstract base class is generated. This abstract
+          bases class contains a field for each attribute and getter and setter methods to access
+          the attribute.</para>
+        <para>The description of an attribute is used to generate Javadoc comments in the code for
+          the attribute.</para>
+        <para>If the there are constraints specified for the attribute in the model, validators for
+          the attribute are also generated. Code is also generated to automatically call these
+          validators whenever the value of the attribute has changed, e.g. when calling the setter
+          method. Whenever an attempts is made to change the value of a attribute that will break a
+          constraint, a BusinessRulevalidation exception is thrown and the value of the attribute is
+          not changed.</para>
+        <para>If an attribute is not nullable and has no default value (see next sections for an
+          explanation of nullable and default value), the attribute is added as a parameter to the
+          constructor of the class. This ensures that an object of this class will always be
+          correct.</para>
+        <para>For <emphasis>derived</emphasis> attributes the getter in the generated abstract base
+          class is generated <emphasis>abstract</emphasis>, which forces the developer to provide a
+          concrete implementation in the extension point. A abstract getter method is only generated
+          when the derived attribute is also declare <emphasis>writable</emphasis>, which forces the
+          developer to also provide a concrete implementation in the extension point.</para>
+        <section>
+          <title>String Attribute</title>
+          <para>A string attribute is completely denoted as shown below. Note that all constraints
+            (after <code>string name</code>) are optional.</para>
+          <programlisting continuation="continues" linenumbering="numbered" xml:space="preserve">"A readable description of this attribute
+<keycap>string</keycap> name
+      <keycap>default</keycap> "the default name"
+      <keycap>minlength</keycap> 3 
+      <keycap>maxlength</keycap> 10 
+      <keycap>regexp</keycap> "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$"
+      <keycap>nullable</keycap> ;
+
+</programlisting>
+          <para>Each string attribute has a number of optional properties,. The order of the
+            properties is fixed as shown above. These properties act as constraints on the value of
+            the attribute and are explained below..</para>
+          <glosslist>
+            <glossentry>
+              <glossterm>default</glossterm>
+              <glossdef>
+                <para>Defines the default value of this attribute. This value is assigned when the
+                  object is being created. The value may be changed later on in the objects
+                  lifetime.</para>
+              </glossdef>
+            </glossentry>
+            <glossentry>
+              <glossterm>minlength</glossterm>
+              <glossdef>
+                <para>Defines the minimal number of characters of this attributes value.</para>
+              </glossdef>
+            </glossentry>
+            <glossentry>
+              <glossterm>maxlenght</glossterm>
+              <glossdef>
+                <para>Defined the maximum number of characters of this attributes value. The value
+                  of <emphasis>maxlength</emphasis> must always be higher or equal to value of
+                    <emphasis>minlength</emphasis>..</para>
+              </glossdef>
+            </glossentry>
+            <glossentry>
+              <glossterm>regexp</glossterm>
+              <glossdef>
+                <para>Defines the format of the attributes value through a regular expression. The
+                  syntax of the regular expression is defined by the Java regular
+                  expressions.</para>
+              </glossdef>
+            </glossentry>
+            <glossentry>
+              <glossterm>nullable</glossterm>
+              <glossdef>
+                <para>The nullable property specifies that this attribute does not have to have a
+                  value. If nullable is not specified, the attribute must always have a defined
+                  value..</para>
+              </glossdef>
+            </glossentry>
+          </glosslist>
+          <section>
+            <title>Generated code</title>
+            <para>A String attribute is implemented by a Java <emphasis>String</emphasis> field.
+              Apart from the generic code generated for each property no additional code is
+              generated for a string attribute.</para>
+          </section>
+        </section>
+        <section>
+          <title>Boolean Attribute</title>
+          <para>A boolean attribute is completely denoted as shown below</para>
+          <programlisting continuation="continues" linenumbering="numbered" xml:space="preserve">"A readable description of this attribute"
+<keycap>boolean</keycap> fixed
+      <keycap>default</keycap> "true"
+      <keycap>nullable</keycap> ;
+
+</programlisting>
+          <para>Each attribute can have a description, which is places directly before the attribute
+            definition. Each boolean attribute has a number of optional properties, as shown above.
+            The order of the properties is fixed. These properties act as constraints on the value
+            of the attribute and are explained below..</para>
+          <glosslist>
+            <glossentry>
+              <glossterm>default</glossterm>
+              <glossdef>
+                <para>Defines the default value of this attribute. This value is assigned when the
+                  object is being created. The value may change later on in the Objects
+                  lifetime.</para>
+              </glossdef>
+            </glossentry>
+            <glossentry>
+              <glossterm>nullable</glossterm>
+              <glossdef>
+                <para>The nullable property specifies that this attribute does not have to have a
+                  value. If nullable is no specified, the attribute must always have a defined
+                  value.</para>
+              </glossdef>
+            </glossentry>
+          </glosslist>
+          <section>
+            <title>Generated code</title>
+            <para>A boolean attribute is implemented by a java Boolean field. If the boolean
+              attribute is not <emphasis>nullable</emphasis> the getter and setters use a Java
+                <emphasis>boolean</emphasis>, if the attribute is nullable the getter and setters
+              use a <emphasis>Boolean</emphasis>.</para>
+          </section>
+        </section>
+        <section>
+          <title>Integer Attribute</title>
+          <para>An integer attribute is completely defined as shown below</para>
+          <programlisting continuation="continues" linenumbering="numbered" xml:space="preserve">"A readable description of this attribute"
+<keycap>integer </keycap>numberOfSteps
+      <keycap>default</keycap> 12
+      <keycap>min</keycap> 4
+      <keycap>max</keycap> 32
+      <keycap>nullable</keycap> ;</programlisting>
+          <para>A integer attribute has a number of optional properties, as shown above. The order
+            of the properties is fixed. These properties act as constraints on the value of the
+            attribute and are explained below..</para>
+          <glosslist>
+            <glossentry>
+              <glossterm>default</glossterm>
+              <glossdef>
+                <para>Defines the default value of this attribute. This value is assigned when the
+                  object is being created. The value may change later on in the Objects lifetime. If
+                  the <emphasis>min</emphasis> and/or <emphasis>max</emphasis> properties are
+                  specified the default value must conform to these properties.</para>
+              </glossdef>
+            </glossentry>
+            <glossentry>
+              <glossterm>min</glossterm>
+              <glossdef>
+                <para>Defines the minimal value of this attribute.</para>
+              </glossdef>
+            </glossentry>
+            <glossentry>
+              <glossterm>max</glossterm>
+              <glossdef>
+                <para>Defines the maximum value of this attribute. The value of
+                    <emphasis>max</emphasis> must always be greater or equal to the value of
+                    <emphasis>min</emphasis>.</para>
+              </glossdef>
+            </glossentry>
+            <glossentry>
+              <glossterm>nullable</glossterm>
+              <glossdef>
+                <para>The nullable property specifies that this attribute does not have to have a
+                  value. If nullable is no specified, the attribute must always have a defined
+                  value.</para>
+              </glossdef>
+            </glossentry>
+          </glosslist>
+          <section>
+            <title>Generated code</title>
+            <para>An integer attribute is implemented by a java <emphasis role="italic"
+                >Integer</emphasis> field. If the attribute is not <emphasis>nullable</emphasis> the
+              getter and setters use a Java <emphasis>int</emphasis>, if the attribute is nullable
+              the getter and setters use an <emphasis>Integer</emphasis>.</para>
+          </section>
+        </section>
+        <section>
+          <title>Decimal Attribute</title>
+          <para>An decimal attribute is completely defined as shown below</para>
+          <programlisting continuation="continues" linenumbering="numbered" xml:space="preserve">"A readable description of this attribute"
+<keycap>decimal</keycap> percentage
+      <keycap>default</keycap> 12
+      <keycap>min</keycap> 4
+      <keycap>max</keycap> 32
+      <keycap>nullable</keycap> ;</programlisting>
+          <para>A decimal attribute has a number of optional properties, as shown above. The order
+            of the properties is fixed. These properties act as constraints on the value of the
+            attribute and are explained below..</para>
+          <glosslist>
+            <glossentry>
+              <glossterm>default</glossterm>
+              <glossdef>
+                <para>Defines the default value of this attribute. This value is assigned when the
+                  object is being created. The value may change later on during the objects
+                  lifetime.</para>
+              </glossdef>
+            </glossentry>
+            <glossentry>
+              <glossterm>min</glossterm>
+              <glossdef>
+                <para>Defines the minimal value of this attribute.</para>
+              </glossdef>
+            </glossentry>
+            <glossentry>
+              <glossterm>max</glossterm>
+              <glossdef>
+                <para>Defines the maximum value of this attribute. The value of
+                    <emphasis>max</emphasis> must always be greater or equal to the value of
+                    <emphasis>min</emphasis>.</para>
+              </glossdef>
+            </glossentry>
+            <glossentry>
+              <glossterm>nullable</glossterm>
+              <glossdef>
+                <para>The nullable property specifies that this attribute does not have to have a
+                  value. If nullable is no specified, the attribute must always have a defined
+                  value.</para>
+              </glossdef>
+            </glossentry>
+          </glosslist>
+          <section>
+            <title>Generated code</title>
+            <para>A decimal attribute is implemented by a java <emphasis role="italic"
+                >Float</emphasis> field. If the attribute is not <emphasis>nullable</emphasis> the
+              getter and setters use a Java <emphasis>float</emphasis>, if the attribute is nullable
+              the getter and setters use a <emphasis>Float</emphasis>.</para>
+          </section>
+        </section>
+        <section>
+          <title>Datetime Attribute</title>
+          <para>A datetime attribute is completely defined as shown below</para>
+          <programlisting continuation="continues" linenumbering="numbered" xml:space="preserve">"The day on which it all started"
+<keycap>datetime day</keycap> started
+    <keycap>default</keycap> 4
+    <keycap>nullable</keycap> ;
+
+</programlisting>
+          <para>A datetime attribute has a number of optional properties, as shown above. The order
+            of the properties is fixed. These properties act as constraints on the value of the
+            attribute and are explained below..</para>
+          <glosslist>
+            <glossentry>
+              <glossterm>accuracy</glossterm>
+              <glossdef>
+                <para>Defines the accuracy of the datetime attribute. The possible values are year,
+                  month, day, hour, minute, second, millisecond. In the above example the accuracy
+                  is defined as day.</para>
+              </glossdef>
+            </glossentry>
+            <glossentry>
+              <glossterm>default</glossterm>
+              <glossdef>
+                <para>Defines the default value of this attribute.</para>
+              </glossdef>
+            </glossentry>
+            <glossentry>
+              <glossterm>nullable</glossterm>
+              <glossdef>
+                <para>The nullable property specifies that this attribute does not have to have a
+                  value. If nullable is no specified, the attribute must always have a defined
+                  value.</para>
+              </glossdef>
+            </glossentry>
+          </glosslist>
+          <section>
+            <title>Generated code</title>
+            <para>A datetime attribute is implemented by a java <emphasis role="italic"
+                >org.joda.time.DateTime</emphasis> field. </para>
+          </section>
+        </section>
+      </section>
+    </section>
+    <section>
+      <title>Enumerations</title>
+      <para>An enumeration defines a data type which can be used as the type of an attribute of a
+        domain class. The enumeration definition includes a list of all enumeration values. The
+        example below shown an enumeration definition.</para>
+      <programlisting continuation="continues" linenumbering="numbered" xml:space="preserve">"The severity level of a customer problem"
+<keycap>enumeration</keycap> SeverityLevel [
+    Low    = 1;
+    Middle = 2;
+    High   = 3;
+]
+</programlisting>
+      <para>The "= 1" defines the numeric value that is used for the enumeration literal in the code
+        and the database. This is mandatory, because it is often necessary to retain previous values
+        when you need to address existing encoding schemes for enumerations, or when you are adding
+        enumeration literals during development.</para>
+      <section>
+        <title>Generated code</title>
+        <para>For en enumeration a Java <emphasis role="italic">enum</emphasis> type is
+          generated.</para>
+      </section>
+    </section>
+    <section>
+      <title>Business Rules</title>
+      <para>A domain class may include business rules. Note that the concept of business rule here
+        is limited. In this context a business rule is a rule that should be true at all times for
+        every object of the given domain class.</para>
+      <para>Other rules, for example one that trigger something when a certain condition is met, are
+        not covered.</para>
+      <programlisting continuation="continues" linenumbering="numbered" xml:space="preserve"><keycap>class</keycap> SampleClass [
+    // attributes go here ...
+    // rules go here ...
+    <keycap>rules</keycap> [
+        "A first rule"
+        mustBeValid;
+        "A second rule"
+        isOriginal;
+        "a unique rule"
+        <keycap>unique</keycap> namesUnique [ firstname, lastname ]
+    ]
+]
+</programlisting>
+      <para>There are two types of business rules that can be modeled.</para>
+      <para>The first type of business rule has a name only in the model. The actual implementation
+        of the rule must be written in Java as an extension to the generated code. This type
+        business rules are validated in the order they were declared. So in the Sample class above,
+        first the "mustBeValid" rule will be validated and after that the "isOriginal" rule.</para>
+      <para>The second type of rule is a uniqueness rule, which is indicated by the
+          <emphasis>unique</emphasis> keyword. A uniqueness rule specifies that the combination of
+        values of one or more attributes of the class must be unique at all times. The names of the
+        attributes are specified between brackets after the name of the rule.</para>
+      <section>
+        <title>Generated code</title>
+        <para>For a business rule an abstract method with the name of the rule returning a boolean
+          value is generated in the base class. This ensures that the developer must provide an
+          implementation in the empty subclass.</para>
+        <para>The first time the empty subclass is generated an empty method implementing the
+          abstract method from the base class is generated. This method returns true and contains a
+            <emphasis>TODO comment</emphasis> to remind the developer he needs to implement the
+          rule.</para>
+        <para>The handling of the rules is completely generated. This means that the rule will be
+          called and validated whenever the object changes. If the rule is broken, a
+          BusinessClassException is created and thrown. Developers do not need to handle these
+          errors themselves.</para>
+        <para>See the generation gap pattern on how this is done in the code</para>
+      </section>
+    </section>
+    <section>
+      <title>Associations</title>
+      <para>The final part of a domain model defines all the relationships between the domain
+        classes.</para>
+      <programlisting continuation="continues" linenumbering="numbered" xml:space="preserve"><keycap>association</keycap> Customer  customer  <emphasis role="bold">one</emphasis>   &lt;-&gt; <emphasis role="bold">many</emphasis> Order     orders     ;
+<keycap>association</keycap> Order     order     <emphasis role="bold">one</emphasis>    -&gt; <emphasis role="bold">many</emphasis> OrderLine orderLines <emphasis role="bold">ordered</emphasis>;
+<keycap>association</keycap> OrderLine orderline <emphasis role="bold">many</emphasis>   -&gt; <emphasis role="bold">one</emphasis>  Record    record     ;
+<emphasis role="bold">association</emphasis> Record    records   <emphasis role="bold">many</emphasis>  &lt;-&gt; <emphasis role="bold">many</emphasis> Artist    contributors ;</programlisting>
+      <para>This example shows one bidirectional association, which uses the &lt;-&gt;
+        syntax and one unidirectional association using the -&gt; syntax.</para>
+      <para>The qualifiers <emphasis role="bold">one</emphasis> and <emphasis role="bold"
+          >many</emphasis> denote the multiplicity of the association at the side of the object
+        closest to it.</para>
+      <para>The <emphasis role="bold">ordered </emphasis>keyword states that the association is
+        ordered (not sorted!). The <emphasis role="bold">ordered</emphasis>keyword can only occur at
+        the target (right hand side) of an association. This means that each element has an index in
+        the relation to the source (left hand side) element. Ordered associations are currently
+        restricted to unidirectional associations only.</para>
+      <section>
+        <title>Generated code</title>
+        <para>Associations are a powerful mechanism and require careful handling in the code. For
+          bidirectional associations the generated code ensures that both sides will always be
+          updates consistently whenever one of the sides is changed.</para>
+        <section>
+          <title>Generated Code for the Domain Layer</title>
+          <para>On the domain layer the code is generated in the Java base class to store the
+            references to objects at the opposite side of an association. For associations with
+            multiplicity 0 or 1 this will be a field of the type at the opposite side, for
+            associations with multiplicity greater than 1 this will be a field of type
+            Set&lt;opposite type&gt;.</para>
+          <para>Next to these fields methods are generated to change these fields. For a single
+            valued field a simple setter and getter is generated.</para>
+          <para>For multivalued fields adding or deleting elements from the collection should always
+            be done by the object owning the collection. We cannot simply generate getter and setter
+            methods, because changes in the collection can be done without the object knowing it,
+            and the object cannot guarantee consistency with the opposite objects.</para>
+          <para>To resolve this problem we generate methods <emphasis role="italic"
+              >addTo...</emphasis>, <emphasis role="italic">removeFrom...</emphasis> for the
+            collection in the owning class. For the Customer class in the above example we generate
+            the <emphasis role="italic">addToOrders()</emphasis> and <emphasis role="italic"
+              >removefromOrders()</emphasis> methods. The getter methods returns an Unmodifiable
+            collection to guard the client from changing the collection.</para>
+          <para>For an ordered association a List is used instead of a Set, and additional <emphasis
+              role="italic">addTo...</emphasis> and <emphasis role="italic">removeFrom...</emphasis>
+            methods are generated to allows additio0ns and removal based on the index.</para>
+          <para><programlisting continuation="continues" linenumbering="numbered" xml:space="preserve"><keycap>public abstract class </keycap>CustomerImplBase {
+  /**
+   *  orders: One 2 Many Bidirectional: The customer has a number of orders
+   */
+  <keycap>private </keycap>Set&lt;Order&gt; orders = <keycap>new</keycap> HashSet&lt;Order&gt;();
+
+  /**
+   * @return orders (Set&lt;Order&gt;) 
+   */
+  <keycap>public</keycap> Set&lt;Order&gt; getOrders()
+
+  /**
+   * Implements adding single element to a collection
+   */
+  <keycap>public void </keycap>addToOrders(Order element)
+
+  /**
+   * Implements removal of a single element from feature 
+   * 
+   * @param element 
+   */
+  <keycap>public void </keycap>removeFromOrders(Order element)
+ </programlisting>To
+            support the consistency of the two sides of an association we always have to update the
+            other side whenever something changes. We cannot simply call the other sides update
+            methods, because they will call their opposite side in turn and we end up in an infinite
+            loop.</para>
+          <para>To solve this problem we use special that are only used to update the opposite side.
+            All the methods are generated with 'z_internal' as prefix. These methods are public
+            because they must be callable from the opposite class. These methods should never be
+            used for anything
+            else.<programlisting continuation="continues" linenumbering="numbered" xml:space="preserve"><keycap>public abstract class </keycap>CustomerImplBase {
+
+  /**
+   * This operation should NOT be used by clients.  It implements the correct
+   * addition of an element in an association.
+   * 
+   * @param element 
+   */
+  <keycap>public void </keycap>z_internalAddToorders(Order element) {
+
+  /**
+   * This operation should NOT be used by clients. It implements the correct
+   * removal of an element in an association.
+   * 
+   * @param element 
+   */
+  <emphasis role="bold">public void </emphasis>z_internalRemoveFromorders(Order element)
+</programlisting></para>
+        </section>
+      </section>
+    </section>
+  </chapter>
+  <chapter>
+    <title>Data Contract DSL Reference</title>
+    <para>This chapter provides a description of all the concepts in the Data Contract DSL. Each
+      concept is described by a definition which explains the meaning of the concept, and a
+      description of the code generated for the concept.</para>
+    <section>
+      <title>Data Transfer Object (DTO)</title>
+      <para>The central concept in the Data Contract DSL is the Data Transfer Object, or DTO. A DTO
+        is a value object that carries data only. The purpose of a DTO is to be able to send data to
+        back and forth to and from clients.</para>
+      <para>Clients communicate with domain objects through services. The services and the service
+        methods are defined by using the Service DSL. The DTO objects define the in- and out
+        parameters for the service methods.</para>
+      <para>There are several types of DTOs. A customDto is a DTO that may have any attributes. A
+        BusinessClassDto represents the data of a domain object as defined in the Business Domain
+        DSL. An EnumerationDto defines an Enumeration. All these variants are described in detail
+        below.</para>
+    </section>
+    <section>
+      <title>Custom Dto</title>
+      <programlisting continuation="continues" linenumbering="numbered" xml:space="preserve"><keycap>custom</keycap> ExampleDto [
+    <keycap>string</keycap>   description; 
+    <keycap>integer</keycap>  amount;    
+    <keycap>datetime</keycap> deliverydate;       
+    <keycap>decimal</keycap>  price;          
+    "Description of the isOk attribute"
+    <keycap>boolean</keycap>  isOk;          
+]
+</programlisting>
+      <para>A custom dto has attributes of different types, corresponding to the types of attributes
+        in the business domain DSL.</para>
+      <section>
+        <title>Attributes</title>
+        <para>DTO Attributes are part of a DTO and defined within the scope of their DTO. The
+          example custom DTO personDto looks as follows.</para>
+        <para>An attribute describes a field of a data transfer object. Attributes always have a
+          defined type, which can be <emphasis>integer</emphasis>, <emphasis>string</emphasis>,
+            <emphasis>decimal</emphasis>, <emphasis>boolean</emphasis> or
+            <emphasis>datetime</emphasis>.</para>
+        <para>Each attribute may have a description, which is placed directly before the attribute
+          definition within double quotes. In the example only <emphasis>isOk</emphasis> has a
+          description.</para>
+        <para>Contrary to domain classes in the Business Domain DSL, attributes of a DTO have no
+          constraints associated with it.</para>
+      </section>
+      <section>
+        <title>Generated code</title>
+        <para>For a custom dto a Java class is generated which contains the attributes as protected
+          fields with getters and setters. </para>
+        <para>The fields in data transfer objects are always nullable, therefore the field types in
+          the generated code are always real objects. This means that <emphasis>Integer</emphasis>,
+            <emphasis>Float</emphasis>, <emphasis>Boolean</emphasis> are used as field types for the
+          attributes of type <emphasis>integer</emphasis>, <emphasis>decimal</emphasis> and
+            <emphasis>boolean</emphasis>.</para>
+        <para>The description of an attribute is used to generate Javadoc comments in the code for
+          the attribute.</para>
+      </section>
+    </section>
+    <section>
+      <title>Class Dto</title>
+      <para>A class DTO is a DTO that represents the data of a domain class from the Business Domain
+        DSL. As a consequence, the attributes that are allowed within a class dto must map 1-to-1 to
+        attributes of the corresponding domain class.</para>
+      <programlisting continuation="continues" linenumbering="numbered" xml:space="preserve"><keycap>from</keycap> RecordShopDomainModel <keycap>import </keycap>Customer ;
+
+<keycap>class</keycap> SimpleCustomerDto <keycap>represents </keycap>Customer [
+    // attributes go here 
+]
+</programlisting>
+      <para>A class dto always declares the domain class that it represents as its base class. This
+        domain class must be defined in a Business Domain model. To ensure that the domain class is
+        in scope it must be imported first from its business domain model. Import statements are
+        always at the top of a data contract model.</para>
+      <programlisting continuation="continues" linenumbering="numbered" xml:space="preserve"><keycap>class</keycap> SimpleCustomerDto <keycap>represents </keycap>Customer [
+    name; 
+    numberOfEars;    
+    birthdate;       
+    length;          
+    "Description of the isMale attribute"
+    isMale;
+]
+</programlisting>
+      <para>Attributes of a class dto must have the same names as attributes in the represented
+        domain class. Not every attribute has to be there, allowing a class dto to contain a subset
+        of attributes from the domain class it represents.</para>
+      <para>The type of the attributes is derived from the type of the corresponding attribute in
+        the domain class in the business domain model. Therefore it is not specified in the data
+        contract model.</para>
+      <para>If you need a BusinessClassDto that represents all attributes from a BusinessClass, the
+        following shorthand will achieve this. It will by default add all attributes to the class
+        dto.</para>
+      <para>
+        <programlisting continuation="continues" linenumbering="numbered" xml:space="preserve"><keycap>class</keycap> FullCustomerDto <keycap>represents </keycap>Customer ;</programlisting>
+      </para>
+      <para>Using this shorthand only the attributes of the represented domain class are added, not
+        the associations.</para>
+      <para>Apart from the attributes, a business class dto may also include references to other
+        DTOs as shown below.</para>
+      <programlisting continuation="continues" linenumbering="numbered" xml:space="preserve"><keycap>class</keycap> SimpleCustomerDto <keycap>represents </keycap>Customer [
+    // attributes go here 
+
+    <keycap>references </keycap>[ 
+        orders <keycap>as</keycap> OrderNumberAndDateDto ;  
+    ]   
+]
+</programlisting>
+      <para>A domain class may take part is associations as defined in the business domain model. A
+        class dto may represent such an association as well. There are restrictions on represented
+        associations. The main restriction is that only one side of an association is represented as
+        a reference. A Dto does not support bi-directional associations.</para>
+      <para>It is possible and supported to simulate bi-directions associations by defining a
+        reference to another class dto that in turn references back to the first class dto, but this
+        is discouraged. Because the generated dto&apos;s do not <quote>know</quote> that such
+        references are each others inverse, it is possible to create inconsistent dto&apos;s.
+        For instance, a dto instance may refer to another dto that refers to a different dto
+        instance than the first one. A single reference is sufficient to update a corresponding
+        bi-directional association in the domain model. The direction of the reference is not
+        important; either one will work.</para>
+      <para>Generally it is better to avoid very complicated dto graphs, especially structures
+        containing cycles or different path to the same referenced dto. Mod4J does support those and
+        the generated code processes them correctly. But if the dto instance graph is inconsistent,
+        the results may be unexpected.</para>
+      <para>The references are contained in the references block. The same rule that applied to
+        attributes also applies to associations. Only associations that are defined in the business
+        domain model may be used. The name to be used is the role name of the opposite class in the
+        association definition.</para>
+      <para>The type of a reference must conform to the type defined in the association in the
+        business domain model. The type of the reference must be a class dto that represents the
+        domain class in the association. Multiplicity of the reference is derived from the
+        definition of the association in the business doamin model and therefore it does need not be
+        specified.</para>
+      <section>
+        <title>Generated code</title>
+        <para>For a class dto several files are generated.</para>
+        <para>First of all there is a straightforward Java class representing the attributes and
+          references defined in the class dto .</para>
+        <para>Secondly a Translator class is generated. This class contains two translator methods
+          to translate the class dto to a domain class and vice versa. For example for the class dto
+            <emphasis role="italic">FullCustomerDto</emphasis> the following two translator methods
+          are generated.</para>
+        <para><programlisting continuation="continues" linenumbering="numbered" xml:space="preserve"><keycap>public</keycap> <keycap>synchronized</keycap> Customer fromDto(<keycap>final</keycap> FullCustomerDto source, 
+                                     Customer target) <keycap>throws</keycap> TranslatorException;
+
+<keycap>public</keycap> <keycap>synchronized</keycap> FullCustomerDto toDto(<keycap>final</keycap> Customer source); 
+          </programlisting>
+          In the <emphasis role="italic">fromDto()</emphasis> method the <emphasis role="italic"
+            >FullCustomerDto </emphasis>object must represent a valid domain object, otherwise a
+            <emphasis role="italic">TranslatorException</emphasis> is thrown. </para>
+      </section>
+    </section>
+    <section>
+      <title>Enumeration Dto</title>
+      <para>An enumeration defines a data type which can be used as the type of an attribute of a
+        business class. The EnumerationDto definition includes a list of all enumeration values. As
+        with the BusinessClassDto, this dto is connected to an Enumeration in the business class
+        model. The example below shown an enumeration definition.</para>
+      <programlisting continuation="continues" linenumbering="numbered" xml:space="preserve"><keycap>enumeration</keycap> SeverityLevelDto <keycap>represents</keycap> SecurityLevelEnum [
+</programlisting>
+      <para>The SecurityLevelEnum must be defined in a Business Class model and imported defines the
+        numeric value that is used for the enumeration literal in the code and the database. This is
+        optional, but useful when you need to address existing encoding schemes for
+        enumerations.</para>
+      <section>
+        <title>Generated code</title>
+        <para>For an enumeration dto a Java <emphasis role="italic">enum </emphasis>class is
+          generated. Also, a translator class is generated with method to translate the enumeration
+          dto to its domain enumeration and vice versa.</para>
+      </section>
+    </section>
+  </chapter>
+  <chapter>
+    <title>Service DSL Reference</title>
+    <para>This chapter provides a description of all the concepts in the Service DSL. Each concept
+      is described by a definition which explains the meaning of the concept, and a description of
+      the code generated for the concept.</para>
+    <para>The central concept in the Service DSL is the Service Method. A service method used DTOs,
+      defined in a Data Contract Model (see chapter on Data Contract DSL). </para>
+    <section>
+      <title>Service</title>
+      <para>A service model defines a service, which may include service methods. There are multiple
+        types of service methods which are described in the following sections. </para>
+      <para>
+        <programlisting continuation="continues" linenumbering="numbered" xml:space="preserve"><keycap>service</keycap> Orders ; 
+
+//  methods go here</programlisting>
+      </para>
+      <section>
+        <title>Generated code</title>
+        <para>For a service two Java classes are generated. One service class in the service layer,
+          which contains all the service methods define in the service model. In the business layer
+          a corresponding class is generated, which includes the same method. </para>
+        <para>The class at the service layer uses DTO types as its parameters, thus making its
+          interface completely independent of the domain layer. The class at the business layer uses
+          domain types. Typically the implementation of a service method in the service layer
+          translates its arguments to domain objects, then calls the corresponding business layer
+          method and translates the result back to DTO objects.</para>
+        <para>The generation of these service classes uses the generation gap pattern as described
+          in <xref linkend="section-generation-gap-pattern"/>. This allows the developer to add
+          manual code when this is needed.</para>
+        <para>For the service and business layers in the architecture three Spring configuration
+          files are generated:<orderedlist>
+            <listitem>
+              <para>
+                <filename>applicationContext.xml</filename> containing bean definitions for the
+                services including transaction handling. Generated in <filename class="directory"
+                  >generated-resources</filename> and always overwritten.</para>
+            </listitem>
+            <listitem>
+              <para>
+                <filename>transactionManagerContext.xml</filename> containing a transaction manager
+                bean. Generated just once in <filename class="directory"
+                  >src/main/resources</filename> and never overwritten. The transaction manager is
+                generally dependent on the environment where the application is deployed and
+                therefore is the responsibility of the developer.</para>
+            </listitem>
+            <listitem>
+              <para>
+                <filename>beanRefContext.xml</filename> containing a definition of a context
+                assembled from the above two files.</para>
+            </listitem>
+          </orderedlist></para>
+      </section>
+    </section>
+    <section>
+      <title>Service Method</title>
+      <para> A service method is method that is defined in the service model, but will be
+        implemented by hand. A method is defined by the keyword "method", followed by the name of
+        the method. A method may have zero or more input parameters and zero or one output
+        parameter.</para>
+      <para>
+        <programlisting continuation="continues" linenumbering="numbered" xml:space="preserve"><keycap>method</keycap> addToOrders <keycap>in</keycap> [ OrderDto order;
+                             SimpleCustomerDto customer 
+                     <keycap>out</keycap> OrderDto;</programlisting>
+      </para>
+      <para>If the parameters or the result of a service method is a list of objects that can be
+        defgined by using the keyword "list" as in:</para>
+      <para>
+        <programlisting continuation="continues" linenumbering="numbered" xml:space="preserve"><keycap>method</keycap> addToOrders <keycap>in</keycap> [ <keycap>list</keycap> OrderDto order;
+                             SimpleCustomerDto customer 
+                     <keycap>out</keycap> <keycap>list</keycap> OrderDto;</programlisting>
+      </para>
+      <section>
+        <title>Generated code</title>
+        <para>For a service method code is generated for service layer in the architecture. A
+          service method results in the generation of a corresponding Java method inside the service
+          class.</para>
+        <para>As there is no knowledge of the functionality of a custom method, the implementation
+          of a custom method must be done by hand. The generation gap pattern is used on the service
+          class to introduce an extension point where this can be done.</para>
+      </section>
+    </section>
+    <section>
+      <title>CRUD: Create, Read, Update, Delete service methods</title>
+      <para>In a layered architecture certain types of service methods often occur in applications.
+        Methods for creating, reading, updating and deleting (CRUD) business objects are often
+        needed.</para>
+      <para>For this purpose the service DSL includes special methods which are indicated by their
+        respective keywords.</para>
+      <programlisting continuation="continues" linenumbering="numbered" xml:space="preserve"><keycap>from</keycap> RecordShopDataContract <keycap>import</keycap> SimpleCustomerDto;
+
+<keycap>create</keycap> createCustomer <keycap>for</keycap> SimpleCustomerDto ;
+<keycap>read</keycap>   readCustomer   <keycap>for</keycap> SimpleCustomerDto ;
+<keycap>update</keycap> updateCustomer <keycap>for</keycap> SimpleCustomerDto ;
+<keycap>delete</keycap> deleteCustomer <keycap>for</keycap> SimpleCustomerDto ;</programlisting>
+      <para>Because the Dto is defined in a data contract model it needs to be imported first. As
+        these methods are used for defining CRUD functionality for business objects the DTO used
+        must be a class dto.</para>
+      <para>If you need all of the CRUD methods, you can use a shortcut to specify all four methods
+        as
+        follows:<programlisting continuation="continues" linenumbering="numbered" xml:space="preserve"><keycap>from</keycap> RecordShopDataContract <keycap>import</keycap> SimpleCustomerDto ;
+
+<keycap>crud</keycap> SimpleCustomerDto  ;</programlisting>In
+        this case the names of the crud methods are derived from the name of the Dto and the domain
+        class it represents. In the above example the names will be <emphasis role="italic"
+          >createCustomer</emphasis>, <emphasis role="italic">readAsSimpleCustomerDto</emphasis>,
+          <emphasis role="italic">updateCustomer</emphasis>, and <emphasis role="italic"
+          >deleteCustomer</emphasis>. The read method has a slightly unappealing name, but that's
+        for a reason. If multiple CRUD's are defined with different Dto's representing the same
+        domain class the name <emphasis role="italic">readCustomer</emphasis> would become
+        ambiguous. The create, delete and uopdate methods have the <emphasis role="italic"
+          >SimpleCustomerDto</emphasis> as one of their parameters and having these with different
+        Dto's of the same type will result in correctly working overloading. The read method nly has
+        the id (of type long) as parameter and cannot be overloaded.</para>
+      <section>
+        <title>Generated code</title>
+        <para>The CRUD methods have clearly defined meaning and are connected with the domain class
+          they work on through the class dto used. This allows the code generator to generate the
+          full implementation of these methods on both the service and the business layer.</para>
+        <section>
+          <title>Service Layer</title>
+          <para>Within the service calls of the service model the crud methods are generated with
+            the correct parameters and return values. Only the read method returns the complete dto
+            with all its referenced objects. The update and delete methods return void. The create
+            method returns just the id of the object created. This id can then be used to read the
+            object and then update or delete it. For the example above the interface of the
+            generated methods will be: </para>
+          <para><programlisting>/**
+ * Create a new SimpleCustomerDto.
+ * 
+ * @param object The SimpleCustomerDto to create.
+ * @return unique id of the new customer created.
+ */
+public Long createCustomer(SimpleCustomerDto object);
+
+/**
+ * Read an existing SimpleCustomerDto.
+ * 
+ * @param object 
+ *            The id of the SimpleCustomerDto to read.
+ * @return 
+ */
+public SimpleCustomerDto readCustomer(Long id);
+
+/**
+ * Update an existing SimpleCustomerDto.
+ *  
+ * @param object
+ *            The SimpleCustomerDto containing the modifications for the corresponding SimpleCustomerDto
+ */
+public void updateCustomer(SimpleCustomerDto object);
+
+/**
+ * Delete an existing SimpleCustomerDto 
+ *
+ * @param id
+ *            The id of the SimpleCustomerDto to delete.
+ */
+public void deleteCustomer(SimpleCustomerDto object);
+</programlisting>Additionally
+            a full implementation of the crud methods is generated. In this implementation the Dto
+            parameters are first translated into domain objects, using the translator methods that
+            have been generated by the data contract DSL. Then the service method on the business
+            layer is called with the domain object as its argument. The result of the business layer
+            service call is then transformed back into a Dto and returned.</para>
+          <para>The actual crud functionality is performed at the business layer, see next section.
+          </para>
+        </section>
+        <section>
+          <title>Business Layer</title>
+          <para>In the business layer a method is generated for a crud method which implements the
+            functionality by calling the appropriate method on the Dao in the data layer.</para>
+        </section>
+      </section>
+    </section>
+    <section>
+      <title>ListAll and Find Methods</title>
+      <section>
+        <title>Definition</title>
+        <para>A listall method allows you to get a list of all objects of a certain type.</para>
+        <programlisting continuation="continues" xml:space="preserve"><keycap>listall</keycap> listOrders <keycap>for</keycap> OrderDto;</programlisting>
+        <para>The above <emphasis role="italic">listall</emphasis> method defines three service
+          methods that support retrieving lists of objects of type OrderDto.</para>
+        <orderedlist>
+          <listitem>
+            <para>A service method named <emphasis role="bold">
+                <emphasis role="italic">listOrders()</emphasis>
+              </emphasis> that wil get a list of all Order objects represented as OrderDto objects.
+              Be carefull when using this method, it may result in very long lists.</para>
+          </listitem>
+          <listitem>
+            <para>A service method <emphasis role="italic">
+                <emphasis role="bold">listOrders(int firstResult, int maxResults)</emphasis>
+              </emphasis> that will get a list of OrderDto objects within a specified range. The
+              range, also called page, is specified by the two parameters. You will typically use
+              this method when you work wiht large sets of objects and want to retrieve them in
+              chunks (pages).</para>
+          </listitem>
+          <listitem>
+            <para>A service method <emphasis role="bold">
+                <emphasis role="italic">countOrders()</emphasis>
+              </emphasis> that will return the total number of existing Order objects. </para>
+          </listitem>
+        </orderedlist>
+        <programlisting continuation="continues" xml:space="preserve"><keycap>find</keycap> findOrders <keycap>for</keycap> OrderDto; </programlisting>
+        <para>The above <emphasis role="italic">find</emphasis> method defines a service method that
+          will find all Order objects that look like the OrderDto parameter. This is a find by
+          example method. The resutl is a List of OrderDto objects that corresponds to the
+          parameter. </para>
+      </section>
+      <section>
+        <title>Generated code</title>
+        <para>For both the <emphasis role="italic">listall </emphasis>and <emphasis role="italic"
+            >find </emphasis>methods a method in both the service layer and the business layer is
+          generated. As these methods deal directly with domain classes the functionality is fully
+          generated.</para>
+      </section>
+    </section>
+    <section>
+      <title>Reference methods</title>
+      <section>
+        <title>Definition</title>
+        <para>A reference method allows you to handle changing links between objects. The links
+          between objects are defined in de business class DSL as associations. A reference method
+          can only be defined for a DTO that represents a business class. There are several types of
+          reference methods. The <emphasis role="italic">add</emphasis> method allows adds an object
+          to an association, the <emphasis role="italic">remove </emphasis>removes an object from an
+          association.</para>
+        <programlisting continuation="continues" xml:space="preserve"><keycap>for</keycap> SimpleCustomerDto <keycap>reference</keycap> orders <keycap>add</keycap> OrderDto   ;</programlisting>
+        <para>The above <emphasis role="italic">add reference method </emphasis>defines a service
+          method that will add an Order object, represented by an OrderDto, to a Customer object,
+          represented as a SimpleCustomerDto.</para>
+        <programlisting continuation="continues" xml:space="preserve"><keycap>for</keycap> SimpleCustomerDto <keycap>reference</keycap> orders <keycap>remove</keycap> OrderDto; </programlisting>
+        <para>The above <emphasis role="italic">remove reference method </emphasis>defines a service
+          method that will remove an Order object, represented by an OrderDto, from a Customer
+          object, represented as a SimpleCustomerDto.</para>
+        <programlisting><keycap>for</keycap> SimpleCustomerDto <keycap>reference</keycap> orders <keycap>get</keycap> OrderDto;</programlisting>
+        <para>The above <emphasis role="italic">get reference method</emphasis> defines a service
+          method that will get a collection of all Order objects, represented by a list of OrderDto
+          objetcs, of a Customer object, represented as a SimpleCustomerDto.</para>
+      </section>
+      <section>
+        <title>Generated code</title>
+        <para>For reference methods a method in both the service layer and the business layer is
+          generated. As these methods deal directly with domain classes the functionality is fully
+          generated.</para>
+      </section>
+    </section>
+  </chapter>
+  <chapter>
+    <title>Presentation DSL Reference</title>
+    <para>To Be Done</para>
+    <para>This chapter provides a description of all the concepts in the Presentation DSL. Each
+      concept is described by a definition which explains the meaning of the concept, and a
+      description of the code generated for the concept.</para>
+    <para>The Presentation DSL has two central concepts: Dialogue and Process. Dialogues are the
+      things shown to the user in the user interface, while processe represent all of the actions
+      that can be performed. Boith processes and Dialogues have acontext object on which they work.
+      In the MVC paradign, the Dialogue is the view, the Process the Controller. and the context
+      object the model.</para>
+    <section>
+      <title>Dialogues</title>
+      <section>
+        <title>Definition</title>
+        <para>A dialogue describes something that interacts with the user. Ususally this is a page
+          in a webbrowser, but it might be rendered using a audio voice intreface as well. In Mod4j
+          a dialogue always defines a part of a page.</para>
+        <para>Each Dialogue has a context, which is the type of object that this dialogue uses to
+          get its information from. </para>
+        <para>There are many subtypes of Dialogue that denote specific types of dialoges like
+          ContextForm, MasterDetial, CompountDialogue etc. These subtypes are all described in the
+          followung sections.</para>
+      </section>
+      <section>
+        <title>Generated code</title>
+        <para>To Be Done.</para>
+      </section>
+    </section>
+    <section>
+      <title>ContentForm</title>
+      <section>
+        <title>Definition</title>
+        <para>A Contentform defines a panel that shows the values of properties of the context
+          object of the ContemntForm. It may show all properties, but can also define a subset of
+          the available properties to show.</para>
+        <para>A Conentform may be editable allowing the user to change values of the
+          properties.</para>
+        <programlisting continuation="continues" xml:space="preserve"><keycap>form</keycap> ShowCustomer<keycap>context</keycap> CustomerDto [
+    <keycap>element</keycap> name <keycap>label</keycap> Name ;
+    <keycap>element</keycap> number <keycap>label</keycap> CustomerNr;
+    <keycap>element</keycap> title <keycap>label</keycap> Title;
+    <keycap>processes </keycap>[
+        doSomething;
+    ]
+]</programlisting>
+        <para>In the above example <emphasis role="italic">name</emphasis>, <emphasis role="italic"
+            >number </emphasis>and <emphasis role="italic">title </emphasis>must be proiperties of
+            <emphasis role="italic">CustomerDto</emphasis>. The string after the <emphasis
+            role="italic">label</emphasis> ketword is the name shown to the user on the panel. Thos
+          allows the naming of the proprties in the models to be different from the naming on the
+          panels..</para>
+        <para>The <emphasis role="italic">processes</emphasis> section shows all the processe that a
+          user can start from this form. These processes are shown as buttons or links on the panel.
+        </para>
+      </section>
+      <section>
+        <title>Generated code</title>
+        <para>TBD: Swap + View + dit panels. property files. .</para>
+      </section>
+    </section>
+    <section>
+      <title>Processes</title>
+      <para>A process consists of a seqential or paralel list of either DialogueCalls or
+        ProcessCalls. A process that cointains only other process calls is called an Automated
+        Process, and a process that calls at least one dialogue is called an InteractiveProcess. </para>
+      <para>
+        <programlisting continuation="continues" linenumbering="numbered" xml:space="preserve"><keycap>InteractiveProcess</keycap> processname; 
+          
+          //  methods go here</programlisting>
+      </para>
+      <section>
+        <title>Generated code</title>
+        <para>For a sprocess one Java class is generated which represents the process. This class
+          conains a method called nextPage(...) which returns the next Wicket page according to the
+          process definition.. </para>
+        <para>For each DialogueCall in a process a dialogePage is created. This dialoguePage is the
+          one returned by the nextPage(...) operation in the process class. The dialogue page only
+          contains the Wicket panel that is geneerated from the referred Dialogue..</para>
+        <para>For the service and business layers in the architecture three Spring configuration
+          files are generated:<orderedlist>
+            <listitem>
+              <para>
+                <filename>applicationContext.xml</filename> containing bean definitions for the
+                services including transaction handling. Generated in <filename class="directory"
+                  >generated-resources</filename> and always overwritten.</para>
+            </listitem>
+            <listitem>
+              <para>
+                <filename>transactionManagerContext.xml</filename> containing a transaction manager
+                bean. Generated just once in <filename class="directory"
+                  >src/main/resources</filename> and never overwritten. The transaction manager is
+                generally dependent on the environment where the application is deployed and
+                therefore is the responsibility of the developer.</para>
+            </listitem>
+            <listitem>
+              <para>
+                <filename>beanRefContext.xml</filename> containing a definition of a context
+                assembled from the above two files.</para>
+            </listitem>
+          </orderedlist></para>
+      </section>
+    </section>
+  </chapter>
+</book>

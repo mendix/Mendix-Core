@@ -1,0 +1,41 @@
+«REM»
+ Copyright (c) 2009 Ordina and committers to Mod4j
+ All rights reserved. This program and the accompanying materials
+ are made available under the terms of the Eclipse Public License v1.0
+ which accompanies this distribution, and is available at
+ http://www.eclipse.org/legal/epl-v10.html
+  Contributors:
+     Ordina - initial implementation
+«ENDREM»
+«IMPORT DataContractDsl»
+
+«EXTENSION org::mod4j::dslcommon::xtend::generatorutil»
+«EXTENSION org::mod4j::dslcommon::xtend::ProjectProperties»
+
+«DEFINE addToStringMethod FOR BusinessClassDto»
+    /**
+     * toString method for «javaClassName(name)»
+     */
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append("«getDtoPackage()».«javaClassName(name)»[");
+        result.append("id=");
+        result.append(getId());
+        result.append(",");
+        result.append("version=");
+        result.append(getVersion());
+        «FOREACH properties.reject(e|e.metaType == DtoAssociationRoleProperty) AS p»
+            «EXPAND addAttribute FOR p -»
+        «ENDFOREACH»
+        result.append("]");
+        return result.toString();
+    }
+«ENDDEFINE»
+
+
+«DEFINE addAttribute FOR DtoProperty»
+        result.append(",");
+        result.append("«this.name»=");
+        result.append(«this.name»);
+«ENDDEFINE»

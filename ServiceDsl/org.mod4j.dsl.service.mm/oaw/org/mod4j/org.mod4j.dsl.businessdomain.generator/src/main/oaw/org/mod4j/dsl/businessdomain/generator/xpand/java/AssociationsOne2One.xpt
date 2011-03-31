@@ -1,0 +1,111 @@
+«REM»
+ Copyright (c) 2009 Ordina and committers to Mod4j
+ All rights reserved. This program and the accompanying materials
+ are made available under the terms of the Eclipse Public License v1.0
+ which accompanies this distribution, and is available at
+ http://www.eclipse.org/legal/epl-v10.html
+  Contributors:
+     Ordina - initial implementation
+«ENDREM»
+«IMPORT BusinessDomainDsl»
+
+«EXTENSION org::mod4j::common::xtend::NameMapper»
+«EXTENSION Association»
+
+«REM»
+    Adds the accessor methods at the source side of a one to one association
+    If the association is bidirectional, code is generated to uodate the target side as well.
+«ENDREM»
+«DEFINE one2OneAccessorsTo FOR Association»
+    /**
+     * @return «targetRoleName» («target.name») 
+     */
+    public «javaDomainClass(target.name)» get«targetRoleName.toFirstUpper()» () {
+        return this.«targetRoleName»;
+    }
+
+    /**
+     * Set «targetRoleName»
+     */
+    public void set«targetRoleName.toFirstUpper()»(«javaDomainClass(target.name)» element) {
+        if ( this.«targetRoleName» != element) {       // prevent infinite loop
+«IF this.bidirectional»
+            if( this.«targetRoleName» != null ) {      // there is a previous link X
+                this.«targetRoleName».z_internalRemove«sourceRoleName»( («javaDomainClass(this.source.name)») this );
+            }
+«ENDIF»
+            this.«targetRoleName» = element;               // set the field to the new value
+«IF this.bidirectional»
+            if ( element != null ) {
+                // make the new link aware of this 
+                element.set«sourceRoleName.toFirstUpper()»( («javaDomainClass(this.source.name)») this );
+            }
+«ENDIF»
+            validation.validate();
+        }
+    }
+
+    /**
+     * This operation should NOT be used by clients.
+     * It implements the correct setting of an element in an association.
+     * 
+     * @param element 
+     */
+    public void z_internalSet«targetRoleName»(«javaDomainClass(target.name)» element) {
+        this.«targetRoleName» = null;
+    }
+
+    /**
+     * This operation should NOT be used by clients.
+     * It implements the correct removal of an element in an association.
+     * 
+     * @param element 
+     */
+    public void z_internalRemove«targetRoleName»(«javaDomainClass(target.name)» element) {
+        this.«targetRoleName» = null;
+    }
+«ENDDEFINE»
+
+«REM»
+    Adds the accessor methods at the target side of a bidirectional one to one association.
+    Note that this code is identivcal to the other side of the association
+«ENDREM»
+«DEFINE one2OneAccessorsFrom FOR Association»
+    /**
+     * @return «sourceRoleName» («source.name») «source.description»
+     */
+    public «javaDomainClass(source.name)» get«sourceRoleName.toFirstUpper()» () {
+        return this.«sourceRoleName»;
+    }
+
+    /**
+     * Implements adding single element to a collection
+     */
+    public void set«sourceRoleName.toFirstUpper()»(«javaDomainClass(source.name)» element) {
+        if ( this.«sourceRoleName» != element) {       // prevent infinite loop
+«IF this.bidirectional»
+            if( this.«sourceRoleName» != null ) {      // there is a previous link Y
+                this.«sourceRoleName».z_internalRemove«targetRoleName»( («javaDomainClass(target.name)») this );
+            }
+«ENDIF»
+            this.«sourceRoleName» = element;               // set the field to the new value
+«IF this.bidirectional»
+            if ( element != null ) {
+                // make the new link aware of this 
+                element.set«targetRoleName.toFirstUpper()»( («javaDomainClass(target.name)») this );
+            }
+«ENDIF»
+            validation.validate();
+        }
+    }
+
+    /**
+     * This operation should NOT be used by clients.
+     * It implements the correct removal of an element in an association.
+     * 
+     * @param element 
+     */
+    public void z_internalRemove«sourceRoleName»(«javaDomainClass(source.name)» element) {
+        this.«sourceRoleName» = null;
+    }
+«ENDDEFINE»

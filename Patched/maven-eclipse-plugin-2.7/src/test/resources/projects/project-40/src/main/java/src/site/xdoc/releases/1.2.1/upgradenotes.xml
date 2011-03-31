@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <!--
+        Please edit this file with the Eclipse XML editor, set your XML editor to a line length of
+        128 characters, indent-size of 4 characters and not using tab-characters, and format the
+        file (Ctrl-Shift-F) before checking in. This should minimize the number of non-significant
+        differences when comparing versions.
+    -->
+
+    <properties>
+        <title>Mod4j 1.2.1 Upgrade Notes</title>
+    </properties>
+    <body>
+        <section name="Mod4j 1.2.1 Upgrade Notes">
+            <p>
+                The following upgrade steps are needed if you want to upgrade your
+                project from
+                <b>Mod4j 1.2.0</b>
+                to
+                <b>Mod4j 1.2.1</b>
+                .
+            </p>
+            <p>
+                If you want to upgrade from earlier released versions,
+                you'll need to
+                follow the
+                required upgrade steps as described in the subsequent
+                Upgrade Notes
+                for each release.
+                For an overview of of the releases and Upgrade
+                Notes, see the
+                <a href="../index.html">Mod4j Releases page</a>
+            </p>
+            <subsection name="Installation of Mod4j Eclipse plug-in 1.2.1">
+                <p>Before you install a new Mod4j Eclipse plug-in into Eclipse make sure you
+                    un-install older
+                    versions of the plug-in.</p>
+                <p>
+                    Here you can find
+                    <a href="../../downloads/download.html">download and install</a>
+                    instructions, that will guide you to install Mod4j, by making use of the Mod4j
+                    updatesite.
+                </p>
+            </subsection>
+            <subsection name="Changes in Maven configuration">
+                <p>
+                    With this release there's only one thing to change in the
+                    <b>parent-pom</b>
+                    of your application. The parent-pom (pom.xml) is located at the root
+                    of your
+                    project (if you didn't change its location).
+                </p>
+                <ol>
+                    <li>
+                        Adjust
+                        <b>mod4j.version</b>
+                        property to
+                        <b>1.2.1</b>
+                        :
+                        <br />
+                        <textarea rows="5" cols="70"><![CDATA[
+<project>
+   ...
+   <properties>
+       <mod4j.version>1.2.1</mod4j.version>]]>
+                        </textarea>
+                    </li>
+                </ol>
+            </subsection>
+        </section>
+    </body>
+</document>

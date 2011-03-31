@@ -1,0 +1,70 @@
+«REM»
+      Copyright (c) 2009 Ordina and committers to Mod4j
+      All rights reserved. This program and the accompanying materials
+      are made available under the terms of the Eclipse Public License v1.0
+      which accompanies this distribution, and is available at
+      http://www.eclipse.org/legal/epl-v10.html
+
+      Contributors:
+          Ordina - initial implementation
+«ENDREM»
+«IMPORT DataContractDsl»
+«IMPORT Crossx»
+
+«EXTENSION org::mod4j::dslcommon::xtend::generatorutil»
+«EXTENSION org::mod4j::dsl::datacontract::generator::xtend::Dto»
+
+«DEFINE addIdAndVersionConstructor FOR Dto»
+    /**
+     * Constructor for use by the DTO Translator.
+     *
+     * @param id
+     *            The ID of the referenced business object.
+     * @param version
+     *            The version of the referenced business object.
+     */
+     public  «javaClassName(name) -» (final Long id, final Integer version) {
+         super(id, version);
+     }
+«ENDDEFINE»
+
+«DEFINE addIdConstructor FOR Dto»
+    /**
+     * Creates an object for use as a parameter for a query.
+     *
+     * @param id
+     *            The ID of the referenced business object.
+     */
+     public  «javaClassName(name) -» (final Long id) {
+         super(id, null);
+     }
+«ENDDEFINE»
+
+«DEFINE addNoArgConstructor FOR Dto»
+    /**
+     * Default no-argument constructor.
+     */
+     public  «javaClassName(name) -» () {
+         super();
+     }
+«ENDDEFINE»
+
+«DEFINE addCustomDtoConstructor FOR Dto»
+    «EXPAND addNoArgConstructor FOR this»
+«ENDDEFINE»
+
+«DEFINE addConstructorArgumentsList  FOR BusinessClassDto -»
+«LET getConstructArguments() AS args -»
+    «FOREACH properties.select(e|e.mandatoryForCreation).sortBy(e|args.indexOf(e.name)) AS prop ITERATOR propIter SEPARATOR "," -»
+        «EXPAND addArgument FOR prop -»
+    «ENDFOREACH»
+«ENDLET -»
+«ENDDEFINE»
+
+«DEFINE addArgument FOR DtoProperty -»
+    source.«getterPrefix()»«name.toFirstUpper()»()
+«ENDDEFINE»
+
+«DEFINE addArgument FOR DtoEnumerationProperty -»
+    «name»Translator.fromDto(source.get«javaClassName(name)»())
+«ENDDEFINE»

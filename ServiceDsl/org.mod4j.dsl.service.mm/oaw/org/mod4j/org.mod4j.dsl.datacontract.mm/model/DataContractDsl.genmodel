@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.mod4j.dsl.datacontract.mm/src"
+    modelPluginID="org.mod4j.dsl.datacontract.mm" modelName="DataContractDsl" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>DataContractDsl.ecore</foreignModel>
+  <genPackages prefix="DataContractDsl" basePackage="org.mod4j.dsl.datacontract.mm"
+      disposableProviderFactory="true" ecorePackage="DataContractDsl.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="DataContractDsl.ecore#//Multiplicity">
+      <genEnumLiterals ecoreEnumLiteral="DataContractDsl.ecore#//Multiplicity/NONE"/>
+      <genEnumLiterals ecoreEnumLiteral="DataContractDsl.ecore#//Multiplicity/ONE"/>
+      <genEnumLiterals ecoreEnumLiteral="DataContractDsl.ecore#//Multiplicity/MANY"/>
+    </genEnums>
+    <genClasses ecoreClass="DataContractDsl.ecore#//DataContractModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataContractDsl.ecore#//DataContractModel/dtos"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataContractDsl.ecore#//DataContractModel/enumerations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataContractDsl.ecore#//DataContractModel/externalReferences"/>
+    </genClasses>
+    <genClasses ecoreClass="DataContractDsl.ecore#//Dto">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference DataContractDsl.ecore#//Dto/datacontractModel"/>
+    </genClasses>
+    <genClasses ecoreClass="DataContractDsl.ecore#//BusinessClassDto">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataContractDsl.ecore#//BusinessClassDto/properties"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DataContractDsl.ecore#//BusinessClassDto/base"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataContractDsl.ecore#//BusinessClassDto/propertyReferences"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataContractDsl.ecore#//BusinessClassDto/associationReferences"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataContractDsl.ecore#//BusinessClassDto/creatable"/>
+    </genClasses>
+    <genClasses ecoreClass="DataContractDsl.ecore#//DtoProperty">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataContractDsl.ecore#//DtoProperty/dataType"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference DataContractDsl.ecore#//DtoProperty/businessClassDto"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference DataContractDsl.ecore#//DtoProperty/customDto"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataContractDsl.ecore#//DtoProperty/mandatoryForCreation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataContractDsl.ecore#//DtoProperty/nullable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataContractDsl.ecore#//DtoProperty/writable"/>
+    </genClasses>
+    <genClasses ecoreClass="DataContractDsl.ecore#//DtoDataProperty">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataContractDsl.ecore#//DtoDataProperty/hasDefault"/>
+    </genClasses>
+    <genClasses ecoreClass="DataContractDsl.ecore#//DtoStringProperty">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataContractDsl.ecore#//DtoStringProperty/defaultValue"/>
+    </genClasses>
+    <genClasses ecoreClass="DataContractDsl.ecore#//DtoBooleanProperty">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataContractDsl.ecore#//DtoBooleanProperty/defaultValue"/>
+    </genClasses>
+    <genClasses ecoreClass="DataContractDsl.ecore#//EnumerationDto">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataContractDsl.ecore#//EnumerationDto/literals"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DataContractDsl.ecore#//EnumerationDto/base"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference DataContractDsl.ecore#//EnumerationDto/datacontractModel"/>
+    </genClasses>
+    <genClasses ecoreClass="DataContractDsl.ecore#//EnumerationDtoLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataContractDsl.ecore#//EnumerationDtoLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="DataContractDsl.ecore#//ModelElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataContractDsl.ecore#//ModelElement/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataContractDsl.ecore#//ModelElement/description"/>
+    </genClasses>
+    <genClasses ecoreClass="DataContractDsl.ecore#//CustomDto">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataContractDsl.ecore#//CustomDto/properties"/>
+    </genClasses>
+    <genClasses ecoreClass="DataContractDsl.ecore#//DtoIntegerProperty">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataContractDsl.ecore#//DtoIntegerProperty/defaultValue"/>
+    </genClasses>
+    <genClasses ecoreClass="DataContractDsl.ecore#//DtoDecimalProperty">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataContractDsl.ecore#//DtoDecimalProperty/defaultValue"/>
+    </genClasses>
+    <genClasses ecoreClass="DataContractDsl.ecore#//DtoEnumerationProperty">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DataContractDsl.ecore#//DtoEnumerationProperty/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataContractDsl.ecore#//DtoEnumerationProperty/defaultValueAsString"/>
+    </genClasses>
+    <genClasses ecoreClass="DataContractDsl.ecore#//DtoDateTimeProperty">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataContractDsl.ecore#//DtoDateTimeProperty/defaultValue"/>
+    </genClasses>
+    <genClasses ecoreClass="DataContractDsl.ecore#//BusinessClassPropertyReference">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference DataContractDsl.ecore#//BusinessClassPropertyReference/dto"/>
+    </genClasses>
+    <genClasses ecoreClass="DataContractDsl.ecore#//BusinessClassAssociationRoleReference">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference DataContractDsl.ecore#//BusinessClassAssociationRoleReference/dto"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DataContractDsl.ecore#//BusinessClassAssociationRoleReference/dtoType"/>
+    </genClasses>
+    <genClasses ecoreClass="DataContractDsl.ecore#//DtoAssociationRoleProperty">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DataContractDsl.ecore#//DtoAssociationRoleProperty/dtoType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataContractDsl.ecore#//DtoAssociationRoleProperty/ordered"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataContractDsl.ecore#//DtoAssociationRoleProperty/multiplicity"/>
+    </genClasses>
+    <genClasses ecoreClass="DataContractDsl.ecore#//ExternalReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataContractDsl.ecore#//ExternalReference/modelname"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference DataContractDsl.ecore#//ExternalReference/datacontractModel"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataContractDsl.ecore#//ExternalReference/keyword"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

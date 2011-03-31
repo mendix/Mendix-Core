@@ -1,0 +1,17 @@
+domain CirculairToOne;
+
+class Biker [
+    string name;
+]
+
+class Bicycle [
+    string name;
+]
+
+class Owner [
+    string name;
+]
+
+association Biker biker one -> one Bicycle bicycle;
+association Bicycle bicycle one -> one Owner bikeowner;
+association Owner owner one -> one Biker biker;

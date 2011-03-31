@@ -1,0 +1,234 @@
+/* 
+   This file contains the code to create a Crossx model from a BusinesDomainDsl model.
+   Needed for crosssreference purposes.
+*/
+import crossx;
+import DataContractDsl;
+
+extension org::mod4j::crossx::broker::xtend::Crossx;
+extension org::mod4j::dslcommon::xtend::generatorutil;
+extension org::mod4j::dsl::datacontract::generator::xtend::Dto;
+
+// Complete the model such that all higher level constructs and all implicit definitions are added.
+completeModel(DataContractModel dtcModel) :
+    let emptyCrud  = dtcModel.dtos.typeSelect(BusinessClassDto).select(dto|dto.propertyReferences.isEmpty) :
+    let filledCrud = dtcModel.dtos.typeSelect(BusinessClassDto).select(dto|!dto.propertyReferences.isEmpty) :
+    let associationRoles = dtcModel.dtos.typeSelect(BusinessClassDto).associationReferences :
+	emptyCrud.addProperties() ->
+	filledCrud.completeProperties()->
+	associationRoles.addDtoAssociationRoles()->
+	dtcModel.resolveEnumerationReferences()->
+	dtcModel.enumerations.addLiterals()->
+	dtcModel.dtos.typeSelect(BusinessClassDto).addCreatable()
+    ;
+
+addCreatable(BusinessClassDto dto) :
+    dto.setCreatable( dto.hasAllMandatoryProperties() )
+    ;
+
+// Add the enumeration literals to the enumeration.
+// Literals are always implicitly taken from the businessclassmodel
+addLiterals(EnumerationDto enum) :
+    let symbol = lookupSymbol(enum.base.modelname, enum.base.name, "Enumeration") :
+    let props = symbol.subSymbols.select(s|s.type.matches("EnumerationLiteral")) :
+    enum.literals.addAll( props.toEnumLiteral()   )->
+    null
+    ;
+
+EnumerationDtoLiteral toEnumLiteral(Symbol literalProperty) :
+   let result = (      //print("TO ENUM LITERAL [" + literalProperty.name + "]")->
+        new EnumerationDtoLiteral) :
+   result.setName( literalProperty.name )->
+   result.setValue( literalProperty.getPropertyValue("value").asInteger() )->
+   result
+   ;
+   
+// resolvbe all references from DtoEnumerationProperties to their type
+resolveEnumerationReferences(DataContractModel dtcModel) :
+    let enumProps = dtcModel.dtos.typeSelect(BusinessClassDto).properties.typeSelect(DtoEnumerationProperty)
+                    .select(prop | prop.type == null ) :
+    enumProps.collect( prop | prop.setType( dtcModel.enumerations.select(e | e.name == prop.dataType).first() ) );
+        
+addProperties(BusinessClassDto dto) :
+    let symbol = lookupSymbol(dto.base.modelname, dto.base.name, "BusinessClass") :
+    let props = symbol.subSymbols.select(s|s.type.matches("Property")) :
+//    print("DTO addProperties: "+ dto.name)->
+    dto.properties.addAll( props.toDtoProperty(dto) ) 
+    ;
+
+DataContractDsl::DtoProperty toDtoProperty(Symbol symbol, BusinessClassDto dto) :
+//    print("     DTO addProperty: "+ symbol.name)->
+    switch (symbol.getPropertyValue("DataType")) {
+        case 'boolean' : newBooleanProperty(symbol)
+        case 'string' : newStringProperty(symbol)
+        case 'integer' : newIntegerProperty(symbol)
+        case 'decimal' : newDecimalProperty(symbol)
+        case 'datetime' : newDateTimeProperty(symbol)
+        default : newEnumProperty(symbol, dto)
+    }
+    ;
+    
+/** 
+ * Add DtoProperty objects to 'dto' for each External PropertyReference in 'dto'
+ */    
+completeProperties(BusinessClassDto dto) :
+    let symbol = lookupSymbol(dto.base.modelname, dto.base.name, "BusinessClass") :
+    let propertySymbols = symbol.subSymbols.select(s|s.type == "Property") :
+//    print("DTO completeProperties: "+ dto.name)->
+    dto.properties.addAll( dto.propertyReferences.referencesToDtoProperty(propertySymbols) )  
+    ;
+    
+addDtoAssociationRoles(BusinessClassAssociationRoleReference assRef) :
+    let symbol = lookupSymbol(assRef.dto.base.modelname, assRef.dto.base.name, "BusinessClass") :
+    let prop = symbol.subSymbols.select(s|s.type.matches("Association") && (s.name == assRef.name)).first() :
+    let ordered = prop.getPropertyValue("ordered") == "true" :
+    let multiplicity = prop.getPropertyValue("Multiplicity") :
+    let result = new DtoAssociationRoleProperty :
+//    print("DTO ASSOCIATION : "+ assRef.name + " for dto [" + assRef.dto.name + "]")->
+    result.setName(prop.name)->
+    result.setDataType(assRef.dtoType.name)->
+    result.setDtoType(assRef.dtoType)->
+    result.setOrdered(ordered)->
+    result.setMultiplicity( (multiplicity == "ONE") ? Multiplicity::ONE : Multiplicity::MANY)->
+    assRef.dto.properties.add(result)
+   ;
+    
+/**
+ * Create a new DtoProperty for 'ref''
+ * 'symbols' is the list of Symbols from Crossx containing the "Property" definitions
+ */
+DataContractDsl::DtoProperty referencesToDtoProperty(BusinessClassPropertyReference ref, List[Symbol] symbols ) :
+    let symbol = symbols.select(s| s.name == ref.name).first() :
+    if symbol != null then {
+	    switch (symbol.getPropertyValue("DataType")) {
+	        case 'boolean' : newBooleanProperty(symbol)
+	        case 'string' : newStringProperty(symbol)
+	        case 'integer' : newIntegerProperty(symbol)
+	        case 'decimal' : newDecimalProperty(symbol)
+	        case 'datetime' : newDateTimeProperty(symbol)
+	        default : newEnumProperty(symbol, ref.dto)
+	    }
+    }
+    else {
+        print("referencesToDtoProperty: DTO null for ref " + ref.name )
+    }
+    
+    ;
+    
+DataContractDsl::DtoBooleanProperty newBooleanProperty(Symbol symbol) :
+    let result = new DtoBooleanProperty :
+    let mandatory = symbol.getPropertyValue("MandatoryForCreation") :
+    let nullable = symbol.getPropertyValue("Nullable") :
+    let writable = symbol.getPropertyValue("Writable") :
+    let hasDefault = symbol.getPropertyValue("HasDefault") :
+    let defaultValue = symbol.getPropertyValue("DefaultValue") :
+    result.setName(symbol.name)->
+    result.setDataType("boolean")->
+    if (hasDefault == "true"  && defaultValue != null) then (
+        result.setHasDefault(true)->
+        result.setDefaultValue(defaultValue == "true")
+    )->
+    result.setMandatoryForCreation( mandatory == "true" )->
+    result.setNullable( nullable == "true" )->
+    result.setWritable( writable == "true" )->
+    result;
+    
+DataContractDsl::DtoStringProperty newStringProperty(Symbol symbol) :
+    let result = new DtoStringProperty:
+    let mandatory = symbol.getPropertyValue("MandatoryForCreation") :
+    let nullable = symbol.getPropertyValue("Nullable") :
+    let writable = symbol.getPropertyValue("Writable") :
+    let hasDefault = symbol.getPropertyValue("HasDefault") :    
+    let defaultValue = symbol.getPropertyValue("DefaultValue") :
+    result.setName(symbol.name)->
+    result.setDataType("string")->
+    if (hasDefault == "true"  && defaultValue != null) then (
+        result.setHasDefault(true)->
+        result.setDefaultValue(defaultValue)
+    )->
+    result.setMandatoryForCreation( mandatory == "true" )->
+    result.setNullable( nullable == "true" )->
+    result.setWritable( writable == "true" )->
+    result;
+    
+DataContractDsl::DtoIntegerProperty newIntegerProperty(Symbol symbol) :
+    let result = new DtoIntegerProperty:
+    let mandatory = symbol.getPropertyValue("MandatoryForCreation") :
+    let nullable = symbol.getPropertyValue("Nullable") :
+    let writable = symbol.getPropertyValue("Writable") :
+    let hasDefault = symbol.getPropertyValue("HasDefault") :
+    let defaultValue = symbol.getPropertyValue("DefaultValue") :
+    result.setName(symbol.name)->
+    result.setDataType("integer")->
+    if (hasDefault == "true"  && defaultValue != null) then (
+        result.setHasDefault(true)->
+        result.setDefaultValue(defaultValue.asInteger())
+    )->
+    result.setMandatoryForCreation( mandatory == "true" )->
+    result.setNullable( nullable == "true" )->
+    result.setWritable( writable == "true" )->
+    result;
+    
+DataContractDsl::DtoDecimalProperty newDecimalProperty(Symbol symbol) :
+    //TODO: Pass default value. Defaults for DecimalProperty not supported yet.
+    let result = new DtoDecimalProperty :
+    let mandatory = symbol.getPropertyValue("MandatoryForCreation") :
+    let nullable = symbol.getPropertyValue("Nullable") :
+    let writable = symbol.getPropertyValue("Writable") :
+    result.setName(symbol.name)->
+    result.setDataType("decimal")->
+    result.setMandatoryForCreation( mandatory == "true" )->
+    result.setNullable( nullable == "true" )->
+    result.setWritable( writable == "true" )->
+    result;
+    
+DataContractDsl::DtoDateTimeProperty newDateTimeProperty(Symbol symbol) :
+    let result = new DtoDateTimeProperty:
+    let mandatory = symbol.getPropertyValue("MandatoryForCreation") :
+    let nullable = symbol.getPropertyValue("Nullable") :
+    let writable = symbol.getPropertyValue("Writable") :
+    let hasDefault = symbol.getPropertyValue("HasDefault") :    
+    let defaultValue = symbol.getPropertyValue("DefaultValue") :
+    result.setName(symbol.name)->
+    result.setDataType("datetime")->
+    if defaultValue != null then result.setDefaultValue(defaultValue)->
+    if (hasDefault == "true"  && defaultValue != null) then (
+        result.setHasDefault(true)->
+        result.setDefaultValue(defaultValue)
+    )->
+    result.setMandatoryForCreation( mandatory == "true" )->
+    result.setNullable( nullable == "true" )->
+    result.setWritable( writable == "true" )->
+    result;
+
+// Create a new DtoEnumerationProperty based on 'symbol'
+DataContractDsl::DtoEnumerationProperty newEnumProperty(Symbol symbol, BusinessClassDto dto) :
+    let result = new DtoEnumerationProperty:
+    let dataType = symbol.getPropertyValue("DataType") :
+    let enum = dto.datacontractModel.enumerations.selectFirst(e|(e.base != null) &&
+                                                    (e.base.name == dataType) ):
+    let mandatory = symbol.getPropertyValue("MandatoryForCreation") :
+    let nullable = symbol.getPropertyValue("Nullable") :
+    let writable = symbol.getPropertyValue("Writable") :
+    let hasDefault = symbol.getPropertyValue("HasDefault") :    
+    let defaultValue = symbol.getPropertyValue("DefaultValue") :
+    result.setDataType( symbol.getPropertyValue("DataType") )->
+    ( if enum != null then (
+          result.setName(symbol.name)->
+          result.setType(enum)->
+          result.setDataType(enum.name)->
+          if (hasDefault == "true"  && defaultValue != null) then (
+              result.setHasDefault(true)->
+              result.setDefaultValueAsString(defaultValue)
+          )->
+          result.setMandatoryForCreation( mandatory == "true" )->
+          result.setWritable( writable == "true" )->
+          result.setNullable( nullable == "true" )
+      ) else (
+          result.setName("NO_NAME")->
+	      result.setType(null)->
+          result.setDataType("NO_DATA_TYPE")->
+          result.setMandatoryForCreation( true )
+      )
+     )->
+    result;

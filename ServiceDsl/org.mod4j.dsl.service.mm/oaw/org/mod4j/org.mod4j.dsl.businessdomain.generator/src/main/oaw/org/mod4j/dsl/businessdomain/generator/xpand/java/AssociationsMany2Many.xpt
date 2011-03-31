@@ -1,0 +1,195 @@
+«REM»
+ Copyright (c) 2009 Ordina and committers to Mod4j
+ All rights reserved. This program and the accompanying materials
+ are made available under the terms of the Eclipse Public License v1.0
+ which accompanies this distribution, and is available at
+ http://www.eclipse.org/legal/epl-v10.html
+  Contributors:
+     Ordina - initial implementation
+«ENDREM»
+«IMPORT BusinessDomainDsl»
+
+«EXTENSION org::mod4j::common::xtend::NameMapper»
+«EXTENSION Association»
+
+«DEFINE many2ManyAccessorsTo FOR Association»
+    «EXPAND get(target.name, targetRoleName) FOR this»
+
+    «EXPAND getFrom(target.name, targetRoleName) FOR this»
+
+    «EXPAND addToTargetCollection FOR this»
+    «EXPAND removeFromTargetCollection FOR this»    
+    «IF ordered»
+        «EXPAND addIndexedToTargetList FOR this»
+        «EXPAND removeIndexedFromTargetCollection FOR this»
+        «EXPAND setInTargetCollection FOR this»
+    «ENDIF»
+    
+«ENDDEFINE»
+
+«DEFINE many2ManyAccessorsFrom FOR Association»
+    «EXPAND get(source.name, sourceRoleName) FOR this»
+
+    «EXPAND getFrom(source.name, sourceRoleName) FOR this»
+
+    /**
+     * Implements adding single element to a collection.
+     */
+    public void addTo«sourceRoleName.toFirstUpper()»(«javaDomainClass(source.name)» element) {
+		if ( element == null ) {
+			return;
+		}
+        if (!«sourceRoleName».contains(element)) {
+            «sourceRoleName».add(element);
+            element.addTo«targetRoleName.toFirstUpper()»((«javaDomainClass(target.name)») this);
+            validation.validate();
+        }
+    }
+    
+    /**
+     * Implements removing a single element from a collection.
+     */
+    public boolean removeFrom«sourceRoleName.toFirstUpper()»(«javaDomainClass(source.name)» element) {
+		if ( element == null ) {
+			return false;
+		}
+        if («sourceRoleName».contains(element)) {
+            this.«sourceRoleName».remove(element);
+            element.removeFrom«targetRoleName.toFirstUpper()»((«javaDomainClass(target.name)») this);
+            validation.validate();
+            return true;
+        }
+        return false;
+    }
+«ENDDEFINE»
+
+«REM»  Defines the get() operation for both ends of the association
+«ENDREM»
+«DEFINE get(String type, String roleName)  FOR Association»
+   /**
+     * @return «roleName» («getCollectionInterface()»<«type»>).
+     */
+    public «getCollectionInterface()»<«type»> get«roleName.toFirstUpper()» () {
+        return Collections.unmodifiable«getCollectionInterface()»(this.«roleName»);
+    }
+«ENDDEFINE»
+
+«REM»  Defines the getForm***(Long id) operation for bioth ends of the association
+«ENDREM»
+«DEFINE getFrom(String type, String roleName) FOR Association»
+    /**
+     * @param id
+     *        id of the collection element to return
+     *
+     * @return «roleName» (Set<«type»>)
+     * @return «roleName» («getCollectionInterface()»<«type»>)
+     *         with the given id.
+     */
+    public «type» getFrom«roleName.toFirstUpper()» (Long id) {
+        if (id == null) {
+            return null;
+        }
+        for («type» «type.toFirstLower()»: this.«roleName») {
+            if (id.equals(«type.toFirstLower()».getId())) {
+                return «type.toFirstLower()»;
+            }
+        }
+        return null;
+    }
+«ENDDEFINE»
+
+«DEFINE addToTargetCollection FOR Association»
+    /**
+     * Implements adding single element to a collection.
+     */
+    public boolean addTo«targetRoleName.toFirstUpper()»(«javaDomainClass(target.name)» element) {
+        if ( element == null ) {
+            return false;
+        }
+        if (!«targetRoleName».contains(element)) {
+            «targetRoleName».add(element);
+    «IF this.bidirectional -»
+            element.addTo«sourceRoleName.toFirstUpper()»((«javaDomainClass(source.name)») this);
+    «ENDIF -»
+            validation.validate();
+            return true;
+        }
+        return false;
+    }
+«ENDDEFINE»
+
+«DEFINE addIndexedToTargetList FOR Association»
+    /**
+     * Implements adding single element to an ordered collection at a specified
+     * location.
+     */
+    public void addTo«targetRoleName.toFirstUpper()»(int index, «javaDomainClass(target.name)» element) {
+        if ( element == null ) {
+            return;
+        }
+        «targetRoleName».add(index, element);
+    «IF this.bidirectional -»
+            element.addTo«sourceRoleName.toFirstUpper()»((«javaDomainClass(source.name)») this);
+    «ENDIF -»
+        validation.validate();
+    }
+«ENDDEFINE»
+
+«DEFINE removeFromTargetCollection FOR Association»
+    /**
+     * Implements removing a single element from a collection.
+     */
+    public boolean removeFrom«targetRoleName.toFirstUpper()»(«javaDomainClass(this.target.name)» element) {
+        if ( element == null ) {
+            return false;
+        }
+        if («targetRoleName».contains(element)) {
+            this.«this.targetRoleName».remove(element);
+    «IF this.bidirectional -»
+            element.removeFrom«sourceRoleName.toFirstUpper()»((«javaDomainClass(source.name)») this);
+    «ENDIF -»
+            validation.validate();
+            return true;
+        }
+        return false;
+    }
+«ENDDEFINE»
+
+«DEFINE removeIndexedFromTargetCollection FOR Association»
+    /**
+     * Implements removing a single element from a collection.
+     */
+    public «javaDomainClass(this.target.name)»  removeFrom«targetRoleName.toFirstUpper()»(int index) {
+        «javaDomainClass(this.target.name)» element;
+        element = this.«this.targetRoleName».remove(index);
+    «IF this.bidirectional -»
+        element.removeFrom«sourceRoleName.toFirstUpper()»((«javaDomainClass(source.name)») this);
+    «ENDIF -»
+        validation.validate();
+        return element;
+    }
+«ENDDEFINE»
+
+«DEFINE setInTargetCollection FOR Association»
+    /**
+     * Replaces the element at the specified position in
+     * {@link «this.targetRoleName»} with the specified element.
+     * 
+     * @param index
+     *        index of element to replace.
+     * @param element
+     *        element to be stored at the specified position. 
+     * @return the element previously at the specified position.
+     * @throws IndexOutOfBoundsException
+     *         if the index is out of range (index < 0 || index >= size()).
+     */
+    public «javaDomainClass(this.target.name)» set«this.targetRoleName.toFirstUpper()»(int index, «javaDomainClass(target.name)» element) {
+        «javaDomainClass(this.target.name)» result;
+        validation.setActive(false);
+        result = removeFrom«this.targetRoleName.toFirstUpper()»(index);
+        addTo«targetRoleName.toFirstUpper()»(index, element);
+        validation.setActive(true);
+        validation.validate();
+        return result;
+    }
+«ENDDEFINE»

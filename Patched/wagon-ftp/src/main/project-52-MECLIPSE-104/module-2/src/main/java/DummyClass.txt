@@ -1,0 +1,7 @@
+/**
+ * @author <a href="mailto:trygvis@inamo.no">Trygve Laugst&oslash;l</a>
+ * @version $Id: DummyClass.txt 759846 2009-03-30 06:26:34Z baerrach $
+ */
+public class DummyClass
+{
+}

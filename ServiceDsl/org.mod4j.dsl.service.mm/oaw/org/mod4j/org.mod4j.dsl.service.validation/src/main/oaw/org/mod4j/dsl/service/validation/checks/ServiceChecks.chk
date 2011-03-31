@@ -1,0 +1,81 @@
+/*******************************************************************************
+ * Copyright (c) 2009 Ordina and committers to Mod4j
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Ordina - initial implementation
+ *******************************************************************************/
+import ServiceDsl;
+// import crossx;
+
+extension org::mod4j::dsl::service::mm::xtend::ServiceMethod;
+extension org::eclipse::xtend::util::stdlib::elementprops;
+extension org::mod4j::dslcommon::xtend::generatorutil;
+
+context DtoReference ERROR "The name of an imported element must be unique" :
+    this.model.dtoReferences.forAll(e| (e != this) implies (e.name != this.name) );
+    
+context CrudService ERROR "Crud can only be defined once for a Dto" :
+    this.model.crudServices.forAll(e| (e != this) implies (e.dto.name != this.dto.name) );
+    
+context SpecialMethod ERROR "A create/read/update/delete method cannot be defined for a Dto that also has a crud defined." :
+    ( (type == MethodType::CREATE) || (type==MethodType::READ) ||
+      (type == MethodType::UPDATE) || (type==MethodType::DELETE) )
+    implies ! this.model.crudServices.exists(crud | crud.dto == this.dto);
+    
+context SpecialMethod ERROR "Missing READ method for "+ this.dto.businessClass() + ": a " + this.type + " method needs a Read method" :
+    ( (type==MethodType::UPDATE) || (type==MethodType::DELETE) )
+    implies 
+        ( specialMethod(this.model, MethodType::READ, this.dto.businessClass()) != null )  ||
+        ( crud(this.model, this.dto.businessClass()) != null)
+    ;
+
+context AssociationMethod ERROR "Missing READ method for "+ this.main.businessClass() + ": a " + this.type + " method needs a Read method" :
+    ( (type==MethodType::ADDTO) || (type==MethodType::REMOVEFROM) )
+    implies (
+        ( specialMethod(this.model, MethodType::READ, this.main.businessClass()) != null )  ||
+        ( crud(this.model, this.main.businessClass()) != null)
+    ) ;
+
+context AssociationMethod ERROR "Missing READ method for "+ this.part.businessClass() + ": a " + this.type + " method needs a Read method" :
+    ( (type==MethodType::ADDTO) || (type==MethodType::REMOVEFROM) )
+    implies (
+        ( specialMethod(this.model, MethodType::READ, this.part.businessClass()) != null )  ||
+        ( crud(this.model, this.part.businessClass()) != null)
+    ) ;
+
+context AssociationMethod ERROR "Missing READ method for "+ this.main.businessClass() + ": a " + this.type + " method needs a Read method" :
+    ( (type==MethodType::GETFROM) )
+    implies (
+        ( specialMethod(this.model, MethodType::READ, this.main.businessClass()) != null )  ||
+        ( crud(this.model, this.main.businessClass()) != null)
+    ) ;
+
+context SpecialMethod ERROR "A "+ this.type + " method can only be defined once for "+ this.dto.name:
+    this.model.methods.typeSelect(SpecialMethod).select(e|e.type == this.type).
+        forAll(e|(e != this) implies (e.dto != this.dto))
+;
+
+context SpecialMethod ERROR "The name of the listall method ["+ this.name + "] is not unique" :
+    ( this.type == MethodType::LISTALL) implies (
+    this.model.methods.typeSelect(SpecialMethod).select(e|e.type == this.type).
+        forAll(e|(e != this) implies (e.name!= this.name))
+) ;
+
+context SpecialMethod ERROR "The name of the read method ["+ this.name + "] is not unique" :
+    ( this.type == MethodType::READ ) implies (
+    this.model.methods.typeSelect(SpecialMethod).select(e|e.type == this.type).
+        forAll(e|(e != this) implies (e.name!= this.name))
+) ;
+
+context SpecialMethod ERROR this.getProperty("ERROR") :
+    ( this.type == MethodType::READ ) implies (
+    this.model.crudServices.
+        forAll(crud|
+            this.setProperty("ERROR", "The name of method ["+ this.name + "] is identical to the read method derived from the crud service for [" + crud.dto.name + "]")->
+            ("read" + businessClass( crud.dto) +  "As" + crud.dto.name)!= this.name
+        )
+) ;

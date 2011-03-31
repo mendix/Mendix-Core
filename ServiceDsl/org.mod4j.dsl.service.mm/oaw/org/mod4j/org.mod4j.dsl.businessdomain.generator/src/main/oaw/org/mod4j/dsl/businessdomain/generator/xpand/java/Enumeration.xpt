@@ -1,0 +1,54 @@
+«REM»
+ Copyright (c) 2009 Ordina and committers to Mod4j
+ All rights reserved. This program and the accompanying materials
+ are made available under the terms of the Eclipse Public License v1.0
+ which accompanies this distribution, and is available at
+ http://www.eclipse.org/legal/epl-v10.html
+  Contributors:
+     Ordina - initial implementation
+«ENDREM»
+«IMPORT BusinessDomainDsl»
+«IMPORT org::mod4j::dslcommon::xpand::java»
+
+«EXTENSION org::mod4j::dslcommon::xtend::generatorutil»
+«EXTENSION org::mod4j::dslcommon::xtend::ProjectProperties»
+«EXTENSION org::mod4j::common::xtend::FileTracker»
+«EXTENSION org::mod4j::common::xtend::NameMapper»
+
+«DEFINE createEnum FOR Enumeration»
+    «EXPAND JavaComments::regenerationWarningHeader ("Mod4j BusinessDomainDsl generator: Enumeration.xpt") FOR this»
+    package «getDomainRootPackage()»;
+    
+    «EXPAND Imports::addImports FOR this»
+            
+   /**
+    * «description»
+    *
+    */
+   public enum «name» {
+    
+        «FOREACH enumerationLiterals AS enumlit ITERATOR enumlitIter SEPARATOR "," »
+            «enumlit.name.toUpperCase()»(«enumlit.persistedValue»)
+        «ENDFOREACH»;
+        
+        private static final Map<Integer, «name»> lookup = new HashMap<Integer, «name»>();
+        static {
+            for(«name» s : EnumSet.allOf(«name».class))
+                   lookup.put(s.id(), s);
+            }
+
+            private Integer id;
+            
+            private «name»(Integer id) {
+            this.id = id;
+        }
+        
+        public Integer id() {
+            return id;
+        }
+        
+        public static «name» value(Integer id) {
+            return lookup.get(id); 
+        }                  
+    }
+«ENDDEFINE»

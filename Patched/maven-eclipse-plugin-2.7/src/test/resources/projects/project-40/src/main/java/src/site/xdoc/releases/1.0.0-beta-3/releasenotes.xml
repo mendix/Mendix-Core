@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <!--
+        Please edit this file with the Eclipse XML editor, set your XML editor to a line length of 128 characters, indent-size
+        of 4 characters and not using tab-characters, and format the file (Ctrl-Shift-F) before checking in. This should
+        minimize the number of non-significant differences when comparing versions.
+    -->
+
+    <properties>
+        <title>Mod4j 1.0.0-beta-3 Release Notes</title>
+    </properties>
+    <body>
+        <section name="Mod4j 1.0.0-beta-3 Release Notes">
+         
+         <h2>Bug</h2>
+<ul>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-93'>MOD4J-93</a>] - Projectsite mist user guide links incorrect</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-175'>MOD4J-175</a>] - Xtext Check Violation: DtoReference not defined in model</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-176'>MOD4J-176</a>] - Creating new project has "null" in the wizard</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-190'>MOD4J-190</a>] - For the custom methods in services only javadoc in the interface is generated</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-193'>MOD4J-193</a>] - Interechte foutmelding bij unique rule</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-198'>MOD4J-198</a>] - The todo comment in the interface of domain services pollutes the Task List and is not correct.</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-200'>MOD4J-200</a>] - Code completion shows to much models when importing</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-202'>MOD4J-202</a>] - A lot of validation errors show up in the problem list after starting Eclipse</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-206'>MOD4J-206</a>] - Foutieve generatie van DTO translator bij gebruik enum</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-208'>MOD4J-208</a>] - Todo comment in DaoImpl classes unnecessary pollutes the tasklist </li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-210'>MOD4J-210</a>] - Generatie van service.dto voor een enum die begint met een kleine letter</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-211'>MOD4J-211</a>] - Spring Context Unit Test fails</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-215'>MOD4J-215</a>] - Inheritance in businessmodel zou associaties mee kunnen nemen </li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-222'>MOD4J-222</a>] - Unclear validation error description</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-225'>MOD4J-225</a>] - Inheritance in businessmodel: Hibernate runtime error "Cannot use identity column key generation with union-subclass mapping"</li>
+</ul>
+                
+<h2>Improvement</h2>
+<ul>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-188'>MOD4J-188</a>] - Mandatory multiplicity is the business DSL is not used in code generator</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-189'>MOD4J-189</a>] - No code is generated in the service- and business layers for the generated dao listAll..() methods</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-199'>MOD4J-199</a>] - Streamline the names and locations of the Spring context files</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-205'>MOD4J-205</a>] - Foutmelding bij incorrecte volgorde in datacontract DSL niet duidelijk: Couldn't find property 'name' for inner type Void'</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-226'>MOD4J-226</a>] - Automatic include of all attributes when references are use.</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-228'>MOD4J-228</a>] - String maxlength not used in initial database schema generation</li>
+</ul>
+    
+<h2>New Feature</h2>
+<ul>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-34'>MOD4J-34</a>] - Eenvoudige user interface genereren i.v.m. het geven van demos</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-78'>MOD4J-78</a>] - Support for bi-directional many-to-many associations.</li>
+</ul>
+                    
+<h2>Task</h2>
+<ul>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-67'>MOD4J-67</a>] - Mod4j-common centraal beschikbaar stellen in de central repository van Maven</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-117'>MOD4J-117</a>] - Write user manual for DataContract Dsl</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-168'>MOD4J-168</a>] - Change distributionManagement to our central Maven repository at Codehaus.</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-172'>MOD4J-172</a>] - Move the mod4j svn repository to codehaus</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-174'>MOD4J-174</a>] - Activate continuous builds for the mod4j svn repository at Codehaus</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-214'>MOD4J-214</a>] - Inheritance in het business model in user guide opnemen</li>
+<li>[<a href='https://repo.smart-java.nl/jira/browse/MOD4J-227'>MOD4J-227</a>] - Typefout in handleiding</li>
+</ul>
+
+
+
+        </section>
+    </body>
+</document>

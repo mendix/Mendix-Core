@@ -1,0 +1,108 @@
+«REM»
+ Copyright (c) 2009 Ordina and committers to Mod4j
+ All rights reserved. This program and the accompanying materials
+ are made available under the terms of the Eclipse Public License v1.0
+ which accompanies this distribution, and is available at
+ http://www.eclipse.org/legal/epl-v10.html
+  Contributors:
+     Ordina - initial implementation
+«ENDREM»
+«IMPORT BusinessDomainDsl»
+
+«EXTENSION BusinessClass»
+«EXTENSION org::mod4j::common::xtend::NameMapper»
+«EXTENSION org::mod4j::dslcommon::xtend::ProjectProperties»
+
+«DEFINE createAddValidators FOR BusinessClass»
+    private void addValidators() {
+    «EXPAND NewBusinessRules::addBusinessRulesValidators FOR this»
+    }
+«ENDDEFINE»
+
+«DEFINE addDefaultImplBaseConstructor FOR BusinessClass »
+    /**
+     * Default no-argument constructor for «javaDomainBaseClass(this.name)»
+     */
+     protected  «javaDomainBaseClass(this.name) -» () {
+        «IF superclass != null -»super();«ENDIF»
+        addValidators();
+     }
+«ENDDEFINE»
+
+«DEFINE addIDImplBaseConstructor FOR BusinessClass »
+    /**
+     * Creates a «javaDomainBaseClass(this.name)» with the specified ID.
+     */
+    protected «javaDomainBaseClass(this.name) -»(Long id) {
+       «IF superclass != null -»super(id);«ENDIF»
+       «IF superclass == null -»this.id = id;«ENDIF»
+    }
+«ENDDEFINE»
+
+«DEFINE addDefaultConstructor FOR BusinessClass »
+    /**
+     * Default no-argument constructor for «javaDomainClass(this.name)»
+     */
+    protected  «javaDomainClass(this.name) -» () {
+       «IF superclass != null -»super();«ENDIF»
+    }
+«ENDDEFINE»
+
+«DEFINE addMinimalConstructor FOR BusinessClass »
+    /**
+     * Minimal constructor for «javaDomainBaseClass(this.name)»
+     *
+     «EXPAND Javadoc::addJavaDocParamList FOR this -»
+     */
+    public «javaDomainBaseClass(this.name)» («EXPAND addConstructorArgumentsList -») {
+     «IF superclass != null -»
+        super(«EXPAND addSuperArgumentList FOR this.superclass -»);
+     «ENDIF»
+     «EXPAND addConstructorAssignment FOREACH properties.reject(e|e.nullable || e.hasDefault || e.derived) -»
+         addValidators();
+        validation.validate();
+    }
+«ENDDEFINE»
+
+«DEFINE addIDConstructor FOR BusinessClass »
+    /**
+     * Creates a «javaDomainClass(this.name)» with the specified ID.
+     */
+    protected «javaDomainClass(this.name) -»(Long id) {
+        super(id);
+    }
+«ENDDEFINE»
+
+«DEFINE addConstructorArgumentsList  FOR BusinessClass »
+    «FOREACH this.getAllProperties().reject(e|e.nullable || e.hasDefault || e.derived) AS prop ITERATOR propIter SEPARATOR "," -»
+        «EXPAND addArgument FOR prop -»
+    «ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE addArgument FOR Property -»
+    «javaType(this)» «name -»
+«ENDDEFINE»
+
+«DEFINE addArgument FOR EnumerationProperty»
+    «type.name» «name -»
+«ENDDEFINE»
+
+«DEFINE addConstructorAssignment FOR Property -»
+    «IF !nullable -»this.«name» = «name»; «ENDIF»
+«ENDDEFINE»
+
+«DEFINE addSuperArgumentList FOR BusinessClass -»
+    «FOREACH this.getAllProperties().reject(e|e.nullable || e.hasDefault || e.derived) AS prop ITERATOR propIter SEPARATOR "," -»
+        «prop.name-»
+    «ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE addCallToSuperOnlyMinimalConstructor (String classNameSuffix) FOR BusinessClass -»
+    /**
+     * Minimal constructor for «javaDomainClass(this.name)»
+     «EXPAND Javadoc::addJavaDocParamList FOR this -»
+     */
+    public «javaDomainClass(this.name)» («EXPAND addConstructorArgumentsList -») {
+        super(«EXPAND addSuperArgumentList FOR this -»);
+    }
+«ENDDEFINE»

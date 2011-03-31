@@ -1,0 +1,161 @@
+"The RecordShop domain model"
+domain RecordShopDomainModel ;  
+           
+/*        
+ * Remarks...                             
+ */
+      
+"A Person represents a legal person."  
+class Person [  
+
+    "First name of the person."   
+    string firstName; 
+    "Last name of the person."    
+    string lastName;   
+    datetime birthDate;
+    "The age of this person in years, derived from birthDate"
+    integer age derived;      
+    "Number of ears (we allow Vulcans in this system)."  
+    integer numberOfEars default 2 min 0 max 4;   
+    "Gender"       
+    SexeEnum sexe default MALE nullable;    
+
+    rules [   
+        "The combination of first- and last name of a person must be unique"
+        unique fullName [firstName, lastName]
+    ]  
+]
+association Person personFrom one <-> many Relation relationsFrom;
+association Person personTo one <-> many Relation relationsTo;
+
+class Relation [
+    string name;
+    datetime since nullable;
+    datetime ended nullable;
+]
+
+class Address [
+    string streetName;
+    string houseNumber;
+    string zipcode regexp "\\\\d{5}(-\\\\d{4})?";
+    string city;  
+]
+
+"A Customer represents a Person who orders from the RecordShop."
+class Customer inherits Person [
+    
+    integer customerNr;  
+    string username minlength 3 maxlength 10 nullable ;
+    string emailAddress regexp "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\\\.[A-Za-z]{2,4}$" nullable;
+    boolean blackListed default false nullable;
+    integer discountPercentage default 0 min 0 max 100 ;
+    
+    rules [  
+        "The customerNr must be unique" 
+        unique uniqueCustomerNr [customerNr]
+        "If Customer has one ear, he/she get a discount of 50 percent."  
+        OneEarDiscount;  
+        "Just another rule"
+        AnotherRule; 
+    ]
+]
+
+"An artist is a Person who has had a role in producing a Record"
+class Artist inherits Person [
+    string artistName;
+    string biography maxlength 32000 nullable;
+]
+
+"A Record is a representation of a physical medium containing one or more musical compositions."
+class Record [
+
+    string asin;
+    string title default "Title unknown";
+    integer mediumCode default 111 ;
+    decimal price;
+    RecordTypeEnum type;  
+]
+
+"An Order represents the agreement between a Customer and the RecordShop about one or more purchased Records."
+class Order [ 
+
+	"A number to identify the Order"
+    string orderNumber;  
+    "The date on which the order has been placed"
+    datetime  orderDate default "2009-01-01" nullable;
+    datetime  deliveryDateTime  nullable;
+    integer discountPercentage min 01 max 100 nullable ;
+    "The total amount of the Order. Its value is derived from the summation of the OrderLine amounts"
+    decimal totalAmount nullable derived; 
+    
+    rules [
+        "The orderNumber of a Order must be unique "
+        unique uniqueOrderNumber [orderNumber]
+          
+        "The deliveryDate may not precede orderDate"
+        OrderDateBeforeDeliveryDate;   
+    ]
+]
+
+class OrderLine [ 
+
+    integer lineNumber min 01 max 50;
+    integer quantity default 1;
+    string description;
+    decimal lineAmount derived;
+    rules [
+    	CheckProductMinimumQuantity;
+    ] 
+]
+
+class Product [
+
+	string productNumber;
+	decimal price;
+	boolean inStock default false;
+	boolean orderable;
+	integer minimalQuantity default 1;
+]
+
+"Sexe enumeration."
+enumeration SexeEnum [
+
+    FEMALE = 2;
+    MALE = 3;
+]
+
+enumeration RecordTypeEnum [
+    LP = 2;
+    CD = 3;
+    DVD = 4;
+    BLUERAY = 5;
+]
+
+"One 2 Many bidirectional: A customer has a number of orders." 
+association Customer customer one <-> many Order orders ;
+
+"One 2 Many unidirectional: An order consists of an ordered list of orderLines.
+This is a typical composite relation: An orderLine must be attached to an existing order. 
+When an order is deleted, also a cascading delete of all the orderLines attached to it must be performed."
+association Order order one -> many OrderLine orderLines ordered ;
+
+"One 2 One bidirectional: An orderLine contains a product."
+association OrderLine orderLine  one <-> one Product product ;
+
+"Many to One bidirectional: A record is sold as a product."
+association Record  records many <-> one Product product ;
+
+"Many to Many bidirectional: Records have been made by zero or more contributors."
+association Record records many <-> many Artist contributors ;
+
+"Many to Many unidirectional: Products have been bought by zero or more buyers."
+association Product products many -> many Customer buyers ;
+
+"Many to One unidirectional: Customers have one invoiceAddress" 
+association Customer customers many -> one Address invoiceAddress;
+
+association Address homeAddress one <-> many Person persons;
+
+association Customer customers many -> many Artist idols;
+"Tests"
+association Person person one -> many Artist relatedTo ; 

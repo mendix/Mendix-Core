@@ -1,0 +1,240 @@
+«REM»
+ Copyright (c) 2009 Ordina and committers to Mod4j
+ All rights reserved. This program and the accompanying materials
+ are made available under the terms of the Eclipse Public License v1.0
+ which accompanies this distribution, and is available at
+ http://www.eclipse.org/legal/epl-v10.html
+  Contributors:
+     Ordina - initial implementation
+«ENDREM»
+«IMPORT BusinessDomainDsl»
+
+«EXTENSION BusinessClass»
+
+«DEFINE instanceVariable FOR Property»
+    «EXPAND Javadoc::addInstanceVarJavaDoc FOR this -»
+    protected «javaNullableType(this)» «name»;
+«ENDDEFINE»
+
+«DEFINE instanceVariable FOR BoolProperty»
+    «EXPAND Javadoc::addInstanceVarJavaDoc FOR this -»
+     protected «javaNullableType(this)» «name»«IF hasDefault» = «defaultValue»«ENDIF»;
+«ENDDEFINE»
+
+«DEFINE instanceVariable FOR EnumerationProperty»
+    «EXPAND Javadoc::addInstanceVarJavaDoc FOR this -»
+     protected «javaNullableType(this)» «name»«IF hasDefault» = «javaType(this)».«defaultValue().name»«ENDIF»;
+«ENDDEFINE»
+
+«DEFINE instanceVariable FOR DateTimeProperty»
+    «EXPAND Javadoc::addInstanceVarJavaDoc FOR this -»
+     protected «javaNullableType(this)» «name»«IF hasDefault && defaultValue.length > 0» = new «javaType(this)»("«defaultValue»")«ENDIF»;
+«ENDDEFINE»
+
+«DEFINE instanceVariable FOR IntegerProperty»
+    «EXPAND Javadoc::addInstanceVarJavaDoc FOR this -»
+    protected «javaNullableType(this)» «name»«IF hasDefault» = «defaultValue»«ENDIF»;
+«ENDDEFINE»
+
+«DEFINE instanceVariable FOR DecimalProperty»
+    «EXPAND Javadoc::addInstanceVarJavaDoc FOR this -»
+    protected «javaNullableType(this)» «name»«IF hasDefault» = «defaultValue»«ENDIF»;
+«ENDDEFINE»
+
+«DEFINE instanceVariable FOR StringProperty»
+    «EXPAND Javadoc::addInstanceVarJavaDoc FOR this -»
+     protected «javaNullableType(this)» «name»«IF hasDefault» = "«defaultValue»"«ENDIF»;
+«ENDDEFINE»
+
+«DEFINE addGetter FOR Property»
+	/**
+	 * @return «name» («javaType(this)») «description»
+	 */
+    public «javaType(this)» get«name.toFirstUpper()» () {
+        return this.«name»;
+    }
+«ENDDEFINE»
+
+«DEFINE addAbstractGetter FOR Property»
+    /**
+     * @return «name» («javaType(this)») «description»
+     */
+    abstract public «javaType(this)» get«name.toFirstUpper()» ();
+«ENDDEFINE»
+
+«DEFINE addGetter FOR BoolProperty»
+    /**
+     * @return «name» («javaType(this)») «description»
+     */
+    public «javaType(this)» is«name.toFirstUpper()» () {
+        return this.«name»;
+    }
+    
+    /**
+     * Extra getter for Boolean properties, because the "is<property>()" syntax does not
+     * always work.
+     *
+     * @return «name» («javaType(this)») «description»
+     */
+    public «javaType(this)» get«name.toFirstUpper()» () {
+        return is«name.toFirstUpper()»();
+    }
+«ENDDEFINE»
+
+«DEFINE addAbstractGetter FOR BoolProperty»
+    /**
+     * @return «name» («javaType(this)») «description»
+     */
+    public abstract «javaType(this)» is«name.toFirstUpper()» ();
+«ENDDEFINE»
+
+«DEFINE addSetter FOR Property»
+    «EXPAND Javadoc::addSetterJavaDoc FOR this -»
+    public void set«name.toFirstUpper()» (final «javaType(this)» «name») {
+        this.«name» = «name»;
+        validation.validate();
+    }
+«ENDDEFINE»
+
+«DEFINE addAbstractSetter FOR Property»
+   «EXPAND Javadoc::addSetterJavaDoc FOR this -»
+    abstract public void set«name.toFirstUpper()» (final «javaType(this)» «name»);
+«ENDDEFINE»
+
+«REM» Add an empty gtter method: used for derived attributes.
+«ENDREM»
+«DEFINE addEmptyGetter FOR Property»
+	/**
+	 * {@inheritDoc}
+	 */	
+   	@Override
+    public «javaType(this)» get«name.toFirstUpper()» () {
+		// TODO Mod4j: add derivation rule for derived attribute «name»
+        return «javaDefaultValue(this)»;
+    }
+«ENDDEFINE»
+
+«REM» Add an empty getter method: used for derived attributes.
+«ENDREM»
+«DEFINE addEmptyGetter FOR BoolProperty»
+	/**
+	 * {@inheritDoc}
+	 */	
+   	@Override
+    public «javaType(this)» is«name.toFirstUpper()» () {
+		// TODO Mod4j: add derivation rule for derived attribute «name»
+        return «javaDefaultValue(this)»;
+    }
+«ENDDEFINE»
+
+«REM» Add an empty setter method: used for writable derived attributes.
+«ENDREM»
+«DEFINE addEmptySetter FOR Property»
+	/**
+	 * {@inheritDoc}
+	 */	
+   	@Override
+    public void set«name.toFirstUpper()» (final «javaType(this)» «name») {
+		// TODO Mod4j: add setter rule for writable derived attribute «name»
+        validation.validate();
+    }
+«ENDDEFINE»
+
+
+«DEFINE addAttribute FOR BlobBinaryProperty»
+    «EXPAND instanceVariable FOR this»
+«ENDDEFINE»
+
+«DEFINE addAttribute FOR BlobTextProperty»
+    «EXPAND instanceVariable FOR this»
+«ENDDEFINE»
+
+«DEFINE addAttribute FOR BoolProperty»
+    «EXPAND instanceVariable FOR this»
+«ENDDEFINE»
+
+«DEFINE addAttribute FOR EnumerationProperty»
+	«EXPAND instanceVariable FOR this»
+«ENDDEFINE»
+
+«DEFINE addAttribute FOR DateTimeProperty»
+ 	«EXPAND instanceVariable FOR this»
+«REM»	public static final String «name.toUpperCase()»_ACCURACY = "«accuracy»"; «ENDREM»
+«ENDDEFINE»
+
+«DEFINE addAttribute FOR IntegerProperty»
+    «EXPAND instanceVariable FOR this»
+    «IF minValue != -2147483648»
+        public static final «javaType(this)» «name.toUpperCase()»_MINVALUE = «minValue»;
+    «ENDIF»
+    «IF maxValue != 2147483647 »
+        public static final «javaType(this)» «name.toUpperCase()»_MAXVALUE = «maxValue»;
+    «ENDIF»
+«ENDDEFINE»
+
+«DEFINE addAttribute FOR DecimalProperty»
+    «EXPAND instanceVariable FOR this»
+    «IF minValue != -2147483648 »
+        public static final «javaType(this)» «name.toUpperCase()»_MINVALUE = «minValue»;
+        public static final boolean «name.toUpperCase()»_MININCLUSIVE = «minInclusive»;
+    «ENDIF»
+    «IF maxValue != -2147483648 »
+        public static final «javaType(this)» «name.toUpperCase()»_MAXVALUE = «maxValue»;
+        public static final boolean «name.toUpperCase()»_MAXINCLUSIVE = «maxInclusive»;
+    «ENDIF»
+«ENDDEFINE»
+
+«DEFINE addAttribute FOR StringProperty»	
+	«EXPAND instanceVariable FOR this» 
+    «IF regularExpression.length > 0»
+        public static final «javaType(this)» «name.toUpperCase()»_REGEXP = "«regularExpression»";
+     «ENDIF»
+     «IF minLength > -1»
+         public static final Integer «name.toUpperCase()»_MINLENGTH = «minLength»;
+     «ENDIF»
+     «IF maxLength > -1»
+         public static final Integer «name.toUpperCase()»_MAXLENGTH = «maxLength»;
+     «ENDIF»
+«ENDDEFINE»
+
+«DEFINE addAttribute FOR Property»
+    /**
+     *  Unknown Property type. It is not a subclass of Property or it is not expanded by this generator.
+     *  Name: «name» 
+     *  Description: «description»
+     */
+«ENDDEFINE»
+
+«DEFINE addIdAttribute FOR BusinessClass»
+    /**
+     *  id: The identifier of this object.
+     */
+     private Long id;
+«ENDDEFINE»
+
+
+«DEFINE addIdAccessors FOR BusinessClass»
+    /**
+    *
+    * @return id (Long) The identifier of this object.
+    */
+     public Long getId() {
+        return this.id;
+    }
+«ENDDEFINE»
+
+«DEFINE addVersionAttribute FOR BusinessClass»
+     /**
+       * version: The version of this object 
+       */
+     private int version = -1;
+«ENDDEFINE»
+
+«DEFINE addVersionAccessors FOR BusinessClass»
+    /**
+    * @return version (Integer) The version of this object.
+    */
+     public Integer getVersion() {
+        return this.version;
+    }
+«ENDDEFINE»

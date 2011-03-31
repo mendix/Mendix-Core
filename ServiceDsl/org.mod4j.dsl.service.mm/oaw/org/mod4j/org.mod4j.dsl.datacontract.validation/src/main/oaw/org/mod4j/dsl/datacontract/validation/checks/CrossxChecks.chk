@@ -1,0 +1,108 @@
+/*******************************************************************************
+ * Copyright (c) 2008 Ordina and committers to Mod4j
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Ordina - initial implementation
+ *******************************************************************************/
+
+import org::mod4j::dsl::datacontract::mm::DataContractDsl;
+import org::mod4j::crossx::mm::crossx;  
+
+extension org::mod4j::crossx::broker::xtend::Crossx;
+extension org::eclipse::xtend::util::stdlib::elementprops;
+extension org::mod4j::dslcommon::xtend::generatorutil;
+
+context DataContractDsl::ExternalReference 
+    if keyword.equalsIgnoreCase("businessclass")
+    ERROR "BusinessClass [" + this.name + "] not defined in model [" + this.modelname + "]":
+       ( lookupSymbol(this.modelname, this.name, "BusinessClass") != null ) ;
+
+context DataContractDsl::ExternalReference 
+    if keyword.equalsIgnoreCase("enumeration")
+    ERROR "Enumeration [" + this.name + "] not defined in model [" + this.modelname + "]":
+       ( lookupSymbol(this.modelname, this.name, "Enumeration") != null) ;
+
+context DataContractDsl::BusinessClassPropertyReference ERROR "Property [" + this.name + "] must be defined in the corresponding business class" :
+    let sym1 = lookupSymbolWithSubsymbol(dto.base.modelname, dto.base.name, "BusinessClass",
+                                         "Property", this.name) :
+    (sym1 != null) ;
+    
+context DataContractDsl::BusinessClassAssociationRoleReference ERROR 
+    "[" + this.name + "] must be a role name in an association for [" + this.dto.base.name  + "]":
+    let symbol = lookupSymbolWithSubsymbol(dto.base.modelname, dto.base.name, "BusinessClass",
+                                         "Association", this.name) :
+    symbol != null;
+    
+context DataContractDsl::BusinessClassAssociationRoleReference ERROR this.getProperty("ERROR") :
+    let symbol = lookupSymbol(this.dto.base.modelname, this.dto.base.name, "BusinessClass") :
+    let props = (symbol == null ? {} : symbol.subSymbols.select(s|s.type.matches("Association") && (s.name == this.name)) ):
+    let prop = (props == null ? null : props.first() ):
+    let mult = (prop == null ? null : getPropertyValue(prop, "Multiplicity") ):
+    if (mult == null) || (this.dtoType == null) then
+        true
+    else (
+	    if (mult == "ONE") then 
+	    (    
+	        if this.dtoType.metaType == DataContractDsl::BusinessClassDto then
+	        (   
+	            let expected = getPropertyValue(prop, "BusinessClass") :
+	            let actual   = ((DataContractDsl::BusinessClassDto)this.dtoType).base.name :
+	            this.setProperty("ERROR", "Base class of [" + this.dtoType.name + "] should be [" + expected + "]")->
+	            expected == actual
+	        ) else 
+	            (this.setProperty("ERROR", "[" + this.dtoType.name + "] should be a BusinesClassDto")-> 
+	            false)
+	    )
+	    else   // (mult == "MANY")  
+	    (
+            let expected = getPropertyValue(prop, "BusinessClass") :
+            let baseDto  = this.dtoType :
+            if baseDto.metaType != DataContractDsl::BusinessClassDto then
+            (
+                this.setProperty("ERROR", "type of  [" + this.dtoType.name + "] must be a BusinessClassDto")->
+                false
+            ) else (
+                let actual = ((DataContractDsl::BusinessClassDto)baseDto).base.name :
+	            this.setProperty("ERROR", "Base class of [" + this.dtoType.name + "] should be [" + expected + "]")->
+                expected == actual
+            )
+        )
+	)
+    ;
+ 
+ context DataContractDsl::BusinessClassDto ERROR this.getProperty("ERROR") :
+	if this.propertyReferences.isEmpty then (
+        let classSymbol = lookupSymbol(this.base.modelname, this.base.name, "BusinessClass") :
+        let propSymbols = (classSymbol == null ? {} : classSymbol.subSymbols.select(s|s.type.matches("Property") ) ):
+        let dataTypes = propSymbols.collect(p | p.getPropertyValue("DataType")):
+        let enumTypes = dataTypes.reject(d | (d=="integer") || (d=="decimal") || (d=="boolean")  || 
+                                             (d=="string") || (d=="datetime") ) :
+        let enums = this.datacontractModel.enumerations.base.name :
+        let unknownTypes = enumTypes.select( e | ! enums.contains(e) ) :
+        if unknownTypes.isEmpty then (
+            true
+        ) else (
+            this.setProperty("ERROR", "Enumeration(s) " + unknownTypes + " must be declared in this data contract model")->
+            false
+        )
+	) else (
+        let classSymbol = lookupSymbol(this.base.modelname, this.base.name, "BusinessClass") :
+        let propSymbols = (classSymbol == null ? {} : classSymbol.subSymbols.select(s|s.type.matches("Property") ) ):
+        let usedPropSymbols = propSymbols.select(ps | this.propertyReferences.name.contains(ps.name)) :
+        let dataTypes = usedPropSymbols.collect(p | p.getPropertyValue("DataType")):
+        let enumTypes = dataTypes.reject(d | (d=="integer") || (d=="decimal") || (d=="boolean")  || 
+                                             (d=="string") || (d=="datetime") ) :
+        let enums = this.datacontractModel.enumerations.base.name :
+        let unknownTypes = enumTypes.select( e | ! enums.contains(e) ) :
+        if unknownTypes.isEmpty then (
+            true
+        ) else (
+            this.setProperty("ERROR", "Enumeration(s) " + unknownTypes + " must be declared in this data contract model")->
+            false
+        )
+	)
+;   

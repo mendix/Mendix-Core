@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <!--
+        Please edit this file with the Eclipse XML editor, set your XML editor to a line length of
+        128 characters, indent-size of 4 characters and not using tab-characters, and format the
+        file (Ctrl-Shift-F) before checking in. This should minimize the number of non-significant
+        differences when comparing versions.
+    -->
+
+    <properties>
+        <title>Mod4j 1.3.0 Release Notes</title>
+    </properties>
+    <body>
+        <section name="Mod4j 1.3.0 Release Notes">
+
+            <p>
+                Dear Mod4j community,
+                <br />
+                <br />
+                The Mod4j development team is pleased to announce the release of Mod4j 1.3.0.
+                The
+                following list highlights the
+                main issues that were involved with this release. For
+                the complete list of solved bugs, improvements and tasks,
+                scroll down to the Release
+                Notes List.
+                <br />
+                With this release you should be prepared to take extra time for some refactoring,
+                because there is a
+                breaking change involved. You can read more about this chang in
+                the
+                <a href="upgradenotes.html">Mod4j 1.3.0 Upgrade Notes</a>
+            </p>
+
+            <subsection name="How to upgrade">
+                <p>
+                    If you want to upgrade from the previous Mod4j release, you will need to follow
+                    the required upgrade steps
+                    as described in the
+                    <a href="upgradenotes.html">Mod4j 1.3.0 Upgrade Notes</a>
+                </p>
+            </subsection>
+            <subsection name="1.3.0 Relaese Notes List">
+
+                <h2>Bug</h2>
+                <ul>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-149'>MODFORJ-149</a>
+                        ] - Mod4j classnames should be validated
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-193'>MODFORJ-193</a>
+                        ] - Invalid constructor generated in the example class of a subclass
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-208'>MODFORJ-208</a>
+                        ] - ConcurrentUpdateException
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-210'>MODFORJ-210</a>
+                        ] - LazyInitializationException when an update generates
+                        BusinessRuleException
+                    </li>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-218'>MODFORJ-218</a>
+                        ] - Derived attributes not translated
+                    </li>
+                </ul>
+
+                <h2>Improvement</h2>
+                <ul>
+                    <li>
+                        [
+                        <a href='http://jira.codehaus.org/browse/MODFORJ-189'>MODFORJ-189</a>
+                        ] - Streamline exception handling over all layers in the architecture
+                    </li>
+                </ul>
+            </subsection>
+        </section>
+    </body>
+</document>

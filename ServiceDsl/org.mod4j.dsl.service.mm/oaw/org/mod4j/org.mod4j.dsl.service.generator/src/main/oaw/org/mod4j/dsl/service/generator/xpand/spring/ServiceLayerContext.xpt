@@ -1,0 +1,39 @@
+«REM»
+	  Copyright (c) 2009 Ordina and committers to Mod4j
+	  All rights reserved. This program and the accompanying materials
+	  are made available under the terms of the Eclipse Public License v1.0
+	  which accompanies this distribution, and is available at
+	  http://www.eclipse.org/legal/epl-v10.html
+	 
+	  Contributors:
+	      Ordina - initial implementation
+«ENDREM»
+«IMPORT ServiceDsl»
+
+«EXTENSION org::mod4j::dsl::service::mm::xtend::ServiceMethod»
+«EXTENSION org::mod4j::dslcommon::xtend::generatorutil»
+«EXTENSION org::mod4j::common::xtend::NameMapper»
+«EXTENSION org::mod4j::dslcommon::xtend::ProjectProperties»
+«EXTENSION org::mod4j::common::xtend::FileTracker»
+
+«DEFINE GenServiceLayerContext FOR ServiceModel»
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated at «timestamp()»  by Mod4j -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+            http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+        ">
+</beans>
+«ENDDEFINE»

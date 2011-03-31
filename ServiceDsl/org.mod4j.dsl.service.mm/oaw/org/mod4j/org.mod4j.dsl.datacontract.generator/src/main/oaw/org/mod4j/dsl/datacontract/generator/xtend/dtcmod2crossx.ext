@@ -1,0 +1,113 @@
+/* 
+   This file contains the code to create a Crossx model from a BusinesDomainDsl model.
+   Needed for crosssreference purposes.
+*/
+
+import crossx;
+import DataContractDsl;
+
+extension org::mod4j::dslcommon::xtend::generatorutil;
+extension org::mod4j::crossx::broker::xtend::Crossx;
+
+create ModelInfo exportModel(DataContractModel dtcModel, String modelFile) :
+    print("MOD4J INFO: Running Crossx on file [" + modelFile + "]")->
+    this.setDslname("DataContractDsl")->
+    this.setModelname(dtcModel.name)->
+    this.setResource(modelFile)->
+    this.symbols.addAll(dtcModel.dtos.toElement())->
+    this.symbols.addAll(dtcModel.enumerations.toElement());
+        
+create Symbol toElement(EnumerationDto dto) :
+    this.setName(dto.name.toFirstUpper()) ->
+    this.setType("EnumerationDto")->
+    this.subSymbols.addAll( dto.literals.enumLiteralToSymbol() )
+    ;
+
+crossx::Symbol enumLiteralToSymbol(EnumerationDtoLiteral lit) :
+    let result = new Symbol :
+    result.setName(lit.name) ->
+    result.setType("EnumerationDtoLiteral") ->
+    result
+    ;
+create Symbol toElement(Dto dto) :
+    this.setName(dto.name) ->
+    this.setType("Dto") ->
+    this.properties.add( addDtoTypeProperty(dto) ) 
+    ; 
+
+create Symbol toElement(BusinessClassDto dto) :
+    this.setName(dto.name) ->
+    this.setType("Dto") ->
+    this.properties.add( addDtoTypeProperty(dto) ) ->
+    this.properties.add( businessClassProperty(dto) )->
+    this.properties.add( newProperty("Creatable", (dto.creatable ? "true" : "false" ) ))->
+    this.properties.add( newRefProperty("BaseClass", dto.base.modelname, dto.base.name, "BusinessClass"))->
+    this.subSymbols.addAll(dto.properties.toElement())
+        ;
+
+create Symbol toElement(CustomDto dto) :
+    this.setName(dto.name) ->
+    this.setType("Dto") ->
+    this.properties.add( addDtoTypeProperty(dto) ) ->
+//    this.properties.add( newProperty("Creatable", (dto.creatable ? "true" : "false" ) ))->
+//    this.properties.add( newRefProperty("BaseClass", dto.base.modelname, dto.base.name, "BusinessClass"))->
+    this.subSymbols.addAll(dto.properties.toElement())
+        ;
+        
+crossx::Symbol toElement(DtoProperty prop) :
+    let result = new Symbol :
+    result.setName(prop.name) ->
+    result.setType("Unknown Property") ->
+    result.properties.add(prop.dataTypeToLiteralProperty())->
+    result.properties.add(newProperty("Nullable", ( (prop.nullable) ? "true" : "false") ))->
+    result.properties.add(newProperty("Writable", ( (prop.writable) ? "true" : "false") ))->
+    result
+    ;
+
+crossx::Symbol toElement(DtoDataProperty prop) :
+    let result = new Symbol :
+    result.setName(prop.name) ->
+    result.setType("DataProperty") ->
+    result.properties.add(prop.dataTypeToLiteralProperty())->
+    result.properties.add(newProperty("Nullable", ( (prop.nullable) ? "true" : "false") ))->
+    result.properties.add(newProperty("Writable", ( (prop.writable) ? "true" : "false") ))->
+    result
+    ;
+
+crossx::Symbol toElement(BusinessClassAssociationRoleReference ref) :
+    let result = new Symbol :
+    result.setName(ref.name) ->
+    result.setType("AssociationRoleReference") ->
+    result.properties.add(newRefProperty("ReferencedDto", ref.dtoType.datacontractModel.name, ref.dtoType.name, ref.dtoType.metaType.name.simpleName() ))->
+    result
+    ;
+
+crossx::Symbol toElement(DtoAssociationRoleProperty ref) :
+    let result = new Symbol :
+    result.setName(ref.name) ->
+    result.setType("AssociationRoleReference") ->
+    result.properties.add(newRefProperty("ReferencedDto", ref.dtoType.datacontractModel.name, ref.dtoType.name, ref.dtoType.metaType.name.simpleName() ))->
+    result.properties.add(newProperty("ordered", ( (ref.ordered) ? "true" : "false") ))->
+    result.properties.add(newProperty("multiplicity", ( (ref.multiplicity == Multiplicity::ONE) ? "ONE" : "MANY") ))->
+    result
+    ;
+
+crossx::LiteralSymbolProperty dataTypeToLiteralProperty(DtoProperty prop) :
+	newProperty("DataType", prop.dataType);
+
+create LiteralSymbolProperty addDtoTypeProperty(Dto dto) :
+    this.setName("dtoType")->
+    switch( dto.metaType ){
+        case DataContractDsl::BusinessClassDto : this.setValue("BusinessClassDto")
+        case DataContractDsl::CustomDto        : this.setValue("CustomDto")
+        default : this.setValue(dto.metaType.name)
+    }
+    ;
+
+create LiteralSymbolProperty businessClassProperty(BusinessClassDto dto) :
+    this.setName("businessClass")->
+    this.setValue(dto.base.name)
+    ;
+
+    
+    

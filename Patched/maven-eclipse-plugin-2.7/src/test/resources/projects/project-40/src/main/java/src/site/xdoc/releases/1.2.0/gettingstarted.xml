@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <!--
+        Please edit this file with the Eclipse XML editor, set your XML editor to a line length of 128 characters, indent-size
+        of 4 characters and not using tab-characters, and format the file (Ctrl-Shift-F) before checking in. This should
+        minimize the number of non-significant differences when comparing versions.
+    -->
+    <body>
+
+        <section name="Mod4j 1.2 Getting Started">
+
+            <subsection name="Setting up your environment">
+                <ol>
+                    <li>
+                        Make sure you've installed Java JDK version 5 (1.5.0_15 or higher). You can
+                        download one from the
+                        <a href="http://java.sun.com/javase/downloads/index.jsp">Sun download
+                            site</a>
+                        .
+                        <br />
+                        <br />
+                    </li>
+                    <li>
+                        Install
+                        <b>Eclipse 3.5 SR1 (Galileo) for Java EE developers</b>
+                        . You can
+                        download one from the
+                        <a href="http://www.eclipse.org/downloads">Eclipse
+                            download site</a>
+                        . If you've already installed Eclipse Galileo, you can
+                        check if it is the right version, by checking the
+                        About box from the menu:
+                        Help -> About Eclipse. Somewhat surprisingly you should see "Eclipse Java EE
+                        IDE
+                        for Web Developers."
+                        <br />
+                        <br />
+                    </li>
+                    <li>
+                        Install, using the
+                        <a href="../../eclipse-update-manager.html">Update Manager</a>
+                        in Eclipse, at least the following
+                        plug-ins into Eclipse:
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Eclise plug-in</th>
+                                    <th>Features to select when installing</th>
+                                    <th>Update site</th>
+                                </tr>
+                            </thead>
+                            <tr>
+                                <td>Eclipse Xtext and Xpand plug-ins</td>
+                                <td>
+                                    <b> - Xtext Antlr Support 0.7.2</b>
+                                    <br />
+                                    <b> - TMF XTEXT SDK (Incubation) 0.7.2</b>
+                                    <br />
+                                    <b> - M2T XPAND SDK (Incubation) 0.7.2</b>
+                                </td>
+                                <td>
+                                    <b>
+                                        <code>http://download.itemis.com/updates/releases</code>
+                                    </b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Eclipse IAM (Integration for Apache Maven), formerly called
+                                    Q4E</td>
+                                <td>
+                                    Select all features
+                                </td>
+                                <td>
+                                    <b>
+                                        <code>http://q4e.googlecode.com/svn/trunk/updatesite-iam</code>
+                                    </b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mod4j Eclipse plug-in</td>
+                                <td>
+                                    Select all features
+                                </td>
+                                <td>
+                                    <b>
+                                        <code>http://mod4j.org/updatesite/3.5</code>
+                                    </b>
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                    </li>
+                    <li>
+                        Take care of the following Workspace settings in Eclipse:
+                        <br />
+                        - Set the
+                        <b>Text file encoding</b>
+                        in Eclipse to
+                        <b>UTF-8</b>
+                        . For Linux users UTF-8 is usually the default
+                        platform encoding, and no change will be necessary.
+                        <br />
+                        - Enable the option
+                        <b>Refresh automatically</b>
+                        . While working with the Mod4j editors a lot of the
+                        (re)sources will be generated or regenerated. To
+                        keep
+                        the compiler happy its convenient to refresh your
+                        workspace automatically.
+                        <br />
+                        You can verify and set both settings by navigating to
+                        <b>Window</b>
+                        >
+                        <b>Preferences...</b>
+                        >
+                        <b>General</b>
+                        >
+                        <b>Workspace</b>
+                        .
+                        <br />
+                        <br />
+                    </li>
+                    <li>
+                        Install Apache Maven 2.1.0 or higher. For download and install instructions
+                        see the
+                        <a href="http://maven.apache.org">Apache Maven site</a>
+                        <br />
+                        <br />
+                    </li>
+                    <li>
+                        Due to known issue
+                        <a href="http://jira.codehaus.org/browse/MODFORJ-146">MODFORJ-146</a>
+                        ,
+                        all users should check if the path to their local Maven repository contains any spaces. If so, they
+                        should apply one of the provided
+                        <a href="http://jira.codehaus.org/browse/MODFORJ-146">workarounds</a>
+                        as described in this issue.
+                    </li>
+                </ol>
+            </subsection>
+
+            <subsection name="Start modelling">
+                <p>If you've completed the installation steps above, you're ready for
+                    modeling...</p>
+                <p>
+                    You can create the following Mod4j models in your project:
+                    <br />
+                    <br />
+                    <img src="../../images/mod4j-business.ico" align="left" alt="" />
+                    BusinessDomain model
+                    <br />
+                    <img src="../../images/mod4j-datacontract.ico" align="left" alt="" />
+                    DataContract
+                    model
+                    <br />
+                    <img src="../../images/mod4j-service.ico" align="left" alt="" />
+                    Service model
+                    <br />
+                    <img src="../../images/mod4j-presentation.ico" align="left" alt="" />
+                    Presentation
+                    model -- NOT AVAILABLE YET
+                </p>
+
+                <p>
+                    Before you start we want to bring our
+                    <b>RecordShop</b>
+                    example project to your
+                    attention. This project contains a example of each of the Mod4j models above. So
+                    if
+                    you want to learn the syntax and structure of the models, take a look at the
+                    RecordShop. The RecorodShop is
+                    an example project that we maintain during our
+                    development process. Features we implement in Mod4j are first
+                    tested in the
+                    RecordShop.
+                    <br />
+                    <a href="http://svn.codehaus.org/mod4j/trunk/modules/Examples/RecordShop-ExampleProject">Here</a>
+                    you can find the
+                    <a href="http://svn.codehaus.org/mod4j/trunk/modules/Examples/RecordShop-ExampleProject">RecordShop sources</a>
+                    and model files.
+                </p>
+
+                <ol>
+                    <li>
+                        First of all you need to create a new Eclipse project for the Mod4j DSL
+                        models you are going to create.
+                        <br />
+                        Choose:
+                        <q>
+                            File, New, Other, Mod4j,
+                            <b>Mod4j Project</b>
+                        </q>
+                        .
+                    </li>
+                    <li>
+                        Enter the application name of the project. For instance:
+                        <b>MyApplication</b>
+                    </li>
+                    <li>
+                        Enter the Root package. For instance:
+                        <b>org.mycompany.myapplication</b>
+                    </li>
+                    <li>
+                        Uncheck the "Use default location" checkbox and choose a location where all
+                        model projects and modules
+                        for your application can be placed.
+                        <br />
+                        While
+                        your project develops over time, this folder will contain the project
+                        modules you create: all
+                        generated project modules and the generated Maven
+                        parent-pom.
+                        <br />
+                        We suggest (commonly used) you use the following folder
+                        structure:
+                        <br />
+                        <code>
+                            <b>path-to-your-projects/MyApplication/modules</b>
+                        </code>
+                    </li>
+                    <li>
+                        After finishing the wizard, a new project is created with the name
+                        <b>MyApplication-dslModels</b>
+                        and a directory structure like this:
+                        <br />
+                        <code>
+                            <b>src/model/businessdomain/MyApplicaton.busmod</b>
+                        </code>
+                        (the model file containing the elements of your businessdomain
+                        model)
+                        <br />
+                        <code>
+                            <b>src/model/datacontract/MyApplication.dtcmod</b>
+                        </code>
+                        (the model file containing the elements of your datacontract model)
+                        <br />
+                        <code>
+                            <b>src/model/service/MyApplication.sermod</b>
+                        </code>
+                        (the model file containing the elements of your service model)
+                        <br />
+                        <code>
+                            <b>src/model/mod4j.properties</b>
+                        </code>
+                        (the property file containing input parameters for code generation)
+                    </li>
+                    <li>
+                        For modeling the business domain model of your application, open the file
+                        <code>src/model/businessdomain/MyApplication.busmod</code>
+                        with the
+                        <code>BusinessDomain Model Editor</code>
+                        .
+                    </li>
+                    <li>Here you can add the classes, attributes, businessrules, associations etc.
+                        of your BusinessDomain model.
+                        Code-completion (ctrl + space) will help you a
+                        lot to find the right keywords and model elements to use.
+                        See the usermanual
+                        for more information about how to setup your BusinessDomain model.</li>
+                    <li>You can setup your DataContract- and Service models in the same way. </li>
+                    <li> After saving your models in Eclipse, the (re)sources for your application
+                        are automatically generated.
+                        See next section. </li>
+                </ol>
+            </subsection>
+
+            <subsection name="Generating source code">
+                <p> If you've completed and saved your model(s) as described in the previous
+                    section, the source code and
+                    resources for your application are automatically
+                    generated out of the model(s). Here below is described were
+                    you can find them
+                    and how to import them as projects into Eclipse. You can also find a overview
+                    and the
+                    location of the generated sources by opening the Mod4j "Generated Files"
+                    console. (Window > Show View > Other
+                    > Mod4j > Generated Files). </p>
+                <ol>
+                    <li>
+                        As you can see in the figure above, the Business Domain model generates
+                        (re)sources into two modules: the
+                        -data and -domain module. If these modules
+                        don't exist the modules will be automatically created. The
+                        <b>-domain</b>
+                        and
+                        <b>-data</b>
+                        modules are created in the application folder for all your
+                        modules, right beside the
+                        <code>MyApplication.dslModels</code>
+                        folder. See:
+                        <code>../MyApplication-domain</code>
+                        and
+                        <code>../MyApplication-data</code>
+                    </li>
+                    <li>
+                        The generated sources and resources are placed in the
+                        <code>generated-sources</code>
+                        and
+                        <code>generated-resources</code>
+                        folders. Sources in
+                        <code>MyApplication-domain/generated-sources</code>
+                        and
+                        resources in
+                        <code>MyApplication-data/generated-resources</code>
+                        <br />
+                        All Extension Points (see also next section) are initially generated
+                        into the
+                        <code>src/main/..</code>
+                        folders.
+                    </li>
+                    <li>
+                        Since the generated modules are fully Mavenized you can import the
+                        generated modules as Maven projects
+                        into Eclipse. But before ypu do that,
+                        it's a good practice to check if the generated modules can be build
+                        by
+                        Maven.
+                        <br />
+                        Open a command console and navigate to location of the
+                        generated parent-pom (it's the pom.xml in the root
+                        of your application
+                        folder).
+                        <br />
+                        type:
+                        <code>
+                            <b>mvn clean install</b>
+                        </code>
+                        <br />
+                        If you run Maven for the first time, it could take a few minutes to
+                        complete for downloading the needed
+                        dependencies. After the build is
+                        finished and you've seen "BUILD SUCCESFULL", the parent-pom and
+                        submodules
+                        are locally installed and you can import the modules as Maven projects into
+                        Eclipse.
+                    </li>
+                    <li>
+                        You can import all the generated Maven modules at once as follows:
+                        <br />
+                        Choose: Import, Maven 2,
+                        <b>Maven 2 Project</b>
+                        <br />
+                        and navigate to the application folder. Choose
+                        <b>Ok</b>
+                        .
+                    </li>
+                    <li>
+                        By default all modules found with a pom are selected for the import. Make
+                        sure you do not import the the
+                        <b>MyApplication-dslModels</b>
+                        module by
+                        deselecting it. This module already exist as project in your Eclipse
+                        workspace.
+                    </li>
+                    <li>
+                        Complete the import by clicking on
+                        <b>Finish</b>
+                    </li>
+                    <li>
+                        In the previous step the IAM Maven plug-in not always recognizes the source folders correctly. If you
+                        encounter compilation failures, adjust the source folders manually. Right-click on the project to adjust
+                        the "Build Path" configuration. Add
+                        <code>src/main/java, src/test/java, src/main/resources, generated-sources</code>
+                        and
+                        <code>generated-resources</code>
+                        to it.
+                    </li>
+                </ol>
+            </subsection>
+
+            <subsection name="Extension Points">
+                <p> There are several reasons to mention why a developer needs to manually add
+                    (re)sources to the generated
+                    (re)sources by Mod4j. </p>
+                <ul>
+                    <li>To implement business rules</li>
+                    <li>If the generated code does not fit the developers needs, and changing the
+                        model is not possible or does
+                        not lead to the right result. </li>
+                    <li>...</li>
+                </ul>
+                <p> For these reasons with Mod4j you can use Extension Points. Extension Points are
+                    extends to the generated
+                    (re)sources and provide a place where developers
+                    manually can make additions to- or change the behavior of
+                    the system. Initially
+                    Mod4j generates Extension Points once if they do not exist already. So Extension
+                    Points
+                    will not be overwritten by the generator. </p>
+                <p>
+                    Typically Extension Points are placed under the
+                    <code>src</code>
+                    folder of a
+                    module and needs to be added to the projects versioncontrol system.
+                </p>
+            </subsection>
+
+        </section>
+    </body>
+</document>

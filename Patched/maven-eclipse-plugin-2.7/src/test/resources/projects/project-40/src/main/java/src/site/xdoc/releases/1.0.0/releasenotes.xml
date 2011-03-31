@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+  <!--
+    Please edit this file with the Eclipse XML editor, set your XML editor to a line length of 128 characters, indent-size of 4
+    characters and not using tab-characters, and format the file (Ctrl-Shift-F) before checking in. This should minimize the
+    number of non-significant differences when comparing versions.
+  -->
+
+  <properties>
+    <title>Mod4j 1.0.0 Release Notes</title>
+  </properties>
+  <body>
+    <section name="Mod4j 1.0.0 Release Notes">
+
+      <h2> Sub-task</h2>
+      <ul>
+        <li>
+          [
+          <a href='http://jira.codehaus.org/browse/MODFORJ-72'>MODFORJ-72</a>
+          ] - Generate toString() method for domain classes
+        </li>
+      </ul>
+
+      <h2> Bug</h2>
+      <ul>
+        <li>
+          [
+          <a href='http://jira.codehaus.org/browse/MODFORJ-10'>MODFORJ-10</a>]
+          - The new &quot;find&quot; keyword in the service model is not bold and collored
+</li>
+<li>[<a href='http://jira.codehaus.org/browse/MODFORJ-14'>MODFORJ-14</a>] -         File occurrs doule in Crossx
+</li>
+<li>[<a href='http://jira.codehaus.org/browse/MODFORJ-39'>MODFORJ-39</a>] -         Generate relative image file references in HTML documentation
+</li>
+<li>[<a href='http://jira.codehaus.org/browse/MODFORJ-65'>MODFORJ-65</a>] -         The new keyword ordered does not show up with codecompletion and is not bold and collered.
+</li>
+<li>[<a href='http://jira.codehaus.org/browse/MODFORJ-68'>MODFORJ-68</a>] -         environment.properties not generated
+</li>
+<li>[<a href='http://jira.codehaus.org/browse/MODFORJ-71'>MODFORJ-71</a>] -         No import org.joda.time.DateTime generated when using mandatory datetime
+</li>
+<li>[<a href='http://jira.codehaus.org/browse/MODFORJ-82'>MODFORJ-82</a>] -         Rename references to helper classes to conventional names.
+</li>
+<li>[<a href='http://jira.codehaus.org/browse/MODFORJ-85'>MODFORJ-85</a>] -         For a boolean a getBoolean() is generated in the DtoTranslator. In stead of isBoolean().
+</li>
+<li>[<a href='http://jira.codehaus.org/browse/MODFORJ-89'>MODFORJ-89</a>] -         Genereted sercvice method may not cpmpile correctly because they depend on teh availability of other service methods
+</li>
+<li>[<a href='http://jira.codehaus.org/browse/MODFORJ-91'>MODFORJ-91</a>] -         Error occurs after first time using the Mod4j Eclipse wizard.
+</li>
+</ul>
+    
+<h2>        Improvement
+</h2>
+<ul>
+<li>[<a href='http://jira.codehaus.org/browse/MODFORJ-4'>MODFORJ-4</a>] -         Keywords abstract and final for classes are not used in code generation
+</li>
+<li>[<a href='http://jira.codehaus.org/browse/MODFORJ-16'>MODFORJ-16</a>] -         Javadoc for constructor parameters of Business classes show wrong datatype
+</li>
+<li>[<a href='http://jira.codehaus.org/browse/MODFORJ-20'>MODFORJ-20</a>] -         Make syntax consistent over all DSLs
+</li>
+<li>[<a href='http://jira.codehaus.org/browse/MODFORJ-23'>MODFORJ-23</a>] -         Placement of Dao and Impl files in different package
+</li>
+<li>[<a href='http://jira.codehaus.org/browse/MODFORJ-29'>MODFORJ-29</a>] -         Add posibility to use an OrderedSet instead of a Set for associations
+</li>
+<li>[<a href='http://jira.codehaus.org/browse/MODFORJ-31'>MODFORJ-31</a>] -         equals method in domain objects
+</li>
+<li>[<a href='http://jira.codehaus.org/browse/MODFORJ-49'>MODFORJ-49</a>] -         Generate 'toString()', 'hashCode()' and 'equals()' methods into the domain classes.
+</li>
+<li>[<a href='http://jira.codehaus.org/browse/MODFORJ-69'>MODFORJ-69</a>] -         Ordered association lacks method to use the ordening.
+</li>
+<li>[<a href='http://jira.codehaus.org/browse/MODFORJ-74'>MODFORJ-74</a>] -         Add indexed 'addTo' and 'removeFrom' methods to DTO and service layers.
+</li>
+<li>[<a href='http://jira.codehaus.org/browse/MODFORJ-87'>MODFORJ-87</a>] -         srcModelPath should be removed from mod4j.properties
+</li>
+<li>[<a href='http://jira.codehaus.org/browse/MODFORJ-92'>MODFORJ-92</a>] -         The mod4j.project console only prints lines that are printed to the error output stream
+</li>
+</ul>
+        
+<h2>        Task
+</h2>
+<ul>
+<li>[<a href='http://jira.codehaus.org/browse/MODFORJ-2'>MODFORJ-2</a>] -         Write user manual for Service Dsl
+</li>
+<li>[<a href='http://jira.codehaus.org/browse/MODFORJ-5'>MODFORJ-5</a>] -         Write an abstract of the used reference architecture
+</li>
+<li>[<a href='http://jira.codehaus.org/browse/MODFORJ-7'>MODFORJ-7</a>] -         Change Smart-Java specific Maven configuration
+</li>
+</ul>
+
+        </section>
+    </body>
+</document>

@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Mod4j DataContract DSL generator
+Bundle-SymbolicName: org.mod4j.dsl.datacontract.generator;singleton:=true
+Bundle-Version: 1.3.0.qualifier
+Eclipse-RegisterBuddy: org.mod4j.common
+Require-Bundle: org.mod4j.common;bundle-version="1.1.0",
+ org.mod4j.crossx.broker;bundle-version="1.1.0",
+ org.mod4j.crossx.mm;bundle-version="1.1.0",
+ org.mod4j.dsl.datacontract.mm;bundle-version="1.1.0"
+Bundle-Vendor: org.mod4j
+Export-Package: org.mod4j.dsl.datacontract.generator.workflow

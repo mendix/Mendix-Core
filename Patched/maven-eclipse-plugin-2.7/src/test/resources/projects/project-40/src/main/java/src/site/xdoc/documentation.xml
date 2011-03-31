@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <!--
+        Please edit this file with the Eclipse XML editor, set your XML editor to a line length of 128 characters, indent-size
+        of 4 characters and not using tab-characters, and format the file (Ctrl-Shift-F) before checking in. This should
+        minimize the number of non-significant differences when comparing versions.
+    -->
+
+    <properties>
+        <title>Mod4j documentation</title>
+    </properties>
+    <body>
+
+        <section name="Mod4j documentation">
+
+            <p>
+                <b>Mod4j 2.0</b>
+            </p>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="releases/2.0.0/gettingstarted.html">Mod4j Getting Started 2.0</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mod4j Application Architecture 2.0
+                            <a href="https://docs.google.com/document/d/1WZ5EE7FBa1XoNOVZQd1sEMv39jontnSS5sOrx4_gQ3A/export?format=pdf">
+                                PDF</a>
+                            /
+                            <a
+                                href="https://docs.google.com/document/pub?id=1WZ5EE7FBa1XoNOVZQd1sEMv39jontnSS5sOrx4_gQ3A">
+                                HTML</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mod4j User Guide 2.0
+                            <a href="http://docs.google.com/View?id=dcxdnqwt_29cjg5tpdz">HTML</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p>
+                <b>Mod4j 1.1.0</b>
+            </p>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="releases/1.1.0/gettingstarted.html">Mod4j Getting Started 1.1.0</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mod4j Application Architecture 1.1.0
+                            <a href="documentation/1.1.0/application-architecture/mod4j-application-architecture.pdf">
+                                PDF</a>
+                            /
+                            <a
+                                href="documentation/1.1.0/application-architecture/mod4j-application-architecture.html">
+                                HTML</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mod4j User Guide 1.1.0
+                            <a href="documentation/1.1.0/user-guide/mod4j-user-guide.pdf">PDF</a>
+                            /
+                            <a href="documentation/1.1.0/user-guide/mod4j-user-guide.html">HTML</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                <b>Mod4j 1.0.0</b>
+            </p>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="releases/1.0.1/gettingstarted.html">Mod4j Getting Started 1.0.1</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mod4j User Guide 1.0.1
+                            <a href="documentation/1.0.1/user-guide/mod4j-user-guide.pdf">PDF</a>
+                            /
+                            <a href="documentation/1.0.1/user-guide/mod4j-user-guide.html">HTML</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mod4j Application Architecture 1.0.1
+                            <a href="documentation/1.0.1/application-architecture/mod4j-application-architecture.pdf">PDF</a>
+                            /
+                            <a href="documentation/1.0.1/application-architecture/mod4j-application-architecture.html">HTML
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                <b>Mod4j 1.0.0-beta3</b>
+            </p>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            Mod4j User Guide 1.0.0-beta-3
+                            <a href="documentation/1.0.0-beta-3/user-guide/mod4j-user-guide.pdf">PDF</a>
+                            /
+                            <a href="documentation/1.0.0-beta-3/user-guide/mod4j-user-guide.html">HTML</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mod4j Application Architecture 1.0.0-beta-3
+                            <a href="documentation/1.0.0-beta-3/application-architecture/mod4j-application-architecture.pdf">PDF
+                            </a>
+                            /
+                            <a href="documentation/1.0.0-beta-3/application-architecture/mod4j-application-architecture.html">
+                                HTML</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </body>
+</document>

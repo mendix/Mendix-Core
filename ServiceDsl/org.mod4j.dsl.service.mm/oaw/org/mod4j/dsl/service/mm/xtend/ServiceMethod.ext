@@ -1,0 +1,101 @@
+/* 
+ * Operations implemented in Java 
+ */
+import ServiceDsl;
+import crossx;
+
+extension org::mod4j::crossx::broker::xtend::Crossx ;
+extension org::mod4j::dslcommon::xtend::generatorutil;
+
+String JavaParamType(Parameter param) :
+    print("JAVA PARAM TYPE [" + param + "]")->
+    ( param == null ? "void"  : (
+    switch( param.collection ){
+        case CollectionType::LIST : 'List<' +  param.type.name + '>'
+        default : param.type.name
+    } )
+    )
+;
+String JavaType(DtoReference dto) :
+    ( dto == null ? "void"  : (
+    let dtoSymbol = lookupSymbol(dto.modelname, dto.name, "Dto") :
+    let dtoType = dtoSymbol.getPropertyValue("dtoType") :
+    let baseDto = dtoSymbol.getPropertyValue("baseDto") :
+    switch( dtoType ){
+        case 'ListDto' : 'List<' +  baseDto + '>'
+        default : dto.name
+    } )
+    )
+;
+Set[Symbol] getAllBusinessClassDtoSymbols(ServiceModel model) :
+    let businessClassDtoSymbols = model.dtoReferences.select(dtoref | dtoref.dtoType() == "BusinessClassDto").
+        collect(dtoref| lookupSymbol(dtoref.modelname, dtoref.name, "Dto")) :
+    let businessClassListDtoSymbols = model.dtoReferences.select(dtoref | dtoref.dtoType() == "ListDto").
+        collect(dtoref|dtoref.baseDtoSymbol()) : // .select(symbol | symbol.type == "BusinessClassDto") :
+    businessClassListDtoSymbols.addAll(businessClassDtoSymbols)->
+    businessClassListDtoSymbols.toSet()
+    ;
+    
+/** Get the name of the businessclass for dto, returns "void" if the dto does not have a businessclass
+ */
+String businessClass(DtoReference dto) :
+    let dtoSymbol = lookupSymbol(dto.modelname, dto.name, "Dto") :
+    let businessClass = dtoSymbol.getPropertyValue("businessClass") :
+    (businessClass == null) ? "void": businessClass
+;
+
+
+Symbol baseDtoSymbol(DtoReference dto) :
+    let dtoSymbol = lookupSymbol(dto.modelname, dto.name, "Dto") :
+    let refSymbol = dtoSymbol.getReferenceProperty("BaseDto") :
+    (refSymbol == null) ? null : lookupReference(refSymbol)
+;
+
+Boolean creatable(DtoReference dto) :
+    let dtoSymbol = lookupSymbol(dto.modelname, dto.name, "Dto") :
+    let creatable = dtoSymbol.getPropertyValue("creatable") :
+    (creatable == "true") ? true : false
+;
+
+String dtoType(DtoReference dto) :
+    let dtoSymbol = lookupSymbol(dto.modelname, dto.name, "Dto") :
+    let dtoType = dtoSymbol.getPropertyValue("dtoType") :
+    (dtoType == null) ? "void": dtoType
+;
+
+String dtoBaseBusinessClass(DtoReference dto) :
+    let dtoBaseSymbol = dto.baseDtoSymbol() :
+    ((dtoBaseSymbol == null) ? "void": dtoBaseSymbol.getPropertyValue("businessClass")) 
+;
+
+/** Find all method of a special type, 
+ */
+List[SpecialMethod] uniqueMethods(ServiceModel model, MethodType typeToFind) :
+	let specialMethods = model.methods.typeSelect(SpecialMethod).select(m| m.type == typeToFind) :
+ 	let uniqueNames = specialMethods.name.toSet() :
+ 	let uniqueBusinessClassesNew = specialMethods.dto.businessClass().toSet() :
+ 	let uniqueSpecialMethodsNew = uniqueBusinessClassesNew.collect(cls| specialMethods.selectFirst(m|m.dto.businessClass() == cls)) :
+//  let uniqueCreateMethods = uniqueNames.collect(unique | createMethods.selectFirst(m|m.name == unique)) :
+ 	uniqueSpecialMethodsNew
+;
+
+SpecialMethod specialMethod(ServiceModel model, MethodType typeToFind, String businessClassName) :
+    let specialMethods = uniqueMethods(model, typeToFind) :
+    specialMethods.selectFirst(m | m.dto.businessClass().matches( businessClassName) )
+    ;
+
+CrudService crud(ServiceModel model, String businessClassName) :
+    model.crudServices.selectFirst(m | m.dto.businessClass().matches( businessClassName) )
+    ;
+    
+List[String] uniqueBusinessClasses(ServiceModel model) :
+    model.dtoReferences.select(dtoRef|dtoRef.dtoType() == "BusinessClassDto").businessClass().toSet()
+;
+
+crossx::Symbol getAssociation(AssociationMethod method) :
+      let mainSymbol = lookupSymbol(method.main.modelname, method.main.name, "Dto") :
+      let baseClassRef = getReferenceProperty(mainSymbol, "BaseClass") :
+      let class = lookupReference( baseClassRef) :
+      let assoc = lookupSubSymbol(class, method.rolename, "Association") : 
+      assoc
+;

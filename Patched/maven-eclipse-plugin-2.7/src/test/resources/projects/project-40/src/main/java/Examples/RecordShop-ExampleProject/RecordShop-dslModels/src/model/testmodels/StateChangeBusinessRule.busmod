@@ -1,0 +1,18 @@
+domain StateChangeBusinessRule;
+
+class Kader [
+    string naam;
+]
+
+class CasusOverleg [
+    string naam;
+    datetime datum;
+    rules [ unique naam [ naam ] ]
+]
+
+class Organisatie [
+    string naam;
+]
+
+association CasusOverleg overleggen many <-> many Organisatie organisaties;
+association Kader kaders many <-> many Organisatie organisaties;

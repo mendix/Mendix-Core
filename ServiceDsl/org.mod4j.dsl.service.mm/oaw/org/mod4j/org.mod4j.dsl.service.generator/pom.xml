@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation=" http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.mendix</groupId>
+        <artifactId>mendix</artifactId>
+        <version>1.4.0-SNAPSHOT</version>
+    </parent>
+    <groupId>org.mendix</groupId>
+    <artifactId>mendix-service-generator</artifactId>
+    <version>1.4.0-SNAPSHOT</version>
+    <name>${project.artifactId}</name>
+    <description>This Eclipse plug-in project contains the ServiceDsl generator.</description>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/oaw</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.mendix</groupId>
+            <artifactId>mendix-service-mm</artifactId>
+            <version>1.4.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mendix</groupId>
+            <artifactId>mendix-common</artifactId>
+            <version>1.4.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mendix.crossx</groupId>
+            <artifactId>mendix-crossx-broker</artifactId>
+            <version>1.4.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+</project>

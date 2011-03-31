@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <!--
+        Please edit this file with the Eclipse XML editor, set your XML editor to a line length of
+        128 characters, indent-size of 4 characters and not using tab-characters, and format the
+        file (Ctrl-Shift-F) before checking in. This should minimize the number of non-significant
+        differences when comparing versions.
+    -->
+
+    <properties>
+        <title>Mod4j 1.3.0 Upgrade Notes</title>
+    </properties>
+    <body>
+        <section name="Mod4j 1.3.0 Upgrade Notes">
+            <p>
+                The upgrade steps as described on this page are needed if you want to upgrade your
+                project from
+                <b>Mod4j 1.2.1</b>
+                to
+                <b>Mod4j 1.3.0</b>
+                .
+                <br />
+                <br />
+                Unfortunately this release of Mod4j comes with a breaking change. Due to evolving
+                insight we've changed the signature of two service methods for creating and
+                updating
+                business objects. So if you maintain one or more service models in your project, you
+                should be
+                prepared to make a view changes to your code.
+                <br />
+                In one of the upgrade steps below you will be guided in how to make these changes,
+                so
+                that your code will work with Mod4j 1.3.0 and later.
+            </p>
+            <p>Please mail to user@mod4j.codehaus.org if you have any questions or need help.</p>
+            <p>
+                If you want to upgrade from earlier released versions,
+                you'll need to follow the
+                required upgrade steps as described in the subsequent
+                Upgrade Notes for each release.
+                For an overview of of the releases and Upgrade
+                Notes, see the
+                <a href="../index.html">Mod4j Releases page</a>
+            </p>
+            <subsection name="Installation of Mod4j Eclipse plug-in 1.3.0">
+                <p>Before you install a new Mod4j Eclipse plug-in into Eclipse make sure you
+                    un-install older
+                    versions of the plug-in.</p>
+                <p>
+                    Here you can find
+                    <a href="../../downloads/download.html">download and install</a>
+                    instructions, that will guide you to install Mod4j, by making use of the Mod4j
+                    updatesite.
+                </p>
+            </subsection>
+            <subsection name="Regenerate Mod4j-CrossX data files">
+                <p>This version of Mod4j generates new CrossX data files. So to prevent a mix-up
+                    between the old and the new files, the old ones must be removed from your
+                    filesystem.</p>
+                <ol>
+                    <li>Open Eclipse and navigate to your -dslModules project</li>
+                    <li>
+                        Search for all files that end with the extentsion
+                        <b>.crossx~</b>
+                    </li>
+                    <li>Delete them all from your filesystem</li>
+                    <li>Restart Eclipse to start with a clean memory again.</li>
+                </ol>
+            </subsection>
+            <subsection name="Changes in Maven configuration">
+                <p>
+                    With this release there's only one thing to change in the
+                    <b>parent-pom</b>
+                    of your application. The parent-pom (pom.xml) is located at the root
+                    of your
+                    project (if you didn't change its location).
+                </p>
+                <ul>
+                    <li>
+                        Adjust
+                        <b>mod4j.version</b>
+                        property to
+                        <b>1.3.0</b>
+                        :
+                        <br />
+                        <textarea rows="5" cols="70"><![CDATA[
+<project>
+   ...
+   <properties>
+       <mod4j.version>1.3.0</mod4j.version>]]>
+                        </textarea>
+                    </li>
+                </ul>
+            </subsection>
+            <subsection name="Changes in services">
+                <p>If you have a service model and make use of one or more crud-services or
+                    individual create or update services, you must be prepared to make some changes
+                    in to your code that makes use of them.</p>
+                <p>
+                    <b>What has changed?</b>
+                    <br />
+                    The signature of the generated
+                    <b>create</b>
+                    and
+                    <b>update</b>
+                    service methods in the service-layer have changed. All create service methods
+                    now return a Long value,
+                    representing the unique id of the just created business
+                    object, instead of returning the full dto object.
+                    <br />
+                    Example:
+                </p>
+                <p>
+                    <code>public Long createCustomer(SimpleCustomerDto object);</code>
+                </p>
+                <p>
+                    The signature of the update service methods also has changed. Where it
+                    previously
+                    returned the just updated business object(s) as dto, as of this
+                    version
+                    of Mod4j it
+                    returns void.
+                    <br />
+                    Example:
+                </p>
+                <p>
+                    <code>public void updateCustomer(SimpleCustomerDto object);</code>
+                </p>
+                <p>
+                    <b>Code changes</b>
+                    <br />
+                    All your custom code that makes use of these service methods needs to be
+                    changed.
+                    After you have
+                    upgraded your project to Mod4j 1.3.0, your compiler will
+                    tell you
+                    exactly what code should be taking care of.
+                </p>
+                <p>
+                    <b>Why did this change?</b>
+                </p>
+                <ul>
+                    <li>First reason is that for update service methods we could not guarantee
+                        that
+                        the returned dto-structure was fully conistent for all possible
+                        scenario's.
+                        For
+                        simple
+                        dto-structures it was possible, but for complex
+                        dto-structutures
+                        with circulair references and multiple objects of the same
+                        type we run
+                        into a
+                        theoretical borders.
+                    </li>
+                    <li>We want the service methods to satisfy the CQS (Command Query Separation)
+                        principle.
+                        Service methods should perform a command (create or update) or a
+                        query (read or find) but not both at the same time. 
+                    </li>
+                    <li>With returing the complete dto-structure for the update and create services
+                        you get more then you asked for.
+                        Sometimes this is kind of tie-in sale that
+                        you do not want. Especially when performance is an issue.
+                    </li>
+                </ul>
+            </subsection>
+            <subsection name="Changes for RuntimeExceptions">
+                <p>
+                    Validation errors resulting from rules in the business domain model are
+                    collected
+                    in a Errors object wrapped in a
+                    <b>BusinessRuleException</b>
+                    . Clients can catch this,
+                    retrieve the Errors object, analyze the errors and
+                    presumably show them to the
+                    user.
+
+                    Other exceptions that may be caught by the
+                    clients calling services are mostly RuntimeExceptions that are
+                    caused by
+                    programming errors. For example,
+                    <b>IllegalArgumentExceptions</b>
+                    when a
+                    null-object is passed to a service method.
+                </p>
+            </subsection>
+        </section>
+    </body>
+</document>

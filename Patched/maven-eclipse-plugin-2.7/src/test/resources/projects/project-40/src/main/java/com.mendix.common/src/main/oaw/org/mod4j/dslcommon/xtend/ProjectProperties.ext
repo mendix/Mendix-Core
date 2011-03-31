@@ -1,0 +1,165 @@
+/*******************************************************************************
+ * Copyright (c) 2009 Ordina and committers to Mod4j
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Ordina - initial implementation
+ *******************************************************************************/
+import ecore;
+
+String getProject() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getProject();
+
+String getProjectForEObject(EObject object) :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getProjectForEObject(org.eclipse.emf.ecore.EObject);
+
+/* 
+ * Application properties
+ */
+String getApplicationName() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getApplicationName();
+
+String getApplicationVersion() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getApplicationVersion();
+
+String getApplicationPath() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getApplicationPath();
+
+String getSrcModelPath() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getSrcModelPath();
+
+String getSrcGenPath() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getSrcGenPath();
+
+String getResourceGenPath() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getResourceGenPath();
+
+String getSrcManPath() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getSrcManPath();
+
+String getResourceManPath() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getResourceManPath();
+ 
+String getRootPackage() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getRootPackage();
+
+String getEnvPropFileName() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getEnvPropFileName();
+
+String getFileEncoding() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getFileEncoding();
+
+String getDslModelsModuleName() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getDslModelsModuleName();
+
+String getDslModelsModulePath() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getDslModelsModulePath();
+
+/* 
+ * Businessdomain layer properties 
+ */
+ // domain package
+String getBusinessDomainModuleName() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getBusinessDomainModuleName();
+
+String getBusinessDomainModulePath() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getBusinessDomainModulePath();
+ 
+String getBusinessdomainRootPackage() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getBusinessdomainRootPackage();
+
+String getDomainRootPackage() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getDomainRootPackage();
+
+String getBusinessdomainRootPackageAsPath() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getBusinessdomainRootPackageAsPath();
+
+String getDomainRootPackageAsPath() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getDomainRootPackageAsPath();
+
+// data package
+String getDataRootPackage() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getDataRootPackage();
+
+String getDataRootPackageAsPath() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getDataRootPackageAsPath();
+
+String getDaoPackage() : 
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getDaoPackage();
+ 
+String getDaoImplPackage() : 
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getDaoImplPackage();
+
+String getDaoPackageAsPath() : 
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getDaoPackageAsPath();
+
+String getHibernate_hbm2ddl_auto() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getHibernate_hbm2ddl_auto();
+ 
+String getHibernate_mapping_class_id_generator_class() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getHibernate_mapping_class_id_generator_class();
+ 
+String getHibernate_InheritanceMappingStrategy() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getHibernate_InheritanceMappingStrategy();
+
+
+/* 
+ * service layer properties 
+ */
+String getServiceModuleName() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getServiceModuleName();
+
+String getServiceModulePath() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getServiceModulePath();
+
+String getServiceRootPackage() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getServiceRootPackage();
+
+String getServiceRootPackageAsPath() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getServiceRootPackageAsPath();
+ 
+String getLocalServicePackage() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getLocalServicePackage();
+
+String getDtoPackage() : 
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getDtoPackage();
+ 
+String getTranslatorsPackage() : 
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getTranslatorsPackage();
+
+ 
+/* 
+ * presentation layer properties 
+ */
+String getPresentationModuleName(String targetPlatform) :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getPresentationModuleName(java.lang.String);
+
+String getPresentationModulePath(String targetPlatform) :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getPresentationModulePath(java.lang.String);
+
+String getPresentationRootPackage() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getPresentationRootPackage();
+
+String getPresentationCommonPackage() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getPresentationCommonPackage();
+
+String getPresentationCommonPackageAsPath() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getPresentationCommonPackageAsPath();
+
+String getPresentationRootPackageAsPath() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getPresentationRootPackageAsPath();
+
+String getPresentationWebAppPath() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ProjectProperties.getWebAppPath();
+ 
+String getPresentationWebInfPath() :
+  getPresentationWebAppPath() + "/WEB-INF";
+  
+String getPresentationCssPath() :
+  getPresentationWebAppPath() + "/css";
+
+String getPresentationImagesPath() :
+  getPresentationWebAppPath() + "/images";

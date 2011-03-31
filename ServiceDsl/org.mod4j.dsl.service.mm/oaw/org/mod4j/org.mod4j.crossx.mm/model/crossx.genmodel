@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="(c) Mod4j and contributors"
+    modelDirectory="/org.mod4j.crossx.mm/src" modelPluginID="org.mod4j.crossx.mm"
+    modelName="Crossx" importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0"
+    copyrightFields="false">
+  <foreignModel>crossx.ecore</foreignModel>
+  <genPackages prefix="Crossx" basePackage="org.mod4j.crossx.mm" disposableProviderFactory="true"
+      ecorePackage="crossx.ecore#/">
+    <genClasses ecoreClass="crossx.ecore#//ModelInfo">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference crossx.ecore#//ModelInfo/symbols"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossx.ecore#//ModelInfo/lastChanged"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossx.ecore#//ModelInfo/modelname"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossx.ecore#//ModelInfo/resource"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossx.ecore#//ModelInfo/dslname"/>
+    </genClasses>
+    <genClasses ecoreClass="crossx.ecore#//Symbol">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossx.ecore#//Symbol/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossx.ecore#//Symbol/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference crossx.ecore#//Symbol/properties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference crossx.ecore#//Symbol/subSymbols"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference crossx.ecore#//Symbol/owner"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference crossx.ecore#//Symbol/parent"/>
+    </genClasses>
+    <genClasses ecoreClass="crossx.ecore#//SymbolProperty">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossx.ecore#//SymbolProperty/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference crossx.ecore#//SymbolProperty/subProperties"/>
+    </genClasses>
+    <genClasses ecoreClass="crossx.ecore#//LiteralSymbolProperty">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossx.ecore#//LiteralSymbolProperty/value"/>
+    </genClasses>
+    <genClasses ecoreClass="crossx.ecore#//ReferenceSymbolProperty">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossx.ecore#//ReferenceSymbolProperty/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossx.ecore#//ReferenceSymbolProperty/modelname"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossx.ecore#//ReferenceSymbolProperty/symbolname"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

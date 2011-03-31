@@ -1,0 +1,6 @@
+<workflow>
+   <property file='generate.properties'/>
+   <bean class="org.eclipse.mwe.emf.StandaloneSetup">
+	   	<platformUri value=".."/>
+   </bean>
+</workflow>

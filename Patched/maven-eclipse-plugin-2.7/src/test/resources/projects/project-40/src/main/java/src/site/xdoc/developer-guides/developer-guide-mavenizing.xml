@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <!--
+        Please edit this file with the Eclipse XML editor, set your XML editor to a line length of 128 characters,
+        indent-size of 4 characters and not using tab-characters, and format the file (Ctrl-Shift-F) before checking in.
+        This should minimize the number of non-significant differences when comparing versions.
+    -->
+    <properties>
+        <title>Mod4j Developer Guide</title>
+    </properties>
+    <body>
+        <section name="Mod4j Developer Guide">
+
+            <subsection name="Mavenizing Eclipse Plug-ins">
+                <ol>
+                    First create a directory
+                    <b>plugins</b>
+                    and fill it with the jar files of the Eclipse plug-ins you want to mavenize.
+                    <li>
+                        <code>mvn eclipse:to-maven -DeclipseDir=. -DstripQualifier=true -DgroupIdPrefix=org.mod4j</code>
+                    </li>
+                    <li>
+                        <code>mvn eclipse:to-maven
+                            -DeclipseDir=.
+                            -DstripQualifier=true
+                            -DgroupIdPrefix=org.mod4j
+                            -DdeployTo=dav.codehaus.org::default::dav:https://dav.codehaus.org/repository/mod4j
+                        </code>
+                    </li>
+                    <li>
+                        <code>
+                            cd -path-to-/eclipse/plugins/com.google.guice_1.0.1.v200907171100
+                        </code>
+                        <code>mvn install:install-file
+                            -DgroupId=org.mod4j.com.google.inject
+                            -DartifactId=guice
+                            -Dversion=1.0-XTEXT-PATCHED
+                            -Dpackaging=jar
+                            -Dfile=./guice-1.0_patched.jar</code>
+                    </li>
+                    <li>
+                        <code>
+                            mvn deploy:deploy-file
+                            -DgroupId=org.mod4j.com.google.inject 
+                            -DartifactId=guice
+                            -Dversion=1.0-XTEXT-PATCHED
+                            -Dpackaging=jar -Dfile=./guice-1.0_patched.jar
+                            -DrepositoryId=dav.codehaus.org
+                            -Durl=dav:https://dav.codehaus.org/repository/mod4j</code>
+                    </li>
+                </ol>
+            </subsection>
+        </section>
+    </body>
+</document>

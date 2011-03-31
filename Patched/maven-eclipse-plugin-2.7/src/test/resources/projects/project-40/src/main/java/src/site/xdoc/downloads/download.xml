@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <!--
+        Please edit this file with the Eclipse XML editor, set your XML editor to a line length of
+        128 characters, indent-size of 4 characters and not using tab-characters, and format the
+        file (Ctrl-Shift-F) before checking in. This should minimize the number of non-significant
+        differences when comparing versions.
+    -->
+
+    <properties>
+        <title>Download, install, uninstall Mod4j</title>
+    </properties>
+    <body>
+
+        <section name="Download, install, uninstall">
+            <p>
+                All the Mod4j DSL editors are published as features to the Mod4j update site. Follow
+                the
+                instructions below to get them installed using the Eclipse Update Manager. Also
+                you find here how you can uninstall Mod4j features in Eclipse.
+            </p>
+            <subsection name="Downlaod and Install Mod4j">
+                <p>
+                    <b>
+                        <big> Prerequisites</big>
+                    </b>
+                    <br />
+                    Its assumed that you've followed the installation instructions in
+                    <b>Setting up your environment</b>
+                    on the
+                    <b>Getting Started page</b>
+                    .
+                </p>
+                <p>
+                    The Mod4j DSL editors can be installed from the Mod4j update site:
+                    <br />
+                    <br />
+                    <b>
+                        <big>
+                            Mod4j update site:
+                            <code>http://mod4j.org/updatesite/3.5</code>
+                        </big>
+                    </b>
+                </p>
+                <ol>
+                    <li>In Eclipse navigate to: Help, Install New Software...</li>
+                    <li>Choose the option "Search for new features to install" and click on "Next".
+                    </li>
+                    <li>To create a new remote site for Mod4j, click on the button "Add...".</li>
+                    <li>Enter a Name: "Mod4j update site"</li>
+                    <li>Enter the URL: http://mod4j.org/updatesite/3.5 and click on "OK"</li>
+                    <li>
+                        Next you can select the Mod4j features of your choice. Complete the wizard
+                        to
+                        install the chosen
+                        features.
+                </li>
+                </ol>
+            </subsection>
+            <subsection name="Uninstall Mod4j">
+                <ol>
+                    <li>
+                        In Eclipse navigate to:
+                        <b>Help, Install New Software...</b>
+                    </li>
+                    <li>
+                        Click on the link: What is
+                        <b>already installed</b>
+                        ?
+                    </li>
+                    <li>
+                        On the tab
+                        <b>Installed Software</b>
+                        select the Mod4j features you wish to uninstall.
+                    </li>
+                    <li>
+                        Press the button
+                        <b>Uninstall...</b>
+                        . Wait a moment for Eclipse to finish calculating the necessary requirements
+                        (mind the Progress bar).
+                    </li>
+                    <li>
+                        Click on the button
+                        <b>Finish</b>
+                    </li>
+                    <li>Its recommended to restart Eclipse after uninstalling features.</li>
+                </ol>
+            </subsection>
+        </section>
+    </body>
+</document>

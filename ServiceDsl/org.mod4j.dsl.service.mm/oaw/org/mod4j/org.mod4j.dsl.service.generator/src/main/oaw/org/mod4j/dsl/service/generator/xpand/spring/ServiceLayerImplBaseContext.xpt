@@ -1,0 +1,83 @@
+«REM»
+	  Copyright (c) 2009 Ordina and committers to Mod4j
+	  All rights reserved. This program and the accompanying materials
+	  are made available under the terms of the Eclipse Public License v1.0
+	  which accompanies this distribution, and is available at
+	  http://www.eclipse.org/legal/epl-v10.html
+	 
+	  Contributors:
+	      Ordina - initial implementation
+«ENDREM»
+«IMPORT ServiceDsl»
+«IMPORT crossx»
+«IMPORT org::mod4j::dslcommon::xpand::xml»
+
+«EXTENSION org::mod4j::dsl::service::mm::xtend::ServiceMethod»
+«EXTENSION org::mod4j::dsl::service::generator::xtend::ServiceGeneratorUtils»
+«EXTENSION org::mod4j::dslcommon::xtend::generatorutil»
+«EXTENSION org::mod4j::common::xtend::NameMapper»
+«EXTENSION org::mod4j::dslcommon::xtend::ProjectProperties»
+«EXTENSION org::mod4j::common::xtend::FileTracker»
+«EXTENSION org::mod4j::crossx::broker::xtend::Crossx»
+
+«DEFINE GenServiceLayerImplBaseContext FOR ServiceModel»
+«LET findAllSymbols(getProject(),  "Service") AS allServices»
+<?xml version="1.0" encoding="UTF-8"?>
+«EXPAND XmlComments::regenerationWarningHeader ("Mod4j ServiceDsl generator: ServiceLayerImplBaseContext.xpt") FOR this»
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+    «FOREACH allServices AS service»
+    <aop:config>
+        <aop:pointcut id="«service.name»ServiceMethods" expression="execution(* «javaLocalServiceInterfacePath(service.name)».*(..))"/>
+        <aop:advisor advice-ref="txAdvice«service.name.toFirstLower()»Service" pointcut-ref="«service.name»ServiceMethods" order="30"/>
+        <aop:aspect ref="loggingAspect">
+            <aop:before pointcut-ref="«service.name»ServiceMethods" method="logBefore" />
+            <aop:after pointcut-ref="«service.name»ServiceMethods" method="logAfter" />
+        </aop:aspect>
+        <aop:aspect ref="timingAspect">
+            <aop:around pointcut-ref="«service.name»ServiceMethods"
+                method="time" />
+        </aop:aspect>
+    </aop:config>
+    «ENDFOREACH»
+    «FOREACH allServices AS service»
+    <tx:advice id="txAdvice«service.name.toFirstLower()»Service"
+        transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="*" propagation="SUPPORTS" read-only="true" />
+            «FOREACH findAllSubSymbols(service, "ServiceMethod") AS method-»
+            <tx:method name="«method.name»" propagation="REQUIRED" />
+            «ENDFOREACH»
+        </tx:attributes>
+    </tx:advice>
+    «ENDFOREACH»
+    
+    <!-- Application Layer  -->
+    «FOREACH allServices AS service»
+    <!-- service.name = «service.name»  this.name = «this.name»-->
+    <bean id="«service.name.toFirstLower()»Service" class="«javaLocalServiceClassPath(service.name)»">
+        «IF service.getPropertyValue("UniqueBusinessClasses").length > 0»
+            «FOREACH service.getPropertyValue("UniqueBusinessClasses").split(",") AS bcName»
+        	    <property name="«javaDaoInterface(bcName).toFirstLower()»" ref="«javaDaoInterface(bcName).toFirstLower()»" />
+            «ENDFOREACH» 
+    	«ENDIF»
+    	«FOREACH findAllSubSymbols(service, "DtoReference") AS dto -»
+            <property name="«javaTranslatorClass(dto.name).toFirstLower()»" ref="«javaTranslatorClass(dto.name).toFirstLower()»" />
+	    «ENDFOREACH-»
+    </bean>
+    «ENDFOREACH»
+</beans>
+«ENDLET»
+«ENDDEFINE»

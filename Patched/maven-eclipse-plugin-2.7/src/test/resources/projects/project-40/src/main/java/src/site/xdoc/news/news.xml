@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <!--
+        Please edit this file with the Eclipse XML editor, set your XML editor to a line length of
+        128 characters, indent-size of 4 characters and not using tab-characters, and format the
+        file (Ctrl-Shift-F) before checking in. This should minimize the number of non-significant
+        differences when comparing versions.
+    -->
+
+    <properties>
+        <title>Mod4j news</title>
+    </properties>
+    <body>
+
+        <section name="*** News *** News *** News *** etc.">
+            <table>
+                <tr>
+                    <td>January 2010</td>
+                    <td>
+                        <b>
+                            <big>Devnology session about Mod4j</big>
+                        </b>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="20">
+                        <a href="http://devnology.nl">
+                            <img
+                                src="http://devnology.nl/templates/rt_versatility_iii_j15/images/style1/logo.png"
+                                alt="Devnology" />
+                        </a>
+                    </td>
+                    <td>
+                        <p>
+                            <a
+                                href="http://devnology.nl/nl/bijeenkomsten/details/18-model-driven-development-met-mod4j">
+                                Devnology session about Mod4j</a>
+                            , Logica Rotterdam, 3 February 2010, lang: dutch.
+                            <br />
+                            <br />
+                            Model Driven Development is een onderwerp dat al jarenlang onverminderd
+                            terug blijft keren op de agenda in het software engineering vakgebied.
+                            Hoewel Microsoft het hiervoor ontwikkelde platform Oslo min of meer in
+                            de ijskast heeft geplaatst, lijkt de Java community met Eclipse serieuze
+                            stappen te nemen om een volwassen 'language workbench' neer te zetten.
+                            In deze bijeenkomst geven MDD-experts Jos Warmer en Eric Jan Malotaux
+                            een presentatie over dit Eclipse platform en tonen aan hoe zij hiermee
+                            Mod4j hebben ontwikkeld. De presentatie legt een stevige bodem voor het
+                            tweede deel van de avond, waarin wij samen met deze experts een
+                            fishbowl-discussie aangaan rondom het thema Model Driven Development.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <br />
+
+            <table>
+                <tr>
+                    <td>25 October 2009</td>
+                    <td>
+                        <b>
+                            <big>Mod4j 1.1.0 released</big>
+                        </b>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="20">
+                    </td>
+                    <td>
+                        <p>
+                            Mod4j 1.1.0 released. For more details about this release see
+                            <a href="../releases/1.1.0/releasenotes.html">Mod4j 1.1.0 Release Notes</a>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <br />
+
+            <table>
+                <tr>
+                    <td>June 2009</td>
+                    <td>
+                        <b>
+                            <big>Mod4j at the Model Driven Experience 2009</big>
+                        </b>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="20">
+                        <img
+                            src="http://www.telin.nl/uploadedImages/Telematica_Instituut/Expertise/Service_Architectures/SAlists/logo_Novay_payoff_PMS_C_klein.jpg"
+                            alt="Novay" />
+                    </td>
+                    <td>
+                        <p>
+                            Mod4j will attend
+                            <a href="http://www.mdexperience.nl">The Model Driven Experience conference</a>
+                            , WTC Amsterdam, 04 juni 2009, lang: dutch
+                            .
+                            <br />
+                            <br />
+                            Modelgedreven software ontwikkeling, Model Driven Development
+                            (MDD) in
+                            het Engels, wordt steeds
+                            vaker
+                            toegepast door software intensieve
+                            organisaties. De
+                            initiële scepsis na de lancering van
+                            het Model
+                            Driven
+                            Architecture (MDA) initiatief door OMG
+                            begint om te slaan in voorzichtig
+                            optimisme. Steeds meer
+                            organisaties onderkennen de voordelen
+                            van MDD
+                            t.o.v. traditionele software
+                            ontwikkelingsaanpakken,
+                            zoals kortere
+                            time-to-market,
+                            lagere onderhoudskosten, hogere kwaliteit
+                            en het
+                            verkleinen van de
+                            business - IT gap.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <table>
+                <tr>
+                    <td>June 2009</td>
+                    <td>
+                        <b>
+                            <big>Mod4j at Code Generation 2009</big>
+                        </b>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="20">
+                        <img src="http://www.codegeneration.net/cg2009/images/CG2009logo75x57.gif"
+                            alt="Code Generation 2009" />
+                    </td>
+                    <td>
+                        <p>
+                            Mod4j will attend
+                            <a href="http://www.codegeneration.net/cg2009">Code Generation 2009</a>
+                            , 16th - 18th June
+                            .
+                            Code Generation is an annual conference held in
+                            Cambridge, UK. The conference
+                            attrack's a
+                            public that is interested in
+                            various topics related to code generation, such as:
+                            <br />
+                            Domain-Specific Languages,
+                            Model-Driven Development (MDD), Model-Driven
+                            Architecture (MDA),
+                            Eclipse
+                            Modelling Tools, openArchitectureWare, Xtext
+                            etc.,
+                            Executable UML,
+                            Model-Driven Software
+                            Development
+                            (MDSD),
+                            Domain-Specific Modelling,
+                            Software
+                            Factories and Software Product Lines,
+                            Generative programming
+                            and other similar approaches.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <table>
+                <tr>
+                    <td>8 April 2009</td>
+                    <td>
+                        <b>
+                            <big>Mod4j at Ordina's 'Innoveer jij mee' session"</big>
+                        </b>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="20">
+                        <img src="../images/j-technologies-logo.gif" alt="Ordina J-Technologies" />
+                    </td>
+                    <td>
+                        <p>
+                            Ordina J-Technologies nodigt je uit voor haar
+                            <a href="http://www.j-technologies.nl/default.asp/id,330/index.html">8-ste innoveerjijmee sessie.</a>
+                            Tijdens deze sessie zullen een aantal Mod4j members een demonstratie
+                            geven van het gebruik van
+                            Mod4j. Op maandag 27 april ben je van harte
+                            welkom in het
+                            <a href="http://www.j-technologies.nl/default.asp/id,330/index.html">kenniscentum van Ordina te Nieuwegein</a>
+                            .
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <table>
+                <tr>
+                    <td>2 April 2009</td>
+                    <td>
+                        <b>
+                            <big>Mod4j at JSpring 2009</big>
+                        </b>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="20">
+                        <img
+                            src="http://www.nljug.org/pages/events/content/jspring_2009/images/banner_v2.jpg"
+                            alt="JSpring 2009" />
+                    </td>
+                    <td>
+                        <p>
+                            Jos Warmer is conference keynote speaker at
+                            <a href="http://www.nljug.org/jspring">JSpring</a>
+                            , 15 April, Bussum, Netherlands.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <br />
+        </section>
+    </body>
+</document>

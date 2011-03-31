@@ -1,0 +1,87 @@
+grammar org.mod4j.dsl.service.xtext.Service with org.eclipse.xtext.common.Terminals
+
+import "platform:/resource/org.mod4j.dsl.service.mm/model/ServiceDsl.ecore"
+/*******************************************************************************
+ * Copyright (c) 2009 Ordina and committers to Mod4j
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Ordina - initial implementation
+ *******************************************************************************/
+
+ServiceModel:
+	(description=STRING )?
+	"service" name = ID ";"
+	(dtoReferences+=DtoReference)*
+	(
+	    (crudServices += CrudService)
+	    | (methods+= ServiceMethod)
+	)*
+	;
+
+AssociationMethod :
+	(description=STRING )?
+    name = "for" main=[DtoReference]  "reference"  rolename=ID 
+    type=AssociationMethodType
+    part=[DtoReference]  ";"
+	;
+enum SpecialMethodType returns MethodType :
+     CREATE="create"  | READ="read" | UPDATE="update" | DELETE="delete" | LISTALL="listall" | FIND="find"
+     ;
+
+enum AssociationMethodType returns MethodType :
+     ADDTO="add" | REMOVEFROM="remove" | GETFROM="get"
+     ;
+
+DtoReference:
+    "from" modelname=ID "import" name=ID ";"
+    ;
+
+ServiceMethod :
+//	(description=STRING )?
+    (CustomMethod | SpecialMethod | AssociationMethod )
+    ;
+    	
+CustomMethod:
+	(description=STRING )?
+	"method"
+	name=ID
+	("in" "(" (inParameters+=Parameter)
+	          ("," inParameters+=Parameter )* ")" )?
+	("out" outParameter = OutParameter )?
+    ";" ;
+     
+OutParameter returns Parameter:
+	(description=STRING )?
+	(collection = CollectionType)?
+    type=[DtoReference]
+//    name=ID 
+    ;
+
+Parameter:
+	(description=STRING )?
+	(collection = CollectionType)?
+    type=[DtoReference]
+    name=ID 
+    ;
+
+enum CollectionType :
+    LIST = "list";
+    
+SpecialMethod:
+	(description=STRING )?
+    type=SpecialMethodType
+    name=ID
+    "for" dto = [DtoReference]
+    ";"
+    ;
+    
+CrudService:
+	(description=STRING )?
+    "crud" dto =[DtoReference]
+    ";"
+    ;
+

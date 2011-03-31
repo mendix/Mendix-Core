@@ -1,0 +1,30 @@
+"The RecordShop Order Service Model. Contains all services for handling and maintaining Orders"
+service OrderServiceModel ;
+
+from RecordShopDataContract import OrderDto;
+from RecordShopDataContract import SimpleCustomerDto;
+//from RecordShopDataContract import OrderNumberAndDateList;
+from RecordShopDataContract import DateDto;
+from RecordShopDataContract import OrderNumberAndDateDto ;
+from RecordShopDataContract import OrderWithOrderLinesDto ;
+from RecordShopDataContract import OrderLineDto ;
+  
+read   readCustomerAAA  for SimpleCustomerDto ;  
+  
+/* 
+ * Create, read, update and delete services
+ */
+crud OrderDto ;
+crud OrderNumberAndDateDto ;  
+crud OrderWithOrderLinesDto;
+
+//for OrderWithOrderLinesDto reference orderLines add OrderLineDto;
+
+"Find all Orders for a specific Customer" 
+method findOrdersByCustomer in (SimpleCustomerDto customer)
+                            out list OrderNumberAndDateDto;
+
+"Find all orders for a given date" 
+method findOrdersByDate in (DateDto date)
+                        out list OrderNumberAndDateDto;
+

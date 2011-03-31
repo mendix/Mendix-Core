@@ -1,0 +1,18 @@
+/**
+ * Operations implemented in Java or Xtend
+ */
+import ServiceDsl;
+import crossx;
+
+extension org::mod4j::crossx::broker::xtend::Crossx;
+
+Collection[Symbol] makeUnique(Collection[Symbol] s) :
+    JAVA org.mod4j.dsl.service.generator.helpers.ServiceUtil.makeUnique(java.util.Collection);
+
+ 
+String getReferredDtoName(Symbol s) :
+    JAVA org.mod4j.dsl.service.generator.helpers.ServiceUtil.getReferredDtoName(org.mod4j.crossx.mm.crossx.Symbol);
+
+String getReferredBusinessClassName(Symbol s) :
+    JAVA org.mod4j.dsl.service.generator.helpers.ServiceUtil.getReferredBusinessClassName(org.mod4j.crossx.mm.crossx.Symbol);
+ 

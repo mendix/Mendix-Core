@@ -1,0 +1,44 @@
+/**
+ * Operations implemented in Java or Xtend
+ */
+import  DataContractDsl;
+import crossx;
+
+extension org::mod4j::crossx::broker::xtend::Crossx;
+extension org::mod4j::dslcommon::xtend::generatorutil;
+
+String getBaseDtoName(Dto p) :
+    JAVA org.mod4j.dsl.datacontract.generator.helpers.DtoHelpers.getBaseDtoName(org.mod4j.dsl.datacontract.mm.DataContractDsl.Dto);
+
+String getBaseDtoBusinessClassName(Dto p) :
+    JAVA org.mod4j.dsl.datacontract.generator.helpers.DtoHelpers.getBaseDtoBusinessClassName(org.mod4j.dsl.datacontract.mm.DataContractDsl.Dto);
+
+String javaType(DtoProperty p) :
+    JAVA org.mod4j.dsl.datacontract.generator.helpers.DtoHelpers.javaType(org.mod4j.dsl.datacontract.mm.DataContractDsl.DtoProperty);
+
+String javaTranslatorName(String name) :
+    JAVA org.mod4j.dsl.datacontract.generator.helpers.DtoHelpers.javaTranslatorName(java.lang.String);
+ 
+String getterPrefix(DtoProperty p) : 
+	switch (p.dataType) {
+	    case 'boolean' : "is"
+	    default : "get"
+	};
+	
+boolean hasAllMandatoryProperties(BusinessClassDto dto) :
+    if dto.propertyReferences.isEmpty then (
+        true
+    )
+    else (
+	    let symbol = lookupSymbol(dto.base.modelname, dto.base.name, "BusinessClass") :
+	    let props = symbol.subSymbols.select(s|s.type.matches("Property")) :
+	    let mandatories = props.select(p | p.getPropertyValue("MandatoryForCreation") == "true") :
+        dto.propertyReferences.name.containsAll(mandatories.name)
+    )
+    ;
+    
+List[String] getConstructArguments(BusinessClassDto dto):
+    let symbol = lookupSymbol(dto.base.modelname, dto.base.name, "BusinessClass") :
+    let prop   = symbol.getPropertyValue("ConstructorOrder") :
+    prop.split(",")
+    ;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.mod4j.eclipse.dsl">
+      <dsl
+            dsl2crossxWorkflow="org/mod4j/dsl/service/generator/workflow/sermod2crossx.oaw"
+            dslCodegenProperties="mod4j.properties"
+            dslCodegenWorkflow="org/mod4j/dsl/service/generator/workflow/ServiceDsl.oaw"
+            dslFileExtension=".sermod"
+            dslMetamodelPackage="org.mod4j.dsl.service.mm.ServiceDsl.ServiceDslPackage"
+            dslName="Mod4j Service DSL">
+      </dsl>
+   </extension>
+
+</plugin>

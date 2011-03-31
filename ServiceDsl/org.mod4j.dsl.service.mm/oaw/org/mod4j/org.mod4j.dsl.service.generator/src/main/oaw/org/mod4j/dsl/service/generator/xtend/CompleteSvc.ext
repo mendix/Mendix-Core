@@ -1,0 +1,59 @@
+/* 
+   This file contains the code to create a Crossx model from a BusinesDomainDsl model.
+   Needed for crosssreference purposes.
+*/
+
+import crossx;
+import ServiceDsl;
+
+extension org::mod4j::crossx::broker::xtend::Crossx;
+extension org::mod4j::dsl::service::mm::xtend::ServiceMethod;
+extension org::mod4j::dslcommon::xtend::generatorutil;
+
+completeModel(ServiceModel model) :
+    let cruds = model.crudServices :
+    print("MOD4J INFO: Running CompleteSvc::completeModel on file [" + model.name + "]")->
+	model.methods.addAll( cruds.createMethod())->
+	model.methods.addAll( cruds.readMethod())->
+	model.methods.addAll( cruds.updateMethod())->
+	model.methods.addAll( cruds.deleteMethod())->
+	model.methods.typeSelect(AssociationMethod).completeName()
+    ;
+    
+create SpecialMethod createMethod(CrudService crud) :
+   setDescription(crud.description + " [From crud service]")->
+   setType(MethodType::CREATE)->
+   setName("create" + crud.dto.businessClass() )->
+//   setName("create" + crud.dto.businessClass() + "From" + crud.dto.name )->
+   setDto(crud.dto)
+   ;
+   
+create SpecialMethod readMethod(CrudService crud) :
+   setDescription(crud.description + " [From crud service]")->
+   setType(MethodType::READ)->
+   setName("read" + crud.dto.businessClass() + "As" + crud.dto.name)->
+   setDto(crud.dto)
+   ;
+   
+create SpecialMethod updateMethod(CrudService crud) :
+   setDescription(crud.description + " [From crud service]")->
+   setType(MethodType::UPDATE)->
+   setName("update" + crud.dto.businessClass())->
+   setDto(crud.dto)
+   ;
+   
+create SpecialMethod deleteMethod(CrudService crud) :
+   setDescription(crud.description + " [From crud service]")->
+   setType(MethodType::DELETE)->
+   setName("delete" + crud.dto.businessClass())->
+   setDto(crud.dto)
+   ;
+   
+completeName(AssociationMethod method) :
+	let assoc = getAssociation(method) : 
+	let mult = getPropertyValue(assoc, "Multiplicity") :
+    let name = ((mult == "ONE") ? "set" : "addTo") + method.rolename.toFirstUpper() :
+    ((method.type == MethodType::GETFROM) ? method.setName("get" + method.rolename.toFirstUpper()) : null)->
+    ((method.type == MethodType::ADDTO  ) ? method.setName(name) : null)->
+    ((method.type == MethodType::REMOVEFROM) ? method.setName("removeFrom" + method.rolename.toFirstUpper()) : null)
+    ;

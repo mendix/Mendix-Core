@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <!--
+        Please edit this file with the Eclipse XML editor, set your XML editor to a line length of 128 characters, indent-size
+        of 4 characters and not using tab-characters, and format the file (Ctrl-Shift-F) before checking in. This should
+        minimize the number of non-significant differences when comparing versions.
+    -->
+
+    <properties>
+        <title>Design decisions</title>
+    </properties>
+    <body>
+        <section name="Design decisions">
+            <p>
+                During the project a number of design questions raised. This
+                page shows all questions and (if already decided) the decisions
+                that have been taken.
+            </p>
+            <subsection name="Sepearate interface and implementation classes">
+                <p>
+                    Will we generate an interface and a separate implementation
+                    class for each business domain class?
+                </p>
+                <p>
+                    No, we don't see what the advantages are for domain classes.
+                </p>
+            </subsection>
+            <subsection name="Generate abstract superclass?">
+                <p>
+                    For each business domain class we will generate an abstract
+                    superclass and a concrete subclass. The abstract superclass
+                    contains all generated code, the concrete subclass is empty
+                    (except for the constructors). Handwritten code must be
+                    added to the concrete (empty) subclass. This subclass will
+                    be generated only if it does not exist already, therefore
+                    handwritten code will always be kept..
+                </p>
+            </subsection>
+            <subsection name="Generating unit tests?">
+                <p>Will we generate unit tests?</p>
+                <p>Useful, but not in the first release.</p>
+            </subsection>
+            <subsection name="How to deal with attribute validations?">
+                <p>
+                    How are attribute validation done in the reference
+                    architecture? How are attribute validation errors handled in
+                    the reference architecture?
+                </p>
+                <p>
+                    We view attribute validations as a special case of a
+                    business rule, therefore attriubute validations are handled
+                    the same way as business rules .
+                </p>
+            </subsection>
+            <subsection
+                name="What do we generate for a business domain class?">
+                <ul>
+                    <li>Domain model Java classes.</li>
+                    <li>
+                        Mappings to database (e.g. Hibernate mapping files, see
+                        other issue).
+                    </li>
+                    <li>
+                        Provisional user interface, but not in first version
+                    </li>
+                    <li>
+                        Data access objects (DAO). This consists of a DAO
+                        interface and a DAO implementation class. Both of these
+                        are split in a abstract superclass and concrete (empty)
+                        subclass to allow foir manual additions.
+                    </li>
+                </ul>
+            </subsection>
+            <subsection
+                name="Domain Driven design and the Reference architecture">
+                <p>
+                    How is the relationship between DDD and the reference
+                    architecture. We probably need a translation between
+                    concepts?
+                </p>
+                <p>
+                    Although we borrow ideas from DDD, we do not follow the full
+                    DDD approach.
+                </p>
+            </subsection>
+            <subsection name="Mapping files versus annotations?">
+                <p>
+                    Will we use mapping files (e.g. Hibernate) of annotations
+                    (e.g. JPA)?
+                </p>
+                <p>
+                    In the first release we will use Hibernate mapping files.
+                    This is easier to handle for code generation. Also this is
+                    the approach where we have the maximum experience in
+                    projects.
+                    <br />
+                    In a future release we want to add support for JPA
+                    annotations.
+                </p>
+            </subsection>
+            <subsection name="Business rules">
+                <p>Business rules is a wide area, what does mod4j support?</p>
+                <p>
+                    We support business constraints only. Such a business rules
+                    can check whether an object or a group of objects is correct
+                    and provides an error message when they are not. Other types
+                    of business rules (fire an event, repair incorrect objects,
+                    notify others, etc. etc.) are not supported, at least not in
+                    the first release.
+                </p>
+            </subsection>
+            <subsection name="Association support">
+                <p>What support is there for associations?</p>
+                <p>
+                    Mod4j support associations in a way that changes to any side
+                    of an association are always directly reflected at the
+                    opposite side as well. Associations al;ways remains
+                    consistent.
+                    <br />
+                    Many-to-many associations are not supported in the first
+                    release, but will be added to the second release.
+
+                </p>
+            </subsection>
+
+        </section>
+    </body>
+</document>

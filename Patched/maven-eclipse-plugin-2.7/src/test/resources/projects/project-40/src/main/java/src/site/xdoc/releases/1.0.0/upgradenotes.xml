@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <!--
+        Please edit this file with the Eclipse XML editor, set your XML editor to a line length of 128 characters, indent-size
+        of 4 characters and not using tab-characters, and format the file (Ctrl-Shift-F) before checking in. This should
+        minimize the number of non-significant differences when comparing versions.
+    -->
+
+    <properties>
+        <title>Mod4j 1.0.0 Upgrade Steps</title>
+    </properties>
+    <body>
+        <section name="Mod4j 1.0.0 Upgrade Notes">
+
+            <p>The following upgrade steps are needed if you want to upgrade your project from Mod4j 1.0.0-beta-3 to Mod4j
+                1.0.0.</p>
+                
+            <subsection name="Upgrade Mod4j Eclipse plug-in ">
+                <ol>
+                    <li>Open Eclipse and un-install the previous installed Mod4j Eclipse plug-in.</li>
+                    <li>Then you can install the new version (1.0.0.200903311346) of the Mod4j Eclipse plug-in via the Mod4j update site: 
+                         <br/>
+                         <b>http://mod4j.org/updatesite</b>
+                    </li>
+                </ol>
+            </subsection>
+
+            <subsection name="Business layer">
+                <h4>Naming of dao instance variables in domain services is changed.</h4>
+                <p>
+                   For all dao instance variables of the domain services, the prefix "the" is removed from the name.
+                   So if your project have extensions points or other manual written code that make use of these instance variables or access methods to it, you'll need to correct these names.
+                   <br/><br/>
+                   Pre Mod4j 1.0.0 style:
+                   <textarea rows="18" cols="90">
+    protected CustomerDao theCustomerDao;
+
+    /**
+     * @param object
+     *            The theCustomerDao to set.
+     */
+    public void setTheCustomerDao(CustomerDao object) {
+        this.theCustomerDao = object;
+    }
+
+    /** 
+     * @return The theCustomerDao to get.
+     *
+     */
+    public CustomerDao getTheCustomerDao() {
+        return this.theCustomerDao;
+    }
+                  </textarea>
+                  <br/>
+                  New style since Mod4j 1.0.0
+                  <textarea rows="18" cols="90">
+    protected CustomerDao customerDao;
+
+    /**
+     * @param object
+     *            The customerDao to set.
+     */
+    public void setCustomerDao(CustomerDao object) {
+        this.customerDao = object;
+    }
+
+    /** 
+     * @return The customerDao to get.
+     *
+     */
+    public CustomerDao getCustomerDao() {
+        return this.customerDao;
+    }
+                  </textarea>
+                </p>
+            </subsection>
+            <subsection name="BusinessDomain DSL">
+                <h4>Language improvements</h4>
+                <h4>Changes to Extension points</h4>
+            </subsection>
+
+        </section>
+    </body>
+</document>

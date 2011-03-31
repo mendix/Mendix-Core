@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ - Copyright (c) 2009 Ordina and committers to Mod4j
+ - All rights reserved. This program and the accompanying materials
+ - are made available under the terms of the Eclipse Public License v1.0
+ - which accompanies this distribution, and is available at
+ - http://www.eclipse.org/legal/epl-v10.html
+ -
+ - Contributors:
+ -     Ordina - initial implementation
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<workflow>
+    <!--  
+        This workflow taken a Service Dsl model and extracts the Crossx model from it.
+        Arguments / properties expected:
+          - modelfile : the file containing the BusinessDomainDsl model
+          - crossxfile : the file to which the crossx model will be written
+          - project: the name of the project in which tyhe model resides
+    -->
+
+    <component class="org.eclipse.xtend.util.stdlib.ExtIssueReporter"/>
+    
+    <property name="nsUriPrefix" value="appelmoes"/>
+
+    <!-- set up EMF for standalone execution -->
+    <bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" >
+        <platformUri value=".."/>
+    </bean>
+
+    <!-- added beans for teh BusinessDomainDsl and the Crossx metamodels
+         Don't use the filenames of the ecore files, because they won't work when the
+         plugins are exported and installed.
+    -->
+    <bean class="org.mod4j.dsl.service.xtext.ServiceStandaloneSetup"/>
+    <bean id="ServiceDsl" class="org.eclipse.xtend.typesystem.emf.EmfMetaModel">
+         <metaModelPackage value="org.mod4j.dsl.service.mm.ServiceDsl.ServiceDslPackage" />   
+    </bean>
+    <bean id="crossx" class="org.eclipse.xtend.typesystem.emf.EmfMetaModel">
+        <metaModelPackage value="org.mod4j.crossx.mm.crossx.CrossxPackage" />   
+    </bean>
+    
+    <!-- Load the Dsl modelfile and store it in slot 'model' -->
+    <component id="service2crossx-modelfileReader" class="org.eclipse.xtext.MweReader" 
+	            uri="${modelfile}"
+	            outputSlot="model">
+		<register class="org.mod4j.dsl.service.xtext.ServiceStandaloneSetup"/>
+	</component>
+
+    <component id="Service-ModelChecks" class="org.eclipse.xtend.check.CheckComponent">
+        <metaModel idRef="ServiceDsl" />
+       <metaModel idRef="crossx"/>
+        <checkFile value="org::mod4j::dsl::service::validation::checks::ServiceChecks" />
+        <emfAllChildrenSlot value="model" />
+    </component>
+
+    <!-- Call the Xtend model-to-model transformation to complete the DTO model
+         with all properties derived from the business classes.
+    -->
+    <component id="complteSvc" class="org.eclipse.xtend.XtendComponent">
+       <metaModel idRef="ServiceDsl"/>
+       <metaModel idRef="crossx"/>
+       <invoke value="org::mod4j::dsl::service::generator::xtend::CompleteSvc::completeModel(model)"/>
+    </component>
+
+    <!-- Call the Xtend model-to-model transformation that takes a Service Model as its input
+         and returns a Crossx model in the outputSlot
+    -->
+    <component id="XtendComponent.servicemodel2crossx" class="org.eclipse.xtend.XtendComponent">
+        <!-- again, we need the two meta models introduced above; we reference
+             them using XML's idRef mechanism -->
+       <metaModel idRef="ServiceDsl"/>
+       <metaModel idRef="crossx"/>
+       <globalVarDef name="nsUriPrefix" value="'${nsUriPrefix}'"/>
+       <invoke value="org::mod4j::dsl::service::generator::xtend::sermod2crossx::exportModel(model, '${modelfile}' )"/>
+       <outputSlot value="crossxModel"/>
+    </component>
+
+    <!-- Is used to put the model in the environment. The model is put in the modelSlot 'model' -->
+    <component class="org.mod4j.dslcommon.openarchitectureware.CrossxWorkflowComponent">
+        <modelSlot value="crossxModel"/>
+        <project value="${project}"/>
+    </component>
+
+    <!-- Last but not least, we write the Ecore model file. We specify the workflow
+         slot where we expect the model as well as the file name of the to-be-written file.
+         This stel isn't neccesary, but migtb be helpfulkl for debugging purposes to check what
+         the Crosssx model looks like.
+    -->
+    <if cond="${isEclipseSetup}">
+	    <component class="org.eclipse.emf.mwe.utils.Writer">
+	        <uri value="${crossxfile}" />
+	        <modelSlot value="crossxModel" />
+	    </component>
+    </if>
+    
+</workflow>
+

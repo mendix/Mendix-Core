@@ -1,0 +1,115 @@
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="dsl" name="dsl" schema="schema/dsl.exsd"/>
+
+   <extension
+         id="Mod4jBuilder"
+         name="Mod4j Project Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder
+            hasNature="true">
+         <run
+               class="org.mod4j.eclipse.builder.Mod4jBuilder">
+         </run>
+      </builder>
+   </extension>
+   <extension
+         id="Mod4jNature"
+         name="Mod4j Project Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="org.mod4j.eclipse.builder.Mod4jNature">
+         </run>
+      </runtime>
+      <builder
+            id="org.mod4j.eclipse.Mod4jBuilder">
+      </builder>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            objectClass="org.eclipse.core.resources.IProject"
+            nameFilter="*"
+            id="mod4j.crossx.broker.contribution1">
+         <action
+               label="Add/Remove Mod4j Nature"
+               icon="icons/mod4j-bw.ico"
+               class="org.mod4j.eclipse.builder.ToggleMod4jNatureAction"
+               menubarPath="additions"
+               enablesFor="+"
+               id="org.mod4j.eclipse.builder.addRemoveNatureAction">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="Mod4j"
+            id="org.mod4j.eclipse.crossx">
+      </category>
+      <view
+            allowMultiple="false"
+            category="org.mod4j.eclipse.crossx"
+            class="org.mod4j.eclipse.crossx.views.CrossxView"
+            icon="icons/mod4j-bw.ico"
+            id="org.mod4j.eclipse.crossx.views.CrossxView"
+            name="Crossx">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="Mod4j"
+            id="org.mod4j.eclipse.crossx">
+      </category>
+      <view
+            allowMultiple="false"
+            category="org.mod4j.eclipse.crossx"
+            class="org.mod4j.eclipse.views.filetracker.FileTrackerView"
+            icon="icons/mod4j-bw.ico"
+            id="org.mod4j.eclipse.views.filetracker.FileTrackerView"
+            name="Mod4j FileTracker">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.ui.resourcePerspective">
+         <view
+               ratio="0.5"
+               relative="org.eclipse.ui.views.TaskList"
+               relationship="right"
+               id="org.mod4j.eclipse.crossx.views.CrossxView">
+         </view>
+      </perspectiveExtension>
+   </extension>
+<!-- Filters                                           -->
+   <extension
+         id="org.mod4j.eclipse.crossxFilter"
+         name="Mod4j Crossx Filter"
+         point="org.eclipse.ui.ide.resourceFilters">
+      <filter
+            selected="true"
+            pattern="*.crossx~">
+      </filter>
+   </extension>
+   <extension
+        point="org.eclipse.ui.newWizards">
+        <category
+              id="org.mod4j.eclipse.wizards"
+             name="Mod4j">
+        </category>
+        <wizard
+              category="org.mod4j.eclipse.wizards"
+              class="org.mod4j.eclipse.wizards.Mod4jAbstractNewProjectWizard"
+              icon="icons/mod4j-bw.ico"
+              id="org.mod4j.eclipse.wizards.Mod4jNewBusinessDomainDslProjectWizard"
+              name="Mod4j Project"
+              project="true">
+        </wizard>
+   </extension>
+   
+
+</plugin>

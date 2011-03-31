@@ -1,0 +1,41 @@
+«REM»
+	  Copyright (c) 2009 Ordina and committers to Mod4j
+	  All rights reserved. This program and the accompanying materials
+	  are made available under the terms of the Eclipse Public License v1.0
+	  which accompanies this distribution, and is available at
+	  http://www.eclipse.org/legal/epl-v10.html
+	 
+	  Contributors:
+	      Ordina - initial implementation
+«ENDREM»
+«IMPORT ServiceDsl»
+«IMPORT org::mod4j::dslcommon::xpand::xml»
+
+«EXTENSION org::mod4j::dsl::service::mm::xtend::ServiceMethod»
+«EXTENSION org::mod4j::dslcommon::xtend::generatorutil»
+«EXTENSION org::mod4j::common::xtend::NameMapper»
+«EXTENSION org::mod4j::dslcommon::xtend::ProjectProperties»
+«EXTENSION org::mod4j::common::xtend::FileTracker»
+
+«DEFINE GenBeanRefContext FOR ServiceModel»
+<?xml version="1.0" encoding="UTF-8"?>
+«EXPAND XmlComments::extensionPointHeader("Mod4j ServiceDsl generator: ServiceLayerBeanRefContext.xpt") FOR this»
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	   http://www.springframework.org/schema/beans	http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+    <bean id="«getServiceRootPackage()».Context"
+		class="org.springframework.context.support.ClassPathXmlApplicationContext">
+        <constructor-arg>
+            <list>
+                <value>«getServiceRootPackageAsPath()»/applicationContext.xml</value>
+                <value>«getServiceRootPackageAsPath()»/transactionManagerContext.xml</value>
+                <value>«getServiceRootPackageAsPath()»/dtoTranslatorsContext.xml</value>
+            </list>
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="«getBusinessdomainRootPackage()».Context"/>
+        </constructor-arg>
+    </bean>
+</beans>
+«ENDDEFINE»

@@ -1,0 +1,187 @@
+«REM»
+ Copyright (c) 2009 Ordina and committers to Mod4j
+ All rights reserved. This program and the accompanying materials
+ are made available under the terms of the Eclipse Public License v1.0
+ which accompanies this distribution, and is available at
+ http://www.eclipse.org/legal/epl-v10.html
+  Contributors:
+     Ordina - initial implementation
+«ENDREM»
+«IMPORT BusinessDomainDsl»
+«IMPORT org::mod4j::dslcommon::xpand::java»
+
+«EXTENSION org::mod4j::dslcommon::xtend::generatorutil»
+«EXTENSION org::mod4j::dslcommon::xtend::ProjectProperties»
+«EXTENSION org::mod4j::common::xtend::FileTracker»
+«EXTENSION org::mod4j::common::xtend::NameMapper»
+
+«DEFINE daoInterfaceBase  FOR BusinessDomainDsl::BusinessClass»
+«FILE generate(getBusinessDomainModuleName(), javaPathFileName(javaDaoBaseInterfacePath(this.name) ))»
+«EXPAND JavaComments::regenerationWarningHeader ("Mod4j BusinessDomainDsl generator: DaoInterfaceBase.xpt") FOR this»
+
+package «getDaoPackage()»;
+
+import java.util.List;
+import org.mod4j.runtime.queries.SearchParameters;
+
+import «javaDomainClassPath(this.name)»;
+
+/**
+ * «javaDaoBaseInterface(this.name)»Data Access Object (DAO). Responsible for accessing database.
+ * 
+ * @author Mod4j generated
+ * 
+ */
+public interface «javaDaoBaseInterface(this.name)» {
+
+    /**
+     * Retrieves a «javaDomainClass(this.name)» by its ID from the database.
+     * 
+     * @param id id of the «javaDomainClass(this.name)» to retrieve.
+     * @return «javaDomainClass(this.name)» retrieved or null when no «javaDomainClass(this.name)» was found.
+     */
+    «javaDomainClass(this.name)» retrieve(Long id);
+
+    /**
+     * Adds a new «javaDomainClass(this.name)» to the database
+     * 
+     * @param object
+     *                the «javaDomainClass(this.name)» to add to the database.
+     * @return the stored «this.name».
+     */
+    Long add(«javaDomainClass(this.name)» object);
+
+    /**
+     * Deletes a «this.name» from the database.
+     * 
+     * @param object
+     *                the «javaDomainClass(this.name)» to delete
+     */
+    void delete(«javaDomainClass(this.name)» object);
+
+    /**
+     * Selects all «javaDomainClass(this.name)»s from the database.
+     * 
+     * @return a List of all «javaDomainClass(this.name)» objects.
+     */
+    List<«javaDomainClass(this.name)»> listAll();
+
+    /**
+     * Selects a range (page) of «javaDomainClass(this.name)»s from the database.
+     * 
+     * @param firstResult the index of the first result object to be retrieved (numbered from 0)
+     * @param maxResults  the maximum number of result objects to retrieve (or <=0 for no limit) 
+     * 
+     * @return a List containing 0 or more «javaDomainClass(this.name)» objects.
+     *
+     * @see #listPage(int, int)
+     */
+    List<«javaDomainClass(this.name)»> listPage(final int firstResult, final int maxResults);
+
+    /**
+     * Selects a sorted range (page) of «javaDomainClass(this.name)»s from the database.
+     * 
+     * @param firstResult the index of the first result object to be retrieved (numbered from 0)
+     * @param maxResults the maximum number of result objects to retrieve (or <=0 for no limit)
+     * @param sortProperty the property of the object to sort on
+     * @param isAscending should the retruned list be sorted ascending? 
+     * 
+     * @return a sorted List containing 0 or more «javaDomainClass(this.name)» objects.
+     *
+     * @see #listPage(int, int, String, boolean)
+     */
+    List<«javaDomainClass(this.name)»> listPage(final int firstResult, final int maxResults,
+        final String sortProperty, final boolean isAscending);
+        
+    /**
+     * @deprecated Instead use {@link #findByExample(«javaDomainClass(this.name)», SearchParameters)}.
+     *
+     * Selects a sorted range (page) of «javaDomainClass(this.name)»s from the database.
+     * 
+     * @param example the example object to which the result objects need to conform
+     * @param firstResult the index of the first result object to be retrieved (numbered from 0)
+     * @param maxResults the maximum number of result objects to retrieve (or <=0 for no limit)
+     * @param sortProperty the property of the object to sort on
+     * @param isAscending should the retruned list be sorted ascending? 
+     * 
+     * @return a sorted List containing 0 or more «javaDomainClass(this.name)» objects.
+     *
+     * @see #listPage(int, int, String, boolean)
+     */
+    List<«javaDomainClass(this.name)»> listPageByExample(final «javaDomainClass(this.name)» example, final int firstResult, final int maxResults,
+            final String sortProperty, final boolean isAscending);
+
+    /**
+     * Counts the number of persisted «javaDomainClass(this.name)» objects in the database.
+     * 
+     * @return the number of persisted objects in the database.
+     */
+    long count();
+    
+    /**
+     * @deprecated Instead use {@link countByExample(«javaDomainClass(this.name)»)} or 
+     *     {@link countByExample(«javaDomainClass(this.name)» example, SearchParameters parameters)}.
+     *
+     * Counts the number of persisted «javaDomainClass(this.name)» objects in the database that
+     * matches the given example object.
+     *
+     * @param example
+     *                the example object to be counted
+     * 
+     * @return the number of persisted objects in the database.
+     */
+    long count(final «javaDomainClass(this.name)» example);
+
+    /**
+     * Counts the number of persisted «javaDomainClass(this.name)» objects in the database that
+     * matches the given <code>example</code> object. By default the match mode will be set to 'anywhere',
+     * and the case of string-valued properties will be ignored.
+     *
+     * @param example
+     *                the example object to be counted
+     * 
+     * @return the number of persisted objects in the database.
+     * @since 1.4
+     */
+    long countByExample(«javaDomainClass(this.name)» example);
+
+    /**
+     * Counts the number of persisted «javaDomainClass(this.name)» objects in the database that
+     * matches the given <code>example</code> object and is constrained by the given search <code>parameters</code>.
+     *
+     * @param example
+     *                the example object to be counted
+     * @param parameters
+     *                the set of search parameters that specifies the search criteria.
+     * 
+     * @return the number of persisted objects in the database.
+     * @since 1.4
+     */
+    long countByExample(«javaDomainClass(this.name)» example, SearchParameters parameters);
+
+    /**
+     * Selects «javaDomainClass(this.name)»s from the database that matches the
+     * given <code>example</code> object. By default the match mode will be set to 'anywhere',
+     * and the case of string-valued properties will be ignored.
+     * 
+     * @param example
+     *                the example object to which the result objects need to conform
+     * @return a List of «javaDomainClass(this.name)» objects.
+     */
+    List<«javaDomainClass(this.name)»> findByExample(«javaDomainClass(this.name)» example);
+    
+    /**
+     * Selects «javaDomainClass(this.name)»s from the database that matches the given
+     * <code>example</code> object, and is constrained by the given search <code>parameters</code>.
+     * 
+     * @param example
+     *                the example object to which the result objects need to conform
+     * @param parameters
+     *                the set of search parameters that specifies the search criteria.
+     * @return a List of «javaDomainClass(this.name)» objects.
+     * @since 1.4
+     */
+    List<«javaDomainClass(this.name)»> findByExample(«javaDomainClass(this.name)» example, SearchParameters parameters);
+}
+«ENDFILE»
+«ENDDEFINE»

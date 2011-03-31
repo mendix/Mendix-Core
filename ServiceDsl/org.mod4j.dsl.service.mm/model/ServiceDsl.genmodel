@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.mod4j.dsl.service.mm/src"
+    modelPluginID="org.mod4j.dsl.service.mm" modelName="ServiceDsl" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>ServiceDsl.ecore</foreignModel>
+  <genPackages prefix="ServiceDsl" basePackage="org.mod4j.dsl.service.mm" disposableProviderFactory="true"
+      ecorePackage="ServiceDsl.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ServiceDsl.ecore#//MethodType">
+      <genEnumLiterals ecoreEnumLiteral="ServiceDsl.ecore#//MethodType/CREATE"/>
+      <genEnumLiterals ecoreEnumLiteral="ServiceDsl.ecore#//MethodType/READ"/>
+      <genEnumLiterals ecoreEnumLiteral="ServiceDsl.ecore#//MethodType/UPDATE"/>
+      <genEnumLiterals ecoreEnumLiteral="ServiceDsl.ecore#//MethodType/DELETE"/>
+      <genEnumLiterals ecoreEnumLiteral="ServiceDsl.ecore#//MethodType/FIND"/>
+      <genEnumLiterals ecoreEnumLiteral="ServiceDsl.ecore#//MethodType/CUSTOM"/>
+      <genEnumLiterals ecoreEnumLiteral="ServiceDsl.ecore#//MethodType/ADDTO"/>
+      <genEnumLiterals ecoreEnumLiteral="ServiceDsl.ecore#//MethodType/REMOVEFROM"/>
+      <genEnumLiterals ecoreEnumLiteral="ServiceDsl.ecore#//MethodType/GETFROM"/>
+      <genEnumLiterals ecoreEnumLiteral="ServiceDsl.ecore#//MethodType/LISTALL"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ServiceDsl.ecore#//CollectionType">
+      <genEnumLiterals ecoreEnumLiteral="ServiceDsl.ecore#//CollectionType/SINGLE"/>
+      <genEnumLiterals ecoreEnumLiteral="ServiceDsl.ecore#//CollectionType/LIST"/>
+    </genEnums>
+    <genClasses ecoreClass="ServiceDsl.ecore#//ServiceModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ServiceDsl.ecore#//ServiceModel/methods"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ServiceDsl.ecore#//ServiceModel/dtoReferences"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ServiceDsl.ecore#//ServiceModel/crudServices"/>
+    </genClasses>
+    <genClasses ecoreClass="ServiceDsl.ecore#//ModelElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ServiceDsl.ecore#//ModelElement/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ServiceDsl.ecore#//ModelElement/description"/>
+    </genClasses>
+    <genClasses ecoreClass="ServiceDsl.ecore#//DtoReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ServiceDsl.ecore#//DtoReference/modelname"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ServiceDsl.ecore#//DtoReference/model"/>
+    </genClasses>
+    <genClasses ecoreClass="ServiceDsl.ecore#//CustomMethod">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ServiceDsl.ecore#//CustomMethod/outParameter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ServiceDsl.ecore#//CustomMethod/inParameters"/>
+    </genClasses>
+    <genClasses ecoreClass="ServiceDsl.ecore#//CrudService">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ServiceDsl.ecore#//CrudService/dto"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ServiceDsl.ecore#//CrudService/model"/>
+    </genClasses>
+    <genClasses ecoreClass="ServiceDsl.ecore#//SpecialMethod">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ServiceDsl.ecore#//SpecialMethod/dto"/>
+    </genClasses>
+    <genClasses ecoreClass="ServiceDsl.ecore#//ServiceMethod">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ServiceDsl.ecore#//ServiceMethod/type"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ServiceDsl.ecore#//ServiceMethod/model"/>
+    </genClasses>
+    <genClasses ecoreClass="ServiceDsl.ecore#//Parameter">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ServiceDsl.ecore#//Parameter/type"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ServiceDsl.ecore#//Parameter/method"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ServiceDsl.ecore#//Parameter/collection"/>
+    </genClasses>
+    <genClasses ecoreClass="ServiceDsl.ecore#//AssociationMethod">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ServiceDsl.ecore#//AssociationMethod/main"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ServiceDsl.ecore#//AssociationMethod/part"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ServiceDsl.ecore#//AssociationMethod/rolename"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

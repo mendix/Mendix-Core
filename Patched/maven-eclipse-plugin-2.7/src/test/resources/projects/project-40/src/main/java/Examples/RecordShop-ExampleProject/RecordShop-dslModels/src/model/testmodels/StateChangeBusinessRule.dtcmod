@@ -1,0 +1,18 @@
+datacontract StateChangeBusinessRule;
+
+from StateChangeBusinessRule businessclass Kader;
+from StateChangeBusinessRule businessclass Organisatie;
+from StateChangeBusinessRule businessclass CasusOverleg;
+
+
+class CasusOverlegDto represents CasusOverleg;
+
+class OrganisatieDto represents Organisatie [
+    naam;
+    references [ overleggen as CasusOverlegDto; ]
+]
+
+class KaderDto represents Kader [
+    naam;
+    references [ organisaties as OrganisatieDto; ]
+]

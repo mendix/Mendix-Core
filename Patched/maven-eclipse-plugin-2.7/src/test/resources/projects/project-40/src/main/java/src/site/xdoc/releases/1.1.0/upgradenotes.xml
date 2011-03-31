@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <!--
+        Please edit this file with the Eclipse XML editor, set your XML editor to a line length of 128 characters, indent-size
+        of 4 characters and not using tab-characters, and format the file (Ctrl-Shift-F) before checking in. This should
+        minimize the number of non-significant differences when comparing versions.
+    -->
+
+    <properties>
+        <title>Mod4j 1.1.0 Upgrade Notes</title>
+    </properties>
+    <body>
+        <section name="Mod4j 1.1.0 Upgrade Notes">
+
+            <p>
+                The following upgrade steps are needed if you want to upgrade your
+                project from
+                <b>Mod4j 1.0.1</b>
+                to
+                <b>Mod4j 1.1.0</b>
+                .
+            </p>
+
+            <subsection name="Upgrade to Eclipse Galileo">
+                <p>
+                    With this release of Mod4j we've moved to Eclipse Galileo. The new Mod4j Eclipse plug-in will not work under
+                    Eclipse Ganymede, so if you did not upgrade already, now is a good moment to take this step. It is not so
+                    hard, just follow the
+                    <b>
+                        <a href="gettingstarted.html">Mod4j 1.1 Getting Started</a>
+                    </b>
+                    for this release.
+                </p>
+            </subsection>
+            <subsection name="Remove hand-written applicationContext.xml files">
+                <p>
+                    The generation of Spring configuration files has changed. A file named
+                    <code>
+                        <b>applicationContext.xml</b>
+                    </code>
+                    is now generated in
+                    <code>
+                        <b>generated-resources</b>
+                    </code>
+                    followed by the package root directory for each module. In the previous
+                    versions a file with the same name
+                    was generated just once under
+                    <code>
+                        <b>src/main/resources</b>
+                    </code>
+                    . This last file will
+                    conflict on the classpath with the generated one. The file
+                    <code>
+                        <b>applicationContext.xml</b>
+                    </code>
+                    under
+                    <code>
+                        <b>src/main/resources</b>
+                    </code>
+                    will have to be removed.
+                </p>
+            </subsection>
+            <subsection name="Changes in Maven configuration">
+                <p>With this release Mod4j has improved the Maven configuration for your application. Follow the next steps to
+                    adjust the Maven configuration in the right way. 
+                </p>
+                <p>
+                    All changes apply to the
+                    <b>parent-pom</b>
+                    of your application. The parent-pom (pom.xml) is located at the root
+                    of
+                    your
+                    project (if you didn't change
+                    its
+                    location).
+                </p>
+                <ol>
+                    <li>
+                        Adjust
+                        <b>mod4j.version</b>
+                        property to
+                        <b>1.1.0</b>
+                        :
+                        <br />
+                        <textarea rows="5" cols="70"><![CDATA[
+<project>
+   ...
+   <properties>
+       <mod4j.version>1.1.0</mod4j.version>]]>
+                        </textarea>
+                    </li>
+                    <li>
+                        Adjust
+                        <b>testResources</b>
+                        section:
+                        <br />
+                        <textarea rows="10" cols="70"><![CDATA[
+<project>
+   ...
+   <build>
+       ...
+       <testResources>
+           <testResource>
+               <directory>${basedir}/src/test/resources</directory>
+           </testResource>
+       </testResources>]]>
+                        </textarea>
+                    </li>
+                    <li>
+                        Remove the following two dependencies from the
+                        <b>dependencyManagement</b>
+                        section:
+                        <br />
+                        <textarea rows="16" cols="70"><![CDATA[
+<project>
+   ...
+    <dependencyManagement>
+        <dependencies>
+            ...
+            <dependency>
+                <groupId>org.openarchitectureware</groupId>
+                <artifactId>oaw-dependencies</artifactId>
+                <version>4.3.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jface</groupId>
+                <artifactId>text</artifactId>
+                <version>3.4.0</version>
+            </dependency>]]>
+                        </textarea>
+                    </li>
+                    <li>
+                        Remove the
+                        <b>OpenArchitectureWare Maven Repository</b>
+                        from the
+                        <b>repositories</b>
+                        section:
+                        <br />
+                        <textarea rows="10" cols="70"><![CDATA[
+<project>
+   ...
+    <repositories>
+        <repository>
+            <id>oaw-m2-repository</id>
+            <name>OpenArchitectureWare Maven Repository</name>
+            <url>http://www.openarchitectureware.org/m2</url>
+        </repository>
+    </repositories>]]>
+                        </textarea>
+                    </li>
+                </ol>
+            </subsection>
+            <subsection name="Model syntax changes">
+                <p>
+                    Some of the DSL model syntax has been improved.  
+                </p>
+                <ul>
+                    <li>
+                        All statements in all models must be terminated by a semicolon (
+                        <b>;</b>
+                        )
+                        <br />
+                        <textarea rows="4" cols="70"><![CDATA[
+class FullCustomerDto represents Customer;
+
+enumeration RecordTypeEnumDto represents RecordTypeEnum;]]>
+                        </textarea>
+                        <br />
+                        <br />
+                    </li>
+                    <li>
+                        The declaration of all
+                        <b>custom methods</b>
+                        in the
+                        <b>
+                            Service
+                        </b>
+                        models now takes a comma-separated argument list,
+                        surrounded by round parentheses (instead of square
+                        brackets).
+                        <br />
+                        <textarea rows="4" cols="70"><![CDATA[
+"Add order to customer"
+method addToOrders in (OrderDto order, SimpleCustomerDto customer) 
+                   out OrderDto; ]]>
+                        </textarea>
+                        <br />
+                        <br />
+                    </li>
+                </ul>
+
+            </subsection>
+            <subsection name="Known Issues">
+                <ul>
+                    <li>
+                        Due to issue
+                        <a href="http://jira.codehaus.org/browse/MODFORJ-145">MODFORJ-145</a>
+                        all occurring backslashes in
+                        <b>regexp</b>
+                        properties in the
+                        <b>BusinessDomain</b>
+                        models, must be escaped three times. See the following example:
+                        <br />
+                        <textarea rows="2" cols="85" ><![CDATA[
+string emailAddress regexp "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\\\.[A-Za-z]{2,4}$";]]>
+                        </textarea>
+                    </li>
+                </ul>
+            </subsection>
+
+        </section>
+    </body>
+</document>

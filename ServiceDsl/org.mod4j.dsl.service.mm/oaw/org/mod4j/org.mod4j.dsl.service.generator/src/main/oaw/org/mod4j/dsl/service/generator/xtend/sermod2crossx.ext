@@ -1,0 +1,99 @@
+/* 
+   This file contains the code to create a Crossx model from a Service model.
+   Needed for crosssreference purposes.
+*/
+
+import crossx;
+import ServiceDsl;
+
+extension org::mod4j::crossx::broker::xtend::Crossx;
+extension org::mod4j::dslcommon::xtend::generatorutil;
+extension org::mod4j::dsl::service::mm::xtend::ServiceMethod;
+
+create ModelInfo exportModel(ServiceModel serviceModel, String modelFile) :
+    print("MOD4J INFO: Running CrossX on file [" + modelFile + "]")->
+    this.setDslname("ServiceDsl")->
+    this.setModelname(serviceModel.name)->
+    this.setResource(modelFile)->
+    this.symbols.add(serviceModel.toSymbol() );
+//    this.symbols.addAll(busModel.enumerations.toElement());
+    
+Symbol toSymbol(ServiceModel model) :
+    let result = new Symbol :
+    result.setName(model.name) ->
+    result.setType("Service")->
+    result.properties.add( newProperty("UniqueBusinessClasses", model.uniqueBusinessClasses().toString(",")))->
+    result.subSymbols.addAll( model.methods.typeSelect(AssociationMethod).toSymbol() )->
+    result.subSymbols.addAll( model.methods.typeSelect(SpecialMethod).toSymbol() )->
+    result.subSymbols.addAll( model.methods.typeSelect(CustomMethod).toSymbol() )->
+//    result.subSymbols.addAll( model.dtoReferences.select(dto|dto.businessClass() != "void").toSymbol() )->
+    result.subSymbols.addAll( model.getAllBusinessClassDtoSymbols().xtoSymbol() )->
+    result
+    ;
+
+Symbol toSymbol(ServiceMethod method) :
+    let result = new Symbol :
+    result.setName(method.name) ->
+    result.setType("ServiceMethod")
+    ;
+
+Symbol toSymbol(SpecialMethod method) :
+    let result = new Symbol :
+    result.properties.add( newProperty("dto", method.dto.name) )->
+    result.properties.add( newProperty("methodType", method.type.toString()) )->
+    result.setName(method.name) ->
+    result.setType("ServiceMethod")
+    ;
+
+Symbol toSymbol(AssociationMethod method) :
+    let assoc =  getAssociation(method) :
+    let mult = getPropertyValue(assoc, "Multiplicity") :
+    let result = new Symbol :
+    result.properties.add( newProperty("methodType", method.type.toString()) )->
+    result.properties.add( newProperty("outCollection", (mult == "ONE" ? "SINGLE" : "LIST")))-> 
+    result.properties.add( newProperty("part", method.part.name) )->
+    result.properties.add( newProperty("whole", method.main.name) )->
+    result.setName(method.name) ->
+    result.setType("ServiceMethod")
+    ;
+
+Symbol toSymbol(CustomMethod method) :
+    let result = new Symbol :
+    result.properties.add( newProperty("methodType", "CustomMethod") )->
+    (method.inParameters.isEmpty ? null : result.properties.add( newProperty("in", method.inParameters.first().type.name)) )->
+    (method.outParameter == null ? 
+           result.properties.add( newProperty("out", "void")) :
+           result.properties.add( newProperty("out", method.outParameter.type.name ))-> 
+           result.properties.add( newProperty("outCollection", method.outParameter.collection.toString())) 
+    )->
+    result.setName(method.name) ->
+    result.setType("ServiceMethod")
+    ;
+
+// Add a DTO nreference for all Dtyo's that have a busienssclass
+Symbol toSymbol(DtoReference dto) :
+    let result = new Symbol :
+    result.properties.add( newProperty("modelname", dto.modelname) )->
+    result.setName(dto.name) ->
+    result.setType("DtoReference")
+    ;
+
+// Add a DTO nreference for all Dtyo's that have a busienssclass
+Symbol xtoSymbol(Symbol businessClassDtoSymbol) :
+    let result = new Symbol :
+    result.properties.add( newProperty("modelname", businessClassDtoSymbol.owner.modelname) )->
+    result.properties.add( newProperty("symboltype", businessClassDtoSymbol.type) )->
+    result.setName(businessClassDtoSymbol.name) ->
+    result.setType("DtoReference")
+    ;
+
+crossx::LiteralSymbolProperty newProperty(String name, String value) :
+    let result = new LiteralSymbolProperty :
+    result.setName(name)->
+    result.setValue(value)->
+    result
+    ;
+
+
+    
+    

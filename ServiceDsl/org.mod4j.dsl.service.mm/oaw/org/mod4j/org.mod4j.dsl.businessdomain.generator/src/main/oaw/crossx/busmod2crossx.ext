@@ -1,0 +1,185 @@
+/*******************************************************************************
+ * Copyright (c) 2009 Ordina and committers to Mod4j
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Ordina - initial implementation
+ *******************************************************************************/
+ /* 
+   This file contains the code to create a Crossx model from a BusinesDomainDsl model.
+   Needed for crosssreference purposes.
+*/
+
+import crossx;
+import BusinessDomainDsl;
+
+extension BusinessClass;
+extension org::mod4j::dslcommon::xtend::generatorutil;
+extension org::mod4j::crossx::broker::xtend::Crossx;
+
+create ModelInfo exportModel(BusinessDomainModel busModel, String modelFile) :
+    print("MOD4J INFO: Running CrossX on file [" + modelFile + "]")->
+    this.setDslname("BusinessDomainDsl")->
+    this.setModelname(busModel.name)->
+    this.setResource(modelFile)->
+    this.symbols.addAll(busModel.types.typeSelect(BusinessClass).toElement())->
+    this.symbols.addAll(busModel.enumerations.toElement());
+    
+Symbol toElement(Enumeration enum) :
+    let result = new Symbol :
+    result.setName(enum.name) ->
+    result.setType("Enumeration")->
+    result.subSymbols.addAll(enum.enumerationLiterals.toElement() )->
+    result
+    ;
+
+Symbol toElement(EnumerationLiteral lit) :
+    let result = new Symbol :
+    result.setName(lit.name) ->
+    result.setType("EnumerationLiteral")->
+    result.properties.add( newProperty("value", lit.persistedValue.toString()))->
+    result
+    ;
+
+
+Symbol toElement(BusinessClass cls) :
+    let result = new Symbol :
+//    print("MOD4J DEBUG : BusinessClass.toElement[" + cls.name + "]")->
+    result.setName(cls.name) ->
+    result.setType("BusinessClass")->
+    result.subSymbols.addAll(cls.properties.toElement() )->
+    (cls.superclass != null ? result.subSymbols.addAll( cls.superclass.properties.toElement()): null)->
+//    print("MOD4J DEBUG : BusinessClass.all associations [" + cls.getAllAssociationsTo() +  "]")->
+    result.subSymbols.addAll( cls.getAllAssociationsTo().toSymbol() )->
+    result.subSymbols.addAll( cls.getAllAssociationsFrom().select(e|e.bidirectional).fromSymbol() )->
+    result.addContructorOrder(cls)->
+    result
+    ;
+
+addContructorOrder(Symbol s, BusinessClass cls) :
+ s.properties.add( newProperty("ConstructorOrder", 
+                           cls.getAllProperties().reject(e|e.nullable || e.hasDefault || e.derived).name.toString(",")  ));
+/** Create a new Symbol of type "Association" for 'ass'
+ */
+crossx::Symbol toSymbol(BusinessDomainDsl::Association ass) :
+    let result = new Symbol :
+//    print("MOD4J DEBUG : Association.toSymbol[" + ass.name+ "]")->
+    result.setName(ass.targetRoleName )->
+    result.setType("Association")->
+    result.properties.add( multiplicityProperty(ass.targetMultiplicity) )->
+    result.properties.add( newProperty("BusinessClass", ass.target.name))->
+    result.properties.add( newProperty("ordered", ass.ordered.toString()))->
+    result.properties.add( newRefProperty("Target", ass.model.name, ass.target.name, "BusinessClass"))->
+    result;
+
+crossx::Symbol fromSymbol(BusinessDomainDsl::Association ass) :
+    let result = new Symbol :
+//    print("MOD4J DEBUG : Association.fromSymbol[" + ass.name+ "]")->
+    result.setName(ass.sourceRoleName )->
+    result.setType("Association")->
+    result.properties.add( multiplicityProperty(ass.sourceMultiplicity) )->
+    result.properties.add( newProperty("BusinessClass", ass.source.name))->
+    result.properties.add( newRefProperty("Target", ass.model.name, ass.source.name, "BusinessClass"))->
+    result;
+
+LiteralSymbolProperty multiplicityProperty(BusinessDomainDsl::Multiplicity mult) :
+    let result = new LiteralSymbolProperty :
+	result.setName("Multiplicity")->
+	result.setValue(mult.asString())->
+    result
+    ;
+    
+String asString(BusinessDomainDsl::Multiplicity mult) :
+    switch( mult ) {
+        case Multiplicity::One      : "ONE"
+        case Multiplicity::ZeroOne  : "ONE"
+        case Multiplicity::ZeroMany : "MANY"
+        case Multiplicity::OneMany  : "MANY"
+        default : "UNKNOWN"
+    };
+
+crossx::Symbol toElement(BusinessDomainDsl::Property prop) :
+    let result = new Symbol :
+    result.setName(prop.name) ->
+    result.setType("Property") ->
+    result.properties.add(prop.toLiteralProperty())->
+    result.properties.add(newProperty("MandatoryForCreation", ( (!prop.nullable) && (!prop.hasDefault) && (!prop.derived) ? "true" : "false") ))->
+    result.properties.add(newProperty("Nullable", ( (prop.nullable) ? "true" : "false") ))->
+    result.properties.add(newProperty("Writable", (prop.derived ? prop.writable : true) ? "true" : "false"))->
+    result.properties.add(newProperty("HasDefault", (prop.hasDefault ? "true" : "false") ))->
+    result
+    ;
+
+crossx::Symbol toElement(BusinessDomainDsl::StringProperty prop) :
+    let result = new Symbol :
+    result.setName(prop.name) ->
+    result.setType("Property") ->
+    result.properties.add(prop.toLiteralProperty())->
+    result.properties.add(newProperty("MandatoryForCreation", ( (!prop.nullable) && (!prop.hasDefault) && (!prop.derived) ? "true" : "false") ))->
+    result.properties.add(newProperty("Nullable", ( (prop.nullable) ? "true" : "false") ))->
+    result.properties.add(newProperty("Writable", ( (prop.derived ? prop.writable : true) ? "true" : "false") ))->
+    result.properties.add(newProperty("HasDefault", (prop.hasDefault ? "true" : "false") ))->
+    (prop.hasDefault ? result.properties.add(newProperty("DefaultValue", prop.defaultValue)) : false)->
+    result
+    ;
+
+crossx::Symbol toElement(BusinessDomainDsl::IntegerProperty prop) :
+    let result = new Symbol :
+    result.setName(prop.name) ->
+    result.setType("Property") ->
+    result.properties.add(prop.toLiteralProperty())->
+    result.properties.add(newProperty("MandatoryForCreation", ( (!prop.nullable) && (!prop.hasDefault) && (!prop.derived) ? "true" : "false") ))->
+    result.properties.add(newProperty("Nullable", ( (prop.nullable) ? "true" : "false") ))->
+    result.properties.add(newProperty("Writable", ( (prop.derived ? prop.writable : true) ? "true" : "false") ))->
+    result.properties.add(newProperty("HasDefault", (prop.hasDefault ? "true" : "false") ))->
+    (prop.hasDefault ? result.properties.add(newProperty("DefaultValue", prop.defaultValue.toString())) : false)->
+    result
+    ;
+
+crossx::Symbol toElement(BusinessDomainDsl::BoolProperty prop) :
+    let result = new Symbol :
+    result.setName(prop.name) ->
+    result.setType("Property") ->
+    result.properties.add(prop.toLiteralProperty())->
+    result.properties.add(newProperty("MandatoryForCreation", ( (!prop.nullable) && (!prop.hasDefault) && (!prop.derived) ? "true" : "false") ))->
+    result.properties.add(newProperty("Nullable", ( (prop.nullable) ? "true" : "false") ))->
+    result.properties.add(newProperty("Writable", ( (prop.derived ? prop.writable : true) ? "true" : "false") ))->
+    result.properties.add(newProperty("HasDefault", (prop.hasDefault ? "true" : "false") ))->
+    (prop.hasDefault ? result.properties.add(newProperty("DefaultValue", prop.defaultValue.toString())) : false)->
+    result
+    ;
+
+crossx::Symbol toElement(BusinessDomainDsl::DateTimeProperty prop) :
+    let result = new Symbol :
+    result.setName(prop.name) ->
+    result.setType("Property") ->
+    result.properties.add(prop.toLiteralProperty())->
+    result.properties.add(newProperty("MandatoryForCreation", ( (!prop.nullable) && (!prop.hasDefault) && (!prop.derived) ? "true" : "false") ))->
+    result.properties.add(newProperty("Nullable", ( (prop.nullable) ? "true" : "false") ))->
+    result.properties.add(newProperty("Writable", ( (prop.derived ? prop.writable : true) ? "true" : "false") ))->
+    result.properties.add(newProperty("HasDefault", (prop.hasDefault ? "true" : "false") ))->
+    (prop.hasDefault ? result.properties.add(newProperty("DefaultValue", prop.defaultValue)) : false)->
+    result
+    ;
+    
+crossx::Symbol toElement(BusinessDomainDsl::EnumerationProperty prop) :
+    let result = new Symbol :
+    result.setName(prop.name) ->
+    result.setType("Property") ->
+    result.properties.add(prop.toLiteralProperty())->
+    result.properties.add(newProperty("MandatoryForCreation", ( (!prop.nullable) && (!prop.hasDefault) && (!prop.derived) ? "true" : "false") ))->
+    result.properties.add(newProperty("Nullable", ( (prop.nullable) ? "true" : "false") ))->
+    result.properties.add(newProperty("Writable", ( (prop.derived ? prop.writable : true) ? "true" : "false") ))->
+    result.properties.add(newProperty("HasDefault", (prop.hasDefault ? "true" : "false") ))->
+    (prop.hasDefault ? result.properties.add(newProperty("DefaultValue", prop.defaultValueAsString)) : false)->
+    result
+    ;
+    
+crossx::LiteralSymbolProperty toLiteralProperty(BusinessDomainDsl::Property prop) :
+	newProperty("DataType", prop.dataType);
+
+crossx::LiteralSymbolProperty toLiteralProperty(BusinessDomainDsl::EnumerationProperty prop) :
+    newProperty("DataType", prop.type.name)  ;

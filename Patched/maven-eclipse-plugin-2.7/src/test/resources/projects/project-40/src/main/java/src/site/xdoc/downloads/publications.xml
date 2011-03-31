@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <!--
+        Please edit this file with the Eclipse XML editor, set your XML editor to a line length of 128 characters, indent-size
+        of 4 characters and not using tab-characters, and format the file (Ctrl-Shift-F) before checking in. This should
+        minimize the number of non-significant differences when comparing versions.
+    -->
+
+    <properties>
+        <title>Publications about Mod4j</title>
+    </properties>
+    <body>
+
+        <section name="Publications about Mod4j">
+            <p>
+                On a regular basis the Mod4j project team gives presentations or write papers about various aspects
+                of Mod4j and the underlying concepts. This page provides links to downloads of these publications.
+            </p>
+                <ol>
+                    <li>Article <a href="../pdf/JAV_MOD4j_1159451.pdf">Model Driven Development met Mod4j</a> by Eric Jan Malotaux, published in Java Magazine 2009/3, June
+                    2009. In Dutch.
+                    </li>
+                    <li>Presentation <a href="../pdf/mod4j-keynote-jspring2009.pdf">Mod4j: Modeling for java</a> by Jos Warmer, keynote session at J-Spring 2009, the Dutch Java Users group (NLJUG) conference.
+                        Slides are in english.
+                    </li>
+                    <li>Presentation on CrossX <a href="../pdf/crossx-presentation-eclipse-summit-2008.pdf">Large Models -
+                        An Alternative Approach</a>
+                        by Jos Warmer for the Modeling Symposium at the Eclipse Summit Europe 2008.
+                        CrossX is the inter-dsl communication technology used my Mod4j and contributed to the
+                        Eclipse EMF Index project.
+                    </li>
+                    <li>Paper on CrossX <a href="../pdf/crossx-paper-eclipse-summit-2008.pdf">Large Models - An Alternative Approach</a>
+                        by Jos Warmer for the Modeling Symposium at the Eclipse Summit Europe 2008.
+                        More detailed background that the presentation above.
+                    </li>
+                </ol>
+        </section>
+    </body>
+</document>

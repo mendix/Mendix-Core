@@ -1,0 +1,128 @@
+/*******************************************************************************
+ * Copyright (c) 2009 Ordina and committers to Mod4j
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Ordina - initial implementation
+ *******************************************************************************/
+import ServiceDsl;
+import crossx;
+
+extension org::mod4j::crossx::broker::xtend::Crossx;
+extension org::mod4j::common::xtend::NameMapper;
+
+extension org::mod4j::dsl::service::mm::xtend::ServiceMethod;
+extension org::mod4j::dslcommon::xtend::generatorutil;
+extension org::eclipse::xtend::util::stdlib::elementprops;
+
+context DtoReference ERROR "DtoReference [" + this.name + "] not defined in model " + this.modelname:
+       lookupSymbol(this.modelname, this.name, "Dto") != null;
+       
+context CrudService ERROR "Crud service "+ name + " can only be defined for a BusinessClassDto" :
+       this.dto != null implies this.dto.dtoType() == "BusinessClassDto";
+
+context SpecialMethod ERROR "Dto "+ dto.name + " must be a BusinessClassDto: create / read / update / delete methods can only be defined for a BusinessClassDto" :
+      ((this.type == MethodType::CREATE) ||
+       (this.type == MethodType::READ) ||
+       (this.type == MethodType::UPDATE) ||
+       (this.type == MethodType::DELETE) )
+        implies
+           (this.dto == null) ? true :  (dto.dtoType() == "BusinessClassDto");
+
+context AssociationMethod ERROR "Of "+ main.name + " must be a BusinessClassDto: add / remove / get methods can only be defined for a BusinessClassDto" :
+       (this.main == null) ? true :  (main.dtoType() == "BusinessClassDto");
+      
+context AssociationMethod ERROR "Dto "+ part.name + " must be a BusinessClassDto: add / remove / get methods can only be defined for a BusinessClassDto" :
+      ((this.type == MethodType::ADDTO) ||
+       (this.type == MethodType::REMOVEFROM) )
+       implies
+       (this.part == null) ? true :  (part.dtoType() == "BusinessClassDto");
+
+//context AssociationMethod ERROR "Dto "+ part.name + " must be a ListDto because [" + this.rolename + "] has multiplicity MANY" :
+//      this.mustBeListDto() ;
+      
+//      ((this.type == MethodType::GETFROM) && (this.getAssociation().getPropertyValue("Multiplicity") == "MANY") )
+//      implies
+//       (this.part == null) ? true :  (part.dtoType() == "ListDto");
+	
+//context AssociationMethod ERROR "Dto "+ part.name + " must be a BusinessClassDto because [" + this.rolename + "] has multiplicity ONE" :
+//      ((this.type == MethodType::GETFROM) && (this.getAssociation().getPropertyValue("Multiplicity") == "ONE") )
+//       implies
+//       (this.part == null) ? true :  (part.dtoType() == "BusinessClassDto");
+	
+/** Check all possible constraints for AssociationMethods
+ **  The conbstraints arev in one Checks rule because iof one fails, the others should be be evalkuated anymore
+ */	
+context AssociationMethod ERROR this.getProperty("ERROR") :
+	 let assoc =  getAssociation(this) :
+	 let mult = getPropertyValue(assoc, "Multiplicity") :
+
+     if assoc == null then (
+         this.setProperty("ERROR", "01 Reference "+ this.rolename + " must be a rolename in an association of " + main.name )->
+         false
+     ) else (
+         ( this.type == MethodType::GETFROM ) implies (
+         let target = lookupReference( getReferenceProperty(assoc, "Target") ) :
+         let dtoSymbol = lookupSymbol(this.part.modelname, this.part.name, "Dto") :
+         let dtoType = getPropertyValue( dtoSymbol, "dtoType") :
+         let baseDtoRef = getReferenceProperty( dtoSymbol, "BaseDto") :
+         if mult == "ONE" then (
+             let busClass = this.part.businessClass() :
+             if dtoType != "BusinessClassDto" then (
+ 	             this.setProperty("ERROR", "02 The class ["+ part.name + "] should be a BusinessClassDto because [" + this.rolename + "] has multiplicity ONE" )->
+	             false
+	         ) else (
+	             if target.name != busClass then (
+	 	             this.setProperty("ERROR", "03 The base business class of ["+ part.name + "] is ["+ busClass + "], but should be [" + target.name  + "]")->
+		             false
+		         ) else (
+		             true
+		         )
+		     )
+         ) else ( // mult == MANY
+             if dtoType != "ListDto" then (
+// 	             this.setProperty("ERROR", "04 The class ["+ part.name + "] should be a ListDto because [" + this.rolename + "] has multiplicity MANY" )->
+//	             false
+                true
+	         ) else (
+/*
+	             let baseDto = lookupReference(baseDtoRef) :
+	             let baseDtoType = baseDto.getPropertyValue("dtoType") :
+	             if baseDtoType != "BusinessClassDto"  then (
+		             this.setProperty("ERROR", "05 The base business class of the ListDto ["+ this.part.name + "] should be a BusinessClassDto")->
+	                 false
+		         ) else (
+		             let businessClass = baseDto.getPropertyValue("businessClass") :
+				 	 if  businessClass != assoc.getPropertyValue("BusinessClass") then (
+		                 this.setProperty("ERROR", "06 The base business class of the ListDto ["+ this.part.name + "] should be [" + assoc.getPropertyValue("BusinessClass") + "]")->
+					     false
+					 ) else ( 
+			             true
+			         )
+		         )
+*/
+
+         true
+	         )
+         ))
+     );
+
+context AssociationMethod ERROR this.getProperty("ERROR") :
+	 let assoc =  getAssociation(this) :
+	 let mult = getPropertyValue(assoc, "Multiplicity") :
+     if (this.type == MethodType::REMOVEFROM) &&
+        ( (mult == "ONE") )
+     then (
+         this.setProperty("ERROR", "07 Remove method for association ["+ this.rolename  +
+                           "] with multiplicity zero or one is not allowed, use add method instead")->
+         false
+     ) else (
+         true 
+     );
+     
+String getIt() :
+    "it";
+     

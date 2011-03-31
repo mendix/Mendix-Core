@@ -1,0 +1,28 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Service xtext ui
+Bundle-SymbolicName: org.mod4j.dsl.service.xtext.ui;singleton:=true
+Bundle-Version: 1.3.0.qualifier
+Bundle-ActivationPolicy: lazy
+Eclipse-RegisterBuddy: org.mod4j.common
+Require-Bundle: org.mod4j.dsl.service.mm;bundle-version="1.1.0",
+ org.mod4j.dsl.service.xtext;bundle-version="1.1.0",
+ org.mod4j.crossx.mm;bundle-version="1.1.0",
+ org.mod4j.crossx.broker;bundle-version="1.1.0",
+ org.mod4j.eclipse;bundle-version="1.1.0",
+ org.antlr.runtime,
+ org.eclipse.xtext.log4j;resolution:=optional,
+ org.eclipse.xtext.ui.core,
+ org.eclipse.xtext.ui.common,
+ org.eclipse.ui.editors,
+ org.eclipse.ui
+Export-Package: org.mod4j.dsl.service.xtext,
+ org.mod4j.dsl.service.xtext.contentassist,
+ org.mod4j.dsl.service.xtext.contentassist.antlr,
+ org.mod4j.dsl.service.xtext.contentassist.antlr.internal,
+ org.mod4j.dsl.service.xtext.internal,
+ org.mod4j.dsl.service.xtext.labeling,
+ org.mod4j.dsl.service.xtext.outline
+Bundle-Vendor: mod4j.org
+Bundle-Activator: org.mod4j.dsl.service.xtext.Mod4jServiceActivator
+ 

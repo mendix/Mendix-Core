@@ -1,0 +1,55 @@
+«REM»
+ Copyright (c) 2009 Ordina and committers to Mod4j
+ All rights reserved. This program and the accompanying materials
+ are made available under the terms of the Eclipse Public License v1.0
+ which accompanies this distribution, and is available at
+ http://www.eclipse.org/legal/epl-v10.html
+  Contributors:
+     Ordina - initial implementation
+«ENDREM»
+«IMPORT BusinessDomainDsl»
+«IMPORT org::mod4j::dslcommon::xpand::xml»
+
+«EXTENSION org::mod4j::dslcommon::xtend::ProjectProperties»
+«EXTENSION org::mod4j::common::xtend::FileTracker»
+«EXTENSION org::mod4j::dslcommon::xtend::generatorutil»
+
+«DEFINE createDslModelsModulePom FOR BusinessDomainModel»
+<?xml version="1.0" encoding="«getFileEncoding()»"?>
+«EXPAND XmlComments::extensionPointHeader ("Mod4j BusinessDomainDsl generator: DslModelsModuelPom.xpt") FOR this»
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation=" http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>«getRootPackage()»</groupId>
+        <artifactId>«getApplicationName()»</artifactId>
+        <version>«getApplicationVersion()»</version>
+    </parent>
+    <groupId>«getRootPackage()»</groupId>
+    <artifactId>«getDslModelsModuleName()»</artifactId>
+    <name>«getDslModelsModuleName()»</name>
+    <version>«getApplicationVersion()»</version>
+    <build>
+        <resources>
+            <resource>
+                <directory>«getSrcModelPath()»</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.mod4j</groupId>
+                <artifactId>mod4j-maven-plugin</artifactId>
+                <version>${mod4j.version}</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generateFromModel</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+«ENDDEFINE»

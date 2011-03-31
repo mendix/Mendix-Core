@@ -1,0 +1,72 @@
+«REM»
+	  Copyright (c) 2009 Ordina and committers to Mod4j
+	  All rights reserved. This program and the accompanying materials
+	  are made available under the terms of the Eclipse Public License v1.0
+	  which accompanies this distribution, and is available at
+	  http://www.eclipse.org/legal/epl-v10.html
+	 
+	  Contributors:
+	      Ordina - initial implementation
+«ENDREM»
+«IMPORT ServiceDsl»
+«IMPORT org::mod4j::dsl::service::generator::xpand::java»
+«IMPORT org::mod4j::dsl::service::generator::xpand::maven»
+«IMPORT org::mod4j::dsl::service::generator::xpand::spring»
+«IMPORT org::mod4j::dslcommon::xpand::xml»
+
+«EXTENSION org::mod4j::dslcommon::xtend::generatorutil»
+«EXTENSION org::mod4j::common::xtend::NameMapper»
+«EXTENSION org::mod4j::dslcommon::xtend::ProjectProperties»
+«EXTENSION org::mod4j::common::xtend::FileTracker»
+
+«DEFINE Generate FOR ServiceModel»
+
+	«print("MOD4J INFO: Running Service generator on model [" + this.name + "]")»
+
+	«FILE generate(getServiceModuleName(), javaPathFileName(javaLocalServiceInterfacePath(name)))»
+		«EXPAND  LocalService::LocalService FOR this» 
+	«ENDFILE»
+	
+	«IF !fileExist(fullExtendPath(getServiceModuleName(), javaPathFileName(javaLocalServiceClassPath(name))))»
+		«FILE generate(getServiceModuleName(), javaPathFileName(javaLocalServiceClassPath(name)))» 
+    		«EXPAND  LocalServiceImpl::LocalServiceImpl FOR this» 
+    	«ENDFILE»
+	«ELSE»
+	    «retain(getServiceModuleName(), javaPathFileName(javaLocalServiceInterfacePath(name)))»
+    «ENDIF»
+
+	«FILE generate(getServiceModuleName(), javaPathFileName(javaLocalServiceBaseClassPath(name)))»
+	    «EXPAND  LocalServiceImplBase::LocalServiceImplBase FOR this» 
+	«ENDFILE»
+	
+	«IF !fileExist(fullExtendPath(getServiceModuleName(), getServiceRootPackageAsPath() + "/beanRefContext.xml"))»
+        «FILE generateToMain(getServiceModuleName(), getServiceRootPackageAsPath() + "/beanRefContext.xml")»
+            «EXPAND ServiceLayerBeanRefContext::GenBeanRefContext FOR this»
+        «ENDFILE»
+    «ELSE»
+        «retain(getServiceModuleName(), getServiceRootPackageAsPath() + "/beanRefContext.xml")»
+    «ENDIF»
+
+	«FILE generate(getServiceModuleName(), getServiceRootPackageAsPath() + "/applicationContext.xml")»
+	    «EXPAND  ServiceLayerImplBaseContext::GenServiceLayerImplBaseContext FOR this» 
+	«ENDFILE»
+    
+    «IF !fileExist(fullExtendPath(getServiceModuleName(), getServiceRootPackageAsPath() + "/transactionManagerContext.xml"))»
+        «FILE generateToMain(getServiceModuleName(), getServiceRootPackageAsPath() + "/transactionManagerContext.xml")»
+<?xml version="1.0" encoding="UTF-8"?>
+
+«EXPAND XmlComments::extensionPointHeader ("Mod4j ServiceDsl generator: ServiceLayer.xpt") FOR this»
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+    <tx:jta-transaction-manager/>
+</beans>
+        «ENDFILE»
+    «ELSE»
+         «retain(getServiceModuleName(), getServiceRootPackageAsPath() + "/transactionManagerContext.xml")»
+    «ENDIF»
+«ENDDEFINE»

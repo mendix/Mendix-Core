@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <!--
+        Please edit this file with the Eclipse XML editor, set your XML editor to a line length of 128 characters, indent-size
+        of 4 characters and not using tab-characters, and format the file (Ctrl-Shift-F) before checking in. This should
+        minimize the number of non-significant differences when comparing versions.
+    -->
+    
+    <body>
+
+        <section name="">
+            <p>
+                Mod4j (Modeling for Java) is an open source DSL-based environment for developing
+                administrative enterprise applications. 
+                It uses a collection of DSL's to model different parts of the architecture, 
+                combined with manually written code. 
+                Currently Mod4j consists of four DSLs: the Business Domain DSL, Service DSL, 
+                Data Contract DSL and Presentation DSL. 
+                The modeling environment is seamlessly integrated into the Eclipse IDE which gives
+                the developers one environment where they can easily switch back- and forth between models and code. 
+                The different DSL’s used in Mod4j can be used independently, 
+                but if they are used in collaboration they will be fully validated with each other. 
+                Apart from integration in the Eclipse IDE, Mod4j also supports the use of Maven. 
+                That is, using the DSL models as the source,
+                the complete code generation process can be run automatically on a build server without
+                the need for Eclipse.
+            </p>
+            <p>
+                The Mod4j DSLs and the corresponding code generators are based on a reference architecture.
+                This allows developers to model various aspects of the application and generate code that
+                strictly follows this reference architecture.
+                The reference architecture is described in a separate document.
+                For a good understanding of the generated code it is useful to read this 
+                <a href="documentation.html">document</a>.
+            </p>
+            <img src="images/mod4j-diagram-small.png" align="left" alt="" />
+            <subsection name="Mod4j Vision">
+                <p>
+                    The vision behind Mod4j is to have a flexible environment where DSLs can be easily changed and 
+                    new DSLs can be added at will. 
+                    Therefore we do not see the current DSLs as a fixed environment. 
+                    We do expect that new features will be
+                    added to the DSLs, new code generators will be added, and also that new DSLs will, be added. 
+                    In the ideal situation Mod4j will offer a large collection of DSLs, where you can choose
+                    the DSLs that fit within your current project.
+                    Having said that, the current four DSLs provide a ready to use environment, which will give you
+                    a large advantage when building administrative Java applications.
+                    This includes higher productivity, better quality and easier maintenance.
+                </p>    
+                <p>
+                    Whether you use Mod4j as is, or take up the challenge to extend and/or change it, have fun.
+                </p>    
+                    <cite>Jos Warmer, Mod4j Project Lead</cite>
+            </subsection>
+            
+        </section>
+    </body>
+</document>

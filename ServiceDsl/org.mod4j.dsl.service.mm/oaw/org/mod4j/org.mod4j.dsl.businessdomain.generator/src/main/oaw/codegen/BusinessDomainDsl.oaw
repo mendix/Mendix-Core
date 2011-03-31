@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!--
+ - Copyright (c) 2009 Ordina and committers to Mod4j
+ - All rights reserved. This program and the accompanying materials
+ - are made available under the terms of the Eclipse Public License v1.0
+ - which accompanies this distribution, and is available at
+ - http://www.eclipse.org/legal/epl-v10.html
+ -
+ - Contributors:
+ -     Ordina - initial implementation
+ -->
+<workflow>
+
+    <!-- Initialize the issues reporting feature of oAW
+         TODO 3 May 2008 : Check whether this is still neccesary
+    -->
+    <component class="org.eclipse.xtend.util.stdlib.ExtIssueReporter"/>
+
+    <component class="org.mod4j.dslcommon.generator.helpers.PropertiesWorkflowComponent">
+        <propertyFile value="${appPropFilePath}" />
+        <workDir value="${workDir}" />
+        <project value="${project}" />
+    </component>
+
+    <bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" >
+        <platformUri value=".."/>
+    </bean>
+    <bean class="org.mod4j.dsl.businessdomain.xtext.BusinessDomainStandaloneSetup"/>
+    <bean id="bm" class="org.eclipse.xtend.typesystem.emf.EmfMetaModel">
+		<metaModelPackage value="BusinessDomainDsl.BusinessDomainDslPackage" />  
+	</bean>
+    <bean id="crossx" class="org.eclipse.xtend.typesystem.emf.EmfMetaModel">
+        <metaModelPackage value="org.mod4j.crossx.mm.crossx.CrossxPackage" />   
+    </bean>
+    <bean id="ecore" class="org.eclipse.xtend.typesystem.emf.EmfMetaModel">
+        <metaModelPackage value="org.eclipse.emf.ecore.EcorePackage" />   
+    </bean>
+    
+    
+     
+     <!-- As in the newly generated generator project
+     <component class="org.eclipse.xtext.MweReader" 
+	            uri="${modelFile}"
+	            outputSlot="busModel">
+		<register class="org.mod4j.dsl.businessdomain.xtext.BusinessDomainStandaloneSetup"/>
+	</component>
+     -->
+    
+    <!--
+        Parse the BusinessDomain model file and validate syntax and model constraints
+    -->
+    <component class="org.eclipse.emf.mwe.utils.Reader">
+        <uri value="${modelFile}" />
+        <modelSlot value="busModel" />
+    </component>
+<!--
+    <component id="BusinessDomainWorkflow-ModelChecks" class="org.eclipse.xtend.check.CheckComponent">
+        <metaModel idRef="bm" />
+        <checkFile value="BusinessDomainDsl::validation::BusinessModelChecks" />
+        <emfAllChildrenSlot value="busModel" />
+    </component>
+-->
+
+    <!--
+        Generation of Domain sources and resources
+    -->
+    <component id="BusinessDomainWorkflow-DomainGenerator" class="org.eclipse.xpand2.Generator">
+        <metaModel idRef="bm" />
+        <metaModel idRef="crossx"/>
+        <metaModel idRef="ecore"/>
+        <fileEncoding value="${fileEncoding}"/>
+        <expand value="org::mod4j::dsl::businessdomain::generator::xpand::BusinessDomainLayer::Root FOR busModel" />
+        <outlet path="${applicationPath}/">
+            <postprocessor class="org.eclipse.xpand2.output.JavaBeautifier" />
+            <postprocessor class="org.eclipse.xpand2.output.XmlBeautifier" />
+        </outlet>
+    </component>
+
+    <!-- 
+        Generation of Extions Points for Domain sources
+    -->
+    <component id="BusinessDomainWorkflow-DomainEextensionPointsGenerator" class="org.eclipse.xpand2.Generator">
+        <metaModel idRef="bm" />
+        <metaModel idRef="ecore"/>
+        <fileEncoding value="${fileEncoding}"/>
+        <expand value="org::mod4j::dsl::businessdomain::generator::xpand::BusinessDomainLayer::ExtensionPointGeneration FOR busModel" />
+        <outlet path="${applicationPath}/">
+            <postprocessor class="org.eclipse.xpand2.output.JavaBeautifier" />
+            <postprocessor class="org.eclipse.xpand2.output.XmlBeautifier" />
+        </outlet>
+    </component>
+
+    <!-- 
+        Generation of Hibernate resources.
+    -->  
+     <component id="BusinessDomainWorkflow-DataPackageResourcesGenerator" class="org.eclipse.xpand2.Generator">
+        <metaModel idRef="bm" />
+        <metaModel idRef="crossx"/>
+        <metaModel idRef="ecore"/>
+        <fileEncoding value="${fileEncoding}"/>
+        <expand value="org::mod4j::dsl::businessdomain::generator::xpand::DataPackage::genResources FOR busModel" />
+        <outlet path="${applicationPath}/">
+            <postprocessor class="org.eclipse.xpand2.output.JavaBeautifier" />
+            <postprocessor class="org.eclipse.xpand2.output.XmlBeautifier" />
+        </outlet>
+    </component>
+
+    <!-- 
+        Generation of Dao sources.
+    -->  
+    <component id="BusinessDomainWorkflow-DataPackageDaoGenerator" class="org.eclipse.xpand2.Generator">
+        <metaModel idRef="bm" />
+        <metaModel idRef="ecore"/>
+        <fileEncoding value="${fileEncoding}"/>
+        <expand value="org::mod4j::dsl::businessdomain::generator::xpand::DataPackage::genDao FOR busModel" />
+        <outlet path="${applicationPath}/">
+            <postprocessor class="org.eclipse.xpand2.output.JavaBeautifier" />
+            <postprocessor class="org.eclipse.xpand2.output.XmlBeautifier" />
+        </outlet>
+    </component>
+
+    <!-- 
+        Generation of Extention Points for Dao's.
+    -->  
+    <component id="BusinessDomainWorkflow-DataPackageExtentionPointsGenerator" class="org.eclipse.xpand2.Generator">
+        <metaModel idRef="bm" />
+        <metaModel idRef="ecore"/>
+        <fileEncoding value="${fileEncoding}"/>
+        <expand value="org::mod4j::dsl::businessdomain::generator::xpand::DataPackage::genDaoExtensions FOR busModel" />
+        <outlet path="${applicationPath}/">
+            <postprocessor class="org.eclipse.xpand2.output.JavaBeautifier" />
+            <postprocessor class="org.eclipse.xpand2.output.XmlBeautifier" />
+        </outlet>
+    </component>
+
+    <!-- 
+        Generation of Maven configuration files.
+    -->  
+    <component id="BusinessDomainWorkflow-MavenConfigGenerator" class="org.eclipse.xpand2.Generator">
+        <metaModel idRef="bm" />
+        <metaModel idRef="ecore"/>
+        <fileEncoding value="${fileEncoding}"/>
+        <expand value="org::mod4j::dsl::businessdomain::generator::xpand::BusinessDomainLayer::CreateMavenConfiguration FOR busModel"/>
+        <outlet path="${applicationPath}">
+            <postprocessor class="org.eclipse.xpand2.output.XmlBeautifier" />
+        </outlet>
+    </component>
+<!--
+	    <component id="busmodWriter" class="org.eclipse.emf.mwe.utils.Writer">
+	        <uri value="${modelFile}.xml" />
+	        <modelSlot value="busModel" />
+	    </component>
+-->
+</workflow>
