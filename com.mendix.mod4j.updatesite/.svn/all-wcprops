@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/mod4j/!svn/ver/2713/trunk/modules/org.mod4j.updatesite
+END
+artifacts.xml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/mod4j/!svn/ver/2713/trunk/modules/org.mod4j.updatesite/artifacts.xml
+END
+site.xml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/mod4j/!svn/ver/2713/trunk/modules/org.mod4j.updatesite/site.xml
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/mod4j/!svn/ver/491/trunk/modules/org.mod4j.updatesite/.project
+END
+content.xml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/mod4j/!svn/ver/2713/trunk/modules/org.mod4j.updatesite/content.xml
+END

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/mod4j/!svn/ver/3305/trunk/modules/org.mod4j.common/src/main/oaw/org/mod4j/dslcommon/xpand/java
+END
+FieldGetterSetter.xpt
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/mod4j/!svn/ver/2748/trunk/modules/org.mod4j.common/src/main/oaw/org/mod4j/dslcommon/xpand/java/FieldGetterSetter.xpt
+END
+JavaComments.xpt
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/mod4j/!svn/ver/3305/trunk/modules/org.mod4j.common/src/main/oaw/org/mod4j/dslcommon/xpand/java/JavaComments.xpt
+END
+Singleton.xpt
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/mod4j/!svn/ver/1910/trunk/modules/org.mod4j.common/src/main/oaw/org/mod4j/dslcommon/xpand/java/Singleton.xpt
+END

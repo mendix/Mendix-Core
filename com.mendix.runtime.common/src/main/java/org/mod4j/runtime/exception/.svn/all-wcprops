@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/mod4j/!svn/ver/3150/trunk/modules/org.mod4j.runtime.common/src/main/java/org/mod4j/runtime/exception
+END
+ServiceException.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/mod4j/!svn/ver/2671/trunk/modules/org.mod4j.runtime.common/src/main/java/org/mod4j/runtime/exception/ServiceException.java
+END
+BusinessRuleException.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/mod4j/!svn/ver/1486/trunk/modules/org.mod4j.runtime.common/src/main/java/org/mod4j/runtime/exception/BusinessRuleException.java
+END
+ConcurrentUpdateException.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/mod4j/!svn/ver/2671/trunk/modules/org.mod4j.runtime.common/src/main/java/org/mod4j/runtime/exception/ConcurrentUpdateException.java
+END
+ConfigurationException.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/mod4j/!svn/ver/1486/trunk/modules/org.mod4j.runtime.common/src/main/java/org/mod4j/runtime/exception/ConfigurationException.java
+END

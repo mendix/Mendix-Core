@@ -1,0 +1,51 @@
+«REM»
+	  Copyright (c) 2009 Ordina and committers to Mod4j
+	  All rights reserved. This program and the accompanying materials
+	  are made available under the terms of the Eclipse Public License v1.0
+	  which accompanies this distribution, and is available at
+	  http://www.eclipse.org/legal/epl-v10.html
+	 
+	  Contributors:
+	      Ordina - initial implementation
+«ENDREM»
+
+«DEFINE field(String type) FOR String »
+	protected «type» «this»;
+	
+    /**
+     * @param object
+     *            The «this» to set.
+	 */
+	public void set«this.toFirstUpper()»(«type» object) {
+	    this.«this» = object;
+    }
+	
+    /** 
+     * @return The «this» to get.
+     *
+     */
+	public «type» get«this.toFirstUpper()»() {
+	    return this.«this»;
+	}
+«ENDDEFINE»
+
+«REM»
+    identical to the filed() operation, but with inheritedDoc as comment.
+«ENDREM»
+«DEFINE fieldInherited(String type) FOR String »
+	protected «type» «this»;
+	
+    /**
+     * {@inheritDoc}
+	 */
+	public void set«this.toFirstUpper()»(«type» object) {
+	    this.«this» = object;
+    }
+	
+    /**
+     * {@inheritDoc}
+	 */
+	public «type» get«this.toFirstUpper()»() {
+	    return this.«this»;
+	}
+«ENDDEFINE»

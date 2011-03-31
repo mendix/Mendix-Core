@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/mod4j/!svn/ver/3349/trunk/modules/org.mod4j.common/src/main/java/org/mod4j/dslcommon/openarchitectureware
+END
+CrossxWorkflowComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/mod4j/!svn/ver/2545/trunk/modules/org.mod4j.common/src/main/java/org/mod4j/dslcommon/openarchitectureware/CrossxWorkflowComponent.java
+END
+DslExtension.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/mod4j/!svn/ver/1910/trunk/modules/org.mod4j.common/src/main/java/org/mod4j/dslcommon/openarchitectureware/DslExtension.java
+END
+RunCrossxWorkflow.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/mod4j/!svn/ver/2545/trunk/modules/org.mod4j.common/src/main/java/org/mod4j/dslcommon/openarchitectureware/RunCrossxWorkflow.java
+END
+Mod4jWorkflowRunner.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/mod4j/!svn/ver/2545/trunk/modules/org.mod4j.common/src/main/java/org/mod4j/dslcommon/openarchitectureware/Mod4jWorkflowRunner.java
+END
+LoggingWorkflowComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/mod4j/!svn/ver/2545/trunk/modules/org.mod4j.common/src/main/java/org/mod4j/dslcommon/openarchitectureware/LoggingWorkflowComponent.java
+END
+CrossxDirectoryVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/mod4j/!svn/ver/3066/trunk/modules/org.mod4j.common/src/main/java/org/mod4j/dslcommon/openarchitectureware/CrossxDirectoryVisitor.java
+END
+Mod4jWorkflowException.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/mod4j/!svn/ver/1910/trunk/modules/org.mod4j.common/src/main/java/org/mod4j/dslcommon/openarchitectureware/Mod4jWorkflowException.java
+END
+CodegenDirectoryVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/mod4j/!svn/ver/2062/trunk/modules/org.mod4j.common/src/main/java/org/mod4j/dslcommon/openarchitectureware/CodegenDirectoryVisitor.java
+END
+OutletDirectoryCleaner.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/mod4j/!svn/ver/3349/trunk/modules/org.mod4j.common/src/main/java/org/mod4j/dslcommon/openarchitectureware/OutletDirectoryCleaner.java
+END

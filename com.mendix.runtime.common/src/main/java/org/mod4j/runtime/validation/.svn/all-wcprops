@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/mod4j/!svn/ver/1375/trunk/modules/org.mod4j.runtime.common/src/main/java/org/mod4j/runtime/validation
+END
+RegExpValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/mod4j/!svn/ver/1369/trunk/modules/org.mod4j.runtime.common/src/main/java/org/mod4j/runtime/validation/RegExpValidator.java
+END
+NotNullValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/mod4j/!svn/ver/1369/trunk/modules/org.mod4j.runtime.common/src/main/java/org/mod4j/runtime/validation/NotNullValidator.java
+END
+NotEmptyOrWhitespaceValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/mod4j/!svn/ver/1369/trunk/modules/org.mod4j.runtime.common/src/main/java/org/mod4j/runtime/validation/NotEmptyOrWhitespaceValidator.java
+END
+BusinessRuleUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/mod4j/!svn/ver/1369/trunk/modules/org.mod4j.runtime.common/src/main/java/org/mod4j/runtime/validation/BusinessRuleUtils.java
+END
+MinValueValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/mod4j/!svn/ver/1369/trunk/modules/org.mod4j.runtime.common/src/main/java/org/mod4j/runtime/validation/MinValueValidator.java
+END
+MaxValueValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/mod4j/!svn/ver/1369/trunk/modules/org.mod4j.runtime.common/src/main/java/org/mod4j/runtime/validation/MaxValueValidator.java
+END
+BusinessRuleValidationTemplate.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/mod4j/!svn/ver/1369/trunk/modules/org.mod4j.runtime.common/src/main/java/org/mod4j/runtime/validation/BusinessRuleValidationTemplate.java
+END
+BusinessRuleValidationCallback.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/mod4j/!svn/ver/1369/trunk/modules/org.mod4j.runtime.common/src/main/java/org/mod4j/runtime/validation/BusinessRuleValidationCallback.java
+END
+BusinessRuleValidationSupport.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/mod4j/!svn/ver/1375/trunk/modules/org.mod4j.runtime.common/src/main/java/org/mod4j/runtime/validation/BusinessRuleValidationSupport.java
+END
+MinLengthValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/mod4j/!svn/ver/1369/trunk/modules/org.mod4j.runtime.common/src/main/java/org/mod4j/runtime/validation/MinLengthValidator.java
+END
+MaxLengthValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/mod4j/!svn/ver/1369/trunk/modules/org.mod4j.runtime.common/src/main/java/org/mod4j/runtime/validation/MaxLengthValidator.java
+END

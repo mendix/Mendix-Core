@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description url="http://mod4j.org/updatesite/3.5">
+      Updatesite for Mod4j features
+   </description>
+   <feature url="features/mod4j.businessdomain.feature_1.1.0.200910221325.jar" id="mod4j.businessdomain.feature" version="1.1.0.200910221325">
+      <category name="Mod4j model editors"/>
+   </feature>
+   <feature url="features/mod4j.datacontract.feature_1.1.0.200910221325.jar" id="mod4j.datacontract.feature" version="1.1.0.200910221325">
+      <category name="Mod4j model editors"/>
+   </feature>
+   <feature url="features/mod4j.service.feature_1.1.0.200910221325.jar" id="mod4j.service.feature" version="1.1.0.200910221325">
+      <category name="Mod4j model editors"/>
+   </feature>
+   <category-def name="Mod4j model editors" label="Mod4j Model Editors">
+      <description>
+         This categorie contains alll the Mod4j model editors.
+      </description>
+   </category-def>
+</site>

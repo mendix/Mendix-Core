@@ -1,0 +1,44 @@
+/*******************************************************************************
+ * Copyright (c) 2009 Ordina and committers to Mod4j
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Ordina - initial implementation
+ *******************************************************************************/
+
+/**
+* The timeStamp() function returns the current time 
+*/
+String timestamp() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ModelHelpers.timestamp();
+
+boolean fileExist(String path) :
+ JAVA org.mod4j.dslcommon.generator.helpers.ModelHelpers.fileExist(java.lang.String);
+
+boolean shouldRegenerate(String path) :
+ JAVA org.mod4j.dslcommon.generator.helpers.ModelHelpers.shouldRegenerate(java.lang.String);
+
+String javaClassName(String cls) :
+ JAVA org.mod4j.dslcommon.generator.helpers.ModelHelpers.javaClassName(java.lang.String);
+
+String simpleName(String fullName) :
+	fullName.split(":").last();
+	
+//String javaPathFileName(String package, String classname) :
+//  package.replaceAll("\\.", "/") + "/" + classname.toFirstUpper() + ".java";
+
+String javaPathFileName(String fullclassname) :
+  fullclassname.replaceAll("\\.", "/") + ".java" ;
+  
+String print(String message) : JAVA
+ org.mod4j.dslcommon.generator.helpers.ModelHelpers.print(java.lang.String);
+
+boolean equalsIgnoreCase(String one, String two) : JAVA
+  org.mod4j.dslcommon.generator.helpers.ModelHelpers.equalsIgnoreCase(java.lang.String, java.lang.String);
+ 
+
+
+ 

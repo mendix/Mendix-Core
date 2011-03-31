@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/mod4j/!svn/ver/3114/trunk/modules/org.mod4j.buildtools/src/main/resources
+END
+smartjava_checks.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/mod4j/!svn/ver/973/trunk/modules/org.mod4j.buildtools/src/main/resources/smartjava_checks.xml
+END
+smartjava_eclipse_formatter.xml
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/mod4j/!svn/ver/3114/trunk/modules/org.mod4j.buildtools/src/main/resources/smartjava_eclipse_formatter.xml
+END

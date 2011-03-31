@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/mod4j/!svn/ver/1910/trunk/modules/org.mod4j.common/src/main/java/org/mod4j/dslcommon/io
+END
+DirectoryWalkerTester.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/mod4j/!svn/ver/1910/trunk/modules/org.mod4j.common/src/main/java/org/mod4j/dslcommon/io/DirectoryWalkerTester.java
+END
+Files.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/mod4j/!svn/ver/1910/trunk/modules/org.mod4j.common/src/main/java/org/mod4j/dslcommon/io/Files.java
+END
+DirectoryVisitorImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/mod4j/!svn/ver/1910/trunk/modules/org.mod4j.common/src/main/java/org/mod4j/dslcommon/io/DirectoryVisitorImpl.java
+END
+DirectoryWalker.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/mod4j/!svn/ver/1910/trunk/modules/org.mod4j.common/src/main/java/org/mod4j/dslcommon/io/DirectoryWalker.java
+END
+IDirectoryVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/mod4j/!svn/ver/1910/trunk/modules/org.mod4j.common/src/main/java/org/mod4j/dslcommon/io/IDirectoryVisitor.java
+END

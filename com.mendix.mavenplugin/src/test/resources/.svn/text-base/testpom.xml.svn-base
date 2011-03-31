@@ -1,0 +1,65 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation=" http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.company.recordshop.domain</groupId>
+    <artifactId>RecordShop.BusinessDomain.Model</artifactId>
+    <name>RecordShop.BusinessDomain.Model</name>
+    <version>1.0-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.mod4j</groupId>
+                <artifactId>mod4j-maven-plugin</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generateFromModel</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration></configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.openarchitectureware</groupId>
+            <artifactId>oaw-dependencies</artifactId>
+            <version>4.3.0</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <!-- TODO Remove this dependency when it is added to the oaw-dependendcies. 
+                See http://www.openarchitectureware.org/forum/viewtopic.php?forum=2&showtopic=8444&highlight=maven -->
+            <groupId>org.eclipse.jface</groupId>
+            <artifactId>text</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mod4j</groupId>
+            <artifactId>mod4j-businessdomain-xtext</artifactId>
+            <version>0.10-SNAPSHOT</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mod4j</groupId>
+            <artifactId>mod4j-businessdomain-validation</artifactId>
+            <version>0.10-SNAPSHOT</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mod4j</groupId>
+            <artifactId>mod4j-businessdomain-mm</artifactId>
+            <version>0.10-SNAPSHOT</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mod4j</groupId>
+            <artifactId>mod4j-businessdomain-generator</artifactId>
+            <version>0.10-SNAPSHOT</version>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+</project>

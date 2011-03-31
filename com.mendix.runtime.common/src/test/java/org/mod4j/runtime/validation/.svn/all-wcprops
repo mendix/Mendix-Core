@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/mod4j/!svn/ver/1369/trunk/modules/org.mod4j.runtime.common/src/test/java/org/mod4j/runtime/validation
+END
+RegExpValidatorTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/mod4j/!svn/ver/1369/trunk/modules/org.mod4j.runtime.common/src/test/java/org/mod4j/runtime/validation/RegExpValidatorTest.java
+END
+NotNullValidatorTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/mod4j/!svn/ver/1369/trunk/modules/org.mod4j.runtime.common/src/test/java/org/mod4j/runtime/validation/NotNullValidatorTest.java
+END
+NotEmptyOrWhitespaceValidatorTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/mod4j/!svn/ver/1369/trunk/modules/org.mod4j.runtime.common/src/test/java/org/mod4j/runtime/validation/NotEmptyOrWhitespaceValidatorTest.java
+END
+BusinessRuleUtilsTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/mod4j/!svn/ver/1369/trunk/modules/org.mod4j.runtime.common/src/test/java/org/mod4j/runtime/validation/BusinessRuleUtilsTest.java
+END
+MinValueValidatorTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/mod4j/!svn/ver/1369/trunk/modules/org.mod4j.runtime.common/src/test/java/org/mod4j/runtime/validation/MinValueValidatorTest.java
+END
+MaxValueValidatorTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/mod4j/!svn/ver/1369/trunk/modules/org.mod4j.runtime.common/src/test/java/org/mod4j/runtime/validation/MaxValueValidatorTest.java
+END
+BusinessRuleValidationTemplateTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/mod4j/!svn/ver/1369/trunk/modules/org.mod4j.runtime.common/src/test/java/org/mod4j/runtime/validation/BusinessRuleValidationTemplateTest.java
+END
+MinLengthValidatorTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/mod4j/!svn/ver/1369/trunk/modules/org.mod4j.runtime.common/src/test/java/org/mod4j/runtime/validation/MinLengthValidatorTest.java
+END
+MaxLengthValidatorTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/mod4j/!svn/ver/1369/trunk/modules/org.mod4j.runtime.common/src/test/java/org/mod4j/runtime/validation/MaxLengthValidatorTest.java
+END

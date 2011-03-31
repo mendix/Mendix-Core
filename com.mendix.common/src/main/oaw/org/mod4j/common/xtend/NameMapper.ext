@@ -1,0 +1,169 @@
+/*******************************************************************************
+ * Copyright (c) 2009 Ordina and committers to Mod4j
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Ordina - initial implementation
+ *******************************************************************************/
+
+String javaDomainClass(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaDomainClass(java.lang.String);
+
+String javaDomainClassPath(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaDomainClassPath(java.lang.String);
+
+String javaDomainBaseClass(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaDomainBaseClass(java.lang.String);
+
+String javaDomainExampleClass(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaDomainExampleClass(java.lang.String);
+
+String javaDomainExampleClassPath(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaDomainExampleClassPath(java.lang.String);
+
+String javaDomainBaseClassPath(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaDomainBaseClassPath(java.lang.String);
+
+String javaDaoInterface(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaDaoInterface(java.lang.String);
+
+String javaDaoInterfacePath(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaDaoInterfacePath(java.lang.String);
+
+String javaDaoClass(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaDaoClass(java.lang.String);
+
+String javaDaoClassPath(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaDaoClassPath(java.lang.String);
+
+String javaDaoBaseInterface(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaDaoBaseInterface(java.lang.String);
+
+String javaDaoBaseInterfacePath(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaDaoBaseInterfacePath(java.lang.String);
+
+String javaDaoBaseClass(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaDaoBaseClass(java.lang.String);
+
+String javaDaoBaseClassPath(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaDaoBaseClassPath(java.lang.String);
+
+String javaLocalServiceInterface(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaLocalServiceInterface(java.lang.String);
+
+String javaLocalServiceInterfacePath(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaLocalServiceInterfacePath(java.lang.String);
+
+String javaLocalServiceClass(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaLocalServiceClass(java.lang.String);
+
+String javaLocalServiceClassPath(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaLocalServiceClassPath(java.lang.String);
+
+String javaLocalServiceBaseClass(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaLocalServiceBaseClass(java.lang.String);
+
+String javaLocalServiceBaseClassPath(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaLocalServiceBaseClassPath(java.lang.String);
+
+String javaDtoClass(String cls) : JAVA 
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaDtoClass(java.lang.String);
+
+String javaDtoClassPath(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaDtoClassPath(java.lang.String);
+
+String javaTranslatorClass(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaTranslatorClass(java.lang.String);
+
+String javaTranslatorClassPath(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaTranslatorClassPath(java.lang.String);
+
+// TODO galileo: seems to be a nonexisting Java method
+//String javaPrimitiveType(String typename) : JAVA
+//  org.mod4j.dslcommon.generator.helpers.JavaTypeHelpers.javaPrimitiveType(java.lang.String);
+
+String javaGenericEnumClass() : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaGenericEnumClass();
+
+String javaGenericEnumClassPath() : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaGenericEnumClassPath();
+  
+String hibernateMappingFile(String classname) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.hibernateMappingFile(java.lang.String);
+
+String javaBusinessRuleBaseClass(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaBusinessRuleBaseClass(java.lang.String);
+
+String javaBusinessRuleBaseClassPath(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaBusinessRuleBaseClassPath(java.lang.String);
+
+String javaBusinessRuleClass(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaBusinessRuleClass(java.lang.String);
+
+String javaBusinessRuleClassPath(String cls) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.javaBusinessRuleClassPath(java.lang.String);
+
+String getBusinessRulesPackage() : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.getBusinessRulesPackage();
+
+// PRESENATTION
+String getPresentationPackage()  : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.getPresentationPackage();
+
+String getWicketPanelClass(String name) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.getWicketPanelClass(java.lang.String);
+  
+String getWicketEditPanelClass(String name) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.getWicketEditPanelClass(java.lang.String);
+  
+String getWicketSwapPanelClass(String name) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.getWicketSwapPanelClass(java.lang.String);
+  
+String getWicketServiceDataProviderClass(String dtoname) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.getWicketServiceDataProviderClass(java.lang.String);
+
+String getWicketDataProviderClass(String dtoname) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.getWicketDataProviderClass(java.lang.String);
+  
+String getWicketFinderDataProviderClass(String dtoname) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.getWicketFinderDataProviderClass(java.lang.String);
+  
+String getWicketReferenceDataProviderClass(String whole, String part) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.getWicketReferenceDataProviderClass(java.lang.String, java.lang.String);
+    
+String getWicketCompositeDataProviderClass(String whole, String part) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.getWicketCompositeDataProviderClass(java.lang.String, java.lang.String);
+    
+String getWicketApplicationClass() : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.getWicketApplicationClass();
+  
+String getWicketSesssionClass() : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.getWicketSesssionClass();
+  
+String getWicketRequestCycleClass() : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.getWicketRequestCycleClass();
+  
+String getWicketMasterPageClass() : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.getWicketMasterPageClass();
+  
+String getWicketHomePageClass() : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.getWicketHomePageClass();
+  
+String getWicketHtmlPanelClass() : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.getWicketHtmlPanelClass();
+  
+String getWicketPageNotFoundPageClass() : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.getWicketPageNotFoundPageClass();
+  
+String getWicketExceptionPageClass() : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.getWicketExceptionPageClass();
+  
+String getPresentationServiceFacadeClass() : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.getPresentationServiceFacadeClass();
+
+String getPresentationServiceFacadeClassPath(String modelName) : JAVA
+  org.mod4j.dslcommon.generator.helpers.NameMapper.getPresentationServiceFacadeClassPath(java.lang.String);
+

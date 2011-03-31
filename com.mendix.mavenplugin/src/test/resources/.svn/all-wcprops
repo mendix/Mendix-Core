@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/mod4j/!svn/ver/1364/trunk/modules/org.mod4j.mavenplugin/src/test/resources
+END
+testworkflow.oaw
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/mod4j/!svn/ver/1364/trunk/modules/org.mod4j.mavenplugin/src/test/resources/testworkflow.oaw
+END
+executeWorkflow-testpom.xml
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/mod4j/!svn/ver/1364/trunk/modules/org.mod4j.mavenplugin/src/test/resources/executeWorkflow-testpom.xml
+END
+testworkflow.properties
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/mod4j/!svn/ver/1364/trunk/modules/org.mod4j.mavenplugin/src/test/resources/testworkflow.properties
+END
+testpom.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/mod4j/!svn/ver/1364/trunk/modules/org.mod4j.mavenplugin/src/test/resources/testpom.xml
+END
+another-testworkflow.oaw
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/mod4j/!svn/ver/1364/trunk/modules/org.mod4j.mavenplugin/src/test/resources/another-testworkflow.oaw
+END

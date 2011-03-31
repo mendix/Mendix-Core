@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/mod4j/!svn/ver/3349/trunk/modules/org.mod4j.common
+END
+.classpath
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/mod4j/!svn/ver/1087/trunk/modules/org.mod4j.common/.classpath
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/mod4j/!svn/ver/3184/trunk/modules/org.mod4j.common/.project
+END
+build.properties
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/mod4j/!svn/ver/1087/trunk/modules/org.mod4j.common/build.properties
+END
+pom.xml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/mod4j/!svn/ver/3230/trunk/modules/org.mod4j.common/pom.xml
+END

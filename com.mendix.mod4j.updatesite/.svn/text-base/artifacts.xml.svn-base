@@ -1,0 +1,2217 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?artifactRepository version='1.1.0'?>
+<repository name='${p2.artifact.repo.name}' type='org.eclipse.equinox.p2.artifact.repository.simpleRepository' version='1.0.0'>
+  <properties size='2'>
+    <property name='p2.compressed' value='false'/>
+    <property name='p2.timestamp' value='1256210744566'/>
+  </properties>
+  <mappings size='3'>
+    <rule filter='(&amp; (classifier=osgi.bundle))' output='${repoUrl}/plugins/${id}_${version}.jar'/>
+    <rule filter='(&amp; (classifier=binary))' output='${repoUrl}/binary/${id}_${version}'/>
+    <rule filter='(&amp; (classifier=org.eclipse.update.feature))' output='${repoUrl}/features/${id}_${version}.jar'/>
+  </mappings>
+  <artifacts size='342'>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.datacontract.feature' version='1.1.0.200910221325'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='1026'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext.ui' version='1.1.0.200910221314'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='67979'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.generator' version='1.1.0.200910221314'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='52217'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext.editor' version='1.0.0.200812171044'>
+      <properties size='3'>
+        <property name='artifact.size' value='29318'/>
+        <property name='download.size' value='29318'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.xtext.editor' version='1.0.0.200812171044'>
+      <properties size='3'>
+        <property name='artifact.size' value='30143'/>
+        <property name='download.size' value='30143'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.mm' version='1.1.0.200910221308'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='103052'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.common' version='1.1.0.200910221313'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='56117'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.validation' version='1.1.0.200910221313'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='4429'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.mm' version='1.1.0.200910221308'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='49296'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.mm' version='1.0.0.200812171044'>
+      <properties size='3'>
+        <property name='artifact.size' value='77269'/>
+        <property name='download.size' value='77269'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.common' version='1.1.0.200910221246'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='56117'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.businessdomain.feature' version='1.1.0.200910221308'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='1096'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.mm' version='1.0.0.200902171456'>
+      <properties size='3'>
+        <property name='artifact.size' value='77254'/>
+        <property name='download.size' value='77254'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.common' version='1.1.0.200910221051'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='56117'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.validation' version='1.1.0.200910221051'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='4810'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.generator' version='1.0.0.200902171456'>
+      <properties size='3'>
+        <property name='artifact.size' value='22038'/>
+        <property name='download.size' value='22038'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext.ui' version='1.1.0.200910221308'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='96633'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.validation' version='0.10.0.200809121634'>
+      <properties size='3'>
+        <property name='artifact.size' value='4912'/>
+        <property name='download.size' value='4912'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.datacontract.feature' version='1.0.0.200812171044'>
+      <properties size='2'>
+        <property name='artifact.size' value='1313'/>
+        <property name='download.size' value='1313'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.validation' version='1.1.0.200910221320'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='4810'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.mm' version='1.1.0.200910221051'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='87141'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.validation' version='1.0.0.200902171450'>
+      <properties size='3'>
+        <property name='artifact.size' value='4197'/>
+        <property name='download.size' value='4197'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.generator' version='1.0.0.200903311346'>
+      <properties size='3'>
+        <property name='artifact.size' value='51577'/>
+        <property name='download.size' value='51577'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.generator' version='1.0.0.200812170807'>
+      <properties size='3'>
+        <property name='artifact.size' value='37434'/>
+        <property name='download.size' value='37434'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext.ui' version='1.1.0.200910221308'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='67980'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.businessdomain.feature' version='1.0.0.200903311346'>
+      <properties size='2'>
+        <property name='artifact.size' value='1387'/>
+        <property name='download.size' value='1387'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.mm' version='1.0.0.200903311346'>
+      <properties size='3'>
+        <property name='artifact.size' value='95364'/>
+        <property name='download.size' value='95364'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext' version='1.1.0.200910221308'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='514366'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.validation' version='1.1.0.200910221314'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='4810'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.generator' version='1.1.0.200910221320'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='52216'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.generator' version='1.0.0.200903311346'>
+      <properties size='3'>
+        <property name='artifact.size' value='31399'/>
+        <property name='download.size' value='31399'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.eclipse' version='0.10.0.200809121636'>
+      <properties size='3'>
+        <property name='artifact.size' value='33779'/>
+        <property name='download.size' value='33779'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.eclipse' version='0.10.0.200809121632'>
+      <properties size='3'>
+        <property name='artifact.size' value='33780'/>
+        <property name='download.size' value='33780'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.validation' version='1.1.0.200910221325'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='3443'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.validation' version='1.1.0.200910221325'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='4429'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.businessdomain.feature' version='1.1.0.200910221313'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='1097'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.xtext' version='1.0.0.200812192211'>
+      <properties size='3'>
+        <property name='artifact.size' value='40235'/>
+        <property name='download.size' value='40235'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext.editor' version='1.0.0.200902171450'>
+      <properties size='3'>
+        <property name='artifact.size' value='29419'/>
+        <property name='download.size' value='29419'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.validation' version='0.10.0.200809121632'>
+      <properties size='3'>
+        <property name='artifact.size' value='4912'/>
+        <property name='download.size' value='4912'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='BusinessDomain.validation' version='0.10.0.200809021439'>
+      <properties size='3'>
+        <property name='artifact.size' value='4892'/>
+        <property name='download.size' value='4892'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext.ui' version='1.1.0.200910221314'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='96632'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.generator' version='1.1.0.200910221313'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='30731'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext.editor' version='1.0.0.200812170807'>
+      <properties size='3'>
+        <property name='artifact.size' value='29318'/>
+        <property name='download.size' value='29318'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.broker' version='1.1.0.200910221246'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='9654'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.validation' version='1.1.0.200910221246'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='3443'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.common' version='1.0.0.200812192211'>
+      <properties size='3'>
+        <property name='artifact.size' value='45710'/>
+        <property name='download.size' value='45710'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.mm' version='1.0.0.200812171044'>
+      <properties size='3'>
+        <property name='artifact.size' value='96996'/>
+        <property name='download.size' value='96996'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.mm' version='1.1.0.200910221313'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='49295'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.mm' version='1.0.0.200812171044'>
+      <properties size='3'>
+        <property name='artifact.size' value='48190'/>
+        <property name='download.size' value='48190'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.generator' version='1.1.0.200910221051'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='52217'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.xtext' version='1.1.0.200910221303'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='151059'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.generator' version='1.1.0.200910221325'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='52217'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.service.feature' version='1.0.0.200902171456'>
+      <properties size='2'>
+        <property name='artifact.size' value='1291'/>
+        <property name='download.size' value='1291'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.mm' version='1.0.0.200812171044'>
+      <properties size='3'>
+        <property name='artifact.size' value='30291'/>
+        <property name='download.size' value='30291'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.broker' version='1.0.0.200902171450'>
+      <properties size='3'>
+        <property name='artifact.size' value='9269'/>
+        <property name='download.size' value='9269'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext' version='1.1.0.200910221313'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='668452'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.validation' version='1.1.0.200910221303'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='4429'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.mm' version='1.1.0.200910221314'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='103051'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.validation' version='1.0.0.200902171456'>
+      <properties size='3'>
+        <property name='artifact.size' value='3337'/>
+        <property name='download.size' value='3337'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.mm' version='1.0.0.200902171456'>
+      <properties size='3'>
+        <property name='artifact.size' value='48340'/>
+        <property name='download.size' value='48340'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.common' version='1.0.0.200902171456'>
+      <properties size='3'>
+        <property name='artifact.size' value='46154'/>
+        <property name='download.size' value='46154'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext' version='1.0.0.200812170807'>
+      <properties size='3'>
+        <property name='artifact.size' value='45189'/>
+        <property name='download.size' value='45189'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.mm' version='0.10.0.200809021439'>
+      <properties size='3'>
+        <property name='artifact.size' value='31138'/>
+        <property name='download.size' value='31138'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext.editor' version='1.0.0.200902171450'>
+      <properties size='3'>
+        <property name='artifact.size' value='31545'/>
+        <property name='download.size' value='31545'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.xtext.editor' version='1.0.0.200903311346'>
+      <properties size='3'>
+        <property name='artifact.size' value='30647'/>
+        <property name='download.size' value='30647'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.generator' version='1.1.0.200910221315'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='30732'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.validation' version='1.0.0.200812192211'>
+      <properties size='3'>
+        <property name='artifact.size' value='3952'/>
+        <property name='download.size' value='3952'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.mm' version='1.1.0.200910221313'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='103051'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.mm' version='1.1.0.200910221303'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='87141'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.eclipse' version='1.1.0.200910221303'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='209334'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.datacontract.feature' version='1.1.0.200910221246'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='1025'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.xtext.ui' version='1.1.0.200910221320'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='54174'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='BusinessDomain.generator' version='0.10.0.200809021439'>
+      <properties size='3'>
+        <property name='artifact.size' value='40355'/>
+        <property name='download.size' value='40355'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.businessdomain.feature' version='0.10.0.200809121632'>
+      <properties size='2'>
+        <property name='artifact.size' value='1412'/>
+        <property name='download.size' value='1412'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.mm' version='1.1.0.200910221313'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='87141'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.common' version='0.10.0.200809121632'>
+      <properties size='3'>
+        <property name='artifact.size' value='30370'/>
+        <property name='download.size' value='30370'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.service.feature' version='1.0.0.200812170807'>
+      <properties size='2'>
+        <property name='artifact.size' value='1291'/>
+        <property name='download.size' value='1291'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.generator' version='1.0.0.200902171456'>
+      <properties size='3'>
+        <property name='artifact.size' value='39178'/>
+        <property name='download.size' value='39178'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext' version='1.1.0.200910221051'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='514366'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.service.feature' version='1.0.0.200812192211'>
+      <properties size='2'>
+        <property name='artifact.size' value='1291'/>
+        <property name='download.size' value='1291'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.xtext.editor' version='1.0.0.200902171456'>
+      <properties size='3'>
+        <property name='artifact.size' value='30210'/>
+        <property name='download.size' value='30210'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.generator' version='1.1.0.200910221246'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='30732'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.generator' version='1.1.0.200910221308'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='52217'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.mm' version='1.0.0.200903311346'>
+      <properties size='3'>
+        <property name='artifact.size' value='48561'/>
+        <property name='download.size' value='48561'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.common' version='1.1.0.200910221325'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='56117'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.generator' version='1.1.0.200910221313'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='52217'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.generator' version='1.1.0.200910221314'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='26443'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.common' version='1.0.0.200902171450'>
+      <properties size='3'>
+        <property name='artifact.size' value='46153'/>
+        <property name='download.size' value='46153'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext.editor' version='1.0.0.200812192211'>
+      <properties size='3'>
+        <property name='artifact.size' value='29318'/>
+        <property name='download.size' value='29318'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.validation' version='1.1.0.200910221320'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='4429'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.mm' version='0.10.0.200809121632'>
+      <properties size='3'>
+        <property name='artifact.size' value='29374'/>
+        <property name='download.size' value='29374'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.generator' version='1.0.0.200812171044'>
+      <properties size='3'>
+        <property name='artifact.size' value='37435'/>
+        <property name='download.size' value='37435'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.common' version='1.1.0.200910221320'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='56117'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.eclipse' version='1.1.0.200910221320'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='209335'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.validation' version='1.1.0.200910221325'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='4811'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.mm' version='1.0.0.200902171456'>
+      <properties size='3'>
+        <property name='artifact.size' value='96978'/>
+        <property name='download.size' value='96978'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='BusinessDomain.mm' version='0.10.0.200809021439'>
+      <properties size='3'>
+        <property name='artifact.size' value='92693'/>
+        <property name='download.size' value='92693'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext' version='1.1.0.200910221325'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='668451'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.generator' version='1.0.0.200812171044'>
+      <properties size='3'>
+        <property name='artifact.size' value='25074'/>
+        <property name='download.size' value='25074'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext' version='1.0.0.200902171450'>
+      <properties size='3'>
+        <property name='artifact.size' value='45167'/>
+        <property name='download.size' value='45167'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.generator' version='0.10.0.200809121636'>
+      <properties size='3'>
+        <property name='artifact.size' value='38737'/>
+        <property name='download.size' value='38737'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext' version='1.1.0.200910221320'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='668452'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.businessdomain.feature' version='1.1.0.200910221303'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='1097'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.xtext' version='1.0.0.200902171456'>
+      <properties size='3'>
+        <property name='artifact.size' value='41006'/>
+        <property name='download.size' value='41006'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.mm' version='1.1.0.200910221325'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='103051'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext.editor' version='1.0.0.200903311346'>
+      <properties size='3'>
+        <property name='artifact.size' value='30109'/>
+        <property name='download.size' value='30109'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.broker' version='1.1.0.200910221325'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='9655'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.generator' version='1.0.0.200812192211'>
+      <properties size='3'>
+        <property name='artifact.size' value='37436'/>
+        <property name='download.size' value='37436'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.mm' version='0.10.0.200809121634'>
+      <properties size='3'>
+        <property name='artifact.size' value='29373'/>
+        <property name='download.size' value='29373'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext' version='1.1.0.200910221320'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='514366'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.mm' version='0.10.0.200809121636'>
+      <properties size='3'>
+        <property name='artifact.size' value='29373'/>
+        <property name='download.size' value='29373'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.eclipse' version='1.1.0.200910221314'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='209334'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.common' version='1.1.0.200910221314'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='56117'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.validation' version='1.0.0.200902171450'>
+      <properties size='3'>
+        <property name='artifact.size' value='4011'/>
+        <property name='download.size' value='4011'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.businessdomain.feature' version='1.1.0.200910221325'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='1097'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.validation' version='1.1.0.200910221308'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='4429'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.validation' version='1.1.0.200910221314'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='3443'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.validation' version='1.1.0.200910221308'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='3443'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.eclipse' version='1.0.0.200812171044'>
+      <properties size='3'>
+        <property name='artifact.size' value='199694'/>
+        <property name='download.size' value='199694'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext.editor' version='0.10.0.200809121632'>
+      <properties size='3'>
+        <property name='artifact.size' value='46213'/>
+        <property name='download.size' value='46213'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.generator' version='1.0.0.200903311346'>
+      <properties size='3'>
+        <property name='artifact.size' value='24681'/>
+        <property name='download.size' value='24681'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.generator' version='1.1.0.200910221303'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='26443'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.broker' version='1.0.0.200812171044'>
+      <properties size='3'>
+        <property name='artifact.size' value='9268'/>
+        <property name='download.size' value='9268'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.mm' version='1.0.0.200812192211'>
+      <properties size='3'>
+        <property name='artifact.size' value='30291'/>
+        <property name='download.size' value='30291'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.datacontract.feature' version='1.1.0.200910221320'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='1025'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.mm' version='1.0.0.200812170807'>
+      <properties size='3'>
+        <property name='artifact.size' value='30292'/>
+        <property name='download.size' value='30292'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.service.feature' version='1.1.0.200910221246'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='996'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext' version='1.1.0.200910221313'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='514366'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.generator' version='1.0.0.200812170807'>
+      <properties size='3'>
+        <property name='artifact.size' value='25074'/>
+        <property name='download.size' value='25074'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.xtext.editor' version='1.0.0.200902171450'>
+      <properties size='3'>
+        <property name='artifact.size' value='30211'/>
+        <property name='download.size' value='30211'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.validation' version='1.0.0.200812170807'>
+      <properties size='3'>
+        <property name='artifact.size' value='3340'/>
+        <property name='download.size' value='3340'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.broker' version='1.1.0.200910221051'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='9654'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext.ui' version='1.1.0.200910221320'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='67979'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.service.feature' version='1.0.0.200812171044'>
+      <properties size='2'>
+        <property name='artifact.size' value='1291'/>
+        <property name='download.size' value='1291'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext' version='1.1.0.200910221303'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='668452'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.mm' version='1.1.0.200910221320'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='87141'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='BusinessDomain.xtext' version='0.10.0.200809021439'>
+      <properties size='3'>
+        <property name='artifact.size' value='171026'/>
+        <property name='download.size' value='171026'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.generator' version='1.1.0.200910221246'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='26444'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext.editor' version='1.0.0.200812192211'>
+      <properties size='3'>
+        <property name='artifact.size' value='31432'/>
+        <property name='download.size' value='31432'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.businessdomain.feature' version='0.10.0.200809121634'>
+      <properties size='2'>
+        <property name='artifact.size' value='1412'/>
+        <property name='download.size' value='1412'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.mm' version='1.0.0.200812170807'>
+      <properties size='3'>
+        <property name='artifact.size' value='96996'/>
+        <property name='download.size' value='96996'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.xtext' version='1.1.0.200910221315'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='151060'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.validation' version='1.1.0.200910221313'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='3443'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.validation' version='1.0.0.200812171044'>
+      <properties size='3'>
+        <property name='artifact.size' value='4228'/>
+        <property name='download.size' value='4228'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.eclipse' version='1.1.0.200910221325'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='209335'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.generator' version='1.1.0.200910221313'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='26443'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.validation' version='1.1.0.200910221320'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='3443'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.broker' version='1.0.0.200812192211'>
+      <properties size='3'>
+        <property name='artifact.size' value='9269'/>
+        <property name='download.size' value='9269'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext.editor' version='1.0.0.200812171044'>
+      <properties size='3'>
+        <property name='artifact.size' value='31434'/>
+        <property name='download.size' value='31434'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.mm' version='1.0.0.200902171456'>
+      <properties size='3'>
+        <property name='artifact.size' value='30274'/>
+        <property name='download.size' value='30274'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.mm' version='1.0.0.200902171450'>
+      <properties size='3'>
+        <property name='artifact.size' value='96978'/>
+        <property name='download.size' value='96978'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.eclipse' version='0.10.0.200809021439'>
+      <properties size='3'>
+        <property name='artifact.size' value='30572'/>
+        <property name='download.size' value='30572'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.xtext' version='1.1.0.200910221246'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='151059'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.mm' version='1.0.0.200902171450'>
+      <properties size='3'>
+        <property name='artifact.size' value='48340'/>
+        <property name='download.size' value='48340'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.businessdomain.feature' version='1.0.0.200812192211'>
+      <properties size='2'>
+        <property name='artifact.size' value='1387'/>
+        <property name='download.size' value='1387'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.generator' version='1.0.0.200902171450'>
+      <properties size='3'>
+        <property name='artifact.size' value='26643'/>
+        <property name='download.size' value='26643'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.xtext' version='1.0.0.200903311346'>
+      <properties size='3'>
+        <property name='artifact.size' value='41917'/>
+        <property name='download.size' value='41917'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext' version='0.10.0.200809121634'>
+      <properties size='3'>
+        <property name='artifact.size' value='172500'/>
+        <property name='download.size' value='172500'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.mm' version='1.1.0.200910221313'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='35056'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.xtext' version='1.0.0.200902171450'>
+      <properties size='3'>
+        <property name='artifact.size' value='41006'/>
+        <property name='download.size' value='41006'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.mm' version='1.1.0.200910221315'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='49296'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.validation' version='1.0.0.200812192211'>
+      <properties size='3'>
+        <property name='artifact.size' value='4309'/>
+        <property name='download.size' value='4309'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.common' version='0.10.0.200809121634'>
+      <properties size='3'>
+        <property name='artifact.size' value='30372'/>
+        <property name='download.size' value='30372'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.datacontract.feature' version='1.0.0.200902171450'>
+      <properties size='2'>
+        <property name='artifact.size' value='1315'/>
+        <property name='download.size' value='1315'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext' version='1.1.0.200910221051'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='668451'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.eclipse' version='1.0.0.200903311346'>
+      <properties size='3'>
+        <property name='artifact.size' value='204596'/>
+        <property name='download.size' value='204596'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.mm' version='0.10.0.200809121632'>
+      <properties size='3'>
+        <property name='artifact.size' value='109882'/>
+        <property name='download.size' value='109882'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext' version='1.0.0.200812171044'>
+      <properties size='3'>
+        <property name='artifact.size' value='45190'/>
+        <property name='download.size' value='45190'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.mm' version='1.1.0.200910221314'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='87141'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.mm' version='1.1.0.200910221246'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='49296'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.generator' version='1.1.0.200910221308'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='26444'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.broker' version='0.10.0.200809121634'>
+      <properties size='3'>
+        <property name='artifact.size' value='5304'/>
+        <property name='download.size' value='5304'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext' version='0.10.0.200809121636'>
+      <properties size='3'>
+        <property name='artifact.size' value='172500'/>
+        <property name='download.size' value='172500'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.mm' version='1.1.0.200910221325'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='35056'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext' version='1.1.0.200910221314'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='514366'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.generator' version='1.1.0.200910221320'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='30731'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.service.feature' version='1.1.0.200910221325'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='1000'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.businessdomain.feature' version='1.1.0.200910221246'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='1097'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext' version='1.1.0.200910221308'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='668452'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.datacontract.feature' version='1.0.0.200812192211'>
+      <properties size='2'>
+        <property name='artifact.size' value='1313'/>
+        <property name='download.size' value='1313'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.businessdomain.feature' version='1.0.0.200812170807'>
+      <properties size='2'>
+        <property name='artifact.size' value='1387'/>
+        <property name='download.size' value='1387'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.generator' version='1.1.0.200910221325'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='26444'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext.ui' version='1.1.0.200910221313'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='96632'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.eclipse' version='1.0.0.200812170807'>
+      <properties size='3'>
+        <property name='artifact.size' value='199693'/>
+        <property name='download.size' value='199693'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.xtext' version='1.0.0.200812170807'>
+      <properties size='3'>
+        <property name='artifact.size' value='40223'/>
+        <property name='download.size' value='40223'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext.editor' version='1.0.0.200902171456'>
+      <properties size='3'>
+        <property name='artifact.size' value='29419'/>
+        <property name='download.size' value='29419'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.mm' version='1.0.0.200812192211'>
+      <properties size='3'>
+        <property name='artifact.size' value='48190'/>
+        <property name='download.size' value='48190'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext.editor' version='0.10.0.200809121634'>
+      <properties size='3'>
+        <property name='artifact.size' value='46213'/>
+        <property name='download.size' value='46213'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext' version='1.0.0.200812192211'>
+      <properties size='3'>
+        <property name='artifact.size' value='158642'/>
+        <property name='download.size' value='158642'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.mm' version='1.1.0.200910221314'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='35056'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext' version='1.0.0.200903311346'>
+      <properties size='3'>
+        <property name='artifact.size' value='160646'/>
+        <property name='download.size' value='160646'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.eclipse' version='1.1.0.200910221051'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='209335'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext.ui' version='1.1.0.200910221051'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='67979'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.mm' version='1.1.0.200910221246'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='87141'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.eclipse' version='1.0.0.200812192211'>
+      <properties size='3'>
+        <property name='artifact.size' value='199703'/>
+        <property name='download.size' value='199703'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.businessdomain.feature' version='1.0.0.200812171044'>
+      <properties size='2'>
+        <property name='artifact.size' value='1387'/>
+        <property name='download.size' value='1387'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.broker' version='1.1.0.200910221303'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='9655'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.mm' version='1.1.0.200910221308'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='87141'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext.editor' version='1.0.0.200902171456'>
+      <properties size='3'>
+        <property name='artifact.size' value='31546'/>
+        <property name='download.size' value='31546'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.mm' version='1.0.0.200903311346'>
+      <properties size='3'>
+        <property name='artifact.size' value='30274'/>
+        <property name='download.size' value='30274'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.businessdomain.feature' version='0.10.0.200809021439'>
+      <properties size='2'>
+        <property name='artifact.size' value='1411'/>
+        <property name='download.size' value='1411'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.datacontract.feature' version='1.0.0.200903311346'>
+      <properties size='2'>
+        <property name='artifact.size' value='1315'/>
+        <property name='download.size' value='1315'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext.ui' version='1.1.0.200910221303'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='67979'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.mm' version='1.0.0.200812170807'>
+      <properties size='3'>
+        <property name='artifact.size' value='48190'/>
+        <property name='download.size' value='48190'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.generator' version='1.0.0.200812192211'>
+      <properties size='3'>
+        <property name='artifact.size' value='21531'/>
+        <property name='download.size' value='21531'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.broker' version='1.1.0.200910221313'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='9655'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext' version='0.10.0.200809121632'>
+      <properties size='3'>
+        <property name='artifact.size' value='172500'/>
+        <property name='download.size' value='172500'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.mm' version='1.1.0.200910221308'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='35056'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.broker' version='0.10.0.200809121632'>
+      <properties size='3'>
+        <property name='artifact.size' value='5304'/>
+        <property name='download.size' value='5304'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.mm' version='1.0.0.200902171450'>
+      <properties size='3'>
+        <property name='artifact.size' value='77253'/>
+        <property name='download.size' value='77253'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.validation' version='1.1.0.200910221303'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='4810'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.validation' version='1.1.0.200910221246'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='4429'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.mm' version='1.1.0.200910221325'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='49296'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.service.feature' version='1.0.0.200903311346'>
+      <properties size='2'>
+        <property name='artifact.size' value='1291'/>
+        <property name='download.size' value='1291'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.validation' version='1.0.0.200812171044'>
+      <properties size='3'>
+        <property name='artifact.size' value='3340'/>
+        <property name='download.size' value='3340'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.eclipse' version='1.1.0.200910221313'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='209334'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext.ui' version='1.1.0.200910221246'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='67979'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.mm' version='1.1.0.200910221051'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='49296'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.mm' version='1.1.0.200910221325'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='87141'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.mm' version='1.1.0.200910221320'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='103051'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.mm' version='0.10.0.200809121636'>
+      <properties size='3'>
+        <property name='artifact.size' value='109882'/>
+        <property name='download.size' value='109882'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext' version='1.0.0.200902171456'>
+      <properties size='3'>
+        <property name='artifact.size' value='159629'/>
+        <property name='download.size' value='159629'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.eclipse' version='1.0.0.200902171450'>
+      <properties size='3'>
+        <property name='artifact.size' value='200006'/>
+        <property name='download.size' value='200006'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.generator' version='1.1.0.200910221308'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='30732'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.validation' version='1.0.0.200902171450'>
+      <properties size='3'>
+        <property name='artifact.size' value='3337'/>
+        <property name='download.size' value='3337'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.xtext' version='1.1.0.200910221051'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='151059'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext.editor' version='1.0.0.200812170807'>
+      <properties size='3'>
+        <property name='artifact.size' value='31433'/>
+        <property name='download.size' value='31433'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.generator' version='1.0.0.200902171450'>
+      <properties size='3'>
+        <property name='artifact.size' value='39177'/>
+        <property name='download.size' value='39177'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.validation' version='1.0.0.200903311346'>
+      <properties size='3'>
+        <property name='artifact.size' value='4630'/>
+        <property name='download.size' value='4630'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.common' version='1.1.0.200910221303'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='56117'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.mm' version='1.1.0.200910221051'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='35056'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.mm' version='1.1.0.200910221320'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='49295'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.businessdomain.feature' version='1.0.0.200902171450'>
+      <properties size='2'>
+        <property name='artifact.size' value='1388'/>
+        <property name='download.size' value='1388'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.validation' version='0.10.0.200809121636'>
+      <properties size='3'>
+        <property name='artifact.size' value='4912'/>
+        <property name='download.size' value='4912'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.xtext' version='1.1.0.200910221313'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='151059'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.mm' version='1.0.0.200902171450'>
+      <properties size='3'>
+        <property name='artifact.size' value='30274'/>
+        <property name='download.size' value='30274'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.mm' version='1.1.0.200910221303'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='103051'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.mm' version='1.1.0.200910221051'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='103051'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext' version='1.0.0.200902171456'>
+      <properties size='3'>
+        <property name='artifact.size' value='45167'/>
+        <property name='download.size' value='45167'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.mm' version='1.1.0.200910221303'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='49295'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.datacontract.feature' version='1.1.0.200910221314'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='1025'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext' version='1.1.0.200910221303'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='514366'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.mm' version='1.1.0.200910221246'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='103052'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.businessdomain.feature' version='0.10.0.200809121636'>
+      <properties size='2'>
+        <property name='artifact.size' value='1412'/>
+        <property name='download.size' value='1412'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.generator' version='1.1.0.200910221051'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='26444'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.generator' version='1.0.0.200812170807'>
+      <properties size='3'>
+        <property name='artifact.size' value='21469'/>
+        <property name='download.size' value='21469'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.generator' version='1.1.0.200910221051'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='30731'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.validation' version='1.1.0.200910221308'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='4811'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.generator' version='1.0.0.200902171456'>
+      <properties size='3'>
+        <property name='artifact.size' value='26643'/>
+        <property name='download.size' value='26643'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.mm' version='1.0.0.200812170807'>
+      <properties size='3'>
+        <property name='artifact.size' value='77271'/>
+        <property name='download.size' value='77271'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.xtext.ui' version='1.1.0.200910221325'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='54173'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.mm' version='0.10.0.200809121634'>
+      <properties size='3'>
+        <property name='artifact.size' value='109882'/>
+        <property name='download.size' value='109882'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.broker' version='1.0.0.200812170807'>
+      <properties size='3'>
+        <property name='artifact.size' value='9268'/>
+        <property name='download.size' value='9268'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.mm' version='1.1.0.200910221320'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='35056'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.generator' version='1.1.0.200910221246'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='52217'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.service.feature' version='1.1.0.200910221313'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='1000'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.mm' version='1.1.0.200910221303'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='35056'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext.ui' version='1.1.0.200910221246'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='96633'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.mm' version='1.0.0.200812192211'>
+      <properties size='3'>
+        <property name='artifact.size' value='77270'/>
+        <property name='download.size' value='77270'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.xtext' version='1.1.0.200910221325'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='151060'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.generator' version='1.1.0.200910221303'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='52217'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.datacontract.feature' version='1.0.0.200812170807'>
+      <properties size='2'>
+        <property name='artifact.size' value='1313'/>
+        <property name='download.size' value='1313'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.xtext.editor' version='1.0.0.200812170807'>
+      <properties size='3'>
+        <property name='artifact.size' value='30143'/>
+        <property name='download.size' value='30143'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext.ui' version='1.1.0.200910221313'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='67979'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.common' version='1.0.0.200812171044'>
+      <properties size='3'>
+        <property name='artifact.size' value='39176'/>
+        <property name='download.size' value='39176'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.broker' version='1.1.0.200910221320'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='9656'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.service.feature' version='1.1.0.200910221303'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='996'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.datacontract.feature' version='1.0.0.200902171456'>
+      <properties size='2'>
+        <property name='artifact.size' value='1315'/>
+        <property name='download.size' value='1315'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.businessdomain.feature' version='1.1.0.200910221320'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='1096'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl_common' version='0.10.0.200809021439'>
+      <properties size='3'>
+        <property name='artifact.size' value='26402'/>
+        <property name='download.size' value='26402'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.validation' version='1.0.0.200903311346'>
+      <properties size='3'>
+        <property name='artifact.size' value='4428'/>
+        <property name='download.size' value='4428'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext.editor' version='1.0.0.200903311346'>
+      <properties size='3'>
+        <property name='artifact.size' value='31960'/>
+        <property name='download.size' value='31960'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext.editor' version='0.10.0.200809121636'>
+      <properties size='3'>
+        <property name='artifact.size' value='46213'/>
+        <property name='download.size' value='46213'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.generator' version='1.0.0.200812192211'>
+      <properties size='3'>
+        <property name='artifact.size' value='25583'/>
+        <property name='download.size' value='25583'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.service.feature' version='1.1.0.200910221320'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='995'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.mm' version='1.1.0.200910221246'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='35056'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.validation' version='1.0.0.200812171044'>
+      <properties size='3'>
+        <property name='artifact.size' value='4310'/>
+        <property name='download.size' value='4310'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.xtext' version='1.0.0.200812171044'>
+      <properties size='3'>
+        <property name='artifact.size' value='40223'/>
+        <property name='download.size' value='40223'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.validation' version='1.0.0.200902171456'>
+      <properties size='3'>
+        <property name='artifact.size' value='4198'/>
+        <property name='download.size' value='4198'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.common' version='1.1.0.200910221308'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='56117'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.generator' version='0.10.0.200809121632'>
+      <properties size='3'>
+        <property name='artifact.size' value='38474'/>
+        <property name='download.size' value='38474'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.businessdomain.feature' version='1.1.0.200910221051'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='1096'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext' version='1.0.0.200902171450'>
+      <properties size='3'>
+        <property name='artifact.size' value='159630'/>
+        <property name='download.size' value='159630'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext.ui' version='1.1.0.200910221325'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='96633'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.service.feature' version='1.1.0.200910221315'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='1000'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext' version='1.0.0.200812192211'>
+      <properties size='3'>
+        <property name='artifact.size' value='45189'/>
+        <property name='download.size' value='45189'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext.ui' version='1.1.0.200910221303'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='96632'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.xtext.editor' version='1.0.0.200812192211'>
+      <properties size='3'>
+        <property name='artifact.size' value='30151'/>
+        <property name='download.size' value='30151'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.mm' version='1.0.0.200903311346'>
+      <properties size='3'>
+        <property name='artifact.size' value='78315'/>
+        <property name='download.size' value='78315'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext' version='1.0.0.200903311346'>
+      <properties size='3'>
+        <property name='artifact.size' value='45380'/>
+        <property name='download.size' value='45380'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.datacontract.feature' version='1.1.0.200910221313'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='1025'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.validation' version='1.0.0.200812170807'>
+      <properties size='3'>
+        <property name='artifact.size' value='4228'/>
+        <property name='download.size' value='4228'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.service.feature' version='1.1.0.200910221051'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='1000'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.broker' version='1.1.0.200910221314'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='9655'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext.ui' version='1.1.0.200910221325'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='67979'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.datacontract.feature' version='1.1.0.200910221308'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='1025'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.generator' version='1.1.0.200910221320'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='26444'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.broker' version='1.0.0.200902171456'>
+      <properties size='3'>
+        <property name='artifact.size' value='9270'/>
+        <property name='download.size' value='9270'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.businessdomain.feature' version='1.1.0.200910221314'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='1097'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.datacontract.feature' version='1.1.0.200910221303'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='1025'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.broker' version='0.10.0.200809121636'>
+      <properties size='3'>
+        <property name='artifact.size' value='5304'/>
+        <property name='download.size' value='5304'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.generator' version='1.1.0.200910221325'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='30732'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.broker' version='0.10.0.200809021439'>
+      <properties size='3'>
+        <property name='artifact.size' value='3224'/>
+        <property name='download.size' value='3224'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.eclipse' version='1.1.0.200910221308'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='209335'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.xtext' version='1.1.0.200910221308'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='151060'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.broker' version='1.1.0.200910221308'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='9655'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.service.feature' version='1.1.0.200910221308'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='1000'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext' version='1.0.0.200812170807'>
+      <properties size='3'>
+        <property name='artifact.size' value='158643'/>
+        <property name='download.size' value='158643'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.eclipse' version='0.10.0.200809121634'>
+      <properties size='3'>
+        <property name='artifact.size' value='33779'/>
+        <property name='download.size' value='33779'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.validation' version='1.1.0.200910221246'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='4811'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.validation' version='1.1.0.200910221315'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='4429'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.common' version='1.0.0.200903311346'>
+      <properties size='3'>
+        <property name='artifact.size' value='53044'/>
+        <property name='download.size' value='53044'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.generator' version='1.0.0.200812171044'>
+      <properties size='3'>
+        <property name='artifact.size' value='21469'/>
+        <property name='download.size' value='21469'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext' version='1.1.0.200910221325'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='514366'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.validation' version='1.1.0.200910221303'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='3443'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.businessdomain.feature' version='1.0.0.200902171456'>
+      <properties size='2'>
+        <property name='artifact.size' value='1388'/>
+        <property name='download.size' value='1388'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.validation' version='1.0.0.200903311346'>
+      <properties size='3'>
+        <property name='artifact.size' value='3337'/>
+        <property name='download.size' value='3337'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.validation' version='1.0.0.200902171456'>
+      <properties size='3'>
+        <property name='artifact.size' value='4012'/>
+        <property name='download.size' value='4012'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.eclipse' version='1.1.0.200910221246'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='209335'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.generator' version='0.10.0.200809121634'>
+      <properties size='3'>
+        <property name='artifact.size' value='38737'/>
+        <property name='download.size' value='38737'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.validation' version='1.1.0.200910221051'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='4428'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.datacontract.feature' version='1.1.0.200910221051'>
+      <properties size='2'>
+        <property name='download.contentType' value='application/zip'/>
+        <property name='download.size' value='1025'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext' version='1.0.0.200812171044'>
+      <properties size='3'>
+        <property name='artifact.size' value='158643'/>
+        <property name='download.size' value='158643'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.validation' version='1.0.0.200812170807'>
+      <properties size='3'>
+        <property name='artifact.size' value='4310'/>
+        <property name='download.size' value='4310'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.generator' version='1.0.0.200902171450'>
+      <properties size='3'>
+        <property name='artifact.size' value='22037'/>
+        <property name='download.size' value='22037'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.eclipse' version='1.0.0.200902171456'>
+      <properties size='3'>
+        <property name='artifact.size' value='200006'/>
+        <property name='download.size' value='200006'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.common' version='0.10.0.200809121636'>
+      <properties size='3'>
+        <property name='artifact.size' value='26935'/>
+        <property name='download.size' value='26935'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext' version='1.1.0.200910221246'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='668452'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.xtext' version='1.1.0.200910221320'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='151058'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.validation' version='1.1.0.200910221313'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='4810'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.mm' version='1.0.0.200812192211'>
+      <properties size='3'>
+        <property name='artifact.size' value='96996'/>
+        <property name='download.size' value='96996'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext' version='1.1.0.200910221314'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='668452'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='mod4j.service.feature' version='1.0.0.200902171450'>
+      <properties size='2'>
+        <property name='artifact.size' value='1293'/>
+        <property name='download.size' value='1293'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.common' version='1.0.0.200812170807'>
+      <properties size='3'>
+        <property name='artifact.size' value='39176'/>
+        <property name='download.size' value='39176'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.validation' version='1.1.0.200910221051'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='3443'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.validation' version='1.0.0.200812192211'>
+      <properties size='3'>
+        <property name='artifact.size' value='3340'/>
+        <property name='download.size' value='3340'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.crossx.broker' version='1.0.0.200903311346'>
+      <properties size='3'>
+        <property name='artifact.size' value='9399'/>
+        <property name='download.size' value='9399'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='BusinessDomain.xtext.editor' version='0.10.0.200809021439'>
+      <properties size='3'>
+        <property name='artifact.size' value='46259'/>
+        <property name='download.size' value='46259'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext.ui' version='1.1.0.200910221320'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='96633'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.businessdomain.xtext.ui' version='1.1.0.200910221051'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='96633'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.datacontract.xtext' version='1.1.0.200910221246'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='514366'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mod4j.dsl.service.generator' version='1.1.0.200910221303'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='30731'/>
+      </properties>
+    </artifact>
+  </artifacts>
+</repository>

@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/mod4j/!svn/ver/2586/trunk/modules/org.mod4j.runtime.common/src/main/java/org/mod4j/runtime/aspects
+END
+LoggingAspect.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/mod4j/!svn/ver/2586/trunk/modules/org.mod4j.runtime.common/src/main/java/org/mod4j/runtime/aspects/LoggingAspect.java
+END
+TimingAspect.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/mod4j/!svn/ver/2586/trunk/modules/org.mod4j.runtime.common/src/main/java/org/mod4j/runtime/aspects/TimingAspect.java
+END

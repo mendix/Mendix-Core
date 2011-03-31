@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow>
+
+    <!-- Initialize the issues reporting feature of oAW
+    -->
+    <component class="org.openarchitectureware.util.stdlib.ExtIssueReporter"/>
+
+    <!--
+        Cleaning of directories.
+      -->
+    <component id="DirCleaner" class="org.openarchitectureware.workflow.common.DirectoryCleaner">
+        <directories value="${directories}"/>
+    </component>
+
+</workflow>

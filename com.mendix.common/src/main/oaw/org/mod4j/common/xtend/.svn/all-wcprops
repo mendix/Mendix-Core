@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/mod4j/!svn/ver/3315/trunk/modules/org.mod4j.common/src/main/oaw/org/mod4j/common/xtend
+END
+NameMapper.ext
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/mod4j/!svn/ver/3315/trunk/modules/org.mod4j.common/src/main/oaw/org/mod4j/common/xtend/NameMapper.ext
+END
+FileTracker.ext
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/mod4j/!svn/ver/3305/trunk/modules/org.mod4j.common/src/main/oaw/org/mod4j/common/xtend/FileTracker.ext
+END

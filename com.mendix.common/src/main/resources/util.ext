@@ -1,0 +1,16 @@
+/**
+* Application property functions
+*/
+String appPropFilePath() : GLOBALVAR appPropFilePath;
+
+String getProperty(String key, String propFilepPath) :
+ JAVA org.mod4j.dslcommon.generator.helpers.ModelHelpers.getProperty(java.lang.String, java.lang.String);
+
+/**
+* The timeStamp() function returns the current time 
+*/
+String timestamp() :
+ JAVA org.mod4j.dslcommon.generator.helpers.ModelHelpers.timestamp();
+
+boolean fileExist(String path) :
+ JAVA org.mod4j.dslcommon.generator.helpers.ModelHelpers.fileExist(java.lang.String);

@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/mod4j/!svn/ver/3329/trunk/modules/org.mod4j.common/src/main/java/org/mod4j/dslcommon/generator/helpers
+END
+ModelHelpers.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/mod4j/!svn/ver/3305/trunk/modules/org.mod4j.common/src/main/java/org/mod4j/dslcommon/generator/helpers/ModelHelpers.java
+END
+ProjectProperties.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/mod4j/!svn/ver/3329/trunk/modules/org.mod4j.common/src/main/java/org/mod4j/dslcommon/generator/helpers/ProjectProperties.java
+END
+NameMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/mod4j/!svn/ver/3328/trunk/modules/org.mod4j.common/src/main/java/org/mod4j/dslcommon/generator/helpers/NameMapper.java
+END
+JavaTypeHelpers.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/mod4j/!svn/ver/1910/trunk/modules/org.mod4j.common/src/main/java/org/mod4j/dslcommon/generator/helpers/JavaTypeHelpers.java
+END
+StringHelpers.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/mod4j/!svn/ver/2813/trunk/modules/org.mod4j.common/src/main/java/org/mod4j/dslcommon/generator/helpers/StringHelpers.java
+END
+PropertiesWorkflowComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/mod4j/!svn/ver/2545/trunk/modules/org.mod4j.common/src/main/java/org/mod4j/dslcommon/generator/helpers/PropertiesWorkflowComponent.java
+END

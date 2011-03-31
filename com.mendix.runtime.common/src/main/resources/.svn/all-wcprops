@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/mod4j/!svn/ver/2133/trunk/modules/org.mod4j.runtime.common/src/main/resources
+END
+beanRefContext.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/mod4j/!svn/ver/968/trunk/modules/org.mod4j.runtime.common/src/main/resources/beanRefContext.xml
+END
+Mod4jCommonContext.xml
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/mod4j/!svn/ver/2133/trunk/modules/org.mod4j.runtime.common/src/main/resources/Mod4jCommonContext.xml
+END
