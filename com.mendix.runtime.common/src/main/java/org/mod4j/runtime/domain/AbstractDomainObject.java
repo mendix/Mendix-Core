@@ -27,9 +27,9 @@ public abstract class AbstractDomainObject {
      *            the validator being added.
      */
     public void addValidator(Validator validator) {
-        if (!validators.contains(validator)) {
+        validators.clear();
+        if (!validators.contains(validator)) 
             validators.add(validator);
-        }
     }
 
     /**

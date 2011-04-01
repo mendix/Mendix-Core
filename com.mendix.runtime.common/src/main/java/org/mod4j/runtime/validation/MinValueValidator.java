@@ -42,7 +42,6 @@ public class MinValueValidator implements Validator {
         }
 
         if (value != null) {
-            Assert.notNull(value);
             if (value < min) {
                 errors.rejectValue(field, "field.value.min", new Long[] { new Long(min), new Long(value) }, field
                         + " should be at least " + min + ", but was " + value);
